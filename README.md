@@ -1,10 +1,2 @@
----
-description: 나는 짱이 될거야
----
-
-# 개발왕, 도던
-
-## 목차
-
-
-
+# Today Dodeoni Learned
+하루하루 공부한 내용을 [GitBook](https://www.gitbook.com)에 정리합니다.
