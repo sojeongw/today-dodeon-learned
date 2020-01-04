@@ -1,2 +1,2 @@
-# Today-Dodeoni-Learned
-TDI - Today Dodeoni Learned
+# Initial page
+
