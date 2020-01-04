@@ -31,7 +31,9 @@
 
 참고도서 
 
-[GoF의 디자인 패턴](https://book.naver.com/bookdb/book_detail.nhn?bid=8942623) [Head First Design Patterns](https://book.naver.com/bookdb/book_detail.nhn?bid=1882446)
+[GoF의 디자인 패턴](https://book.naver.com/bookdb/book_detail.nhn?bid=8942623) 
+
+[Head First Design Patterns](https://book.naver.com/bookdb/book_detail.nhn?bid=1882446)
 
 ### 객체 지향 설계 원칙\(SOLID\)
 
@@ -45,13 +47,15 @@
 
 참고도서 
 
-[UML 실전에서는 이것만 쓴다](https://book.naver.com/bookdb/book_detail.nhn?bid=6439362) [소프트웨어 개발의 지혜](https://book.naver.com/bookdb/book_detail.nhn?bid=144677)
+[UML 실전에서는 이것만 쓴다](https://book.naver.com/bookdb/book_detail.nhn?bid=6439362) 
+
+[소프트웨어 개발의 지혜](https://book.naver.com/bookdb/book_detail.nhn?bid=144677)
 
 ## 초난감 DAO
 
 DB 커넥션과 statement 실행이 add\(\)와 get\(\)에 중복으로 들어가있다.
 
-```text
+```java
 public class UserDAO {
 
     public void add(User user){
@@ -82,7 +86,7 @@ public class UserDAO {
 
 소드 추출 기법: 중복된 코드를 독립적인 메소드로 만든다.
 
-```text
+```java
 public class UserDAO {
 
     public void add(User user){
@@ -107,7 +111,7 @@ public class UserDAO {
 * 템플릿 메소드 패턴: 기본 골격을 담은 메소드. 변하지 않는 기능은 슈퍼 클래스에, 자주 변경하거나 확장할 기능은 서브 클래스에 만든다.  추상 클래스, 같은 패키지나 서브 클래스에서 이용할 수 있는 protected가 쓰인다. 서브 클래스에서 선택적으로 오버라이드 할 수 있는 메소드를 `hook 메소드`라고 한다. 
 * 팩토리 메소드 패턴: 템플릿 메소드 패턴과 비슷한데 주로 인터페이스를 이용한다. 인터페이스이기 때문에 어떤 클래스를 실제로 구현해서 리턴할지는 알지 못하며 관심도 없다.  서브 클래스에서 결정할 수 있도록 미리 기본 코드를 짜놓은 메소드를 `팩토리 메소드`라고 하는데, 자바에서 오브젝트를 생성하는 `팩토리 메소드`와 혼동하지 않아야 한다.
 
-```text
+```java
 public abstract class UserDAO {
 
     public void add(User user){
@@ -125,7 +129,7 @@ public abstract class UserDAO {
 }
 ```
 
-```text
+```java
 public class NUserDAO extends UserDAO {
     // N사만의 connection 구현
     public Connection getConnection() {
@@ -148,7 +152,7 @@ public class DUserDAO extends UserDAO {
 
 상속이 아니라 완전히 독립된 클래스로 분리한다. 객체를 한 번만 만들어 놓고 계속 사용할 수 있다.
 
-```text
+```java
 // 이제 상속을 하지 않으므로 추상 클래스일 필요가 없다.
 public class ConnectionMaker {
     public Connection makeConnection() {
@@ -157,7 +161,7 @@ public class ConnectionMaker {
 }
 ```
 
-```text
+```java
 public class UserDAO {
     // 따로 클래스를 만들어서
     private ConnectionMaker connectionMaker;
@@ -188,7 +192,7 @@ public class UserDAO {
 
 추상화란 공통점을 추려서 따로 분리하는 것이다. 두 개의 클래스가 서로 긴밀하게 연결되지 않도록 느슨한 연결고리를 만들어준다. 실제 구현한 클래스가 무엇인지는 `몰라도` 된다. 그저 해당 인터페이스 타입으로 넘겨주기만 하면 된다. 인터페이스로 사용할 수 있는 기능만 알면 되지, 어떻게 구현했는지는 알 필요가 없다.
 
-```text
+```java
 // DB 커넥션 부분을 인터페이스로 분리한다.
 public interface ConnectionMaker {
     public Connection makeConnection() {
@@ -196,7 +200,7 @@ public interface ConnectionMaker {
 }
 ```
 
-```text
+```java
 // 해당 인터페이스를 implements 한 다음
 public class DConnectionMaker implements ConnectionMaker {
 
@@ -206,7 +210,7 @@ public class DConnectionMaker implements ConnectionMaker {
 }
 ```
 
-```text
+```java
 public class UserDAO {
     // D사인지 N사인지 명시할 필요 없이 인터페이스만 가져온다.
     private ConnectionMaker connectionMaker;
@@ -236,7 +240,7 @@ public class UserDAO {
 
 여기서 클라이언트는 오브젝트를 사용하는 또 다른 오브젝트를 의미한다. UserDAO를 사용하는 클라이언트 오브젝트에 해당 관심사를 분리한다. 클라이언트에서 인터페이스를 구현하는 클래스를 명시하고 파라미터로 UserDAO에 보내면 파라미터는 인터페이스라는 조건만 충족하면 되므로 UserDAO에서 구체적인 클래스를 알 필요가 없어진다.
 
-```text
+```java
 // 클라이언트 클래스를 생성한다.
 public class UserDaoTest {
     public static void main(String[] args) {
@@ -251,7 +255,7 @@ public class UserDaoTest {
 }
 ```
 
-```text
+```java
 public class UserDAO {
     private ConnectionMaker connectionMaker;
 
