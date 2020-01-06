@@ -23,7 +23,7 @@ public class UserDaoTest {
 ```java
 public class DaoFactory {
     public UserDao userDao() {
-        // 옮기
+        // 옮기고
         ConnectionMaker connectionMaker = new DConnectionMaker();
         UserDao userDao = new UserDao(connectionMaker);
         
@@ -35,7 +35,7 @@ public class DaoFactory {
 
 public class UserDaoTest {
     public static void main(String[] args) {
-        // 옮긴것을 사용한다.
+        // 옮긴 것을 사용한다.
         UserDao dao = new DaoFactory.userDao();
     }
 }
@@ -61,8 +61,8 @@ public class UserDaoTest {
 
 | UserDao, ConnectionMaker | DaoFactory |
 | :---: | :---: |
-| 데이터 로직,기술 로직구 | 오브젝트를 구성하고 서로의 관계 정 |
-| 컴포넌 | 설계 |
+| 데이터 로직, 기술 로직 구현 | 오브젝트를 구성하고 서로의 관계 정의 |
+| 컴포넌트 | 설계 |
 
 `UserDao`와 `ConnectionMaker`가 애플리케이션의 데이터 로직과 기술 로직을 담당하고 있고, `DaoFactory`는 이러한 오브젝트를 구성하고 서로의 관계를 정의하는 역할을 한다.
 
