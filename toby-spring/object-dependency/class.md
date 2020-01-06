@@ -40,18 +40,14 @@ public class UserDAO {
 public class UserDAO {
 
     public void add(User user){
-        // DB 커넥션
         Connection c = DriverManager()...
 
-        // statement 실행
         PreparedStatement ps = ...
     }
 
     public User get(String id){
-         // DB 커넥션
          Connection c = DriverManager()...
 
-         // statement 실행
          PreparedStatement ps = ...       
     }
 }
