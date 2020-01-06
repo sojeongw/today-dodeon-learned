@@ -12,7 +12,7 @@
   * [인터페이스 도입](toby-spring/object-dependency/interface.md)
   * [관계 설정 책임의 분리](toby-spring/object-dependency/relation.md)
   * [원칙과 패턴](toby-spring/object-dependency/pattern.md)
-  * [오브젝트 팩토리](toby-spring/object-dependency/undefined.md)
+  * [오브젝트 팩토리](toby-spring/object-dependency/object-factory.md)
   * [제어의 역전](toby-spring/object-dependency/inversion-of-control.md)
   * [스프링 IoC](toby-spring/object-dependency/spring-ioc.md)
 

@@ -1,6 +1,6 @@
 # 오브젝트 팩토리
 
-사실 이전에 만든 클라이언트 `UserDaoTest`는 원래 `UserDao`가 잘 동작하는지 테스트하기위한 것이었다.
+사실 이전에 만든 클라이언트 `UserDaoTest`는 원래 `UserDao`가 잘 동작 하는지 테스트 하기 위한 것이었다.
 
 ```java
 public class UserDaoTest {
@@ -16,7 +16,7 @@ public class UserDaoTest {
 
 ## 팩토리
 
-객체의 생성 방법을 결정하고 그 오브젝트를 돌려주는 역할을 한다.오브젝트를 생성하는 부분과 실제 사용하는 부분을 분리하는 목적으로 사용한다.
+객체의 생성 방법을 결정하고 그 오브젝트를 돌려주는 역할을 한다. 오브젝트를 생성하는 부분과 실제 사용하는 부분을 분리하는 목적으로 사용한다.
 
 {% tabs %}
 {% tab title="After" %}
@@ -55,18 +55,18 @@ public class UserDaoTest {
 {% endtab %}
 {% endtabs %}
 
-`UserDaoTest`가 갖고 있던 `ConnectionMaker`와 `UserDao` 생성 코드를 `DaoFactory`로 옮겼다. 이제 `UserDao`가 어떻게 생성되는지 신경쓰지 않고도 테스트를 위해 활용할 수있게 되었다.
+`UserDaoTest`가 갖고 있던 `ConnectionMaker`와 `UserDao` 생성 코드를 `DaoFactory`로 옮겼다. 이제 `UserDao`가 어떻게 생성되는지 신경쓰지 않고도 테스트를 위해 활용할 수 있게 되었다.
 
 ### 설계도로서의 팩토리
 
 | UserDao, ConnectionMaker | DaoFactory |
 | :---: | :---: |
 | 데이터 로직, 기술 로직 구현 | 오브젝트를 구성하고 서로의 관계 정의 |
-| 컴포넌트 | 설계 |
+| 컴포넌트 | 설계도 |
 
 `UserDao`와 `ConnectionMaker`가 애플리케이션의 데이터 로직과 기술 로직을 담당하고 있고, `DaoFactory`는 이러한 오브젝트를 구성하고 서로의 관계를 정의하는 역할을 한다.
 
-이제 N사와 D사가 각각 다른 connection을 원해도 `DaoFactory`만 수정하면 해결할 수 있다. `컴포넌트`역할의 오브젝트와 `설계도/구조`를 결정하는 오브젝트를 분리함으로써 얻는 장점이다.
+이제 N사와 D사가 각각 다른 connection을 원해도 `DaoFactory`만 수정하면 해결할 수 있다. `컴포넌트` 역할의 오브젝트와 `설계도/구조`를 결정하는 오브젝트를 분리함으로써 얻는 장점이다.
 
 ## 오브젝트 팩토리의 활용
 
