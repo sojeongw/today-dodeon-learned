@@ -5,7 +5,7 @@
 ```java
 public class UserDaoTest {
     public static void main(String[] args) {
-    
+
         ConnectionMaker connectionMaker = new DConnectonMaker();
         UserDao dao = new UserDao(connectionMaker);
     }
@@ -26,7 +26,7 @@ public class DaoFactory {
         // 옮기고
         ConnectionMaker connectionMaker = new DConnectionMaker();
         UserDao userDao = new UserDao(connectionMaker);
-        
+
         return userDao;
     }
 }
@@ -46,7 +46,7 @@ public class UserDaoTest {
 ```java
 public class UserDaoTest {
     public static void main(String[] args) {
-    
+
         ConnectionMaker connectionMaker = new DConnectonMaker();
         UserDao dao = new UserDao(connectionMaker);
     }
@@ -62,7 +62,7 @@ public class UserDaoTest {
 | UserDao, ConnectionMaker | DaoFactory |
 | :---: | :---: |
 | 데이터 로직, 기술 로직 구현 | 오브젝트를 구성하고 서로의 관계 정의 |
-| 컴포넌트 | 설계 |
+| 컴포넌트 | 설계도 |
 
 `UserDao`와 `ConnectionMaker`가 애플리케이션의 데이터 로직과 기술 로직을 담당하고 있고, `DaoFactory`는 이러한 오브젝트를 구성하고 서로의 관계를 정의하는 역할을 한다.
 
@@ -77,21 +77,21 @@ public class DaoFactory {
     public UserDao userDao() {
         ConnectionMaker connectionMaker = new DConnectionMaker();
         UserDao userDao = new UserDao(connectionMaker);
-        
+
         return userDao;
     }
-    
+
     public AccountDao accountDao() {
         ConnectionMaker connectionMaker = new DConnectionMaker();
         AccountDao accountDao = new AccountDao(connectionMaker);
-        
+
         return accountDao;
     }
-    
+
     public MessageDao messageDao() {
         ConnectionMaker connectionMaker = new DConnectionMaker();
         MessageDao messageDao = new MessageDao(connectionMaker);
-        
+
         return messageDao;
     }
 }
@@ -107,22 +107,22 @@ public class DaoFactory {
 public class DaoFactory {
     public UserDao userDao() {
         UserDao userDao = new UserDao(connectionMaker());
-        
+
         return userDao;
     }
-    
+
     public AccountDao accountDao() {
         AccountDao accountDao = new AccountDao(connectionMaker());
-        
+
         return accountDao;
     }
-    
+
     public MessageDao messageDao() {
         MessageDao messageDao = new MessageDao(connectionMaker());
-        
+
         return messageDao;
     }
-    
+
     // 실제 connection을 구현하는 클래스를 생성하는 부분만 따로 빼낸다.
     public ConnectionMaker connectionMaker() {
         return new DConnectionMaker();
@@ -137,21 +137,21 @@ public class DaoFactory {
     public UserDao userDao() {
         ConnectionMaker connectionMaker = new DConnectionMaker();
         UserDao userDao = new UserDao(connectionMaker);
-        
+
         return userDao;
     }
-    
+
     public AccountDao accountDao() {
         ConnectionMaker connectionMaker = new DConnectionMaker();
         AccountDao accountDao = new AccountDao(connectionMaker);
-        
+
         return accountDao;
     }
-    
+
     public MessageDao messageDao() {
         ConnectionMaker connectionMaker = new DConnectionMaker();
         MessageDao messageDao = new MessageDao(connectionMaker);
-        
+
         return messageDao;
     }
 }
@@ -160,6 +160,4 @@ public class DaoFactory {
 {% endtabs %}
 
 이제 `connectionMaker()` 한 부분만 수정하면 모든 `DaoFactory` 메소드에 적용된다.
-
-
 

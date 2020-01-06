@@ -21,4 +21,3 @@
 ### UserDao와 DaoFactory
 
 원래 초기 코드에서 `ConnectionMaker`는 `UserDao`에 있었다. 그런데 지금은 `DaoFactory`에 있다. 어떤 구현 클래스를 사용할지 `DaoFactory`에게 위임했으니 이제 수동적으로 만들어지는 것이다.
-
