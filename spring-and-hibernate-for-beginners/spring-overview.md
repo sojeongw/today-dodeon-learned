@@ -1,4 +1,7 @@
 # Spring Overview
+---
+description: Udemy의 Spring & Hibernate for Beginners 강의를 정리합니다. 영어 강의이기 때문에 영문과 혼용합니다.
+---
 
 ## Why Spring?
 
