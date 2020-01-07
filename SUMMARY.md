@@ -25,5 +25,6 @@
   * [Constructor Injection](spring-and-hibernate-for-beginners/spring-with-xml/constructor-injection.md)
   * [Setter Injection](spring-and-hibernate-for-beginners/spring-with-xml/setter-injection.md)
   * [Bean Scopes](spring-and-hibernate-for-beginners/spring-with-xml/bean-scopes.md)
-  
-
+* [Spring with Annotations](spring-and-hibernate-for-beginners/spring-with-annotations/README.md)
+    * [Dependency Injection](spring-and-hibernate-for-beginners/spring-with-annotations/dependency-injection.md)
+    * [Constructor Injection](spring-and-hibernate-for-beginners/spring-with-annotations/constructor-injection.md)
