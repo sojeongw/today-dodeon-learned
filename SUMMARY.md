@@ -16,7 +16,7 @@
   * [제어의 역전](toby-spring/object-dependency/inversion-of-control.md)
   * [스프링 IoC](toby-spring/object-dependency/spring-ioc.md)
 
-## Spring & Hibernate for Beginners
+## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
 
 * [Spring Overview](spring-and-hibernate-for-beginners/spring-overview.md)
 * [Spring with XML](spring-and-hibernate-for-beginners/spring-with-xml/README.md)

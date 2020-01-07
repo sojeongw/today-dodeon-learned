@@ -18,11 +18,11 @@ description: 제어의 역전(Inversion of Control)은 오브젝트 팩토리에
 
 #### legacy
 
-XML configuration file
+XML 설정 파일
 
 #### modern
 
-Java Annotations or Java Source Code
+Java 애노테이션 or Java 소스 코드
 
 ### Spring Development Process
 
