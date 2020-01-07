@@ -1,7 +1,6 @@
 # Spring Overview
----
-description: Udemy의 Spring & Hibernate for Beginners 강의를 정리합니다. 영어 강의이기 때문에 영문과 혼용합니다.
----
+
+## description: Udemy의 Spring & Hibernate for Beginners 강의를 정리합니다. 영어 강의이기 때문에 영문과 혼용합니다.
 
 ## Why Spring?
 
@@ -38,7 +37,7 @@ Bean을 생성하고 관리하는 부분
 
 ![](../.gitbook/assets/20200106145546.png)
 
-AOP 프로그래밍을 지원하는 부분. 즉,  로그,  보안,  트랜잭션 등의 기능을 제공함.
+AOP 프로그래밍을 지원하는 부분. 즉, 로그, 보안, 트랜잭션 등의 기능을 제공함.
 
 * AOP
 * Aspects

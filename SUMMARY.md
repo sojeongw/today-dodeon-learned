@@ -20,5 +20,6 @@
 
 * [Spring Overview](spring-and-hibernate-for-beginners/spring-overview.md)
 * [Inversion of Control](spring-and-hibernate-for-beginners/inversion-of-control/README.md)
-  * [XML Configuration](spring-and-hibernate-for-beginners/inversion-of-control/xml-configuration.md)
+  * [XML Configuration](spring-and-hibernate-for-beginners/inversion-of-control/xml-configuration/README.md)
+    * [Demo Code](spring-and-hibernate-for-beginners/inversion-of-control/xml-configuration/demo-code.md)
 

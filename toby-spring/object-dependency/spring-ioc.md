@@ -8,7 +8,7 @@
 
 ## 빈 팩토리
 
-빈을 만들고 관계를 설정하는 IoC 오브젝트를 `빈 팩토리`라고 한다. 
+빈을 만들고 관계를 설정하는 IoC 오브젝트를 `빈 팩토리`라고 한다.
 
 ## 애플리케이션 컨텍스트
 
@@ -17,6 +17,7 @@
 이전에 `컴포넌트`와 `설계도`를 설명했었는데, 여기서의 `설계도`가 `애플리케이션 컨텍스트`와 `설정 정보`를 의미한다.
 
 ## DaoFactory에 애플리케이션 컨텍스트 적용하기
+
 ### 설정 정보 만들기
 
 `DaoFactory`를 스프링에 적용해보자.
@@ -30,10 +31,10 @@ public class DaoFactory {
     @Bean   // 오브젝트 생성을 담당하는 IoC 메소드라는 표시
     public UserDao userDao() {
         UserDao userDao = new UserDao(connectionMaker());
-           
+
         return userDao;
     }
-    
+
     @Bean
     public ConnectionMaker connectionMaker() {
         return new DConnectionMaker();
@@ -47,10 +48,10 @@ public class DaoFactory {
 public class DaoFactory {
     public UserDao userDao() {
         UserDao userDao = new UserDao(connectionMaker());
-           
+
         return userDao;
     }
-    
+
     public ConnectionMaker connectionMaker() {
         return new DConnectionMaker();
     }
@@ -62,6 +63,7 @@ public class DaoFactory {
 설정 정보를 담당하는 클래스라고 알려주기 위해 `@Configuraton` 애노테이션을 추가한다. 그리고 오브젝트를 실제 만드는 메소드에 `@Bean` 애노테이션을 붙인다. 이제 `애플리케이션 컨텍스트`가 IoC를 적용할 때 사용할 설정 정보가 세팅되었다.
 
 ### 애플리케이션 컨텍스트 만들기
+
 이제 위의 설정 정보를 사용하는 애플리케이션 컨텍스트를 만들어보자.
 
 {% tabs %}
@@ -91,6 +93,7 @@ public class UserDaoTest {
 {% endtab %}
 {% endtabs %}
 
-`AnnotationConfigurationContext`를 이용하면 `@Configuration`이 붙은 자바 코드를 설정 정보로 가져올 수 있다. 
+`AnnotationConfigurationContext`를 이용하면 `@Configuration`이 붙은 자바 코드를 설정 정보로 가져올 수 있다.
 
-`애플리케이션 컨텍스트`가 관리하는 `UserDao`는 `getBean()`으로 불러온다. `@Bean`이 붙은 메소드의 이름이 빈의 이름이 되어 getBean()의 첫 번째 파라미터로 넘겨진다. 만약 생성하는 방법이나 구성을 다르게 설정한 메소드를 따로 추가했다면 그 메소드 이름을 적으면 된다.
+`애플리케이션 컨텍스트`가 관리하는 `UserDao`는 `getBean()`으로 불러온다. `@Bean`이 붙은 메소드의 이름이 빈의 이름이 되어 getBean\(\)의 첫 번째 파라미터로 넘겨진다. 만약 생성하는 방법이나 구성을 다르게 설정한 메소드를 따로 추가했다면 그 메소드 이름을 적으면 된다.
+
