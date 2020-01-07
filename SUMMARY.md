@@ -19,7 +19,7 @@
 ## Spring & Hibernate for Beginners
 
 * [Spring Overview](spring-and-hibernate-for-beginners/spring-overview.md)
-* [Inversion of Control](spring-and-hibernate-for-beginners/inversion-of-control/README.md)
-  * [XML Configuration](spring-and-hibernate-for-beginners/inversion-of-control/xml-configuration/README.md)
-    * [Demo Code](spring-and-hibernate-for-beginners/inversion-of-control/xml-configuration/demo-code.md)
+* [Inversion of Control](spring-and-hibernate-for-beginners/spring-with-xml/inversion-of-control.md)
+  * [XML Configuration](spring-and-hibernate-for-beginners/spring-with-xml/xml-configuration.md)
+    * [Demo Code](spring-and-hibernate-for-beginners/spring-with-xml/demo-code.md)
 
