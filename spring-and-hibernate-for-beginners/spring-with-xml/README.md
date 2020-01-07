@@ -6,8 +6,7 @@ description: 먼저 XML로 빈 설정 하는 법을 알아본다.
 
 ## What is a Spring Bean?
 
-`Spring Bean` 은 그냥 자바 오브젝트다. 자바 오브젝트가 스프링 컨테이너에서 생성될 때 `Spring Bean`이라고 부른다. 
-`Spring Bean`은 일반적인 자바 클래스에서 생성되는 것으로 그냥 자바 오브젝트 같은 것이라고 생각하면 된다.
+`Spring Bean` 은 그냥 자바 오브젝트다. 자바 오브젝트가 스프링 컨테이너에서 생성될 때 `Spring Bean`이라고 부른다.
 
 ## Configuring your Spring Beans
 

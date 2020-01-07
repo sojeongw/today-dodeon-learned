@@ -22,4 +22,6 @@
 * [Spring with XML](spring-and-hibernate-for-beginners/spring-with-xml/README.md)
   * [Inversion of Control](spring-and-hibernate-for-beginners/spring-with-xml/inversion-of-control.md)
   * [Dependency Injection](spring-and-hibernate-for-beginners/spring-with-xml/dependency-injection.md)
+  * [Constructor Injection](spring-and-hibernate-for-beginners/spring-with-xml/constructor-injection.md)
+  * [Setter Injection](spring-and-hibernate-for-beginners/spring-with-xml/setter-injection.md)
 
