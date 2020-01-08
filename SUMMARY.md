@@ -15,6 +15,7 @@
   * [오브젝트 팩토리](toby-spring/object-dependency/object-factory.md)
   * [제어의 역전](toby-spring/object-dependency/inversion-of-control.md)
   * [오브젝트 스코프](toby-spring/object-dependency/object-scope.md)
+  * [의존 관계](toby-spring/object-dependency/dependency-injection.md)
 
 ## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
 

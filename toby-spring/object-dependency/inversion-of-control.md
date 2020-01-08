@@ -109,7 +109,7 @@ public class UserDaoTest {
     public static void main(String[] args) {
         // 애플리케이션 컨텍스트 생성
         // 생성자 파라미터로 설정 정보인 DaoFactory를 보낸다.
-        ApplicatonContext context = new AnnotationConfigurationContext(DaoFactory.class);
+        AnnotationConfigurationContext context = new AnnotationConfigurationContext(DaoFactory.class);
 
         // getBean()으로 애플리케이션 컨텍스트가 관리하는 오브젝트를 요청한다.
         UserDao dao = context.getBean("userDao", UserDao.class);
