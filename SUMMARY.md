@@ -16,6 +16,10 @@
   * [제어의 역전](toby-spring/object-dependency/inversion-of-control.md)
   * [오브젝트 스코프](toby-spring/object-dependency/object-scope.md)
   * [의존 관계](toby-spring/object-dependency/dependency-injection.md)
+* [2장. 테스트](toby-spring/unit-test/README.md)
+    * [단위 테스트의 필요성](toby-spring/unit-test/user-dao-test.md)
+    * [JUnit 프레임워크](toby-spring/unit-test/junit-framework.md)
+    * [JUnit 적용하기](toby-spring/unit-test/develop-testcode.md)
 
 ## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
 
