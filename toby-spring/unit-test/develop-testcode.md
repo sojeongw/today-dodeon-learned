@@ -52,11 +52,11 @@ public class UserDao {
 {% tab title="Before" %}
 ```java
 public class UserDao {
-    private ConnectionMaker connectionMaker;
-
-    public void setConnectionMaker(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
-    }
+    private DataSource dataSource;
+	
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
 }
 ```
 {% endtab %}
