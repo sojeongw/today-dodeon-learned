@@ -316,10 +316,10 @@ public class UserDaoTest {
         assertThat(userget1.getPassword(), is(user1.getPassword()));
 
         // user 데이터를 get 한 다음
-		User userget1 = dao.get(user1.getId());
+		User userget2 = dao.get(user2.getId());
         // 해당 유저의 값과 일치하는지 확인한다.
-        assertThat(userget1.getName(), is(user1.getName()));
-        assertThat(userget1.getPassword(), is(user1.getPassword()));
+        assertThat(userget2.getName(), is(user2.getName()));
+        assertThat(userget2.getPassword(), is(user2.getPassword()));
     }
 
     @Test
