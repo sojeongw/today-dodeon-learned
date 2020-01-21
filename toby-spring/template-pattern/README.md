@@ -6,8 +6,6 @@
 
 코드를 보면 어떤 부분은 수정하면서 다양하게 확장하려고 하고, 어떤 부분은 고정되어 변하지 않으려고 한다. 이때 각기 특성이 다른 부분을 구분하고 독립적으로 변경될 수 있게 하는 것이다.
 
-
-
 ## 템플릿
 
 이 중에서 변경이 거의 일어나지 않고 일정한 패턴으로 유지되는 부분을 변경되는 부분에서 독립시키는 방법이다.
@@ -157,26 +155,24 @@ public class UserDao {
 
 try 블록을 사용했다면 반드시 `close()` 호출로 가져온 리소스를 반환해야 한다. 이때 `close()` 메소드의 호출 시점이 중요하다.
 
-### getConnection()에서 DB 커넥션을 가져올 때
+#### getConnection()에서 DB 커넥션을 가져올 때
 
 일시적으로 DB나 네트워크에 문제가 있거나 다른 예외가 생겼다면 `ps`와 `c` 둘 다 null 상태다. `null`일 떄 `close()`를 호출하면 `NullPointerException`이 발생하므로 `close()`를 호출해서는 안된다.
 
-### PreparedStatement를 생성하다가 예외가 발생했을 때
+#### PreparedStatement를 생성하다가 예외가 발생했을 때
 
 이때는 `c`가 이미 커넥션 객체를 가지고 있어 `close()` 호출이 가능하지만 `ps`는 그렇지 않다.
 
-### ps를 실행하다가 예외가 발생했을 때
+#### ps를 실행하다가 예외가 발생했을 때
 
 `c`와 `ps` 모두 `close()` 메소드를 호출해줘야 한다.
-
----
-
+<br/>
 따라서, `finally`에서는 반드시 `c`와 `ps`가 `null`이 아닌지 먼저 확인한 후에 `close()`를 호출해야 한다. close() 또한 `SQLException`이 날 수 있으므로 try/catch로 처리한다. `close()` 실패 시 특별히 해줄 수 있는 조치는 없다.
 
 이미 `deleteAll()`에 `SQLException`이 처리되어 있지만, 만약 try/catch를 쓰지 않는다면 `ps.close()`를 한 뒤 `c.close()`가 실행되지 않는 경우가 발생할 수도 있다.
 
 또한, 현재는 catch에서 예외를 던지는 일 밖에 없어서 빼버릴 수도 있지만 보통 로그를 남기거나 부가적인 추가 작업이 있을 수 있으니 일단 만들어두는 것이 좋다.
-
+<br/>
 이제 `getCount()`를 바꿔보자. JDBC 조회 기능은 좀 더 복잡하다. `Connection`, `PreparedStatement` 외에 `ResultSet`이 필요하기 때문이다. `ResultSet` 또한 `close()`가 호출되도록 만든다.
 
 {% tabs %}
