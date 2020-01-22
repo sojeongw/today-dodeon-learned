@@ -28,7 +28,8 @@
     * [버그 테스트](toby-spring/unit-test/bug-test.md)
     * [정리](toby-spring/unit-test/summary.md)
 * [3장. 템플릿](toby-spring/template-pattern/README.md)
-    * [템플릿 메소드 패턴](toby-spring/template-pattern/refactoring.md)
+    * [템플릿 메소드 패턴](toby-spring/template-pattern/template-pattern.md)
+    * [내부 클래스](toby-spring/template-pattern/refactoring.md)
 
 ## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
 
