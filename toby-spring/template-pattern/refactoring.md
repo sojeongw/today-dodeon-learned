@@ -1,4 +1,4 @@
-# 내부 클래스로 리팩토링 하기
+# 내부 클래스를 이용한 리팩토링
 
 현재까지 만든 구조는 DAO 메소드 마다 새로운 StatementStrategy 구현 클래스를 만들어야 한다. 또한, add()의 User처럼 추가적으로 필요한 정보가 있으면 전략 클래스에 생성자와 인스턴스 변수를 굳이 만들어줘야 한다.
 
@@ -194,67 +194,67 @@ public class UserDao {
 그런데 익명 내부 클래스의 오브젝트는 딱 한 번만 사용한다. 굳이 변수에 담아둘 필요가 없으니 컨텍스트 메소드에서 바로 생성해보자.
 
 {% tabs %}
-             {% tab title="After" %}
-             ```java
-             public class UserDao {
-             	private DataSource dataSource;
-                 		
-                 public void setDataSource(DataSource dataSource) {
-                     this.dataSource = dataSource;
-                 }
-             
-                 public void add(final User user) throws SQLException {
-                     // 한 번만 쓰는 거니까 굳이 인터페이스 타입에 담지 않고
-                     // jdbcContextWithStatementStrategy() 메소드의 파라미터에서 바로 생성한다.
-                     jdbcContextWithStatementStrategy(new StatementStrategy() {
-                          public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
-                              PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?, ?, ?)");
-                      
-                              ps.setString(1, user.getId());
-                              ps.setString(2, user.getName());
-                              ps.setString(3, user.getPassword());
-              
-                              return ps;
-                          }
-                      });
-                     // 이제 이곳에서 전략을 만들고 컨텍스트로 보낼 필요가 없다.
-                 }
-                 ...
+ {% tab title="After" %}
+ ```java
+ public class UserDao {
+    private DataSource dataSource;
+            
+     public void setDataSource(DataSource dataSource) {
+         this.dataSource = dataSource;
+     }
+ 
+     public void add(final User user) throws SQLException {
+         // 한 번만 쓰는 거니까 굳이 인터페이스 타입에 담지 않고
+         // jdbcContextWithStatementStrategy() 메소드의 파라미터에서 바로 생성한다.
+         jdbcContextWithStatementStrategy(new StatementStrategy() {
+              public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
+                  PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?, ?, ?)");
+          
+                  ps.setString(1, user.getId());
+                  ps.setString(2, user.getName());
+                  ps.setString(3, user.getPassword());
+  
+                  return ps;
+              }
+          });
+         // 이제 이곳에서 전략을 만들고 컨텍스트로 보낼 필요가 없다.
+     }
+     ...
+ }
+ ```
+ {% endtab %}
+ 
+ {% tab title="Before" %}
+ ```java
+ public class UserDao {
+    private DataSource dataSource;
+            
+     public void setDataSource(DataSource dataSource) {
+         this.dataSource = dataSource;
+     }
+ 
+     public void add(final User user) throws SQLException {
+         StatementStrategy st = new StatementStrategy() {
+             public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
+                 PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?, ?, ?)");
+         
+                 ps.setString(1, user.getId());
+                 ps.setString(2, user.getName());
+                 ps.setString(3, user.getPassword());
+ 
+                 return ps;
              }
-             ```
-             {% endtab %}
-             
-             {% tab title="Before" %}
-             ```java
-             public class UserDao {
-             	private DataSource dataSource;
-                 		
-                 public void setDataSource(DataSource dataSource) {
-                     this.dataSource = dataSource;
-                 }
-             
-                 public void add(final User user) throws SQLException {
-                     StatementStrategy st = new StatementStrategy() {
-                         public PreparedStatement makePreparedStatement(Connection c) throws SQLException {
-                             PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?, ?, ?)");
-                     
-                             ps.setString(1, user.getId());
-                             ps.setString(2, user.getName());
-                             ps.setString(3, user.getPassword());
-             
-                             return ps;
-                         }
-                     };
-                     
-                     StatementStrategy st = new AddStatement();
-                     // 이전에는 이렇게 컨텍스트에 전략을 담아 보냈다.
-                     jdbcContextWithStatementStrategy(st);
-                 }
-                 ...
-             }
-             ```
-             {% endtab %}
-             {% endtabs %}
+         };
+         
+         StatementStrategy st = new AddStatement();
+         // 이전에는 이렇게 컨텍스트에 전략을 담아 보냈다.
+         jdbcContextWithStatementStrategy(st);
+     }
+     ...
+ }
+ ```
+ {% endtab %}
+ {% endtabs %}
 
 ### deleteAll()에 적용하기
 
