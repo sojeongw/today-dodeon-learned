@@ -10,7 +10,7 @@
 
 ## try/catch/finally
 
-try/catch/finally는 템플릿/콜백 패턴을 적용하기에 적합한 코드다. 파일에 담긴 모든 숫자를 더해주는 코드를 만들어보자.
+`try/catch/finally`는 템플릿/콜백 패턴을 적용하기에 적합한 코드다. 파일에 담긴 모든 숫자를 더해주는 코드를 만들어보자.
 
 ```text
 1
@@ -71,7 +71,7 @@ public class Calculator {
 }
 ```
 
-파일을 읽거나 처리하다가 예외가 발생할 수 있으므로 try/catch/finally로 처리했다. 
+파일을 읽거나 처리하다가 예외가 발생할 수 있으므로 `try/catch/finally`로 처리했다. 
 
 ## 중복 제거와 템플릿/콜백 설계
 
@@ -243,7 +243,7 @@ public class Calculator {
 
 ## 리팩토링
 
-그런데 calcSum()과 calcMultiply()는 비슷한 패턴으로 진행되고 있다. 각 라인에서 읽은 내용을 계산하다가 최종값을 리턴하는 것이다.
+그런데 `calcSum()`과 `calcMultiply()`는 비슷한 패턴으로 진행되고 있다. 각 라인에서 읽은 내용을 계산하다가 최종값을 리턴하는 것이다.
 
 {% tabs %}
 {% tab title="calcMultiply()" %}
@@ -271,7 +271,7 @@ return sum;
 
 다시 코드를 정리해보자. 템플릿과 콜백을 찾아낼 때는 변하는 코드의 경계를 찾고 그 경계 사이에 주고받는 일정한 정보가 있는지 확인한다. 
 
-변하는 부분인 doSomethingWithReader()를 콜백 인터페이스로 만들면 다음과 같다.
+변하는 부분인 `doSomethingWithReader()`를 콜백 인터페이스로 만들면 다음과 같다.
 
 ```java
 ...
@@ -303,16 +303,6 @@ public class Calculator {
         };
         // 곱하기니까 초기값을 1로 보낸다.
         return lineReadTemplate(filepath, multiplyCallback, 1);
-    }
-
-    public Integer calcSum(String filepath) throws IOException {
-      LineCallback sumCallback = new LineCallback() {
-            public Integer doSomethingWithLine(String line, Integer value) {
-                // 변경되는 코드
-                return value + Integer.valueOf(line);
-            }};
-            // 더하기니까 초기값을 0으로 보낸다.
-            return lineReadTemplate(filepath, sumCallbac, 0);
     }
 
     // 새로 만든 라인 콜백과 계산 결과를 저장할 변수의 초기값을 파라미터로 받는다.
@@ -398,4 +388,146 @@ public class Calculator {
 {% endtab %}
 {% endtabs %}
 
-파일 로직 코드는 템플릿으로 분리되고 Calculator 클래스에 순수한 계산 로직만 남아 관심사를 명확하게 확인할 수 있다. 데이터를 가져와 계산한다는 핵심 기능에만 충실하게 바뀌었다.
+파일 로직 코드는 템플릿으로 분리되고 `Calculator` 클래스에 순수한 계산 로직만 남아 관심사를 명확하게 확인할 수 있다. 데이터를 가져와 계산한다는 핵심 기능에만 충실하게 바뀌었다.
+
+## 제네릭스를 활용한 콜백 인터페이스
+
+지금까지 만든 `LineCallback`과 `lineReadTemplate()`은 결과가 `Integer`로 고정되어 있었다. 결과 타입을 다양하게 하고 싶다면 제네릭스를 활용하면 된다.
+
+{% tabs %}
+{% tab title="After" %}
+```java
+public interface LineCallback<T> {
+    T doSomethingWithLine(String line, T value);
+}
+```
+{% endtab %}
+
+{% tab title="Before" %}
+```java
+public interface LineCallback {
+    Integer doSomethingWithLine(String line, Integer value);
+}
+```
+{% endtab %}
+{% endtabs %}
+
+콜백 메소드의 리턴값과 파라미터 값을 제네릭 타입 `T`로 선언했다.
+
+{% tabs %}
+{% tab title="After" %}
+```java
+public class Calculator {
+    public Integer calcSum(String filepath) throws IOException {
+      LineCallback sumCallback = new LineCallback() {
+            public Integer doSomethingWithLine(String line, Integer value) {
+                return value + Integer.valueOf(line);
+            }};
+            return lineReadTemplate(filepath, sumCallbac, 0);
+    }
+
+    public Integer calcMultiply(String filepath) throws IOException {
+        BufferedReaderCallback multiplyCallback = new LineCallback() {
+                public Integer doSomethingWithReader(String line, BufferedReader br) {
+                    return multiply * Integer.valueOf(line); 
+            }       
+        };
+        return lineReadTemplate(filepath, multiplyCallback, 1);
+    }
+
+    // 제네릭스 덕분에 이제 String도 처리할 수 있게 되었다.
+    public String concatenate(String filepath) throws IOException {
+        // 사용할 타입을 String으로 지정했다.
+		LineCallback<String> concatenateCallback = 
+			new LineCallback<String>() {
+			public String doSomethingWithLine(String line, String value) {
+				return value + line;
+			}};
+            // 템플릿 메소드의 T는 모두 스트링이 된다.
+			return lineReadTemplate(filepath, concatenateCallback, "");
+	}	
+
+    // 타입 파라미터 T를 추가해서 제네릭 메소드로 만든다.
+    // T 타입으로 선언된 LineCallback 메소드를 호출해서 처리한 뒤 T 타입의 결과를 리턴하는 메소드가 된다.
+    public T lineReadTemplate(String filepath, LineCallback<T> callback, T initVal) throws  IOException {
+        BufferedReader br = null;
+        
+        try {
+            br = new BufferedReader(new FileReader(filepath));
+            // 결과 값도 T로 바꿔준다.
+            T res = initVal;
+            while((line = br.readLine()) != null) {
+                res = callback.doSomethingWithLine(line, res);
+            }
+            return ret;
+        } catch (IOException e) {
+            ...
+        } finally {
+           ...
+        }
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Before" %}
+```java
+public class Calculator {
+    public Integer calcSum(String filepath) throws IOException {
+        ...
+    }
+
+    public Integer calcMultiply(String filepath) throws IOException {
+        ...
+    }
+
+    public Integer lineReadTemplate(String filepath, LineCallback callback, int initVal) throws  IOException {
+        BufferedReader br = null;
+        
+        try {
+            br = new BufferedReader(new FileReader(filepath));
+            int res = initVal;
+            while((line = br.readLine()) != null) {
+                res = callback.doSomethingWithLine(line, res);
+            }
+            return ret;
+        } catch (IOException e) {
+           ...
+        } finally {
+           ...
+        }
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+해당 기능을 테스트해보자. 
+
+```java
+public class CalcSumTest {
+	Calculator calculator;
+	String numFilepath;
+	
+	@Before public void setUp() {
+		this.calculator = new Calculator();
+		this.numFilepath = getClass().getResource("numbers.txt").getPath();
+	}
+	
+	@Test public void sumOfNumbers() throws IOException {
+		assertThat(calculator.calcSum(this.numFilepath), is(10));
+	}
+	
+	@Test public void multiplyOfNumbers() throws IOException {
+		assertThat(calculator.calcMultiply(this.numFilepath), is(24));
+	}
+	
+	@Test public void concatenateStrings() throws IOException {
+		assertThat(calculator.concatenate(this.numFilepath), is("1234"));
+	}
+}
+```
+
+파일에 있는 1, 2, 3, 4를 스트링으로 받아 합치므로 `1234` 가 나와야 한다.
+
+기존에 만든 `calcSum()`이나 `calcMultiply`도 String 대신 `Integer`로 인터페이스를 정의하면 그대로 사용할 수 있다.
