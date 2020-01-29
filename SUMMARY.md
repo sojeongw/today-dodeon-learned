@@ -31,6 +31,8 @@
     * [템플릿 메소드 패턴](toby-spring/template-pattern/template-pattern.md)
     * [내부 클래스를 이용한 리팩토링](toby-spring/template-pattern/refactoring.md)
     * [컨텍스트와 DI](toby-spring/template-pattern/context-and-di.md)
+    * [템플릿과 콜백](toby-spring/template-pattern/template-and-callback.md)
+    * [템플릿/콜백의 활용](toby-spring/template-pattern/template-and-callback-example.md)
 
 ## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
 
