@@ -33,6 +33,7 @@
     * [컨텍스트와 DI](toby-spring/template-pattern/context-and-di.md)
     * [템플릿과 콜백](toby-spring/template-pattern/template-and-callback.md)
     * [템플릿/콜백의 활용](toby-spring/template-pattern/template-and-callback-example.md)
+    * [정리](toby-spring/template-pattern/summary.md)
 
 ## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
 
