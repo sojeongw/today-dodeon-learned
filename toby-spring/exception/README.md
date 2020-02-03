@@ -46,7 +46,7 @@ catch 블록이 귀찮아지면 기계적으로 `throws Exception`을 붙이는 
 |:---:|:---:|
 |RuntimeException|그 외의 클래스|
 |예외 처리 강제하지 않음|예외 처리 코드 필수|
-|개발자의 부주의에 의한 프로그램의 오류|예상치 못하게 발생한 예외|
+|시스템 장애나 개발자에 의한 프로그램의 오류|예상치 못하게 발생한 예외|
 |NullPointer/IllegalArgumentException|IOException, SQLException|
 
 ## 예외처리 방법
