@@ -35,6 +35,7 @@
     * [템플릿/콜백의 활용](toby-spring/template-pattern/template-and-callback-example.md)
     * [정리](toby-spring/template-pattern/summary.md)
 * [4장. 예외처리](toby-spring/exception/README.md)
+    * [예외처리 전략](toby-spring/exception/exception-strategy.md)
 
 ## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
 
