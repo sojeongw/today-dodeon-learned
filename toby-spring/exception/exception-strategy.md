@@ -95,3 +95,15 @@ public class UserDao {
 ![](../../.gitbook/assets/toby/20200203154912.png)
 
 코드를 보면 `InsufficientBalanceException`일 때 예외 상황에 대해 상세한 정보를 확인해서 예외 정보에 넣어주고 있다.
+
+## SQLException의 처리
+
+`SQLException`은 코드 레벨에서 복구할 방법이 없다. SQL 문법이 틀렸거나, DB 서버가 다운되거나, 커넥션 풀이 꽉 차는 등의 경우이기 때문이다.
+
+그러므로 기계적인 throws 선언보다 가능한 빨리 언체크/런타임 예외로 전환해줘야 한다. 그래서 `JdbcTemplate`의 메소드 선언을 살펴보면 아래와 같이 되어있다.
+
+```java
+public int update(final String sql) throws DataAccessException { ... }
+```
+
+꼭 필요한 경우에만 런타임 예외로 잡고 그외의 경우는 무시한다. `DataAccessException` 이 런타임 예외이므로 `update()`를 사용하는 메소드에서 다시 잡거나 던질 의무가 없다.
