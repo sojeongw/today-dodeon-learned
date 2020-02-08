@@ -54,4 +54,4 @@
 ## 지식 쌓기 <a id="interview"></a>
 
 * [데이터 베이스](interview/database/README.md)
-    *[샤딩](interview/database/sharding.md)
+    * [샤딩](interview/database/sharding.md)
