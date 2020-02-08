@@ -50,3 +50,7 @@
 * [Spring with Annotations](spring-and-hibernate-for-beginners/spring-with-annotations/README.md)
     * [Dependency Injection](spring-and-hibernate-for-beginners/spring-with-annotations/dependency-injection.md)
     * [Constructor Injection](spring-and-hibernate-for-beginners/spring-with-annotations/constructor-injection.md)
+
+## 지식 쌓기 <a id="study-for-interview"></a>
+* [데이터 베이스](interview/database/README.md)
+    *[샤딩](interview/database/sharding.md)
