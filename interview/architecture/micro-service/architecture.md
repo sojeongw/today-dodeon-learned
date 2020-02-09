@@ -1,12 +1,12 @@
 # MSA의 구성
 
-![](../../../.gitbook/assets/msa-architecture-components.png)
+![](../../../.gitbook/assets/interview/architecture/msa-architecture-components.png)
 
 MSA는 크게 Inner와 Outer로 나뉜다.
 
 ## Inner Architecture
 
-![](../../../.gitbook/assets/msa-innerarchitecture.png)
+![](../../../.gitbook/assets/interview/architecture/msa-innerarchitecture.png)
 
 내부 서비스를 어떻게 쪼갤지에 대한 아키텍처다.
 
@@ -28,13 +28,13 @@ Inner Architecture는 비즈니스, 서비스, 시스템마다 특성이 달라�
 
 ## Outer Architecture
 
-![](../../../.gitbook/assets/msa-architecture-components%20%281%29.png)
+![](../../../.gitbook/assets/interview/architecture/msa-architecture-components.png)
 
 다시 이 그림을 살펴보면 Outer Architecture는 총 6개로 분류된다.
 
 ### External Gateway
 
-![](../../../.gitbook/assets/apigateway.png)
+![](../../../.gitbook/assets/interview/architecture/apigateway.png)
 
 외부에서 들어오는 요청을 내부 구조를 드러내지 않고 처리하기 위한 요소다.
 
@@ -47,7 +47,7 @@ Inner Architecture는 비즈니스, 서비스, 시스템마다 특성이 달라�
 
 ### Service Mesh
 
-![](../../../.gitbook/assets/servicemesh.png)
+![](../../../.gitbook/assets/interview/architecture/serviceMesh.png)
 
 마이크로 서비스 간의 네트워크를 제어한다.
 
@@ -58,7 +58,7 @@ Inner Architecture는 비즈니스, 서비스, 시스템마다 특성이 달라�
 
 ### Container Management
 
-![](../../../.gitbook/assets/container-management-diagram.png)
+![](../../../.gitbook/assets/interview/architecture/container-management-diagram.png)
 
 컨테이너로 애플리케이션을 운영하면 유연한 설계가 가능하고 자율성을 가진다. 개발자가 쉽게 접근하고 운영할 수 있어 MSA에 적합하다.
 
@@ -76,7 +76,7 @@ Inner Architecture는 비즈니스, 서비스, 시스템마다 특성이 달라�
 
 #### Message Queue
 
-![](../../../.gitbook/assets/messagequeue.png)
+![](../../../.gitbook/assets/interview/architecture/messagequeue.png)
 
 MSA는 송신자와 수신자가 직접 통신하지 않고 Message Queue를 이용해 비동기적으로 메시지를 주고 받는다.
 
@@ -93,4 +93,3 @@ Telemetry는 서비스를 모니터링 하고 각 서비스에서 발생하는 �
 ### CI/CD Automation
 
 CI/CD는 애플리케이션 개발 단계를 자동화해서 좀 더 짧은 주기로 고객에게 제공할 수 있는 방법이다. 이렇게 자주 배포를 하러면 자동화는 필수적이다.
-

@@ -53,12 +53,9 @@
 
 ## 지식 쌓기 <a id="interview"></a>
 
-* [아키텍처](interview/architecture.md)
-* [아키텍처](interview/architecture-1/README.md)
-  * [MSA](interview/architecture-1/micro-service.md)
-  * [MSA](interview/architecture-1/micro-service-1/README.md)
-    * [MSA의 구성](interview/architecture-1/micro-service-1/architecture.md)
-    * [MSA의 구성](interview/architecture-1/micro-service-1/architecture-1.md)
+* [아키텍처](interview/architecture/README.md)
+  * [MSA](interview/architecture/micro-service/micro-service.md)
+    * [MSA의 구성](interview/architecture/micro-service/architecture.md)
 * [데이터 베이스](interview/database/README.md)
   * [NoSQL](interview/database/no-sql.md)
   * [서버 확장](interview/database/scaling.md)
