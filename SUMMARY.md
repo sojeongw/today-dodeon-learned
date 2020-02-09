@@ -54,4 +54,6 @@
 ## 지식 쌓기 <a id="interview"></a>
 
 * [데이터 베이스](interview/database/README.md)
+    * [NoSQL](interview/database/no-sql.md)
+    * [서버 확장](interview/database/scaling.md)
     * [샤딩](interview/database/sharding.md)
