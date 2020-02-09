@@ -8,16 +8,23 @@
 
 ## 수평 분할
 
+![](../../.gitbook/assets/interview/database/image38.png)
+
 - 스키마가 같은 데이터를 두 개 이상의 테이블에 나누어 저장하는 것
-    - 예) 주민 데이터를 처리하기 위해 같은 스키마 안에서 `서현동 주민 테이블`과 `정자동 주민 테이블`을 나눠 사용하는 것
-- [인덱스](https://itholic.github.io/database-index/)의 크기를 줄이고 작업 동시성을 늘릴 수 있다.
+    - 예) `User Table`을 동일 스키마의 13세 미만의 유저를 저장하는 `User Table #0`과 13세 이상의 유저를 저장하는 `User Table #1`로 분할하여 사용
+    - 예) 주민 데이터를 처리하기 위해 같은 스키마 안에서 `서현동 주민 테이블`과 `정자동 주민 테이블`을 나눠 사용
+- [인덱스](https://itholic.github.io/database-index/)의 크기를 줄이고 작업 [동시성](https://seamless.tistory.com/42)을 늘릴 수 있다.
 - 보통 하나의 DB 안에서 이루어진다.
 
 ## 샤딩
 
+![](../../.gitbook/assets/interview/database/image39.png)
+
 - 물리적으로 아예 다른 DB에 데이터를 분산 저장하고 조회하는 방법
-    - 예) `주민` 테이블이 여러 DB에 있을 때 `서현동 주민`은 A DB에, `정자동 주민`은 B DB에 저장한다.
+    - 예) `User Table`이 여러 데이터베이스에 있을 때 13세 미만의 유저를 0번 데이터베이스에, 13세 이상의 유저를 1번 데이터베이스에 저장
+    - 예) `주민` 테이블이 여러 DB에 있을 때 `서현동 주민`은 A DB에, `정자동 주민`은 B DB에 저장
 - 수평 분할 방식을 사용한다.
+- 하나의 데이터 베이스 인스턴스에 넣을 수 없는 큰 데이터를 분산 처리하기 위해 사용한다.
 - 여러 DB를 다루기 때문에 JOIN 연산, 일관성, 복제 등에 불리하다.
 - 예전에는 애플리케이션 서버 레벨에서 구현했으나 최근에는 플랫폼 레벨에서 제공한다.
 
@@ -106,4 +113,5 @@ Twitter에서 공개한 샤딩 플랫폼이다. Spock Proxy와는 용도와 아�
 이러한 제약 사항이 문제가 되지 않도록 데이터 모델링 하는 것이 중요하다.
 
 [NHN의 안과 밖: Sharding Platform](https://d2.naver.com/helloworld/14822)
+
 [ADT 활용 예제1: MySQL Shard 데이터 재분배](https://tech.kakao.com/2016/07/01/adt-mysql-shard-rebalancing/)
