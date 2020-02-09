@@ -1,8 +1,8 @@
 # 의존 관계
 
-## 의존 관계 주입(Dependency Injection)
+## 의존 관계 주입\(Dependency Injection\)
 
-![](../../.gitbook/assets/toby/20200108164927.png)
+![](../../.gitbook/assets/20200108164927.png)
 
 위의 UML 다이어그램처럼 A가 B에 의존한다는 것은 B가 변할 때 A에 영향을 미친다는 뜻이다.
 
@@ -17,25 +17,26 @@ public class UserDAO {
 }
 ```
 
-지금까지 작업했던 `UserDao`는 `ConnectionMaker`에 의존한다. 즉, `ConnectionMaker` 인터페이스를 사용하고 있으며 만약 이것이 바뀌면 영향을 받는다. 
+지금까지 작업했던 `UserDao`는 `ConnectionMaker`에 의존한다. 즉, `ConnectionMaker` 인터페이스를 사용하고 있으며 만약 이것이 바뀌면 영향을 받는다.
 
 하지만 `ConnectionMaker` 인터페이스를 구현한 `DConnectionMaker` 클래스는 `UserDao` 코드 속에 드러나있지 않으며 영향을 주지도 않는다. 이렇듯 인터페이스로 의존 관계를 만들어두면 수정이 자유로워진다.
 
-![](../../.gitbook/assets/toby/20200108165347.png)
+![](../../.gitbook/assets/20200108165347.png)
 
 이처럼 인터페이스로 느슨한 의존 관계를 맺는 경우는 `UserDao`가 런타임 때 어떤 클래스를 실제로 가져다 쓸 지 알 수 없다. 프로그램이 시작되고 오브젝트가 만들어지고 나서야 알게 되는 것이다. 이때 실제 사용하는 오브젝트를 `의존 오브젝트`라고 한다.
 
 정리하자면 의존 관계 주입은 다음의 조건을 만족해야 한다.
-- 클래스 모델이나 코드에는 런타임 때 사용하는 의존 관계가 드러나지 않는다.
-- 따라서 인터페이스에만 의존하고 있어야 한다.
-- 런타임 시점에 생기는 의존 관계는 컨테이너나 팩토리 같은 제 3자가 결정한다.
-- 의존 관계는 사용할 오브젝트에 대한 레퍼런스를 제공, 즉 주입해주면서 만들어진다.
 
-![](../../.gitbook/assets/toby/20200108170833.png)
+* 클래스 모델이나 코드에는 런타임 때 사용하는 의존 관계가 드러나지 않는다.
+* 따라서 인터페이스에만 의존하고 있어야 한다.
+* 런타임 시점에 생기는 의존 관계는 컨테이너나 팩토리 같은 제 3자가 결정한다.
+* 의존 관계는 사용할 오브젝트에 대한 레퍼런스를 제공, 즉 주입해주면서 만들어진다.
+
+![](../../.gitbook/assets/20200108170833.png)
 
 런타임이 되면 의존 관계 주입이 위와 같이 일어난다. 인터페이스를 실제 구현하는 클래스를 사용하게 되는 것이다.
 
-## 의존 관계 검색(Dependency Lookup)
+## 의존 관계 검색\(Dependency Lookup\)
 
 `의존 관계 주입`이 내 자신의 코드가 아니라 외부에서 관계를 맺는 것이라면 `의존 관계 검색`은 능동적으로 필요한 의존 오브젝트를 찾는다. `IoC`이므로 어떤 클래스를 이용할지 결정하지는 않지만 요청할 때 스스로 찾는 방법이다.
 
@@ -104,7 +105,7 @@ public class DaoFactory {
 
 ### 부가 기능 추가
 
-DAO가 DB 연결을 얼마나 많이 하는지 카운팅 하는 코드를 짜보자. 
+DAO가 DB 연결을 얼마나 많이 하는지 카운팅 하는 코드를 짜보자.
 
 ```java
 // 연결 횟수를 세는 코드를 다른 클래스로 분리한다.
@@ -116,7 +117,7 @@ public class CountingConnectionMaker implements ConnectionMaker {
     public CountingConnectionMaker(ConnectionMaker realConnectionMaker) {
         this.realConnectionMaker = realConnectionMaker;
     }
-    
+
     // DAO가 연결 메소드를 호출할 때마다 counter를 증가시킨다.
     public Connection makeConnection() {
         this.counter++;
@@ -133,11 +134,11 @@ public class CountingConnectionMaker implements ConnectionMaker {
 
 DB 연결 횟수를 세는 코드는 DAO의 관심 사항이 아니므로 위처럼 분리한다.
 
-![](../../.gitbook/assets/toby/20200108173345.png)
+![](../../.gitbook/assets/20200108173345.png)
 
 `CountingConnectionMaker` 적용 전에는 런타임이 되면 `DConnectionMaker`에 의존했다.
 
-![](../../.gitbook/assets/toby/20200108173359.png)
+![](../../.gitbook/assets/20200108173359.png)
 
 이제는 `CountingConnectionMaker`에 의존하면서 counter를 증가시키고 `CountingConnectionMaker`가 다시 `DConnectionMaker`를 호출해서 실제 DB 커넥션을 제공한다.
 
@@ -150,12 +151,12 @@ public class CountingDaoFactory {
     public UserDao userDao() {
         return new UserDao(connectionMaker());
     }
-    
+
     @Bean
     public ConnectionMaker connectionMaker() {
         return new CountingConnectionMaker(realConnectionMaker());
     }
-    
+
     @Bean
     public ConnectionMaker realConnectionMaker() {
     return new DConnectionMaker();
@@ -182,7 +183,6 @@ public class DaoFactory {
     }
 }
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -197,7 +197,7 @@ public class UserDaoConnectionCountingTest {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(CountingDaoFactory.class);
         UserDao dao = context.getBean("userDao" , UserDao .class);
-        
+
         // 의존 관계 검색으로 가져오고 싶은 빈 이름을 넣는다.
         CountingConnectionMaker ccm = context.getBean("connectionMaker", CountingConnectionMaker.class);
 
@@ -217,7 +217,6 @@ public class UserDaoTest {
     }
 }
 ```
-
 {% endtab %}
 {% endtabs %}
 
@@ -227,14 +226,14 @@ public class UserDaoTest {
 
 ### 수정자 메소드를 이용한 주입
 
-수정자(setter) 메소드는 항상 `set`으로 시작하는 메소드다. 파라미터로 전달된 값을 클래스 내부에 있는 인스턴스 변수에 할당하는 것이다.
+수정자\(setter\) 메소드는 항상 `set`으로 시작하는 메소드다. 파라미터로 전달된 값을 클래스 내부에 있는 인스턴스 변수에 할당하는 것이다.
 
 {% tabs %}
 {% tab title="After" %}
 ```java
 public class UserDao {
     private ConnectionMaker connectionMaker;
-    
+
     // 수정자 메소드를 이용한 의존 관계 주입
     public void setConnectionMaker(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
@@ -247,17 +246,15 @@ public class UserDao {
 ```java
 public class UserDAO {
     private ConnectionMaker connectionMaker;
-    
+
     // 생성자를 이용한 의존 관계 주입
     public UserDao(ConnectionMaker connectonMaker) {
         this.connectionMaker = connectonMaker();
     }
 }
 ```
-
 {% endtab %}
 {% endtabs %}
-
 
 {% tabs %}
 {% tab title="After" %}
@@ -286,10 +283,10 @@ public class CountingDaoFactory {
     }
 }
 ```
-
 {% endtab %}
 {% endtabs %}
 
 ### 일반 메소드를 이용한 주입
 
 `set`으로 시작하면서 한 개의 파라미터만 가져야 하는 `수정자 메소드`가 싫다면 일반 메소드를 사용할 수도 있다. 하지만 파라미터가 많아지면 실수하기 쉬우므로 주의해야 한다. 한 번에 모든 파라미터를 다 받아야 하는 생성자보다는 낫다.
+

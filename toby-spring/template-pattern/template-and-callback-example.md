@@ -1,12 +1,12 @@
-# 템플릿/콜백의 응용
+# 템플릿/콜백의 활용
 
 템플릿/콜백은 DI처럼 스프링의 독점 기술이 아니라 객체 지향적인 패턴이지만 스프링이 이러한 기능을 적극적으로 활용할 수 있도록 도와준다.
 
 따라서 스프링 개발자라면 템플릿/콜백 패턴을 잘 사용할 줄 알아야 한다. 고정된 작업 흐름에 반복되는 코드가 있다면 분리하는 습관을 기르자.
 
-- 중복된 코드를 메소드로 분리해보기
-- 일부에 변경이 필요한 경우 인터페이스를 사이에 두고 분리해 전략 패턴과 DI를 활용하기
-- 바뀌는 부분이 여러 개 만들어져야 한다면 템플릿/콜백 패턴 이용하기
+* 중복된 코드를 메소드로 분리해보기
+* 일부에 변경이 필요한 경우 인터페이스를 사이에 두고 분리해 전략 패턴과 DI를 활용하기
+* 바뀌는 부분이 여러 개 만들어져야 한다면 템플릿/콜백 패턴 이용하기
 
 ## try/catch/finally
 
@@ -43,7 +43,7 @@ public class Calculator {
     public Integer calcSum(String filepath) throws  IOException {
         // 한 줄씩 읽기 편하게 BufferedReader로 가져온다.
         BufferedReader br = null;
-        
+
         try {
             br = new BufferedReader(new FileReader(filepath));
             Integer sum = 0;
@@ -71,7 +71,7 @@ public class Calculator {
 }
 ```
 
-파일을 읽거나 처리하다가 예외가 발생할 수 있으므로 `try/catch/finally`로 처리했다. 
+파일을 읽거나 처리하다가 예외가 발생할 수 있으므로 `try/catch/finally`로 처리했다.
 
 ## 중복 제거와 템플릿/콜백 설계
 
@@ -114,7 +114,7 @@ public class Calculator {
 
     public Integer fileReadTemplate(String filepath, BufferedReaderCallback callback) throws  IOException {
         BufferedReader br = null;
-        
+
         try {
             br = new BufferedReader(new FileReader(filepath));
             // 콜백 오브젝트를 호출한다. 
@@ -140,7 +140,7 @@ public class Calculator {
 public class Calculator {
     public Integer calcSum(String filepath) throws  IOException {
         BufferedReader br = null;
-        
+
         try {
             br = new BufferedReader(new FileReader(filepath));
             Integer sum = 0;
@@ -227,7 +227,7 @@ public class Calculator {
         };
         return fileReadTemplate(filepath, multiplyCallback);
     }
-    
+
     public Integer calcSum(String filepath) throws IOException {
        ...
         return fileReadTemplate(filepath, sumCallback);
@@ -246,7 +246,7 @@ public class Calculator {
 그런데 `calcSum()`과 `calcMultiply()`는 비슷한 패턴으로 진행되고 있다. 각 라인에서 읽은 내용을 계산하다가 최종값을 리턴하는 것이다.
 
 {% tabs %}
-{% tab title="calcMultiply()" %}
+{% tab title="calcMultiply\(\)" %}
 ```java
 Integer multiply = 1;
 String line = null;
@@ -257,7 +257,7 @@ return multiply;
 ```
 {% endtab %}
 
-{% tab title="calcSum()" %}
+{% tab title="calcSum\(\)" %}
 ```java
 Integer sum = 1;
 String line = null;
@@ -269,7 +269,7 @@ return sum;
 {% endtab %}
 {% endtabs %}
 
-다시 코드를 정리해보자. 템플릿과 콜백을 찾아낼 때는 변하는 코드의 경계를 찾고 그 경계 사이에 주고받는 일정한 정보가 있는지 확인한다. 
+다시 코드를 정리해보자. 템플릿과 콜백을 찾아낼 때는 변하는 코드의 경계를 찾고 그 경계 사이에 주고받는 일정한 정보가 있는지 확인한다.
 
 변하는 부분인 `doSomethingWithReader()`를 콜백 인터페이스로 만들면 다음과 같다.
 
@@ -308,7 +308,7 @@ public class Calculator {
     // 새로 만든 라인 콜백과 계산 결과를 저장할 변수의 초기값을 파라미터로 받는다.
     public Integer lineReadTemplate(String filepath, LineCallback callback, int initVal) throws  IOException {
         BufferedReader br = null;
-        
+
         try {
             br = new BufferedReader(new FileReader(filepath));
             // 초기 값을 저장한다.
@@ -350,7 +350,7 @@ public class Calculator {
           };
           return fileReadTemplate(filepath, sumCallback);
     }
-    
+
     public Integer calcMultiply(String filepath) throws IOException {
         BufferedReaderCallback multiplyCallback = 
             new BufferedReaderCallback() {
@@ -368,7 +368,7 @@ public class Calculator {
 
     public Integer fileReadTemplate(String filepath, BufferedReaderCallback callback) throws  IOException {
         BufferedReader br = null;
-        
+
         try {
             br = new BufferedReader(new FileReader(filepath));
             int ret = callback.doSomethingWithReader(br);
@@ -438,20 +438,20 @@ public class Calculator {
     // 제네릭스 덕분에 이제 String도 처리할 수 있게 되었다.
     public String concatenate(String filepath) throws IOException {
         // 사용할 타입을 String으로 지정했다.
-		LineCallback<String> concatenateCallback = 
-			new LineCallback<String>() {
-			public String doSomethingWithLine(String line, String value) {
-				return value + line;
-			}};
+        LineCallback<String> concatenateCallback = 
+            new LineCallback<String>() {
+            public String doSomethingWithLine(String line, String value) {
+                return value + line;
+            }};
             // 템플릿 메소드의 T는 모두 스트링이 된다.
-			return lineReadTemplate(filepath, concatenateCallback, "");
-	}	
+            return lineReadTemplate(filepath, concatenateCallback, "");
+    }    
 
     // 타입 파라미터 T를 추가해서 제네릭 메소드로 만든다.
     // T 타입으로 선언된 LineCallback 메소드를 호출해서 처리한 뒤 T 타입의 결과를 리턴하는 메소드가 된다.
     public T lineReadTemplate(String filepath, LineCallback<T> callback, T initVal) throws  IOException {
         BufferedReader br = null;
-        
+
         try {
             br = new BufferedReader(new FileReader(filepath));
             // 결과 값도 T로 바꿔준다.
@@ -483,7 +483,7 @@ public class Calculator {
 
     public Integer lineReadTemplate(String filepath, LineCallback callback, int initVal) throws  IOException {
         BufferedReader br = null;
-        
+
         try {
             br = new BufferedReader(new FileReader(filepath));
             int res = initVal;
@@ -502,32 +502,33 @@ public class Calculator {
 {% endtab %}
 {% endtabs %}
 
-해당 기능을 테스트해보자. 
+해당 기능을 테스트해보자.
 
 ```java
 public class CalcSumTest {
-	Calculator calculator;
-	String numFilepath;
-	
-	@Before public void setUp() {
-		this.calculator = new Calculator();
-		this.numFilepath = getClass().getResource("numbers.txt").getPath();
-	}
-	
-	@Test public void sumOfNumbers() throws IOException {
-		assertThat(calculator.calcSum(this.numFilepath), is(10));
-	}
-	
-	@Test public void multiplyOfNumbers() throws IOException {
-		assertThat(calculator.calcMultiply(this.numFilepath), is(24));
-	}
-	
-	@Test public void concatenateStrings() throws IOException {
-		assertThat(calculator.concatenate(this.numFilepath), is("1234"));
-	}
+    Calculator calculator;
+    String numFilepath;
+
+    @Before public void setUp() {
+        this.calculator = new Calculator();
+        this.numFilepath = getClass().getResource("numbers.txt").getPath();
+    }
+
+    @Test public void sumOfNumbers() throws IOException {
+        assertThat(calculator.calcSum(this.numFilepath), is(10));
+    }
+
+    @Test public void multiplyOfNumbers() throws IOException {
+        assertThat(calculator.calcMultiply(this.numFilepath), is(24));
+    }
+
+    @Test public void concatenateStrings() throws IOException {
+        assertThat(calculator.concatenate(this.numFilepath), is("1234"));
+    }
 }
 ```
 
 파일에 있는 1, 2, 3, 4를 스트링으로 받아 합치므로 `1234` 가 나와야 한다.
 
 기존에 만든 `calcSum()`이나 `calcMultiply`도 String 대신 `Integer`로 인터페이스를 정의하면 그대로 사용할 수 있다.
+

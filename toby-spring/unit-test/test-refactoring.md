@@ -4,27 +4,27 @@
 
 ```java
 public class UserDaoTest {
-	
-	@Test 
-	public void andAndGet() throws SQLException {
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-        UserDao dao = context.getBean("userDao", UserDao.class);
-        ...
-	}
-	
-	@Test
-	public void count() throws SQLException {
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-        UserDao dao = context.getBean("userDao", UserDao.class);
-        ...
-	}
 
-	@Test
-	public void getUserFailure() throws SQLException {
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-		UserDao dao = context.getBean("userDao", UserDao.class);
+    @Test 
+    public void andAndGet() throws SQLException {
+        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
+        UserDao dao = context.getBean("userDao", UserDao.class);
         ...
-	}
+    }
+
+    @Test
+    public void count() throws SQLException {
+        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
+        UserDao dao = context.getBean("userDao", UserDao.class);
+        ...
+    }
+
+    @Test
+    public void getUserFailure() throws SQLException {
+        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
+        UserDao dao = context.getBean("userDao", UserDao.class);
+        ...
+    }
 }
 ```
 
@@ -50,21 +50,21 @@ public class UserDaoTest {
         ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
         this.dao = context.getBean("userDao", UserDao.class);
     }
-	
-	@Test 
-	public void andAndGet() throws SQLException {
-		...
-	}
-	
-	@Test
-	public void count() throws SQLException {
-        ...
-	}
 
-	@Test
-	public void getUserFailure() throws SQLException {
+    @Test 
+    public void andAndGet() throws SQLException {
         ...
-	}
+    }
+
+    @Test
+    public void count() throws SQLException {
+        ...
+    }
+
+    @Test
+    public void getUserFailure() throws SQLException {
+        ...
+    }
 }
 ```
 {% endtab %}
@@ -72,27 +72,27 @@ public class UserDaoTest {
 {% tab title="Before" %}
 ```java
 public class UserDaoTest {
-	
-	@Test 
-	public void andAndGet() throws SQLException {
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-		UserDao dao = context.getBean("userDao", UserDao.class);
-        ...
-	}
-	
-	@Test
-	public void count() throws SQLException {
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-		UserDao dao = context.getBean("userDao", UserDao.class);
-        ...
-	}
 
-	@Test
-	public void getUserFailure() throws SQLException {
-		ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-		UserDao dao = context.getBean("userDao", UserDao.class);
+    @Test 
+    public void andAndGet() throws SQLException {
+        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
+        UserDao dao = context.getBean("userDao", UserDao.class);
         ...
-	}
+    }
+
+    @Test
+    public void count() throws SQLException {
+        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
+        UserDao dao = context.getBean("userDao", UserDao.class);
+        ...
+    }
+
+    @Test
+    public void getUserFailure() throws SQLException {
+        ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
+        UserDao dao = context.getBean("userDao", UserDao.class);
+        ...
+    }
 }
 ```
 {% endtab %}
@@ -106,7 +106,7 @@ JUnit 프레임워크는 어떤 과정을 거쳐 이 테스트를 수행하는 �
 
 ### 2. 오브젝트 생성
 
-테스트 메소드를 실행할 때마다 테스트 클래스의 오브젝트를 새로 만든다. 하나의 테스트 클래스 오브젝트는 테스트가 끝나면 버려진다. 
+테스트 메소드를 실행할 때마다 테스트 클래스의 오브젝트를 새로 만든다. 하나의 테스트 클래스 오브젝트는 테스트가 끝나면 버려진다.
 
 이렇게 하는 이유는 각 테스트가 서로 영향을 주지 않고 독립적임을 보장하기 위함이다. 따라서 인스턴스 변수도 초기화 되므로 부담 없이 사용할 수 있다.
 
@@ -128,13 +128,13 @@ JUnit 프레임워크는 어떤 과정을 거쳐 이 테스트를 수행하는 �
 
 ### 6. 반복 수행
 
-나머지 테스트 메소드에 대해 2~5번을 반복한다. 
+나머지 테스트 메소드에 대해 2~5번을 반복한다.
 
 ### 7. 결과 도출
 
 그동안 진행한 테스트의 모든 결과를 종합해서 돌려준다.
 
-![](../../.gitbook/assets/toby/test-process.png)
+![](../../.gitbook/assets/test-process.png)
 
 테스트 순서를 그림으로 나타내면 위와 같다. 만약 테스트 메소드의 일부에서만 공통적으로 사용하는 코드가 있다면 일반적인 메소드 추출 방법을 사용하면 된다. 아니면 아예 공통적인 특징을 지닌 테스트 메소드만 모아 별도의 테스트 클래스에 넣어도 된다.
 
@@ -157,50 +157,50 @@ public class UserDaoTest {
     public void andAndGet() throws SQLException {
         // User 오브젝트 생성이 중복됨
         User user1 = new User("gyumee", "박성철", "spring1");
-		User user2 = new User("leegw700", "이길원", "spring2");
-		
-		dao.deleteAll();
-		assertThat(dao.getCount(), is(0));
+        User user2 = new User("leegw700", "이길원", "spring2");
 
-		dao.add(user1);
-		dao.add(user2);
-		assertThat(dao.getCount(), is(2));
-		
-		User userget1 = dao.get(user1.getId());
-		assertThat(userget1.getName(), is(user1.getName()));
-		assertThat(userget1.getPassword(), is(user1.getPassword()));
-		
-		User userget2 = dao.get(user2.getId());
-		assertThat(userget2.getName(), is(user2.getName()));
-		assertThat(userget2.getPassword(), is(user2.getPassword()));
+        dao.deleteAll();
+        assertThat(dao.getCount(), is(0));
+
+        dao.add(user1);
+        dao.add(user2);
+        assertThat(dao.getCount(), is(2));
+
+        User userget1 = dao.get(user1.getId());
+        assertThat(userget1.getName(), is(user1.getName()));
+        assertThat(userget1.getPassword(), is(user1.getPassword()));
+
+        User userget2 = dao.get(user2.getId());
+        assertThat(userget2.getName(), is(user2.getName()));
+        assertThat(userget2.getPassword(), is(user2.getPassword()));
     }
-    
+
     @Test
     public void count() throws SQLException {
         // User 오브젝트 생성이 중복됨
-		User user1 = new User("gyumee", "박성철", "spring1");
-		User user2 = new User("leegw700", "이길원", "spring2");
-		User user3 = new User("bumjin", "박범진", "spring3");
-				
-		dao.deleteAll();
-		assertThat(dao.getCount(), is(0));
-				
-		dao.add(user1);
-		assertThat(dao.getCount(), is(1));
-		
-		dao.add(user2);
-		assertThat(dao.getCount(), is(2));
-		
-		dao.add(user3);
-		assertThat(dao.getCount(), is(3));
+        User user1 = new User("gyumee", "박성철", "spring1");
+        User user2 = new User("leegw700", "이길원", "spring2");
+        User user3 = new User("bumjin", "박범진", "spring3");
+
+        dao.deleteAll();
+        assertThat(dao.getCount(), is(0));
+
+        dao.add(user1);
+        assertThat(dao.getCount(), is(1));
+
+        dao.add(user2);
+        assertThat(dao.getCount(), is(2));
+
+        dao.add(user3);
+        assertThat(dao.getCount(), is(3));
     }
 
     @Test
     public void getUserFailure() throws SQLException {
-		dao.deleteAll();
-		assertThat(dao.getCount(), is(0));
-		
-		dao.get("unknown_id");
+        dao.deleteAll();
+        assertThat(dao.getCount(), is(0));
+
+        dao.get("unknown_id");
     }
 }
 ```
@@ -225,49 +225,49 @@ public class UserDaoTest {
         this.dao = context.getBean("userDao", UserDao.class);
 
         // @Before에 픽스처 생성 로직을 모아서 오브젝트를 생성한다.
-		this.user1 = new User("gyumee", "박성철", "spring1");
-		this.user2 = new User("leegw700", "이길원", "spring2");
-		this.user3 = new User("bumjin", "박범진", "spring3");
+        this.user1 = new User("gyumee", "박성철", "spring1");
+        this.user2 = new User("leegw700", "이길원", "spring2");
+        this.user3 = new User("bumjin", "박범진", "spring3");
     }
     @Test 
     public void andAndGet() throws SQLException {
-		dao.deleteAll();
-		assertThat(dao.getCount(), is(0));
+        dao.deleteAll();
+        assertThat(dao.getCount(), is(0));
 
-		dao.add(user1);
-		dao.add(user2);
-		assertThat(dao.getCount(), is(2));
-		
-		User userget1 = dao.get(user1.getId());
-		assertThat(userget1.getName(), is(user1.getName()));
-		assertThat(userget1.getPassword(), is(user1.getPassword()));
-		
-		User userget2 = dao.get(user2.getId());
-		assertThat(userget2.getName(), is(user2.getName()));
-		assertThat(userget2.getPassword(), is(user2.getPassword()));
+        dao.add(user1);
+        dao.add(user2);
+        assertThat(dao.getCount(), is(2));
+
+        User userget1 = dao.get(user1.getId());
+        assertThat(userget1.getName(), is(user1.getName()));
+        assertThat(userget1.getPassword(), is(user1.getPassword()));
+
+        User userget2 = dao.get(user2.getId());
+        assertThat(userget2.getName(), is(user2.getName()));
+        assertThat(userget2.getPassword(), is(user2.getPassword()));
     }
-    
+
     @Test
     public void count() throws SQLException {
-		dao.deleteAll();
-		assertThat(dao.getCount(), is(0));
-				
-		dao.add(user1);
-		assertThat(dao.getCount(), is(1));
-		
-		dao.add(user2);
-		assertThat(dao.getCount(), is(2));
-		
-		dao.add(user3);
-		assertThat(dao.getCount(), is(3));
+        dao.deleteAll();
+        assertThat(dao.getCount(), is(0));
+
+        dao.add(user1);
+        assertThat(dao.getCount(), is(1));
+
+        dao.add(user2);
+        assertThat(dao.getCount(), is(2));
+
+        dao.add(user3);
+        assertThat(dao.getCount(), is(3));
     }
 
     @Test
     public void getUserFailure() throws SQLException {
-		dao.deleteAll();
-		assertThat(dao.getCount(), is(0));
-		
-		dao.get("unknown_id");
+        dao.deleteAll();
+        assertThat(dao.getCount(), is(0));
+
+        dao.get("unknown_id");
     }
 }
 ```
@@ -286,51 +286,52 @@ public class UserDaoTest {
     @Test 
     public void andAndGet() throws SQLException {
         User user1 = new User("gyumee", "박성철", "springno1");
-		User user2 = new User("leegw700", "이길원", "springno2");
-		
-		dao.deleteAll();
-		assertThat(dao.getCount(), is(0));
+        User user2 = new User("leegw700", "이길원", "springno2");
 
-		dao.add(user1);
-		dao.add(user2);
-		assertThat(dao.getCount(), is(2));
-		
-		User userget1 = dao.get(user1.getId());
-		assertThat(userget1.getName(), is(user1.getName()));
-		assertThat(userget1.getPassword(), is(user1.getPassword()));
-		
-		User userget2 = dao.get(user2.getId());
-		assertThat(userget2.getName(), is(user2.getName()));
-		assertThat(userget2.getPassword(), is(user2.getPassword()));
+        dao.deleteAll();
+        assertThat(dao.getCount(), is(0));
+
+        dao.add(user1);
+        dao.add(user2);
+        assertThat(dao.getCount(), is(2));
+
+        User userget1 = dao.get(user1.getId());
+        assertThat(userget1.getName(), is(user1.getName()));
+        assertThat(userget1.getPassword(), is(user1.getPassword()));
+
+        User userget2 = dao.get(user2.getId());
+        assertThat(userget2.getName(), is(user2.getName()));
+        assertThat(userget2.getPassword(), is(user2.getPassword()));
     }
-    
+
     @Test
     public void count() throws SQLException {
-		User user1 = new User("gyumee", "박성철", "spring1");
-		User user2 = new User("leegw700", "이길원", "spring2");
-		User user3 = new User("bumjin", "박범진", "spring3");
-				
-		dao.deleteAll();
-		assertThat(dao.getCount(), is(0));
-				
-		dao.add(user1);
-		assertThat(dao.getCount(), is(1));
-		
-		dao.add(user2);
-		assertThat(dao.getCount(), is(2));
-		
-		dao.add(user3);
-		assertThat(dao.getCount(), is(3));
+        User user1 = new User("gyumee", "박성철", "spring1");
+        User user2 = new User("leegw700", "이길원", "spring2");
+        User user3 = new User("bumjin", "박범진", "spring3");
+
+        dao.deleteAll();
+        assertThat(dao.getCount(), is(0));
+
+        dao.add(user1);
+        assertThat(dao.getCount(), is(1));
+
+        dao.add(user2);
+        assertThat(dao.getCount(), is(2));
+
+        dao.add(user3);
+        assertThat(dao.getCount(), is(3));
     }
 
     @Test
     public void getUserFailure() throws SQLException {
-		dao.deleteAll();
-		assertThat(dao.getCount(), is(0));
-		
-		dao.get("unknown_id");
+        dao.deleteAll();
+        assertThat(dao.getCount(), is(0));
+
+        dao.get("unknown_id");
     }
 }
 ```
 {% endtab %}
 {% endtabs %}
+

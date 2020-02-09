@@ -9,8 +9,8 @@ try/catch/finally를 쓰다보니 코드가 많이 복잡해졌다. 이럴 경�
 ```java
 public class UserDao {
     ...
-	public void deleteAll() throws SQLException {
-		Connection c = null;
+    public void deleteAll() throws SQLException {
+        Connection c = null;
         PreparedStatement ps = null;
 
         try {
@@ -30,11 +30,11 @@ public class UserDao {
                 try {
                     c.close();
                 } catch (SQLException e) {
-                    
+
                 }
             }
         }
-	}	
+    }    
 }
 ```
 
@@ -48,12 +48,12 @@ public class UserDao {
 {% tab title="After" %}
 ```java
 public class UserDao {
-	private DataSource dataSource;
-		
-	...
+    private DataSource dataSource;
 
-	public void deleteAll() throws SQLException {
-		Connection c = null;
+    ...
+
+    public void deleteAll() throws SQLException {
+        Connection c = null;
         PreparedStatement ps = null;
 
         try {
@@ -68,17 +68,17 @@ public class UserDao {
         } finally {     
             ...
         }
-	}	
+    }    
 
     private PreparedStatement makeStatement(Connection c) throws SQLExcpetion {
-	    PreparedStatement ps;
+        PreparedStatement ps;
         ps = c.prepareStatement("delete from users");
         return ps;
     }   
 
-	public int getCount() throws SQLException  {
-		...
-	}
+    public int getCount() throws SQLException  {
+        ...
+    }
 }
 ```
 {% endtab %}
@@ -86,12 +86,12 @@ public class UserDao {
 {% tab title="Before" %}
 ```java
 public class UserDao {
-	private DataSource dataSource;
-		
-	...
+    private DataSource dataSource;
 
-	public void deleteAll() throws SQLException {
-		Connection c = null;
+    ...
+
+    public void deleteAll() throws SQLException {
+        Connection c = null;
         PreparedStatement ps = null;
 
         try {
@@ -103,11 +103,11 @@ public class UserDao {
         } finally {     
             ...
         }
-	}	
+    }    
 
-	public int getCount() throws SQLException  {
-		...
-	}
+    public int getCount() throws SQLException  {
+        ...
+    }
 }
 ```
 {% endtab %}
@@ -138,7 +138,7 @@ public class UserDao {
     ...
 
     private PreparedStatement makeStatement(Connection c) throws SQLExcpetion {
-	    PreparedStatement ps;
+        PreparedStatement ps;
         ps = c.prepareStatement("delete from users");
         return ps;
     }  
@@ -167,7 +167,7 @@ public class UserDao {
     ...
 
     private PreparedStatement makeStatement(Connection c) throws SQLExcpetion {
-	    PreparedStatement ps;
+        PreparedStatement ps;
         ps = c.prepareStatement("delete from users");
         return ps;
     }  
@@ -176,29 +176,29 @@ public class UserDao {
 {% endtab %}
 {% endtabs %}
 
-상속으로 원하는 만큼 확장할 수 있고 DAO 클래스를 굳이 수정할 필요도 없다. 하지만 DAO에 어떤 로직 만들 때마다 상속으로 새로운 클래스도 만들어야 한다는 부담이 생긴다. 
+상속으로 원하는 만큼 확장할 수 있고 DAO 클래스를 굳이 수정할 필요도 없다. 하지만 DAO에 어떤 로직 만들 때마다 상속으로 새로운 클래스도 만들어야 한다는 부담이 생긴다.
 
-![](../../.gitbook/assets/toby/template-method-pattern.png)
+![](../../.gitbook/assets/template-method-pattern.png)
 
 이처럼 `UserDao`의 JDBC 메소드가 4개면 서브 클래스도 4개여야 한다. 또한, 확장하는 방법이 이미 클래스를 만들 때부터 고정되어 버린다. 런타임이 아니라 컨파일 시점에 클래스 간의 관계가 설정되어 있는 것이다. 결국 유연성이 떨어지는 코드가 된다.
 
 ## 전략 패턴
 
-개방 폐쇄 원칙(OCP)를 지키면서도 템플릿 메소드 패턴보다 유연하게 만드려면 인터페이스를 활용한다. 즉, 변하는 부분만 클래스로 분리하고 인터페이스를 이용해 위임하는 것이다.
+개방 폐쇄 원칙\(OCP\)를 지키면서도 템플릿 메소드 패턴보다 유연하게 만드려면 인터페이스를 활용한다. 즉, 변하는 부분만 클래스로 분리하고 인터페이스를 이용해 위임하는 것이다.
 
-![](../../.gitbook/assets/toby/strategy-pattern.png)
+![](../../.gitbook/assets/strategy-pattern.png)
 
 `컨텍스트`는 변하지 않는 부분, `전략`은 변하는 부분이다. 일정한 구조를 가진 `컨텍스트`로 동작하다가 특별하게 확장해야 하는 기능은 `Strategy` 인터페이스를 사이에 두고 외부의 독립된 전략 클래스로 넘긴다.
 
-### deleteAll()의 컨텍스트
+### deleteAll\(\)의 컨텍스트
 
 `deleteAll()`의 변하지 않는 부분은 JDBC를 이용해 DB를 업데이트 하는 작업이다.
 
-- DB 커넥션 가져오기
-- PreparedStatement를 만들어줄 외부 기능 호출하기
-- 전달받은 PreparedStatement 실행하기
-- 예외가 발생하면 다시 메소드 밖으로 던지기
-- PreparedStatement와 Connection 닫아주
+* DB 커넥션 가져오기
+* PreparedStatement를 만들어줄 외부 기능 호출하기
+* 전달받은 PreparedStatement 실행하기
+* 예외가 발생하면 다시 메소드 밖으로 던지기
+* PreparedStatement와 Connection 닫아주
 
 여기서 `PreparedStatement`를 만들어주는 외부 기능이 `전략`에 해당한다. 이 기능을 인터페이스로 만든 다음 인터페이스의 메소드로 전략을 호출하면 된다.
 
@@ -213,7 +213,6 @@ package springbook.user.dao;
     }
 }
 ```
-
 
 {% tabs %}
 {% tab title="After" %}
@@ -249,12 +248,12 @@ public class UserDaoDeleteAll extends UserDao {
 {% tab title="After" %}
 ```java
 public class UserDao {
-	private DataSource dataSource;
-		
-	...
+    private DataSource dataSource;
 
-	public void deleteAll() throws SQLException {
-		Connection c = null;
+    ...
+
+    public void deleteAll() throws SQLException {
+        Connection c = null;
         PreparedStatement ps = null;
 
         try {
@@ -264,7 +263,7 @@ public class UserDao {
             StatementStrategy strategy = new DeleteAllStatement();
             // 그 안에서 재정의된 메소드에 커넥션 정보를 보내준다.
             ps = strategy.makePreparedStatement(c);
-            
+
             // 전략이 적용된 쿼리를 실행한다.
             ps.executeUpdate();
         } catch (SQLException e) {  
@@ -272,11 +271,11 @@ public class UserDao {
         } finally {     
             ...
         }
-	}	
+    }    
 
-	public int getCount() throws SQLException  {
-		...
-	}
+    public int getCount() throws SQLException  {
+        ...
+    }
 }
 ```
 {% endtab %}
@@ -284,12 +283,12 @@ public class UserDao {
 {% tab title="Before" %}
 ```java
 public class UserDao {
-	private DataSource dataSource;
-		
-	...
+    private DataSource dataSource;
 
-	public void deleteAll() throws SQLException {
-		Connection c = null;
+    ...
+
+    public void deleteAll() throws SQLException {
+        Connection c = null;
         PreparedStatement ps = null;
 
         try {
@@ -302,11 +301,11 @@ public class UserDao {
         } finally {     
             ...
         }
-	}	
+    }    
 
-	public int getCount() throws SQLException  {
-		...
-	}
+    public int getCount() throws SQLException  {
+        ...
+    }
 }
 ```
 {% endtab %}
@@ -320,15 +319,15 @@ public class UserDao {
 
 그림으로 나타내면 아래와 같다.
 
-![](../../.gitbook/assets/toby/client-context.png)
+![](../../.gitbook/assets/client-context.png)
 
 이 구조는 이전에 배웠던 구조와 비슷하다.
- 
-![](../../.gitbook/assets/toby/client-context2.png)
+
+![](../../.gitbook/assets/client-context2.png)
 
 컨텍스트인 `UserDao`는 `ConnectionMaker`라는 전략을 필요로 한다. 클라이언트인 `UserDaoTest`는 필요한 전략을 만들어서 보내준다.
 
-![](../../.gitbook/assets/toby/object-factory.png)
+![](../../.gitbook/assets/object-factory.png)
 
 그리고 이때 썼던 `ObjectFactory`는 전략 오브젝트를 만들고 컨텍스트로 전달하는 책임을 따로 분리시킨 클래스였다.
 
@@ -357,24 +356,24 @@ public class UserDao {
     }
 
     // 이 컨텍스트를 호출할 떄 클라이언트가 StatementStrategy라는 전략을 넘겨준다.
-	public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException {
-		Connection c = null;
-		PreparedStatement ps = null;
+    public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException {
+        Connection c = null;
+        PreparedStatement ps = null;
 
-		try {
-			c = dataSource.getConnection();
+        try {
+            c = dataSource.getConnection();
 
             // 전략은 생성이 필요한 시점에 호출해서 사용한다.
-			ps = stmt.makePreparedStatement(c);
-		
-			ps.executeUpdate();
-		} catch (SQLException e) {
-			throw e;
-		} finally {
-			if (ps != null) { try { ps.close(); } catch (SQLException e) {} }
-			if (c != null) { try {c.close(); } catch (SQLException e) {} }
-		}
-	}
+            ps = stmt.makePreparedStatement(c);
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw e;
+        } finally {
+            if (ps != null) { try { ps.close(); } catch (SQLException e) {} }
+            if (c != null) { try {c.close(); } catch (SQLException e) {} }
+        }
+    }
 
 }
 ```
@@ -383,12 +382,12 @@ public class UserDao {
 {% tab title="Before" %}
 ```java
 public class UserDao {
-	private DataSource dataSource;
-		
-	...
+    private DataSource dataSource;
 
-	public void deleteAll() throws SQLException {
-		Connection c = null;
+    ...
+
+    public void deleteAll() throws SQLException {
+        Connection c = null;
         PreparedStatement ps = null;
 
         try {
@@ -396,7 +395,7 @@ public class UserDao {
 
             StatementStrategy strategy = new DeleteAllStatement();
             ps = strategy.makePreparedStatement(c);
-            
+
             ps.executeUpdate();
         } catch (SQLException e) {  
             throw e;
@@ -404,7 +403,7 @@ public class UserDao {
             if (ps != null) { try { ps.close(); } catch (SQLException e) {} }
             if (c != null) { try {c.close(); } catch (SQLException e) {} }
         }
-	}	
+    }    
 }
 ```
 {% endtab %}
@@ -412,14 +411,14 @@ public class UserDao {
 
 클라이언트와 컨텍스트의 클래스를 분리하진 않았지만 의존 관계와 책임 측면에서 볼 때 서로 잘 분리되어 있음을 알 수 있다. 특히 클라이언트가 컨텍스트에게 전략을 정해서 전달하는 것은 DI 구조라고 할 수 있다.
 
-### add() 메소드에 적용
+### add\(\) 메소드에 적용
 
-이번에는 add() 메소드에 적용해보자.
+이번에는 add\(\) 메소드에 적용해보자.
 
 ```java
 public class UserDao {
-	private DataSource dataSource;
-    		
+    private DataSource dataSource;
+
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -446,7 +445,7 @@ public class UserDao {
 
     public void deleteAll() throws SQLException {
        ...
-    }	
+    }    
 
     public int getCount() throws SQLException  {
         ...
@@ -485,8 +484,8 @@ public class AddStatement implements StatementStrategy {
 {% tab title="After" %}
 ```java
 public class UserDao {
-	private DataSource dataSource;
-    		
+    private DataSource dataSource;
+
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -503,7 +502,7 @@ public class UserDao {
 
     public void deleteAll() throws SQLException {
        ...
-    }	
+    }    
 
     public int getCount() throws SQLException  {
         ...
@@ -515,8 +514,8 @@ public class UserDao {
 {% tab title="Before" %}
 ```java
 public class UserDao {
-	private DataSource dataSource;
-    		
+    private DataSource dataSource;
+
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -542,7 +541,7 @@ public class UserDao {
 
     public void deleteAll() throws SQLException {
        ...
-    }	
+    }    
 
     public int getCount() throws SQLException  {
         ...
@@ -556,8 +555,9 @@ public class UserDao {
 
 DI의 가장 중요한 개념은 제3자를 통해 두 오브젝트 사이를 유연하게 만드는 것이다. 이 개념만 적용하면 구조나 관계는 다양하게 만들 수 있다.
 
-DI는 의존 관계인 두 오브젝트와 서로의 관계를 다이나믹하게 설정해주는 오브젝트 팩토리(DI 컨테이너), 이를 사용하는 클라이언트 사이에서 일어난다.
+DI는 의존 관계인 두 오브젝트와 서로의 관계를 다이나믹하게 설정해주는 오브젝트 팩토리\(DI 컨테이너\), 이를 사용하는 클라이언트 사이에서 일어난다.
 
 하지만 때로는 원시적인 전략 패턴 구조에 따라 클라이언트가 오브젝트 팩토리의 역할을 같이 할 수도 있다. 또는 클라이언트와 전략이 합쳐질 수도 있으며 클라이언트, DI로 연결된 두 오브젝트 모두가 한 클래스에 담길 수도 있다. 이 경우 DI는 아주 작은 코드와 메소드에서 나타나기도 한다.
 
 이렇게 DI의 장점을 단순화해서 IoC 컨테이너 없이 만드는 것을 `마이크로 DI`라고 한다. 코드에 의한 DI라는 의미로 수동 DI라고 하기도 한다.
+

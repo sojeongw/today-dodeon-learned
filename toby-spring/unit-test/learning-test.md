@@ -114,11 +114,11 @@ public class JUnitTest {
 
 테스트를 위한 설정 파일을 만든다. 이때 DI 기능이 아니라 컨텍스트가 생성되는 방식을 보는 것이므로 빈을 등록할 필요는 없다.
 
-```xml
+```markup
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 </beans>
 ```
@@ -128,44 +128,45 @@ public class JUnitTest {
 @ContextConfiguration("junit.xml")  // 위에서 만든 설정 파일을 넣는다.
 public class JUnitTest {
     // 매번 주입해주는 애플리케이션 컨텍스트
-	@Autowired 
+    @Autowired 
     ApplicationContext context;
-	
-	static Set<JUnitTest> testObjects = new HashSet<JUnitTest>();
+
+    static Set<JUnitTest> testObjects = new HashSet<JUnitTest>();
     // context를 저장해둘 static 변수
-	static ApplicationContext contextObject = null;
-	
-	@Test public void test1() {
-		assertThat(testObjects, not(hasItem(this)));
-		testObjects.add(this);
-		
+    static ApplicationContext contextObject = null;
+
+    @Test public void test1() {
+        assertThat(testObjects, not(hasItem(this)));
+        testObjects.add(this);
+
         // 스태틱 변수가 null이라면 첫 번째 테스트라는 의미이다. 
         // 값이 있다면 현재 컨텍스트와 일치하는지 확인한다.
         // is() 매처는 타입만 일치하면 값을 검증할 수 있다.
-		assertThat(contextObject == null || contextObject == this.context, is(true));
+        assertThat(contextObject == null || contextObject == this.context, is(true));
         // 스태틱 변수에 현재 컨텍스트를 저장한다. 이제 스태티 변수는 null이 아니다.
-		contextObject = this.context;
-	}
-	
-	@Test public void test2() {
-		assertThat(testObjects, not(hasItem(this)));
-		testObjects.add(this);
-		
+        contextObject = this.context;
+    }
+
+    @Test public void test2() {
+        assertThat(testObjects, not(hasItem(this)));
+        testObjects.add(this);
+
         // assertTrue는 조건문의 결과가 true인지 확인한다. assertThat보다 간결하다.
-		assertTrue(contextObject == null || contextObject == this.context);
-		contextObject = this.context;
-	}
-	
-	@Test public void test3() {
-		assertThat(testObjects, not(hasItem(this)));
-		testObjects.add(this);
-		
+        assertTrue(contextObject == null || contextObject == this.context);
+        contextObject = this.context;
+    }
+
+    @Test public void test3() {
+        assertThat(testObjects, not(hasItem(this)));
+        testObjects.add(this);
+
         // 이번에는 매처의 조합을 활용해 or 조건으로 비교한다.
         // nullValue는 오브젝트가 null인지 확인한다.
-		assertThat(contextObject, either(is(nullValue())).or(is(this.contextObject)));
-		contextObject = this.context;
-	}
+        assertThat(contextObject, either(is(nullValue())).or(is(this.contextObject)));
+        contextObject = this.context;
+    }
 }
 ```
 
 assert 하는 다양한 방식을 알아보았다. 이중에서 편한 방법을 선택하면 된다.
+

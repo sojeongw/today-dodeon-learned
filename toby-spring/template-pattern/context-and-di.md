@@ -2,9 +2,9 @@
 
 전략 패턴으로 보면 구조는 다음과 같다.
 
-- 클라이언트: UserDao의 add(), deleteAll() 등의 메소드
-- 전략: 익명 내부 클래스로 만들어지는 내용
-- 컨텍스트: DB 커넥션을 만드는 큰 흐름인 jdbcContextWithStatementStrategy() 메소드
+* 클라이언트: UserDao의 add\(\), deleteAll\(\) 등의 메소드
+* 전략: 익명 내부 클래스로 만들어지는 내용
+* 컨텍스트: DB 커넥션을 만드는 큰 흐름인 jdbcContextWithStatementStrategy\(\) 메소드
 
 컨텍스트 메소드는 `UserDao`에 있는 `PreparedStatement`를 실행하는 메소드라면 다 같이 공유할 수 있다. 다른 DAO에서도 사용할 수 있도록 `jdbcContextWithStatementStrategy()`를 UserDao 클래스 밖으로 독립시켜보자.
 
@@ -56,7 +56,7 @@ public class UserDao {
     public void setJdbcContext(JdbcContext jdbcContext) {
         this.jdbcContext = jdbcContext;
     }   
-    
+
     public void add(final User user) throws SQLException {
         // DI 받은 jdbcContext의 컨텍스트 메소드를 사용하도록 변경한다.
         this.jdbcContext.workWithStatementStrategy(
@@ -84,7 +84,7 @@ public class UserDao {
     public void setDataSource(DataSource dataSource) {
             this.dataSource = dataSource;
         }
-    
+
     public void add(final User user) throws SQLException {
         jdbcContextWithStatementStrategy(
             new StatementStrategy() {
@@ -109,13 +109,11 @@ public class UserDao {
 
 스프링의 DI는 기본적으로 인터페이스를 사이에 두고 의존 클래스를 바꿔서 사용하는 게 목적이다. 하지만 JdbcContext는 독립적으로 JDBC 컨텍스트를 제공해줄 뿐 그 구현 방법이 바뀔 가능성은 없다. 그래서 인터페이스로 구현하지 않고 DI를 적용하는 특별한 구조가 된다.
 
-![](../../.gitbook/assets/toby/20200122161557.png)
+![](../../.gitbook/assets/20200122161557.png)
 
 그림으로 나타내면 위와 같다. 인터페이스 없이 JdbcContext가 추가된 의존 관계를 나타내고 있다.
 
-<br/>
-
-![](../../.gitbook/assets/toby/20200122161938.png)
+![](../../.gitbook/assets/20200122161938.png)
 
 스프링의 빈 설정은 클래스 레벨이 아니라, 런타임 시에 오브젝트 레벨에서 생기는 의존관계에 따라 정의된다. 기존에는 userDao 빈이 dataSource 빈을 직접 의존했지만 이제 그 사이에 jdbcContext 빈이 끼게 되었다.
 
@@ -139,7 +137,7 @@ JdbcContext는 JDBC 컨텍스트 메소드를 제공해주는 일종의 서비�
 
 #### JdbcContext가 DI로 다른 빈에 의존하고 있다
 
-이 두 번째 이유가 중요하다. JdbcContext는 dataSource 프로퍼티를 통해 DataSource 오브젝트를 주입받는다. 
+이 두 번째 이유가 중요하다. JdbcContext는 dataSource 프로퍼티를 통해 DataSource 오브젝트를 주입받는다.
 
 DI를 받으려면 주입되는 곳과 주입 받는 곳 둘 다 스프링 빈으로 등록되어야 한다. 스프링이 생성하고 관리하는 IoC 대상이어야 DI에 참여할 수 있기 때문이다.
 
@@ -161,9 +159,9 @@ DAO 메소드 마다 만드는 게 아니라 DAO 개수만큼만 만들면 되�
 
 그런데 DI를 받으려면 서로 빈으로 등록되어 있어야 한다고 했다. 우리는 빈으로 만들지 않으므로 UserDao에 DI까지 맡기면 된다. 오브젝트를 만들고 수정자 메소드로 주입해주는 것이다.
 
-![](../../.gitbook/assets/toby/20200122165427.png)
+![](../../.gitbook/assets/20200122165427.png)
 
-그림으로 보면 위와 같다. 
+그림으로 보면 위와 같다.
 
 1. 스프링 빈에 userDao와 dataSource만 빈으로 정의한다. 
 2. userDao 빈에 dataSource를 주입받는다.
@@ -171,14 +169,13 @@ DAO 메소드 마다 만드는 게 아니라 DAO 개수만큼만 만들면 되�
 4. 만들면서 DI 받은 DataSource를 JdbcContext의 수정자 메소드로 주입한다.
 5. 만들어진 JdbcContext 오브젝트는 UserDao의 인스턴스 변수에 저장해 사용한다.
 
-
 {% tabs %}
 {% tab title="After" %}
 ```java
 public class UserDao {
-	private DataSource dataSource;
+    private DataSource dataSource;
     private JdbcContext jdbcContext;
-    		
+
     // 수정자 메소드로 클라이언트가 직접 JdbcContext를 생성하고 DI 한다.
     public void setDataSource(DataSource dataSource) {
         // JdbcContext 생성
@@ -200,8 +197,8 @@ public class UserDao {
 {% tab title="Before" %}
 ```java
 public class UserDao {
-	private DataSource dataSource;
-    		
+    private DataSource dataSource;
+
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -224,3 +221,4 @@ public class UserDao {
 DAO로 수동 DI 하는 방법은 내부에서 만들어지고 사용되면서 외부에는 관계를 드러내지 않는 장점이 있다. 은밀히 DI를 수행하고 전략을 감출 수 있는 것이다. 하지만 싱글톤으로 만들 수 없고 DI를 위해 부가적인 코드가 필요하다는 단점이 있다.
 
 분명한 이유를 댈 수 있는 선에서 상황에 따라 적절하게 선택하면 된다.
+

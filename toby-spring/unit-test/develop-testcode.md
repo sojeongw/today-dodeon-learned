@@ -1,10 +1,10 @@
-# 일관성 있는 테스트
+# JUnit 적용하기
 
 테스트를 하면서 가장 불편했던 건 매번 테스트를 실행할 때마다 DB 데이터를 삭제하는 것이었다. 이 과정을 잊는다면 `add()` 메소드 실행중에 중복 에러가 뜰 것이다.
 
 이렇게 별도의 준비 작업 때문에 테스트가 실패하기도 하고 성공하기도 한다면 좋은 테스트라고 할 수 없다. 테스트는 `항상` 동일한 결과를 내야 한다.
 
-## deleteAll()과 getCount() 추가
+## deleteAll\(\)과 getCount\(\) 추가
 
 {% tabs %}
 {% tab title="After" %}
@@ -12,33 +12,33 @@
 public class UserDao {
     // 1장에서 건너뛴 XML 파트에서 변경된 부분
     private DataSource dataSource;
-	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
-    
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
+
     // USER 테이블의 모든 레코드를 삭제해준다.
     public void deleteAll() throws SQLException {
         Connection c = dataSource.getConnection();
-    
+
         PreparedStatement ps = c.prepareStatement("delete from users");
         ps.executeUpdate();
 
         ps.close();
         c.close();
     }
-    
+
     // USER 테이블의 레코드 개수를 돌려준다.
     public int getCount() throws SQLException {
         Connection c = dataSource.getConnection();
-    
+
         PreparedStatement ps = c.prepareStatement("select count(*) from users");
 
         ResultSet rs = ps.executeQuery();
         rs.next();
 
         int count = rs.getInt(1);
-        
+
         rs.close();
         ps.close();
         c.close();
@@ -53,10 +53,10 @@ public class UserDao {
 ```java
 public class UserDao {
     private DataSource dataSource;
-	
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 }
 ```
 {% endtab %}
@@ -94,13 +94,13 @@ public class UserDaoTest {
         user.setId("whiteship");
         user.setName("백기선");
         user.setPassword("married");
-        
+
         // dao에 user를 추가하고
         dao.add(user);
         // 1인지 확인한다.
         assertThat(dao.getCount(), is(1));
-		
-		User user2 = dao.get(user.getId());
+
+        User user2 = dao.get(user.getId());
 
         assertThat(user2.getName(), is(user.getName()));
         assertThat(user2.getPassword(), is(user.getPassword()));
@@ -127,10 +127,10 @@ public class UserDaoTest {
         user.setId("whiteship");
         user.setName("백기선");
         user.setPassword("married");
-        
+
         dao.add(user);
-		
-		User user2 = dao.get(user.getId());
+
+        User user2 = dao.get(user.getId());
 
         assertThat(user2.getName(), is(user.getName()));
         assertThat(user2.getPassword(), is(user.getPassword()));
@@ -144,7 +144,7 @@ public class UserDaoTest {
 
 다른 방법으로는 `addAndGet()` 테스트를 마치기 직전에 그동안 추가한 데이터를 다시 원상 복구 하는 것이다. `add()`로 호출한 데이터를 `deleteAll()`로 삭제하는 것이다.
 
-이 방법도 나쁘진 않지만 `addAndGet()` 메소드 전 후로 같은 DB를 쓰는 작업이 있다면 문제가 생길 수 있으므로 *테스트 전*에 상태를 초기화 해주는 게 낫다.
+이 방법도 나쁘진 않지만 `addAndGet()` 메소드 전 후로 같은 DB를 쓰는 작업이 있다면 문제가 생길 수 있으므로 _테스트 전_에 상태를 초기화 해주는 게 낫다.
 
 테스트는 외부 환경이나 순서가 바뀌어도 항상 일관성 있는 결과가 보장되어야 함을 잊지 말자.
 
@@ -156,10 +156,10 @@ public class UserDaoTest {
 
 JUnit은 아래의 조건만 지키면 한 클래스 안에 여러 개의 테스트 메소드를 넣을 수 있다.
 
-- `@Test` 애노테이션
-- `public` 접근 지정자
-- `void` 리턴
-- 파라미터 없음
+* `@Test` 애노테이션
+* `public` 접근 지정자
+* `void` 리턴
+* 파라미터 없음
 
 USER 테이블을 지우고 `getCount()`를 했을 때 0인 것을 확인한 뒤, 3개의 정보를 추가하면서 `getCount()`가 제대로 동작하는지 확인해보자.
 
@@ -167,9 +167,9 @@ USER 테이블을 지우고 `getCount()`를 했을 때 0인 것을 확인한 뒤
 {% tab title="After" %}
 ```java
 public class User {
-	String id;
-	String name;
-	String password;
+    String id;
+    String name;
+    String password;
 
     // User 오브젝트를 여러 번 만들기 위해 생성자를 만든다.
     public User(String id, String name, String password) {
@@ -177,30 +177,30 @@ public class User {
         this.name = name;
         this.password = password;
     }
-    
+
     // 자바 빈 규약을 따르는 클래스에 생성자를 추가했을 때는
     // 파라미터가 없는 디폴트 생성자도 함께 정의해야 한다.
     public User() {
     } 
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
 ```
 {% endtab %}
@@ -208,28 +208,28 @@ public class User {
 {% tab title="Before" %}
 ```java
 public class User {
-	String id;
-	String name;
-	String password;
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    String id;
+    String name;
+    String password;
+
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
 ```
 {% endtab %}
@@ -243,11 +243,11 @@ public class UserDaoTest {
     public void addAndGet() throws SQLException {
         ...
     }
-    
+
     @Test
     public void count() throws SQLException {
     ApplicationContext context = new GenericXmlApplicationContext ("applicationContext.xml");
-   
+
     // 새로운 User 3개를 생성하고
     UserDao dao = context.getBean("userDao" , UserDao.class);
     User user1 = new User("gyumee", "박성철", "spring1");
@@ -257,7 +257,7 @@ public class UserDaoTest {
     // 다 지워지는지 확인한다.
     dao.deleteAll();
     assertThat(dao.getCount(), is(0));
-    
+
     // 유저를 하나씩 추가할 때마다 제대로 count 되는지 확인한다.
     dao.add(user1);
     assertThat(dao.getCount(), is(1));
@@ -302,21 +302,21 @@ public class UserDaoTest {
 
         dao.deleteAll();
         assertThat(dao.getCount(), is(0));
-        
+
         // 두 User를 모두 add() 한다.
         dao.add(user1);
         dao.add(user2);
         // 2명의 User를 제대로 count 했는지 확인한다.
         assertThat(dao.getCount(), is(2));
-		
+
         // user 데이터를 get 한 다음
-		User userget1 = dao.get(user1.getId());
+        User userget1 = dao.get(user1.getId());
         // 해당 유저의 값과 일치하는지 확인한다.
         assertThat(userget1.getName(), is(user1.getName()));
         assertThat(userget1.getPassword(), is(user1.getPassword()));
 
         // user 데이터를 get 한 다음
-		User userget2 = dao.get(user2.getId());
+        User userget2 = dao.get(user2.getId());
         // 해당 유저의 값과 일치하는지 확인한다.
         assertThat(userget2.getName(), is(user2.getName()));
         assertThat(userget2.getPassword(), is(user2.getPassword()));
@@ -351,11 +351,11 @@ public class UserDaoTest {
         user.setId("whiteship");
         user.setName("백기선");
         user.setPassword("married");
-        
+
         dao.add(user);
         assertThat(dao.getCount(), is(1));
-		
-		User user2 = dao.get(user.getId());
+
+        User user2 = dao.get(user.getId());
 
         assertThat(user2.getName(), is(user.getName()));
         assertThat(user2.getPassword(), is(user.getPassword()));
@@ -372,8 +372,8 @@ public class UserDaoTest {
 
 만약 파라미터로 받은 id가 존재하지 않는다면 어떻게 해야할까? 이럴 땐 두 가지 방법이 있다.
 
-- null과 같은 특별한 값 리턴
-- id에 해당하는 정보를 찾을 수 없다고 예외 처리
+* null과 같은 특별한 값 리턴
+* id에 해당하는 정보를 찾을 수 없다고 예외 처리
 
 각기 장단점이 있지만 여기서는 후자를 해볼 것이다. 예외 클래스는 스프링의 `EmptyResultDataAccessException`을 사용한다.
 
@@ -389,7 +389,7 @@ public class UserDaoTest {
     @Test(expected=EmptyResultDataAccessException.class)
     public void getUserFailure() throws SQLException {
         ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
-        
+
         UserDao dao = context.getBean("userDao", UserDao.class);
         dao.deleteAll();
         assertThat(dao.getCount(), is(0));
@@ -428,11 +428,11 @@ public class UserDaoTest {
         user.setId("whiteship");
         user.setName("백기선");
         user.setPassword("married");
-        
+
         dao.add(user);
         assertThat(dao.getCount(), is(1));
-		
-		User user2 = dao.get(user.getId());
+
+        User user2 = dao.get(user.getId());
 
         assertThat(user2.getName(), is(user.getName()));
         assertThat(user2.getPassword(), is(user.getPassword()));
@@ -454,19 +454,19 @@ public class UserDaoTest {
 ```java
 public class UserDao {
     private DataSource dataSource;
-	
-	public void setDataSource(DataSource dataSource) {
-		...
-	}
-    
-    public User get(String id) throws SQLException {
-		Connection c = this.dataSource.getConnection();
-		PreparedStatement ps = c
-				.prepareStatement("select * from users where id = ?");
-		ps.setString(1, id);
 
-		ResultSet rs = ps.executeQuery();
-    
+    public void setDataSource(DataSource dataSource) {
+        ...
+    }
+
+    public User get(String id) throws SQLException {
+        Connection c = this.dataSource.getConnection();
+        PreparedStatement ps = c
+                .prepareStatement("select * from users where id = ?");
+        ps.setString(1, id);
+
+        ResultSet rs = ps.executeQuery();
+
         // 일단 User를 null로 초기화한다.
         User user = null;
 
@@ -479,21 +479,21 @@ public class UserDao {
             user.setPassword(rs.getString("password"));
         }
 
-		rs.close();
-		ps.close();
-		c.close();
+        rs.close();
+        ps.close();
+        c.close();
 
         // 반환값이 없다면 우리가 계획한 예외를 던진다.
         if(user == null) throw new EmptyResultDataAccessException(1);
 
-		return user;
-        
+        return user;
+
     }
-    
+
     public void deleteAll() throws SQLException {
         ...
     }
-    
+
     public int getCount() throws SQLException {
         ...
     }
@@ -505,35 +505,35 @@ public class UserDao {
 ```java
 public class UserDao {
     private DataSource dataSource;
-	
-	public void setDataSource(DataSource dataSource) {
-		...
-	}
 
-	public User get(String id) throws SQLException {
-		Connection c = this.dataSource.getConnection();
-		PreparedStatement ps = c
-				.prepareStatement("select * from users where id = ?");
-		ps.setString(1, id);
+    public void setDataSource(DataSource dataSource) {
+        ...
+    }
 
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		User user = new User();
-		user.setId(rs.getString("id"));
-		user.setName(rs.getString("name"));
-		user.setPassword(rs.getString("password"));
+    public User get(String id) throws SQLException {
+        Connection c = this.dataSource.getConnection();
+        PreparedStatement ps = c
+                .prepareStatement("select * from users where id = ?");
+        ps.setString(1, id);
 
-		rs.close();
-		ps.close();
-		c.close();
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        User user = new User();
+        user.setId(rs.getString("id"));
+        user.setName(rs.getString("name"));
+        user.setPassword(rs.getString("password"));
 
-		return user;
-	}
-    
+        rs.close();
+        ps.close();
+        c.close();
+
+        return user;
+    }
+
     public void deleteAll() throws SQLException {
         ...
     }
-    
+
     public int getCount() throws SQLException {
         ...
     }
@@ -557,3 +557,4 @@ public class UserDao {
 개발자들이 곧잘 하는 변명이다. 이는 개발자가 예외적인 상황을 피하고 정상 케이스만 테스트 했다는 뜻이다. 그래서 우리는 항상 `부정적인 케이스`를 먼저 만드는 습관을 들여야 한다.
 
 예를 들어 `get()`의 경우 존재하는 id에 대해 레코드를 가져오는지 테스트 하는 것도 중요하지만 존재하지 않는 id일 때 어떻게 반응할지 먼저 결정하고 개발하는 것이 좋다.
+

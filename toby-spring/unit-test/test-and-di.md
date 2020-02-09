@@ -14,7 +14,7 @@
 
 테스트는 자동으로 실행 가능하며 빠르게 동작해야 한다. 이를 위해서는 가능한 작은 단위를 테스트해야 한다. DI는 테스트를 작은 단위로 만들고 독립적으로 실행되게 하는 데 중요한 역할을 한다.
 
-## 테스트를 위한 @DirtiesContext 
+## 테스트를 위한 @DirtiesContext
 
 만약 테스트용과 운영용을 분리해서 DB를 사용하고 싶다면 어떻게 해야할까? 테스트할 때 운영용 DB를 사용하면 기존 데이터가 큰 오류가 생길 수 있다. 이런 경우 테스트 코드에 의한 DI를 이용하면 된다.
 
@@ -35,9 +35,9 @@ public class UserDaoTest {
     }
     @Test 
     public void andAndGet() throws SQLException {
-	    ...
+        ...
     }
-    
+
     @Test
     public void count() throws SQLException {
         ...
@@ -60,7 +60,7 @@ public class UserDaoTest {
 
 위처럼 수동으로 DI 하는 방법은 코드가 많아져 번거롭고 애플리케이션 컨텍스트를 매번 새로 만드는 부담이 있다. 이 경우 `DataSource` 클래스가 빈으로 정의된 `테스트 전용 설정 파일`을 만들면 된다.
 
-```xml
+```markup
 <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource"> 
 <property name="driverClass" value="com.mysql.jdbc.Driver"/> 
 <property name="url" value="jdbc:mysql://localhost/testdb"/> 
@@ -89,9 +89,9 @@ public class UserDaoTest {
     }
     @Test 
     public void andAndGet() throws SQLException {
-	    ...
+        ...
     }
-    
+
     @Test
     public void count() throws SQLException {
         ...
@@ -132,9 +132,9 @@ public class UserDaoTest {
     }
     @Test 
     public void andAndGet() throws SQLException {
-	    ...
+        ...
     }
-    
+
     @Test
     public void count() throws SQLException {
         ...
@@ -164,7 +164,7 @@ public class UserDaoTest {
 ## DI를 이용한 테스트 방법 선택
 
 그렇다면 어떤 방법으로 DI를 테스트에 이용해야 할까? 모두 장단점이 있지만 우선적으로 스프링 컨테이너 없이 테스트할 수 있는 방법을 우선적으로 고려하자. 그 밖에는 다음의 특징을 고려해 선택한다.
- 
+
 ### 오브젝트의 생성과 초기화가 단순할 경우
 
 스프링 컨테이너 없이 테스트한다. 필요한 오브젝트의 생성과 초기화가 단순하다면 이 방법을 가장 먼저 고려해야 한다. 테스트 수행 속도가 가장 빠르고 간결하기 때문이다.
@@ -176,3 +176,4 @@ public class UserDaoTest {
 ### 예외적인 의존관계를 강제해야할 경우
 
 이때는 컨텍스트에서 DI 받은 오브젝트에 다시 테스트 코드로 수동 DI 하는 방식을 사용한다. `@DirtiesContext` 애노테이션을 잊지 말자.
+

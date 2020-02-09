@@ -2,9 +2,8 @@
 
 예외 전환의 목적은 두 가지로 나뉜다.
 
-- 런타임 예외로 포장해서 굳이 필요하지 않은 catch/throws를 줄인다.
-
-- 로우레벨의 예외를 좀 더 의미있고 추상화된 예외로 바꾼다.
+* 런타임 예외로 포장해서 굳이 필요하지 않은 catch/throws를 줄인다.
+* 로우레벨의 예외를 좀 더 의미있고 추상화된 예외로 바꾼다.
 
 `DataAccessException` 은 런타임 예외로 `SQLException`을 포장해서 복구 불가능한 것을 애플리케이션 레벨에서는 신경쓰지 않도록 해준다.
 
@@ -30,7 +29,7 @@ DB가 다르면 에러와 종류와 원인도 제각각이다. JDBC는 이런 �
 
 스프링은 `DataAccessException` 이라는 런타임 예외를 정의하고 있는데 `SQLException`을 대체할 수 있으며 `BadSqlGrammarException` 등 세분화 된 서브 클래스를 제공한다.
 
-![](../../.gitbook/assets/toby/20200204111558.png)
+![](../../.gitbook/assets/20200204111558.png)
 
 하지만 DB 마다 에러 코드가 제각각이므로 위와 같이 분류해서 스프링이 정의한 예외 클래스와 매핑한 테이블을 만들어둔다.
 
@@ -117,3 +116,4 @@ public class UserDao {
 `DataAccessException`은 의미가 같은 예외라면 JDBC든, Hibernate든 일관된 예외가 나오도록 만들어준다. 데이터 액세스 기술에 독립적으로 추상화된 예외를 제공하는 것이다.
 
 ### DAO 인터페이스와 구현의 분리
+

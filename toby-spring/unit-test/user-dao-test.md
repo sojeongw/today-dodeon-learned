@@ -4,42 +4,42 @@
 
 ```java
 public class UserDaoTest {
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
-		UserDao dao = context.getBean("userDao", UserDao.class);
-		
-		User user = new User();
-		user.setId("whiteship");
-		user.setName("백기선");
-		user.setPassword("married");
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+        UserDao dao = context.getBean("userDao", UserDao.class);
 
-		dao.add(user);
-			
-		System.out.println(user.getId() + " 등록 성공");
-		
-		User user2 = dao.get(user.getId());
-		System.out.println(user2.getName());
-		System.out.println(user2.getPassword());
-			
-		System.out.println(user2.getId() + " 조회 성공");
-	}
+        User user = new User();
+        user.setId("whiteship");
+        user.setName("백기선");
+        user.setPassword("married");
+
+        dao.add(user);
+
+        System.out.println(user.getId() + " 등록 성공");
+
+        User user2 = dao.get(user.getId());
+        System.out.println(user2.getName());
+        System.out.println(user2.getPassword());
+
+        System.out.println(user2.getId() + " 조회 성공");
+    }
 }
 ```
 
 1장에서 만들었던 테스트 코드의 내용은 다음과 같다.
 
-- 자바에서 가장 쉽게 실행할 수 있는 `main()` 메소드 사용
-- 테스트 대상인 `UserDao`의 오브젝트를 가져와 메소드 호출
-- 테스트에 사용할 `User` 오브젝트 값을 직접 입력
-- 테스트 결과와 성공 메시지를 콘솔에 출력
+* 자바에서 가장 쉽게 실행할 수 있는 `main()` 메소드 사용
+* 테스트 대상인 `UserDao`의 오브젝트를 가져와 메소드 호출
+* 테스트에 사용할 `User` 오브젝트 값을 직접 입력
+* 테스트 결과와 성공 메시지를 콘솔에 출력
 
 ## 기존 방식의 문제점
 
 보통 웹 애플리케이션을 테스트 하려면 `DAO` 뿐만 아니라 `서비스`, `프레젠테이션` 계층까지 대충이라도 다 만들고 서버에 배치해 웹을 띄우고, 폼에 입력을 넣어 확인한다. 이를 위해 폼에서 값을 받아 파싱해 오브젝트를 만들고 `UserDao`를 호출하는 기능이 필요하다.
 
-이렇게 모든 기능을 다 만들고 나서야 테스트를 하게 되면 시간이 많이 걸리고 에러가 발생했을 때 무엇이 정확한 원인인지 확인하기 어렵다. 
+이렇게 모든 기능을 다 만들고 나서야 테스트를 하게 되면 시간이 많이 걸리고 에러가 발생했을 때 무엇이 정확한 원인인지 확인하기 어렵다.
 
-## 단위 테스트(Unit Test)
+## 단위 테스트\(Unit Test\)
 
 테스트는 가능한 작은 단위로 쪼개서 수행해야 한다. 한꺼번에 몰아서 하면 테스트 과정이 복잡해지고 오류의 정확한 원인을 파악하기 힘들기 때문이다. `관심사의 분리`가 여기에도 적용된다.
 
@@ -91,20 +91,20 @@ public class UserDaoTest {
 {% tab title="After" %}
 ```java
 public class UserDaoTest {
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
-		UserDao dao = context.getBean("userDao", UserDao.class);
-		
-		User user = new User();
-		user.setId("whiteship");
-		user.setName("백기선");
-		user.setPassword("married");
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+        UserDao dao = context.getBean("userDao", UserDao.class);
 
-		dao.add(user);
-			
-		System.out.println(user.getId() + " 등록 성공");
-		
-		User user2 = dao.get(user.getId());
+        User user = new User();
+        user.setId("whiteship");
+        user.setName("백기선");
+        user.setPassword("married");
+
+        dao.add(user);
+
+        System.out.println(user.getId() + " 등록 성공");
+
+        User user2 = dao.get(user.getId());
 
         if (!user.getName().equals(user2.getName())) {
             System.out .println("테스트 실패 (name)");
@@ -115,7 +115,7 @@ public class UserDaoTest {
         else {
             System.out.println("조회 테스트 성공");
         }
-	}
+    }
 }
 ```
 {% endtab %}
@@ -123,25 +123,25 @@ public class UserDaoTest {
 {% tab title="Before" %}
 ```java
 public class UserDaoTest {
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
-		UserDao dao = context.getBean("userDao", UserDao.class);
-		
-		User user = new User();
-		user.setId("whiteship");
-		user.setName("백기선");
-		user.setPassword("married");
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        ApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+        UserDao dao = context.getBean("userDao", UserDao.class);
 
-		dao.add(user);
-			
-		System.out.println(user.getId() + " 등록 성공");
-		
-		User user2 = dao.get(user.getId());
-		System.out.println(user2.getName());
-		System.out.println(user2.getPassword());
-			
-		System.out.println(user2.getId() + " 조회 성공");
-	}
+        User user = new User();
+        user.setId("whiteship");
+        user.setName("백기선");
+        user.setPassword("married");
+
+        dao.add(user);
+
+        System.out.println(user.getId() + " 등록 성공");
+
+        User user2 = dao.get(user.getId());
+        System.out.println(user2.getName());
+        System.out.println(user2.getPassword());
+
+        System.out.println(user2.getId() + " 조회 성공");
+    }
 }
 ```
 {% endtab %}
@@ -152,3 +152,4 @@ public class UserDaoTest {
 켄트 벡은 "테스트란 개발자가 마음 편하게 잠자리에 들 수 있게 해주는 것" 이라고 했다. 개발자는 코드를 추가하면 기존 기능에 문제가 있을까봐 불안해한다. 하지만 만들어진 코드의 기능을 모두 점검할 수 있는 `포괄적인 테스트`를 만들면 빠르게 조치를 취할 수 있다.
 
 수정할 때 코드에 자신감을 갖게 되며 새 기술에 문제가 없는지 빠르게 확인하는 방법은 스스로 테스트 수행과 결과를 확인해주는 `자동화된 테스트` 작성이다.
+

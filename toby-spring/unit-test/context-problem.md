@@ -2,11 +2,11 @@
 
 테스트 메소드 실행 과정을 설명하면서 매 테스트 마다 테스트 클래스 오브젝트를 새로 생성한다고 했다. 이는 `애플리케이션 컨텍스트`도 매번 새롭게 만들어진다는 말이다.
 
-빈이 많고 복잡해지면 애플리케이션 컨텍스트 생성에 *시간이 많이 걸린다*. 모든 싱글톤 빈 오브젝트를 초기화할 때 어떤 빈은 자체적인 초기화 작업을 진행해서 더 많은 시간을 필요로 하기 때문이다.
+빈이 많고 복잡해지면 애플리케이션 컨텍스트 생성에 _시간이 많이 걸린다_. 모든 싱글톤 빈 오브젝트를 초기화할 때 어떤 빈은 자체적인 초기화 작업을 진행해서 더 많은 시간을 필요로 하기 때문이다.
 
-또한, 애플리케이션 컨텍스터가 초기화될 때 특정 빈은 독자적으로 *많은 리소스*를 할당하거나 *독립적인 스레드*를 띄우기도 한다.
+또한, 애플리케이션 컨텍스터가 초기화될 때 특정 빈은 독자적으로 _많은 리소스_를 할당하거나 _독립적인 스레드_를 띄우기도 한다.
 
-테스트는 매번 새로운 오브젝트를 사용하는 것이 원칙이지만 이처럼 많은 자원과 시간이 소모된다면 *테스트 전체가 공유*하는 오브젝트를 만들기도 한다. 이때도 테스트는 순서에 상관없이 일관성 있는 결과를 보장해야 한다.
+테스트는 매번 새로운 오브젝트를 사용하는 것이 원칙이지만 이처럼 많은 자원과 시간이 소모된다면 _테스트 전체가 공유_하는 오브젝트를 만들기도 한다. 이때도 테스트는 순서에 상관없이 일관성 있는 결과를 보장해야 한다.
 
 ### @BeforeClass 스태틱 메소드
 
@@ -41,15 +41,15 @@ public class UserDaoTest {
         // 기존의 애플리케이션 컨텍스트 코드는 삭제한다.
         this.dao = context.getBean("userDao", UserDao.class);
 
-		this.user1 = new User("gyumee", "박성철", "spring1");
-		this.user2 = new User("leegw700", "이길원", "spring2");
-		this.user3 = new User("bumjin", "박범진", "spring3");
+        this.user1 = new User("gyumee", "박성철", "spring1");
+        this.user2 = new User("leegw700", "이길원", "spring2");
+        this.user3 = new User("bumjin", "박범진", "spring3");
     }
     @Test 
     public void andAndGet() throws SQLException {
-	    ...
+        ...
     }
-    
+
     @Test
     public void count() throws SQLException {
         ...
@@ -76,15 +76,15 @@ public class UserDaoTest {
         ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
         this.dao = context.getBean("userDao", UserDao.class);
 
-		this.user1 = new User("gyumee", "박성철", "spring1");
-		this.user2 = new User("leegw700", "이길원", "spring2");
-		this.user3 = new User("bumjin", "박범진", "spring3");
+        this.user1 = new User("gyumee", "박성철", "spring1");
+        this.user2 = new User("leegw700", "이길원", "spring2");
+        this.user3 = new User("bumjin", "박범진", "spring3");
     }
     @Test 
     public void andAndGet() throws SQLException {
         ...
     }
-    
+
     @Test
     public void count() throws SQLException {
         ...
@@ -118,19 +118,19 @@ public class UserDaoTest {
     public void setUp() {
         this.dao = context.getBean("userDao", UserDao.class);
 
-		this.user1 = new User("gyumee", "박성철", "spring1");
-		this.user2 = new User("leegw700", "이길원", "spring2");
-		this.user3 = new User("bumjin", "박범진", "spring3");
-        
+        this.user1 = new User("gyumee", "박성철", "spring1");
+        this.user2 = new User("leegw700", "이길원", "spring2");
+        this.user3 = new User("bumjin", "박범진", "spring3");
+
         // 확인용 코드 추가
         System.out.println(this.context);
         System.out.println(this);
     }
     @Test 
     public void andAndGet() throws SQLException {
-	    ...
+        ...
     }
-    
+
     @Test
     public void count() throws SQLException {
         ...
@@ -192,7 +192,7 @@ public class GroupDaoTest {
 2. 테스트 컨텍스트 프레임워크가 컨텍스트 내에서 변수 타입과 일치하는 빈을 찾는다.
 3. 타입이 일치하는 빈이 있으면 인스턴스 변수에 주입한다.
 
-일반적으로 주입을 하려면 생성자나 수정자 메소드를 사용해왔지만 이 경우에는 메소드가 없어도 가능하다. 
+일반적으로 주입을 하려면 생성자나 수정자 메소드를 사용해왔지만 이 경우에는 메소드가 없어도 가능하다.
 
 ### 타입에 의한 자동 와이어링
 
@@ -214,7 +214,7 @@ public class UserDaoTest {
 }
 ```
 
-스프링 애플리케이션 컨텍스트는 초기화할 때 *자기 자신도 빈으로 등록*하기 때문에 `ApplicationContext` 타입의 빈이 이미 컨텍스트에 존재하는 셈이다. 따라서 DI도 가능한 것이다.
+스프링 애플리케이션 컨텍스트는 초기화할 때 _자기 자신도 빈으로 등록_하기 때문에 `ApplicationContext` 타입의 빈이 이미 컨텍스트에 존재하는 셈이다. 따라서 DI도 가능한 것이다.
 
 `@Autowired`를 이용하면 굳이 컨텍스트를 가져와 `getBean()`을 사용하지 않고 `UserDao` 빈을 직접 DI 받을 수도 있다.
 
@@ -236,15 +236,15 @@ public class UserDaoTest {
     public void setUp() {
         // 기존의 getBean()은 삭제한다.
 
-		this.user1 = new User("gyumee", "박성철", "spring1");
-		this.user2 = new User("leegw700", "이길원", "spring2");
-		this.user3 = new User("bumjin", "박범진", "spring3");
+        this.user1 = new User("gyumee", "박성철", "spring1");
+        this.user2 = new User("leegw700", "이길원", "spring2");
+        this.user3 = new User("bumjin", "박범진", "spring3");
     }
     @Test 
     public void andAndGet() throws SQLException {
-	    ...
+        ...
     }
-    
+
     @Test
     public void count() throws SQLException {
         ...
@@ -273,15 +273,15 @@ public class UserDaoTest {
     public void setUp() {
         this.dao = context.getBean("userDao", UserDao.class);
 
-		this.user1 = new User("gyumee", "박성철", "spring1");
-		this.user2 = new User("leegw700", "이길원", "spring2");
-		this.user3 = new User("bumjin", "박범진", "spring3");
+        this.user1 = new User("gyumee", "박성철", "spring1");
+        this.user2 = new User("leegw700", "이길원", "spring2");
+        this.user3 = new User("bumjin", "박범진", "spring3");
     }
     @Test 
     public void andAndGet() throws SQLException {
         ...
     }
-    
+
     @Test
     public void count() throws SQLException {
         ...
@@ -310,7 +310,7 @@ public class UserDaoTest {
 
 ### 인터페이스의 적용
 
-`@Autowired`가 할당하는 변수는 클래스 타입은 물론이고 인터페이스 타입도 가능하다. 
+`@Autowired`가 할당하는 변수는 클래스 타입은 물론이고 인터페이스 타입도 가능하다.
 
 인터페이스를 사용할 경우 실제 구현한 클래스와 인터페이스 중 어떤 타입으로 선언하는 것이 나을까? 이는 테스트에서 빈을 어떤 용도로 사용하느냐에 따라 다르다.
 
@@ -335,3 +335,4 @@ public class UserDaoTest {
 반면에 구현한 오브젝트 자체에 관심이 있는 경우 해당 구현체 타입으로 받는다. 구현 클래스에 들어있는 DB 연결 정보를 보고 싶거나 특정 메소드를 이용해야 할 경우가 해당한다.
 
 테스트에 필요하다면 애플리케이션 클래스와 밀접한 관계를 맺고 있어도 상관 없다. 코드 내부 구조와 설정을 의도적으로 검증할 필요가 있기 때문이다. 하지만 꼭 필요한 것이 아니라면 테스트에서도 가능한 인터페이스를 이용해 애플리케이션 코드와 느슨한 연결을 해두는 게 좋다.
+
