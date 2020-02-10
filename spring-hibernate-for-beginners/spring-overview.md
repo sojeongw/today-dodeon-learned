@@ -6,7 +6,7 @@ description: Udemy의 Spring & Hibernate for Beginners 강의를 정리합니다
 
 ## Why Spring?
 
-![](../.gitbook/assets/20200106145356.png)
+![](../.gitbook/assets/udemy/20200106145356.png)
 
 * 자바 애플리케이션을 만드는 가장 유명한 프레임워크
 * 이전에 사용되던 J2EE를 대체할만큼 가볍고 간단함
@@ -14,7 +14,7 @@ description: Udemy의 Spring & Hibernate for Beginners 강의를 정리합니다
 
 ## What's new in Spring 5
 
-![](../.gitbook/assets/20200106145433.png)
+![](../.gitbook/assets/udemy/20200106145433.png)
 
 * Java 8 이상 요구
 * Servlet API 4.0을 반영하여 Spring MVC 업그레이드
@@ -22,7 +22,7 @@ description: Udemy의 Spring & Hibernate for Beginners 강의를 정리합니다
 
 ## Spring Core Framework
 
-![](../.gitbook/assets/20200106145510.png)
+![](../.gitbook/assets/udemy/20200106145510.png)
 
 ### Core Container
 
@@ -64,7 +64,7 @@ AOP 프로그래밍을 지원하는 부분. 즉, 로그, 보안, 트랜잭션 �
 
 ### Web Layer
 
-![](../.gitbook/assets/20200106145530.png)
+![](../.gitbook/assets/udemy/20200106145530.png)
 
 Web과 관련된 모든 클래스를 제공한다. Spring MVC framework의 Home이다.
 

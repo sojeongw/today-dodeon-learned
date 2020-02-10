@@ -1,5 +1,7 @@
 # DBMS 설계
 
+[아직 수정중인 문서]
+
 사용자의 요청과 저장 용량이 많은 서비스는 하나의 저장소만 쓰지 않는다. MySQL, CUBRID, Redis, Memchaced, HBase, MongoDB, Elasticsearch, Arcus, Cassandra 등 다양한 저장소를 활용한다.
 
 [Storm과 Elasticsearch Percolator를 이용한 NELO2 알람 기능 개선](https://d2.naver.com/helloworld/1044388)

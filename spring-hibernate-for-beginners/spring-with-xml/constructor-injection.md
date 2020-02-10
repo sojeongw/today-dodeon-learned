@@ -14,7 +14,7 @@
 
 ## 의존성 주입 설정
 
-![](../../.gitbook/assets/20200107112553.png)
+![](../../.gitbook/assets/udemy/20200107112553.png)
 
 스프링 설정 파일에 `의존성 주입`을 설정한다. `의존성` 즉, `helper class`이자 실제 인터페이스를 구현하는 `HappyFortuneService`를 빈으로 등록한 뒤, 직접 사용할 `BaseballCoach` 클래스에 생성자 argument로 넣는다고 명시한다.
 

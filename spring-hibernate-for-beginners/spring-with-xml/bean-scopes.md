@@ -8,21 +8,21 @@ description: >-
 
 ## Singleton
 
-![](../../.gitbook/assets/20200107142209.png)
+![](../../.gitbook/assets/udemy/20200107142209.png)
 
 빈은 이렇게 한 번 등록하면 기본적으로 `singleton`이다.
 
 `singleton`이란 스프링 컨테이너가 딱 한 번 만드는 인스턴스다. 메모리에 cash 되면 빈을 요청할 때마다 항상 같은 레퍼런스를 공유한다. 즉, 같은 bean을 돌려 쓴다.
 
-![](../../.gitbook/assets/20200107142513.png)
+![](../../.gitbook/assets/udemy/20200107142513.png)
 
 이렇게 언제 어떻게 가져다 쓰든 똑같은 오브젝트를 공유하면서 사용한다.
 
-![](../../.gitbook/assets/20200107142651.png)
+![](../../.gitbook/assets/udemy/20200107142651.png)
 
 `singleton`이 아닌 다른 방식을 쓰고 싶다면 위와 같이 `scope`을 따로 설정할 수 있다.
 
-![](../../.gitbook/assets/20200107142705.png)
+![](../../.gitbook/assets/udemy/20200107142705.png)
 
 `scope`의 종류는 위와 같다.
 
@@ -32,7 +32,7 @@ description: >-
 
 `prototype`은 요청할 때마다 새로운 instance를 만든다.
 
-![](../../.gitbook/assets/20200107142727.png)
+![](../../.gitbook/assets/udemy/20200107142727.png)
 
 위의 예시처럼 빈을 호출할 때마다 다른 reference를 가진 class를 반환한다.
 
@@ -56,7 +56,7 @@ description: >-
 
 ### Bean Destruction
 
-![](../../.gitbook/assets/20200107154040.png)
+![](../../.gitbook/assets/udemy/20200107154040.png)
 
 `destroy-method`에 메소드 이름을 적으면 빈을 소멸시킬 때 커스텀 한 메소드를 호출할 수 있다. 리소스를 clean up 하는 코드를 넣을 수도 있다.
 
