@@ -128,9 +128,9 @@ JUnit은 `assertThat()`으로 검증했을 때 기대한 결과가 아니면 `As
 
 이클립스에서 `@Test`가 들어있는 테스트 클래스를 선택한 뒤, `run` - `Run As` - `JUnit Test` 를 선택하면 테스트가 자동으로 실행된다.
 
-![](../../.gitbook/assets/20200113153110.png)
+![](../../.gitbook/assets/toby/20200113153110.png)
 
-![](../../.gitbook/assets/20200113153322.png)
+![](../../.gitbook/assets/toby/20200113153322.png)
 
 테스트의 총 수행시간, 테스트/에러/실패 개수를 확인할 수 있다.
 

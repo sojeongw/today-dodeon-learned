@@ -8,7 +8,7 @@
 
 ## 수평 분할
 
-![](../../.gitbook/assets/image38.png)
+![](../../.gitbook/assets/interview/database/image38.png)
 
 * 스키마가 같은 데이터를 두 개 이상의 테이블에 나누어 저장하는 것
   * 예\) `User Table`을 동일 스키마의 13세 미만의 유저를 저장하는 `User Table #0`과 13세 이상의 유저를 저장하는 `User Table #1`로 분할하여 사용
@@ -18,7 +18,7 @@
 
 ## 샤딩
 
-![](../../.gitbook/assets/image39.png)
+![](../../.gitbook/assets/interview/database/image39.png)
 
 * 물리적으로 아예 다른 DB에 데이터를 분산 저장하고 조회하는 방법
   * 예\) `User Table`이 여러 데이터베이스에 있을 때 13세 미만의 유저를 0번 데이터베이스에, 13세 이상의 유저를 1번 데이터베이스에 저장
@@ -27,6 +27,7 @@
 * 하나의 데이터 베이스 인스턴스에 넣을 수 없는 큰 데이터를 분산 처리하기 위해 사용한다.
 * 여러 DB를 다루기 때문에 JOIN 연산, 일관성, 복제 등에 불리하다.
 * 예전에는 애플리케이션 서버 레벨에서 구현했으나 최근에는 플랫폼 레벨에서 제공한다.
+---
 * 서버에서 동작하는 형태
   * Hibernate Shards
 * 미들티어로 동작하는 형태
@@ -63,7 +64,7 @@
 
 [MySQL Proxy](http://www.hanbit.co.kr/channel/category/category_view.html?cms_code=CMS8168518374)를 바탕으로 제작한 샤딩 플랫폼이다. MySQL Proxy는 SQL을 분석하고 변경하는 데에 목적이 있으며, SQL 수행 전/후에 Lua 스크립트를 실행해 쿼리나 ResultSet에 대한 설정을 할 수 있다.
 
-![](../../.gitbook/assets/helloworld-14822-1.png)
+![](../../.gitbook/assets/interview/database/helloworld-14822-1.png)
 
 사용하기 위해서는 MySQL DB를 하나 생성한 다음, 위의 그림에 있는 테이블에 row를 추가해야 한다. 이 row는 샤딩을 위해 정한 규칙이다.
 
@@ -89,7 +90,7 @@
 
 Twitter에서 공개한 샤딩 플랫폼이다. Spock Proxy와는 용도와 아키텍쳐가 다르다.
 
-![](../../.gitbook/assets/helloworld-14822-4.png)
+![](../../.gitbook/assets/interview/database/helloworld-14822-4.png)
 
 위 그림은 두 대의 Gizzard가 여러 개의 DB로 샤딩된 데이터를 처리하는 모습이다.
 

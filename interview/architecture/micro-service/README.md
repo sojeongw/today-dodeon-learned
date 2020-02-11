@@ -9,7 +9,7 @@ MSA는 Micro Service Architecture의 준말이다. Micro 라는 말이 붙었듯
 
 모놀리스는 모든 내용이 한 프로젝트에 통합되어있는 형태다. 아키텍처가 간단하고 유지 보수가 쉽기 때문에 소규모의 프로젝트에는 적합하다.
 
-하지만 규모가 커지고 수 십, 수 백명의 개발자가 달라붙어야 하는 상황이라면 여러가지 문제가 발생한다.
+하지만 규모가 커지고 수십, 수백 명의 개발자가 달라붙어야 하는 상황이라면 여러가지 문제가 발생한다.
 
 - 서비스가 커질 수록 전체 시스템의 구조와 영향도를 파악하기가 힘들다.
 - 빌드, 테스트, 배포 하는 시간이 기하급수적으로 늘어난다.
@@ -18,11 +18,10 @@ MSA는 Micro Service Architecture의 준말이다. Micro 라는 말이 붙었듯
 
 ## 정의
 
-```text
-the microservice architectural style is an approach to developing a single application as a suite of small services, each running in its own process and communicating with lightweight mechanisms, often an HTTP resource API. These services are built around business capabilities and independently deployable by fully automated deployment machinery.
+>the microservice architectural style is an approach to developing a single application as a suite of small services, each running in its own process and communicating with lightweight mechanisms, often an HTTP resource API. These services are built around business capabilities and independently deployable by fully automated deployment machinery.
+>
+>Martin Fowler
 
-- Martin Fowler
-```
 
 `각자의 프로세스에서 돌아가는 작은 서비스들의 모음집`이며 `독립적인 배포가 가능한` 구조다. 서비스가 많아서 배포가 잦기 때문에 `자동화`된 배포가 필요하다.
 
@@ -57,6 +56,6 @@ the microservice architectural style is an approach to developing a single appli
 - 서비스끼리 API로 호출하기 때문에 통신 비용과 Latency가 늘어난다.
 - 서로 분리되어 있기 때문에 테스트와 트랜잭션을 수행하는 것이 복잡하다.
 - 데이터가 여러 서비스에 걸쳐서 분산되어 있기 때문에 한 번에 조회하기 어렵다.
-- 데이터 정합성(데이터 값이 서로 일치하는 ) 관리가 어렵다.
+- 데이터 정합성(데이터 값이 서로 일치하는 것) 관리가 어렵다.
 
 [Microservices](https://martinfowler.com/articles/microservices.html)

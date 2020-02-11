@@ -94,7 +94,7 @@ public abstract class UserDAO {
         Connection c = getConnection();
     }
 
-    public User get(String id){\
+    public User get(String id){
          Connection c = getConnection();     
     }
 

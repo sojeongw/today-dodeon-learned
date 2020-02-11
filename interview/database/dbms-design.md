@@ -5,7 +5,9 @@
 사용자의 요청과 저장 용량이 많은 서비스는 하나의 저장소만 쓰지 않는다. MySQL, CUBRID, Redis, Memchaced, HBase, MongoDB, Elasticsearch, Arcus, Cassandra 등 다양한 저장소를 활용한다.
 
 [Storm과 Elasticsearch Percolator를 이용한 NELO2 알람 기능 개선](https://d2.naver.com/helloworld/1044388)
+
 [LINE 소셜 네트워크 서비스의 아키텍처](https://d2.naver.com/helloworld/809802)
+
 [LINE 스토리지, 한달에 수십억 건의 데이터를 Redis와 HBase에 저장하다.](https://charsyam.wordpress.com/2012/04/29/발-번역-line-스토리지-한달에-수십억-건의-데이터를-redis와/)
 
 ## DB 쿼리 스타일

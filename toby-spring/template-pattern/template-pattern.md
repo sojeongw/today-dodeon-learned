@@ -319,15 +319,15 @@ public class UserDao {
 
 그림으로 나타내면 아래와 같다.
 
-![](../../.gitbook/assets/client-context.png)
+![](../../.gitbook/assets/toby/client-context.png)
 
 이 구조는 이전에 배웠던 구조와 비슷하다.
 
-![](../../.gitbook/assets/client-context2.png)
+![](../../.gitbook/assets/toby/client-context2.png)
 
 컨텍스트인 `UserDao`는 `ConnectionMaker`라는 전략을 필요로 한다. 클라이언트인 `UserDaoTest`는 필요한 전략을 만들어서 보내준다.
 
-![](../../.gitbook/assets/object-factory.png)
+![](../../.gitbook/assets/toby/object-factory.png)
 
 그리고 이때 썼던 `ObjectFactory`는 전략 오브젝트를 만들고 컨텍스트로 전달하는 책임을 따로 분리시킨 클래스였다.
 

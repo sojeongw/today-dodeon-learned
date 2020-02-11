@@ -30,7 +30,7 @@
 
 ## 템플릿/콜백의 작업 흐름
 
-![](../../.gitbook/assets/20200128201720.png)
+![](../../.gitbook/assets/toby/20200128201720.png)
 
 ### 1. 클라이언트
 
@@ -80,7 +80,7 @@
 
 저번에 `UserDao`, `JdbcContext`, `StatementStrategy` 에 템플릿/콜백 패턴을 적용했었다.
 
-![](../../.gitbook/assets/20200129110556.png)
+![](../../.gitbook/assets/toby/20200129110556.png)
 
 `JdbcContext` 클래스의 `workWithStatementStrategy()` 템플릿은 리턴값이 없는 `void` 메소드이다. 만약 조회 하는 작업이었다면 템플릿의 작업 결과를 클라이언트에 리턴한다.
 
@@ -255,7 +255,7 @@ public class UserDao {
 
 `executeSql()`를 모든 DAO에서 사용할 수 있게 되었으며, 익명 내부 클래스를 사용하던 UserDao가 좀 더 깔끔해졌다.
 
-![](../../.gitbook/assets/20200129134634.png)
+![](../../.gitbook/assets/toby/20200129134634.png)
 
 JdbcContext 안에 클라이언트, 템플릿, 콜백이 함께 공존하면서 동작하게 되었다.
 

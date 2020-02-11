@@ -119,7 +119,6 @@ mutation {
   }
 }
 ```
-```
 {% endtab %}
 
 {% tab title="Response" %}

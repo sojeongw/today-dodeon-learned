@@ -2,7 +2,7 @@
 
 ## 의존 관계 주입\(Dependency Injection\)
 
-![](../../.gitbook/assets/20200108164927.png)
+![](../../.gitbook/assets/toby/20200108164927.png)
 
 위의 UML 다이어그램처럼 A가 B에 의존한다는 것은 B가 변할 때 A에 영향을 미친다는 뜻이다.
 
@@ -21,7 +21,7 @@ public class UserDAO {
 
 하지만 `ConnectionMaker` 인터페이스를 구현한 `DConnectionMaker` 클래스는 `UserDao` 코드 속에 드러나있지 않으며 영향을 주지도 않는다. 이렇듯 인터페이스로 의존 관계를 만들어두면 수정이 자유로워진다.
 
-![](../../.gitbook/assets/20200108165347.png)
+![](../../.gitbook/assets/toby/20200108165347.png)
 
 이처럼 인터페이스로 느슨한 의존 관계를 맺는 경우는 `UserDao`가 런타임 때 어떤 클래스를 실제로 가져다 쓸 지 알 수 없다. 프로그램이 시작되고 오브젝트가 만들어지고 나서야 알게 되는 것이다. 이때 실제 사용하는 오브젝트를 `의존 오브젝트`라고 한다.
 
@@ -32,7 +32,7 @@ public class UserDAO {
 * 런타임 시점에 생기는 의존 관계는 컨테이너나 팩토리 같은 제 3자가 결정한다.
 * 의존 관계는 사용할 오브젝트에 대한 레퍼런스를 제공, 즉 주입해주면서 만들어진다.
 
-![](../../.gitbook/assets/20200108170833.png)
+![](../../.gitbook/assets/toby/20200108170833.png)
 
 런타임이 되면 의존 관계 주입이 위와 같이 일어난다. 인터페이스를 실제 구현하는 클래스를 사용하게 되는 것이다.
 
@@ -134,11 +134,11 @@ public class CountingConnectionMaker implements ConnectionMaker {
 
 DB 연결 횟수를 세는 코드는 DAO의 관심 사항이 아니므로 위처럼 분리한다.
 
-![](../../.gitbook/assets/20200108173345.png)
+![](../../.gitbook/assets/toby/20200108173345.png)
 
 `CountingConnectionMaker` 적용 전에는 런타임이 되면 `DConnectionMaker`에 의존했다.
 
-![](../../.gitbook/assets/20200108173359.png)
+![](../../.gitbook/assets/toby/20200108173359.png)
 
 이제는 `CountingConnectionMaker`에 의존하면서 counter를 증가시키고 `CountingConnectionMaker`가 다시 `DConnectionMaker`를 호출해서 실제 DB 커넥션을 제공한다.
 

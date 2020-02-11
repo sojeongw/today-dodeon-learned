@@ -10,7 +10,7 @@
 
 ## add\(\) 메소드의 예외처리
 
-![](../../.gitbook/assets/exception09.png)
+![](../../.gitbook/assets/toby/exception09.png)
 
 저번에 나온 add\(\) 메소드는 `SQLException`과 `DuplicateUserIdException` 두 가지의 체크 예외를 던졌다.
 
@@ -92,7 +92,7 @@ public class UserDao {
 
 이때 의도적으로 체크 예외로 만들어야 개발자가 잊지 않고 로직을 구현할 수 있다. 무책임하게 `throws Exception`을 할 수도 있지만 런타임 예외로 만드는 것보다는 상대적으로 안전하다.
 
-![](../../.gitbook/assets/20200203154912.png)
+![](../../.gitbook/assets/toby/20200203154912.png)
 
 코드를 보면 `InsufficientBalanceException`일 때 예외 상황에 대해 상세한 정보를 확인해서 예외 정보에 넣어주고 있다.
 

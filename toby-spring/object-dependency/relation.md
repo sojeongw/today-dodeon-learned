@@ -63,8 +63,10 @@ public class UserDAO {
         Connection c = connectionMaker.makeConnection();
     }
 
-    public User get(String id){\
+    public User get(String id){
         Connection c = connectionMaker.makeConnection();
+    }
+}
 ```
 {% endtab %}
 {% endtabs %}
