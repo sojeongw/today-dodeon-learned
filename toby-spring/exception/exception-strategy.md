@@ -107,4 +107,3 @@ public int update(final String sql) throws DataAccessException { ... }
 ```
 
 꼭 필요한 경우에만 런타임 예외로 잡고 그외의 경우는 무시한다. `DataAccessException` 이 런타임 예외이므로 `update()`를 사용하는 메소드에서 다시 잡거나 던질 의무가 없다.
-
