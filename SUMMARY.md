@@ -62,6 +62,7 @@
   * [서버 확장](interview/database/scaling.md)
   * [샤딩](interview/database/sharding.md)
   * [GraphQL](interview/database/graphql.md)
-* [알고리즘](interview/algorithm/hash-table.md)
+* [알고리즘](interview/algorithm/README.md)
+    * [해시 테이블](interview/algorithm/hash-table.md)
   
 
