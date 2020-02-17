@@ -2,7 +2,7 @@
 
 ## 리스트
 
-![](../../.gitbook/assets/interview/data-structure/screenshot%202020-02-13%20오후%202.48.21.png)
+![](../../.gitbook/assets/interview/algorithm/screenshot%202020-02-13%20오후%202.48.21.png)
 
 - 배열
     - 크기가 변하지 않음
@@ -25,13 +25,13 @@ public class LinearList {
 
 ## 연결 리스트
 
-![](../../.gitbook/assets/interview/data-structure/screenshot%202020-02-13%20오후%202.51.34.png)
+![](../../.gitbook/assets/interview/algorithm/screenshot%202020-02-13%20오후%202.51.34.png)
 
 - 삽입/삭제 시 전체 데이터 변동 없이 앞, 뒤의 연관된 데이터만 변경 가능
 - 중간에 넣고 지우는 과정을 빠르게 수행하므로 데이터가 많이 변할 때 사
 - 특정 데이터를 찾으려면 포인터를 따라 이동해야 하므로 성능이 떨어짐
 
-![](../../.gitbook/assets/interview/data-structure/screenshot%202020-02-13%20오후%202.54.01.png)
+![](../../.gitbook/assets/interview/algorithm/screenshot%202020-02-13%20오후%202.54.01.png)
 
 - 연결 리스트
     - 데이터가 데이터와 다음 데이터의 포인터로 이루어짐
@@ -42,7 +42,7 @@ public class LinearList {
 - 환형 연결 리스트
     - 더블 연결 리스트의 양 끝이 연결된 구조
 
-![](../../.gitbook/assets/interview/data-structure/screenshot%202020-02-13%20오후%202.58.27.png)
+![](../../.gitbook/assets/interview/algorithm/screenshot%202020-02-13%20오후%202.58.27.png)
 
 ```java
 public class LinkedList {

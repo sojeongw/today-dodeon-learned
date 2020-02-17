@@ -63,6 +63,8 @@
   * [샤딩](interview/database/sharding.md)
   * [GraphQL](interview/database/graphql.md)
 * [알고리즘](interview/algorithm/README.md)
+    * [시간/공간 복잡도](interview/algorithm/complexity.md)
+    * [리스트](interview/algorithm/list.md)
     * [해시 테이블](interview/algorithm/hash-table.md)
   
 
