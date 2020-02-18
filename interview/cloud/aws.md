@@ -224,3 +224,5 @@ AWS 계정 안에 IAM 그룹과 사용자를 생성해 접근 제어 및 권한 
 ### DNS Failover
 
 장애가 발생한 서버의 IP 주소 또는 도메인(ELB)를 알려주지 않는다.
+
+[[AWS] 기본 기능 정리](https://velog.io/@minholee_93/AWS-아마존-웹-서비스를-다루는-기술-ufk46m70lq)
