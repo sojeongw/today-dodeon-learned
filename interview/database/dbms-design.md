@@ -43,7 +43,7 @@ DB 서버 1대로 트래픽이나 저장량을 감당하기 힘들면 분산해�
 
 ### 로드 밸런서
 
-![](../../.gitbook/assets/interview/database)
+![](../../.gitbook/assets/interview/database/helloworld-201810-naver_main-03.png)
 
 로드 밸런서로 구성한 일반적인 3계층(3-Tier) 분산 처리 모델이다. 클라이언트의 트래픽이 로드 밸런서를 통해 웹 서버로 분산된다. WAS는 같은 DB를 참조한다.
 
