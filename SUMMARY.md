@@ -54,6 +54,7 @@
 ## 지식 쌓기 <a id="interview"></a>
 
 * [아키텍처](interview/architecture/README.md)
+  * [Layered Architecture](interview/architecture/layered-architecture.md)
   * [MSA](interview/architecture/micro-service/README.md)
     * [MSA의 구성](interview/architecture/micro-service/architecture.md)
 * [클라우드 & 기타](interview/cloud/README.md)
@@ -79,6 +80,7 @@
   * [WAS](interview/network/was.md)
   * [REST API](interview/network/rest-api.md)
   * [서블릿](interview/network/servlet.md)
+  * [상태 정보](interview/network/state.md)
 * [자바 이론](interview/jvm-and-java/README.md)
     * [JVM과 메모리](interview/jvm-and-java/jvm.md)
 * [스프링](interview/spring/README.md)
