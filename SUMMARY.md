@@ -37,6 +37,7 @@
 * [4장. 예외처리](toby-spring/4-exception/README.md)
   * [예외처리 전략](toby-spring/4-exception/exception-strategy.md)
   * [예외 전환](toby-spring/4-exception/exception-transition.md)
+  * [정리](toby-spring/4-exception/summary.md)
 
 ## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
 
