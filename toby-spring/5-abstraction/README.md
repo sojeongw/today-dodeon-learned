@@ -229,4 +229,105 @@ public class UserDaoJdbc {
 
 그런데 보통 이런 SQL 문장은 실수가 많이 일어난다. 특히 UPDATE 문은 WHERE 절을 빼먹어도 경고 없이 정상 동작하는 것처럼 보인다. 이때 해결할 수 있는 방법은 두 가지다.
 
-- `jdbcTemplate.update()`의 리턴 값을 확인한다.
+### `jdbcTemplate.update()`의 리턴 값을 확인
+
+SQL을 실행했을 때 영향받은 로우의 개수를 돌려준다. 메소드의 리턴 타입을 int로 바꾸고 리턴하게 한 뒤, 값이 맞는지 확인한다.
+
+### 테스트 코드 보완
+
+원하는 사용자 외의 정보는 변경되지 않도록 테스트 코드를 수정한다. 
+
+{% tabs %}
+{% tab title="After" %}
+```java
+public class UserDaoTest {
+    @Test
+    public void update() {
+        dao.deleteAll();
+        // 수정할 사용자
+        dao.add(user1);
+        // 수정하지 않을 사용자
+        dao.add(user2);
+        
+        user1.setName("오민규");
+        user1.setPassword("springno6");
+        user1.setLevel(Level.GOLD);
+        user1.setLogin(1000);
+        user1.setRecommend(999);
+
+        dao.update(user1);
+
+        // 수정 사항이 반영됐는지 확인한다.
+        User user1update = dao.get(user1.getId);
+        checkSameUser(user1, user1update);
+        // 변경되지 않았음을 확인한다.
+        User user2same = dao.get(user2.getId());
+        checkSameUser(user2, user2same);
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Before" %}
+```java
+public class UserDaoTest {
+    @Test
+    public void update() {
+        dao.deleteAll();
+        dao.add(user1);
+        
+        user1.setName("오민규");
+        user1.setPassword("springno6");
+        user1.setLevel(Level.GOLD);
+        user1.setLogin(1000);
+        user1.setRecommend(999);
+        dao.update(user1);
+
+        User user1update = dao.get(user1.getId);
+        checkSameUser(user1, user1update);
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+원래의 `update()`에서 WHERE를 빼먹었다면 이 테스트는 실패할 것이다.
+
+## 레벨 업그레이드
+
+`UserDaoJdbc`는 데이터를 어떻게 가져올지 다루는 곳이므로 비즈니스 로직을 담을 `UserService` 클래스에 넣는다.
+
+`UserService`는 `UserDao` 인터페이스 타입으로 `userDao` 빈을 DI 받아 사용한다. `UserDao`의 구현 클래스가 바뀌어도 영향을 받지 않아야 하기 때문이다. 
+
+즉, 지금 쓰고 있는 JDBC에서 다른 방식으로 데이터 액세스 로직이 바뀌더라도 비즈니스 로직 코드를 수정하는 일이 있어서는 안된다.
+
+또한, DI를 `UserService`에 적용하려면 그 자신도 스프링 빈으로 당연히 등록되어야 한다. `UserService` 테스트를 위한 `UserServiceTest`도 만든다.
+
+![](../../.gitbook/assets/toby/screenshot%202020-03-01%20오후%204.35.32.png)
+
+지금까지 설명한 `UserService`의 클래스 레벨 의존 관계는 위와 같다.
+
+```java
+public class UserService {
+    // DI로 가져올 UserDao 오브젝트
+    UserDao userDao;
+
+    // DI용 수정자 메서
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+}
+```
+
+```java
+@RunWith(SpringJunit4ClassRunner.class)
+@ContextConfiguration(locations="/test-applicationContext.xml")
+public class UserServiceTest {
+    // 테스트 대상인 UserService 빈을 제공받을 수 있도록 
+    // @Autowired가 붙은 인스턴스 변수를 선언한다.
+    @Autowired
+    UserService userService;
+}
+```
+
+이제 로직을 추가할 기본 준비가 끝났다.
