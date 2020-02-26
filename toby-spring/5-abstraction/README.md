@@ -312,7 +312,7 @@ public class UserService {
     // DI로 가져올 UserDao 오브젝트
     UserDao userDao;
 
-    // DI용 수정자 메서
+    // DI용 수정자 메서드
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
@@ -331,3 +331,148 @@ public class UserServiceTest {
 ```
 
 이제 로직을 추가할 기본 준비가 끝났다.
+
+### upgradeLevels() 로직 추가
+
+```java
+public class UserService {
+    UserDao userDao;
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public void upgradeLevels() {
+        List<User> users = userDao.getAll();
+
+        for(User user : users) {
+            // 레벨의 변화를 확인하는 flag
+            Boolean changed = null;
+
+            // BASIC 레벨 업그레이드
+            if(user.getLevel() == Level.BASIC && user.getLogin() >= 50) {
+                user.setLevel(Level.SILVER);
+                changed = true;
+            }
+
+            // SILVER 레벨 업그레이드
+            else if(user.getLevel() == Level.SILVER && user.getRecommend() >= 30) {
+                user.setLevel(Level.GOLD);
+                changed = true;
+            }
+
+            // GOLD 레벨은 업그레이드 없음
+            else if(user.getLevel() == Level.GOLD) { changed = false; }
+
+            // 일치하는 조건 없으면 변경 없음
+            else { changed = false; }
+
+            // 변경이 있는 경우 update()
+            if(changed) { userDao.update(user); }
+        }
+    }
+}
+```
+
+아래는 위의 코드에 대한 테스트 코드다.
+
+```java
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="/test-applicationContext.xml")
+public class UserServiceTest {
+	@Autowired 	UserService userService;	
+	@Autowired UserDao userDao;
+	
+    // 테스트 픽스쳐
+	List<User> users;	
+	
+	@Before
+	public void setUp() {
+        // asList()를 이용해 배열을 가변 인자인 리스트로 넣어주면 편리하다.
+		users = Arrays.asList(
+				new User("bumjin", "박범진", "p1", Level.BASIC, MIN_LOGCOUNT_FOR_SILVER-1, 0),
+				new User("joytouch", "강명성", "p2", Level.BASIC, MIN_LOGCOUNT_FOR_SILVER, 0),
+				new User("erwins", "신승한", "p3", Level.SILVER, 60, MIN_RECCOMEND_FOR_GOLD-1),
+				new User("madnite1", "이상호", "p4", Level.SILVER, 60, MIN_RECCOMEND_FOR_GOLD),
+				new User("green", "오민규", "p5", Level.GOLD, 100, Integer.MAX_VALUE)
+				);
+	}
+
+	@Test
+	public void upgradeLevels() {
+		userDao.deleteAll();
+		for(User user : users) userDao.add(user);
+		
+		userService.upgradeLevels();
+		
+        // 사용자별로 업그레이드 후의 예쌍 레벨을 검증한다.
+		checkLevelUpgraded(users.get(0), false);
+		checkLevelUpgraded(users.get(1), true);
+		checkLevelUpgraded(users.get(2), false);
+		checkLevelUpgraded(users.get(3), true);
+		checkLevelUpgraded(users.get(4), false);
+	}
+
+    // DB에서 사용자 정보를 가져와 레벨을 확인하는 코드가 중복되므로 헬퍼 메서드로 분리한다.
+	private void checkLevelUpgraded(User user, Level expectedLevel) {
+		User userUpdate = userDao.get(user.getId());
+		assertThat(userUpdate.getLevel(), is(expectedLevel));
+	}
+}
+```
+
+### 기본 레벨 설정 하기
+
+처음 가입하는 사용자는 기본적으로 BASIC 레벨이어야 한다. 이 기능은 어디에 넣어야 할까?
+
+- UserDaoJdbc
+    - DB 정보를 넣고 읽는 부분에만 관심을 가지므로 바람직하지 않다.
+- User
+    - 처음 가입할 때만 의미 있는 정보인데 단지 이 로직 때문에 클래스에서 직접 초기화 하는 것은 문제가 있다.
+- UserService
+    - add() 메서드를 만들어 사용자가 등록될 때 적용할 만한 비즈니스 로직을 넣기 적합하다.
+    
+먼저 테스트 코드를 작성해보자.
+
+```java
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="/test-applicationContext.xml")
+public class UserServiceTest {
+    ...
+    @Test
+    public void add() {
+        userDao.deleteAll();
+
+        // GOLD 레벨 사용자
+        User userWithLevel = users.get(4);
+        // 레벨이 비어있는 사용자
+        User userWithoutLevel = users.get(0);
+        userWithoutLevel.setLevel(null);
+
+        userService.add(userWithLevel);
+        userService.add(userWithoutLevel);
+
+        User userWithLevelRead = userDao.get(userWithLevel.getId());
+        User userWithoutLevelRead = userDao.get(userWithoutLevel.getId());
+
+        // GOLD인 사용자가 그대로 GOLD로 유지되었는지 확인한다.
+        assertThat(userWithLevelRead.getLevel(), is(userWithLevel.getLevel()));
+        // 레벨이 없던 사용자가 BASIC으로 기본 설정되어 나오는지 확인한다.
+        assertThat(userWithoutLevelRead.getLevel(), is(Level.BASIC));
+    }
+}
+```
+
+테스트를 준비했으니 테스트가 성공하도록 코드를 만든다.
+
+```java
+public class UserService {
+    ...
+    public void add(User user) {
+        if(user.getLevel() == null) user.setLevel(Level.BASIC);
+        userDao.add(user);
+    }
+}
+```
+
+테스트는 성공했지만 코드가 조금 복잡하다. 다음 장에서 리팩토링을 해보자.
