@@ -39,7 +39,8 @@
   * [예외 전환](toby-spring/4-exception/exception-transition.md)
   * [정리](toby-spring/4-exception/summary.md)
 * [5장. 서비스 추상화](toby-spring/5-abstraction/README.md)
-    * [코드 개선](toby-spring/5-abstraction/code-refactoring.md)
+    * [서비스 추상화 및 개선](toby-spring/5-abstraction/code-refactoring.md)
+    * [트랜잭션 서비스 추상화](toby-spring/5-abstraction/transaction-abstraction.md)
 
 ## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
 
