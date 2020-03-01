@@ -41,6 +41,14 @@
 * [5장. 서비스 추상화](toby-spring/5-abstraction/README.md)
     * [서비스 추상화 및 개선](toby-spring/5-abstraction/code-refactoring.md)
     * [트랜잭션 서비스 추상화](toby-spring/5-abstraction/transaction-abstraction.md)
+    
+## 백기선 스프링 강좌 <a id="spring-keesun-baik"></a>
+
+* [예제로 배우는 스프링 입문(개정판)](spring-keesun-baik/spring-framework-introduction/README.md)
+    * [PetClinic 예제](spring-keesun-baik/spring-framework-introduction/01-pet-clinic.md)
+    * [스프링 IoC](spring-keesun-baik/spring-framework-introduction/02-spring-ioc.md)
+    * [스프링 AOP](spring-keesun-baik/spring-framework-introduction/03-spring-aop.md)
+    * [스프링 PSA](spring-keesun-baik/spring-framework-introduction/04-spring-psa.md)
 
 ## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
 
