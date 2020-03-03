@@ -57,7 +57,51 @@ class OwnerControllerTest {
 
 ### 의존성 관리
 
-특정 생성자나 애너테이션 등을 통해 필요한 의존성을 주입해주는 것
+특정 생성자나 애너테이션 등을 통해 필요한 의존성을 주입해주는 것. 
 
 ## 스프링 IoC 컨테이너
 
+빈을 만들고, 서로의 의존성을 엮어주고, 그렇게 만들어진 빈을 제공한다. 프로젝트에 있는 모든 클래스가 빈으로 등록되는 것은 아니다. 
+
+의존성 주입은 빈끼리만 가능하다. 즉, IoC 컨테이너 안에 들어있는 객체끼리만 의존성 주입이 가능하다.
+
+### BeanFactory
+
+사실상 IoC 컨테이너
+
+### ApplicationContext
+
+BeanFactory를 상속하면서 그밖의 다양한 일들도 함께 수행한다.
+
+```java
+public class BeanTest {
+    @Test
+    public void getBean() {
+        // 애플리케이션 컨텍스트에 있는 모든 빈의 이름을 가져올 수 있다.
+        applicationContext.getBeanDefinitionNames();
+        // 존재하는 빈 이름을 넣고 체크해보면 null이 아닌 것을 알 수 있다.
+        OwnerController bean = applicationContext.getBean(OwnerController.class);
+        assertThat(bean).isNotNull();
+    }   
+} 
+```
+
+하지만 이렇게 직접 `applicationContext`를 사용할 일은 없다. `application context`가 가지고 있는 빈을 알아서 주입해주기 때문이다.
+
+### 빈 스코프
+
+```java
+@Controller
+class OnwerController{
+    private final OwnerRepository owners;
+
+    @GetMapping("/bean")
+    @ResponseBody
+    public String bean() {
+        // 둘은 같은 해시 값을 출력한다.
+        return applicationContext.getBean(OwnerRepository.class) + "\n" + this.owners;
+     }
+}
+```
+
+스프링은 빈을 매번 새로 만들지 않고 재사용 한다. 멀티 스레드 상황에서 싱글턴을 사용하는 건 번거롭고 조심스럽다. 하지만 IoC를 이용하면 특별한 코드를 넣지 않아도 IoC에 등록된 빈으로 편하게 싱글턴 스코프를 구현할 수 있다.
