@@ -1,7 +1,4 @@
 # 스프링 IoC
----
-description: https://martinfowler.com/articles/injection.html
----
 
 ## 일반적인 (의존성에 대한) 제어권
 
@@ -59,6 +56,8 @@ class OwnerControllerTest {
 
 특정 생성자나 애너테이션 등을 통해 필요한 의존성을 주입해주는 것. 
 
+**Reference**
+
 [Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
 
 ## 스프링 IoC 컨테이너
@@ -108,6 +107,8 @@ class OnwerController{
 
 스프링은 빈을 매번 새로 만들지 않고 재사용 한다. 멀티 스레드 상황에서 싱글턴을 사용하는 건 번거롭고 조심스럽다. 하지만 IoC를 이용하면 특별한 코드를 넣지 않아도 IoC에 등록된 빈으로 편하게 싱글턴 스코프를 구현할 수 있다.
 
+**Reference**
+
 [Interface BeanFactory](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/beans/factory/BeanFactory.html)
 
 [Interface ApplicationContext](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/context/ApplicationContext.html)
@@ -132,7 +133,7 @@ OwnerController ownerController = applicationContext.getBean(OwnerController.cla
 
 ## 빈 등록하기
 
-### 1. Component Scanning
+### Component Scanning
 
 애너테이션으로 등록하는 방식. 애너테이션은 그 자체가 애너테이션을 처리하는 것은 아니다. 그냥 애너테이션일 뿐이다.
 
@@ -155,6 +156,20 @@ public class PetClinicApplication {
 }
 ```
 
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@SpringBootConfiguration
+@EnableAutoConfiguration
+@ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
+		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
+public @interface SpringBootApplication {
+    ...
+}
+```
+
 `@SpringBootApplication`에는 `@ComponentScan`이 있다. `@ComponentScan`은 어디부터 어디까지 찾아보라고 알려준다. 그러면 `@ComponentScan`의 모든 하위 클래스를 훑어보면서 `@Repository`, `@Service`, `@Controller` 등등 다양한 애너테이션을 찾는다.
 
 즉, 우리가 하나하나 빈으로 등록하지 않아도 스프링이 알아서 IoC 컨테이너가 만들어질 때 `@ComponentScan`에 따라 해당 클래스를 빈으로 등록해준다.
@@ -169,7 +184,7 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
 
 특정 인터페이스(Repository)를 상속하면, 해당 인터페이스를 상속받는 인터페이스(OwnerRepository)를 찾는다. 그리고 그 인터페이스의 구현체를 내부적으로 생성해서 빈으로 등록한다.
 
-### 2. 직접 등록하기
+### 직접 등록하기
 
 XML이나 자바 설정 파일이 직접 하나하나 등록하는 방식. 
 
