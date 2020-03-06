@@ -232,10 +232,75 @@ class OwnerController {
 }
 ```
 
-생성자로 주입받는 대신 `@Autowired`를 사용하면 IoC 컨테이너에 들어있는 빈을 주입받아 사용할 수 있다.
+생성자로 주입받는 대신 `@Autowired`나 `@Inject`를 사용하면 IoC 컨테이너에 들어있는 빈을 주입받아 사용할 수 있다.
 
 ```java
 SampleController bean = applicationContext.getBean(SampleController.class);
 ```
 
 물론 이렇게 직접 주입받을 수도 있지만 `@Autowired`를 자주 쓰게 될 것이다.
+
+## 의존성 주입
+
+필요한 의존성을 어떻게 받아올까? `@Autowired`나 `@Inject`를 어디에 붙여야 할까? 
+
+### 생성자
+
+스프링에서 제일 권장하는 방법이다. 필수적으로 사용해야 하는 레퍼런스가 없으면 인스턴스를 만들지 못하도록 강제하기 때문이다.
+
+경우에 따라 A가 B를 참조하고 B가 A를 참조하는 순환 참조(Circular Dependency)가 발생할 수 있다. 만약 둘 다 생성자 주입을 사용하고 있다면 인스턴스를 생성할 수가 없다. 이런 경우에는 필드나 Setter 주입을 사용할 수 있다. 하지만 되도록 순환 참조가 발생하지 않도록 설계하는 것이 제일 좋다.
+
+```java
+@Controller
+class OwnerController {
+    // 생략 가능
+    @Autowired
+    public OwnerController(OwnerRepository clinicService) {
+        this.owners = clinicService;
+    }
+}
+```
+
+스프링 4.3 부터 클래스에 생성자가 하나 뿐이고 그 생성자가 주입받는 레퍼런스 변수가 빈으로 등록되어 있다면, 그 빈을 자동으로 주입한다. 따라서 위의 `@Autowired`를 생략할 수 있다.
+
+### 필드
+
+```java
+@Controller
+class OwnerController {
+    @Autowired
+    private OwnerRepository owners;
+}
+```
+
+필드 주입엔 `final`을 붙일 수 없다. `final`은 오직 생성자 주입만을 이용해 초기화할 수 있다. 생성자 주입에 꼭 써야하는 것은 아니지만, 한 번 주입받은 후 레퍼런스가 바뀌지 않게 하기 위함이다.
+
+### Setter
+
+```java
+@Controller
+class OwnerController {
+    private OwnerRepository owners;
+
+    @Autowired
+    public void setOwners(OwnerRepository owners) {
+        this.owners = owners;
+    }
+}
+```
+
+스프링 IoC가 `OwnerController` 인스턴스를 만들고 나서, Setter를 통해 IoC 컨테이너에 있는 빈 중에 `OwnerRepository` 타입을 찾아 `owners`에 넣어준다.
+
+```java
+public class SampleRepository {
+
+}
+
+@Controller
+public class SampleController {
+    @Autowired
+    private SampleRepository sampleRepository;
+}
+```
+
+이렇게 `Repository`를 빈으로 등록하지 않고 주입하려고 하면 애플리케이션 빌드 자체가 되지 않는다. `NoSuchBeanDefinitionException`이 발생하며 `No qualifying bean`이라는 메시지가 출력된다.
