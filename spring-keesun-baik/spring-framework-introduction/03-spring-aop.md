@@ -73,7 +73,80 @@ A.java 파일을 컴파일 하면 A.class 파일이 생긴다. 컴파일을 하�
 
 ### 프록시 패턴
 
-스프링 AOP가 사용하는 방법이다.
+스프링 AOP가 사용하는 방법이다. 빈이 등록될 때 자동으 프록시가 만들어진다.
+
+```java
+public class toreTest {
+    @Test
+    public void testPay() {
+        // 프록시를 넣어준다.
+        Payment cashPerf = new CashPerf();
+        // 프록시를 쓰지 않았다면 아래처럼 Cash를 그대로 썼을 것이다.
+        // Payment cash = new Cash();
+
+        Store store = new Store(cashPerf);
+        store.buySomething(100);
+    }
+}
+
+public class Store {
+
+    Payment payment;
+
+    public Store(Payment payment) {
+        this.payment = payment;
+    }
+
+    public void buySomething(int amount) {
+        payment.pay(amount);
+    }
+}
+
+public class Cash implements Payment{
+    @Override
+    public void pay(int amount) {
+        System.out.println(amount + " 현금 결제");
+    }
+}
+
+// 일종의 프록시
+public class CashPerf implements Payment{
+    Payment cash = new Cash();
+
+    @Override
+    public void pay(int amount) {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        System.out.println("Start");
+
+        cash.pay(amount);
+
+        stopWatch.stop();
+        System.out.println(stopWatch.prettyPrint());
+    }
+}
+```
+
+```text
+Start
+100 현금 결제
+StopWatch '': running time = 138590 ns
+---------------------------------------------
+ns         %     Task name
+---------------------------------------------
+000138590  100%  
+```
+
+우리는 `Store`나 `Cash`를 건드리지 않고도 `Stopwatch`를 이용한 부가 기능을 사이에 끼워넣었다. 스프링에 빗대자면, `Cash`를 빈으로 등록해놨지만 내가 만들고 싶은 프록시가 자동으로 생성되어 클라이언트는 `Cash` 대신에 프록시를 사용한다.
+
+```java
+public interface OwnerRepository extends Repository<Owner, Integer> {
+	@Transactional(readOnly = true)
+	Collection<Owner> findByLastName(@Param("lastName") String lastName);
+}
+```
+
+원래 JDBC를 쓸 때면 코드 앞 뒤로 `setAutoCommit()`과 커밋, 롤백 코드가 들어갔다. 하지만 `@Transactional`이 붙으면 `OwnerRepository` 객체 타입의 프록시가 새로 생성되어 그 코드를 생략할 수 있다.
 
 **Reference**
 

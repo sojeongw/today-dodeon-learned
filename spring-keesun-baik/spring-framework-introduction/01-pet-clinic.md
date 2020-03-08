@@ -2,7 +2,7 @@
 
 ## 프로젝트 세팅
 
-```shell script
+```text
 ./mvnw package   # 프로젝트 빌드
 java -jar target/*.jar    # 프로젝트 실행
 ```
