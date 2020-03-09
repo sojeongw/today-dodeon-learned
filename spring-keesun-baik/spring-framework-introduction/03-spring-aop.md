@@ -65,7 +65,7 @@ A.java 파일을 컴파일 하면 A.class 파일이 생긴다. 컴파일을 하�
 
 ### 바이트코드 조작
 
-> A.java ----> A.class ----> (AOP) ----> 메모
+> A.java ----> A.class ----> (AOP) ----> 메모리
 
 클래스 로더가 A.class 파일을 읽어오면서 메모리에 올릴 때 조작하는 방법이다. 
 
@@ -73,7 +73,7 @@ A.java 파일을 컴파일 하면 A.class 파일이 생긴다. 컴파일을 하�
 
 ### 프록시 패턴
 
-스프링 AOP가 사용하는 방법이다. 빈이 등록될 때 자동으 프록시가 만들어진다.
+스프링 AOP가 사용하는 방법이다. 빈이 등록될 때 자동으로 프록시가 만들어진다.
 
 ```java
 public class toreTest {
@@ -90,7 +90,6 @@ public class toreTest {
 }
 
 public class Store {
-
     Payment payment;
 
     public Store(Payment payment) {
@@ -117,7 +116,7 @@ public class CashPerf implements Payment{
     public void pay(int amount) {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        System.out.println("Start");
+        System.out.println("start");
 
         cash.pay(amount);
 
@@ -128,7 +127,7 @@ public class CashPerf implements Payment{
 ```
 
 ```text
-Start
+start
 100 현금 결제
 StopWatch '': running time = 138590 ns
 ---------------------------------------------
@@ -151,3 +150,86 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
 **Reference**
 
 [프록시 패턴](https://refactoring.guru/design-patterns/proxy)
+
+## AOP 실습
+
+성능을 측정하는 `@LogExecutionTime`을 만들어 적용해보자.
+
+```java
+@Controller
+class OwnerController {
+	private final OwnerRepository owners;
+	private final PetRepository petRepository;
+
+	public OwnerController(OwnerRepository clinicService, PetRepository petRepository) {
+		this.owners = clinicService;
+        this.petRepository = petRepository;
+	}
+
+	@GetMapping("/owners/new")
+    @LogExecutionTime
+	public String initCreationForm(Map<String, Object> model) {
+		...
+	}
+
+	@PostMapping("/owners/new")
+    @LogExecutionTime
+    public String processCreationForm(@Valid Owner owner, BindingResult result) {
+		...
+	}
+
+	@GetMapping("/owners/find")
+    @LogExecutionTime
+    public String initFindForm(Map<String, Object> model) {
+		...
+	}
+
+	@GetMapping("/owners")
+    @LogExecutionTime
+    public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
+        ...
+	}
+}
+```
+
+```java
+// 어디에 쓸 수 있는지 설정한다. 여기서는 메서드에서 쓸 수 있도록 설정했다.
+@Target(ElementType.METHOD)
+// 애너테이션 정보를 런타임까지 유지한다고 설정한다.
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LogExecutionTime {
+    
+}
+```
+
+`@LogExecutionTime`은 그저 어디에 적용할지 표시하는 용도일 뿐이다. 실제 이 애너테이션을 읽어서 처리하는 일은 `Aspect`가 담당한다.
+
+```java
+// 빈으로 등록되어야 하므로 컴포넌트 애너테이션을 붙인다.
+@Component
+// Aspect 라는 것을 알려준다.
+@Aspect
+public class LogAspect {
+    Logger logger = LoggerFactory.getLogger(LogAspect.class);
+
+    // Around 애너테이션을 사용하면 joinPoint를 사용할 수 있다.
+    // joinPoint란 우리가 커스텀해서 만든 애너테이션을 적용할 타겟을 의미한다.
+    // 즉, OwnerController에서 @LogExecutionTime을 붙인 메서드들이다.
+    @Around("@annotation(LogExecutionTime)")
+    public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+
+        // 타겟인 메서드가 JoinPoint 타입의 인터페이스로 들어오면 실행한다.
+        Object proceed = joinPoint.proceed();
+
+        // 메서드 앞/뒤로 스탑워치를 실행한다.
+        stopWatch.stop();
+        logger.info(stopWatch.prettyPrint());
+
+        return proceed;
+    }
+}
+```
+
+이 코드가 `Aspect`이며 `프록시 패턴`으로 동작하는 것이다.
