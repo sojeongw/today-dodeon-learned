@@ -17,7 +17,9 @@ public class DemoApplication {
         System.out.println(bookService.bookRepository != null);
     }
 }
+```
 
+```java
 public class BookService {
     BookRepository bookRepository;
 
@@ -25,7 +27,9 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 }
+```
 
+```java
 public class BookRepository {
 }
 ```
@@ -89,7 +93,9 @@ public class DemoApplication {
         System.out.println(bookService.bookRepository != null);
     }
 }
+```
 
+```java
 @Service
 public class BookService {
     @Autowired
@@ -99,7 +105,9 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 }
+```
 
+```java
 @Repository
 public class BookRepository {
 }
@@ -125,7 +133,9 @@ public class DemoApplication {
         System.out.println(bookService.bookRepository != null);
     }
 }
+```
 
+```java
 public class BookService {
     BookRepository bookRepository;
 
@@ -133,10 +143,14 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 }
+```
 
+```java
 public class BookRepository {
 }
+```
 
+```java
 // 빈 설정 파일임을 알려주는 애너테이션
 @Configuration
 public class ApplicationConfig {
@@ -181,7 +195,9 @@ public class DemoApplication {
         System.out.println(bookService.bookRepository != null);
     }
 }
+```
 
+```java
 public class BookService {
     @Autowired
     BookRepository bookRepository;
@@ -190,10 +206,14 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 }
+```
 
+```java
 public class BookRepository {
 }
+```
 
+```java
 @Configuration
 public class ApplicationConfig {
     @Bean
@@ -224,7 +244,9 @@ public class ApplicationConfig {
 @ComponentScan(basePackageClasses = DemoApplication.class)
 public class ApplicationConfig {
 }
+```
 
+```java
 // 컴포넌트 스캐닝을 위해 다시 애너테이션을 붙여준다.
 @Service
 public class BookService {
@@ -235,7 +257,9 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 }
+```
 
+```java
 @Repository
 public class BookRepository {
 }
@@ -244,7 +268,12 @@ public class BookRepository {
 이 방법이 현재 트렌드에 가장 가까운 방법이다.
 
 ```java
+@SpringBootApplication
+public class DemoApplication {
+    public static void main(String[] args) {
 
+    }
+}
 ```
 
 또한, 우리는 `ApplicationContext`를 직접 쓸 일 없다. 위처럼 `@SpringBootApplication`만 써주면 알아서 해준다.
