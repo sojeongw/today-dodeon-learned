@@ -49,6 +49,16 @@
     * [스프링 IoC](spring-keesun-baik/spring-framework-introduction/02-spring-ioc.md)
     * [스프링 AOP](spring-keesun-baik/spring-framework-introduction/03-spring-aop.md)
     * [스프링 PSA](spring-keesun-baik/spring-framework-introduction/04-spring-psa.md)
+    
+* [스프링 프레임워크 핵심 기술](spring-keesun-baik/spring-framework-core/README.md)
+    * [IoC 컨테이너와 빈](spring-keesun-baik/spring-framework-core/01-ioc-bean/README.md)
+        * [스프링 IoC 컨테이너와 빈](spring-keesun-baik/spring-framework-core/01-ioc-bean/01-ioc-container-and-bean.md)
+        * [ApplicationContext와 빈 설정](spring-keesun-baik/spring-framework-core/01-ioc-bean/02-application-context.md)
+    * [Resource/Validation](spring-keesun-baik/spring-framework-core/02-resource-validation.md)
+    * [데이터 바인딩](spring-keesun-baik/spring-framework-core/03-data-binding.md)
+    * [SpEL](spring-keesun-baik/spring-framework-core/04-spel.md)
+    * [스프링 AOP](spring-keesun-baik/spring-framework-core/05-spring-aop.md)
+    * [Null-Safety](spring-keesun-baik/spring-framework-core/06-null-safety.md)
 
 ## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
 
