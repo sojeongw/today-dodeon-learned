@@ -276,6 +276,6 @@ public class DemoApplication {
 }
 ```
 
-또한, 우리는 `ApplicationContext`를 직접 쓸 일 없다. 위처럼 `@SpringBootApplication`만 써주면 알아서 해준다.
+또한, 우리는 `ApplicationContext`를 직접 쓸 일이 없다. 위처럼 `@SpringBootApplication`만 써주면 알아서 해준다.
 
 `@SpringBootApplication`에 들어가보면 이미 `@ComponentScan`이 들어가있다. 즉, 이 자체가 자바 설정 파일이므로 더 이상 `ApplicationConfig.class` 파일은 필요 없다.
