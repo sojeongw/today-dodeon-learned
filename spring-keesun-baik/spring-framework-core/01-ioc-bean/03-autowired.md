@@ -259,7 +259,7 @@ public class BookService {
 2020-03-16 13:33:24.079  INFO 14600 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.31]
 2020-03-16 13:33:24.121  INFO 14600 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
 2020-03-16 13:33:24.121  INFO 14600 --- [           main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 566 ms
-// @PostConstruct가 출력되는 위
+// @PostConstruct가 출력되는 위치
 class me.whiteship.autowired.MyBookRepository
 2020-03-16 13:33:24.219  INFO 14600 --- [           main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
 2020-03-16 13:33:24.342  INFO 14600 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
