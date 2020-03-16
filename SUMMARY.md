@@ -56,6 +56,7 @@
         * [ApplicationContext와 빈 설정](spring-keesun-baik/spring-framework-core/01-ioc-bean/02-application-context.md)
         * [@Autowired](spring-keesun-baik/spring-framework-core/01-ioc-bean/03-autowired.md)
         * [@Component와 컴포넌트 스캔](spring-keesun-baik/spring-framework-core/01-ioc-bean/04-component.md)
+        * [빈의 스코프](spring-keesun-baik/spring-framework-core/01-ioc-bean/05-bean-scope.md)
     * [Resource/Validation](spring-keesun-baik/spring-framework-core/02-resource-validation.md)
     * [데이터 바인딩](spring-keesun-baik/spring-framework-core/03-data-binding.md)
     * [SpEL](spring-keesun-baik/spring-framework-core/04-spel.md)
