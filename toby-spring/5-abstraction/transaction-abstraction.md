@@ -83,8 +83,52 @@ DB는 자체적으로 트랜잭션을 보장한다. 하지만 여러 SQL을 사�
 
 트랜잭션이 시작되고 끝나는 위치를 `트랜잭션 경계`라고 부르며, 트랜잭션 시작을 선언하고 커밋이나 롤맥을 하는 작업을 `트랜잭션 경계 설정`이라고 부른다.
 
-### UserService와 UserDao의 트랜잭션 경계 설정
+## UserService와 UserDao의 트랜잭션 경계 설정
 
 우리는 코드 어디에도 트랜잭션을 시작하고 커밋/롤백 하는 코드를 설정하지 않았으므로 테스트에 실패한 것이다.
 
 ![](../../.gitbook/assets/toby/screenshot%202020-03-01%20오후%209.37.16.png)
+
+위 그림은 `UserService`와 `UserDao`를 통해 트랜잭션이 일어나는 과정을 나타낸 것이다.
+
+`upgradeLevels()`가 `UserDao`의 `update()`를 세번 호출했다면, 두 번째 호출에서 오류가 발생해 작업이 중단되어도 첫 번째 커밋한 트랜잭션 결과는 DB에 남는다.
+
+이렇게 되면 DAO 메서드에서 DB 커넥션을 매번 만드므로 `UserService`의 여러 작업을 하나로 묶는 게 불가능해진다.
+
+## 비즈니스 로직 내의 트랜잭션 경계설정
+
+`upgradeLevels()`처럼 여러 번 DB에 업데이트 하는 과정을 하나의 트랜잭션으로 묶으려면 어떻게 해야 할까?
+
+결국 트랜잭션 경계 설정 작업을 `UserService`로 가져가야 한다. `upgradeLevels()` 메서드의 시작과 끝에서 트랜잭션 작업이 이루어져야 하기 때문이다.
+
+```java
+public class UserService {
+    public void upgradeLevels() throws Exception {
+        // 1. DB Connection 생성
+    
+        // 2. 트랜잭션 시작
+    
+        try {
+            // 3. DAO 메서드(update) 호출
+    
+            // 4. 트랜잭션 커밋
+        }
+        catch(Exception e) {
+            // 5. 트랜잭션 롤백
+            throw e;
+        }
+        finally{
+            // 6. DB Connection 종료
+        }
+    }
+}
+```
+
+순수하게 데이터 액세스 작업을 하는 코드는 `update()`에 있어야 하며, `Connection`은 반드시 `upgradeLevels()`에서 만든 것을 사용해야 같은 트랜잭션 안에서 동작한다.
+
+![](../../.gitbook/assets/toby/screenshot%202020-04-07%20오전%2012.00.06.png)
+
+이때 `upgrade()`를 직접 호출하는 것은 결국 `upgradeLevel()`이므로 `UserService` 내의 메서드끼리도 `Connection` 오브젝트를 사용하도록 전달해야 한다.
+
+## UserService 트랜잭션 경계설정의 문제점
+
