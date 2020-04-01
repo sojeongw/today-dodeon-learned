@@ -41,6 +41,7 @@
 * [5장. 서비스 추상화](toby-spring/5-abstraction/README.md)
     * [서비스 추상화 및 개선](toby-spring/5-abstraction/code-refactoring.md)
     * [트랜잭션 서비스 추상화](toby-spring/5-abstraction/transaction-abstraction.md)
+    * [트랜잭션 동기화](toby-spring/5-abstraction/transaction-synchronization.md)
     
 ## 백기선 스프링 강좌 <a id="spring-keesun-baik"></a>
 
