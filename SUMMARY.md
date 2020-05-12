@@ -43,6 +43,14 @@
     * [트랜잭션 서비스 추상화](toby-spring/5-abstraction/transaction-abstraction.md)
     * [트랜잭션 동기화](toby-spring/5-abstraction/transaction-synchronization.md)
     
+## 더 자바, 코드를 조작하는 다양한 방법 <a id="the-java"></a>
+
+* [들어가며](the-java/README.md)
+* [JVM 이해하기](the-java/01-understanding-of-jvm/README.md)
+    * [자바, JVM, JDK, JRE](the-java/01-understanding-of-jvm/01-java-jvm-jdk-jre.md)
+    * [JVM 구조](the-java/01-understanding-of-jvm/02-jvm-structure.md)
+
+
 ## 백기선 스프링 강좌 <a id="spring-keesun-baik"></a>
 
 * [예제로 배우는 스프링 입문(개정판)](spring-keesun-baik/spring-framework-introduction/README.md)
