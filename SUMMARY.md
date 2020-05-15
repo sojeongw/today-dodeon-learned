@@ -49,6 +49,7 @@
 * [JVM 이해하기](the-java/01-understanding-of-jvm/README.md)
     * [자바, JVM, JDK, JRE](the-java/01-understanding-of-jvm/01-java-jvm-jdk-jre.md)
     * [JVM 구조](the-java/01-understanding-of-jvm/02-jvm-structure.md)
+    * [클래스 로더](the-java/01-understanding-of-jvm/03-class-loader.md)
 
 
 ## 백기선 스프링 강좌 <a id="spring-keesun-baik"></a>
@@ -76,19 +77,6 @@
     * [SpEL](spring-keesun-baik/spring-framework-core/04-spel.md)
     * [스프링 AOP](spring-keesun-baik/spring-framework-core/05-spring-aop.md)
     * [Null-Safety](spring-keesun-baik/spring-framework-core/06-null-safety.md)
-
-## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
-
-* [Spring Overview](spring-hibernate-for-beginners/spring-overview.md)
-* [Spring with XML](spring-hibernate-for-beginners/spring-with-xml/README.md)
-  * [Inversion of Control](spring-hibernate-for-beginners/spring-with-xml/inversion-of-control.md)
-  * [Dependency Injection](spring-hibernate-for-beginners/spring-with-xml/dependency-injection.md)
-  * [Constructor Injection](spring-hibernate-for-beginners/spring-with-xml/constructor-injection.md)
-  * [Setter Injection](spring-hibernate-for-beginners/spring-with-xml/setter-injection.md)
-  * [Bean Scopes](spring-hibernate-for-beginners/spring-with-xml/bean-scopes.md)
-* [Spring with Annotations](spring-hibernate-for-beginners/spring-with-annotations/README.md)
-  * [Dependency Injection](spring-hibernate-for-beginners/spring-with-annotations/dependency-injection.md)
-  * [Constructor Injection](spring-hibernate-for-beginners/spring-with-annotations/constructor-injection.md)
 
 ## 지식 쌓기 <a id="interview"></a>
 
@@ -134,5 +122,18 @@
     * [해시 테이블](interview/algorithm/hash-table.md)
     * [매칭 알고리즘](interview/algorithm/matching.md)
     * [랭킹 알고리즘](interview/algorithm/ranking.md)
+    
+## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
+
+* [Spring Overview](spring-hibernate-for-beginners/spring-overview.md)
+* [Spring with XML](spring-hibernate-for-beginners/spring-with-xml/README.md)
+  * [Inversion of Control](spring-hibernate-for-beginners/spring-with-xml/inversion-of-control.md)
+  * [Dependency Injection](spring-hibernate-for-beginners/spring-with-xml/dependency-injection.md)
+  * [Constructor Injection](spring-hibernate-for-beginners/spring-with-xml/constructor-injection.md)
+  * [Setter Injection](spring-hibernate-for-beginners/spring-with-xml/setter-injection.md)
+  * [Bean Scopes](spring-hibernate-for-beginners/spring-with-xml/bean-scopes.md)
+* [Spring with Annotations](spring-hibernate-for-beginners/spring-with-annotations/README.md)
+  * [Dependency Injection](spring-hibernate-for-beginners/spring-with-annotations/dependency-injection.md)
+  * [Constructor Injection](spring-hibernate-for-beginners/spring-with-annotations/constructor-injection.md)
   
 
