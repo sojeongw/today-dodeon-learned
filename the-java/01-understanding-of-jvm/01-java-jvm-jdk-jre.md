@@ -67,7 +67,7 @@ JVM 기반으로 동작하는 프로그래밍 언어
 - Kotiln
 - Scala
 
-** Reference **
+**Reference**
 
 [JDK, JRE, JVM] (https://howtodoinjava.com/java/basics/jdk-jre-jvm/)
 

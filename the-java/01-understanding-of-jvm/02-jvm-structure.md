@@ -110,7 +110,7 @@ public class App {
 들어가보면 `native`가 붙어있어 네이티브 메서드인 것을 알 수 있다. currentThread()는 사용할 수 있도록 연결해주는 인터페이스 즉, JNI이고 실제 구현은 C로 되어있는 네이티브 메서드 라이브러리이다.
 
 
-** Reference **
+**Reference**
 
 [JVM 작동 방식] (https://www.geeksforgeeks.org/jvm-works-jvm-architecture/)
 

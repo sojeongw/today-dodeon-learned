@@ -45,7 +45,6 @@
     
 ## 더 자바, 코드를 조작하는 다양한 방법 <a id="the-java"></a>
 
-* [들어가며](the-java/README.md)
 * [JVM 이해하기](the-java/01-understanding-of-jvm/README.md)
     * [자바, JVM, JDK, JRE](the-java/01-understanding-of-jvm/01-java-jvm-jdk-jre.md)
     * [JVM 구조](the-java/01-understanding-of-jvm/02-jvm-structure.md)
