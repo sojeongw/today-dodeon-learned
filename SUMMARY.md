@@ -43,7 +43,7 @@
     * [트랜잭션 서비스 추상화](toby-spring/5-abstraction/transaction-abstraction.md)
     * [트랜잭션 동기화](toby-spring/5-abstraction/transaction-synchronization.md)
     
-## 더 자바, 코드를 조작하는 다양한 방법 <a id="the-java"></a>
+## JAVA <a id="the-java"></a>
 
 * [JVM 이해하기](the-java/01-understanding-of-jvm/README.md)
     * [자바, JVM, JDK, JRE](the-java/01-understanding-of-jvm/01-java-jvm-jdk-jre.md)

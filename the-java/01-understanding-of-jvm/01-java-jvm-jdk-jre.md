@@ -15,13 +15,13 @@
 
 ![](../../.gitbook/assets/the-java/01/스크린샷%202020-07-05%20오후%208.06.16.png)
 
-[JIT 컴파일러] (https://aboullaite.me/understanding-jit-compiler-just-in-time-compiler)
+[JIT 컴파일러](https://aboullaite.me/understanding-jit-compiler-just-in-time-compiler)
 
 ### JVM 벤더
 
 오라클, 아마존, Azul 등
 
-[JVM 스펙] (https://docs.oracle.com/javase/specs/jvms/se11/html)
+[JVM 스펙](https://docs.oracle.com/javase/specs/jvms/se11/html)
 
 ## JRE(Java Runtime Environment)
 
@@ -54,7 +54,7 @@ JRE + 개발 툴
 - 오라클 JDK 11 버전부터 상용으로 사용 시 유료
     - 오라클 Open JDK 혹은 오라클 외의 회사의 JDK 라면 무료
     
-[자바 유료화] (https://medium.com/@javachampions/java-is-still-free-c02aef8c9e04)
+[자바 유료화](https://medium.com/@javachampions/java-is-still-free-c02aef8c9e04)
 
 ## JVM 언어
 
@@ -69,6 +69,6 @@ JVM 기반으로 동작하는 프로그래밍 언어
 
 **Reference**
 
-[JDK, JRE, JVM] (https://howtodoinjava.com/java/basics/jdk-jre-jvm/)
+[JDK, JRE, JVM](https://howtodoinjava.com/java/basics/jdk-jre-jvm/)
 
-[JVM 언어] (https://en.wikipedia.org/wiki/List_of_JVM_languages)
+[JVM 언어](https://en.wikipedia.org/wiki/List_of_JVM_languages)

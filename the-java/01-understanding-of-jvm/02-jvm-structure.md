@@ -72,7 +72,7 @@ method call을 의미한다.
 
 네이티브 메서드 라이브러리를 쓰려면 네이티브 메서드 인터페이스를 통해야 하고, 이것을 쓰려면 네이티브 메서드 스택에 쌓아야 한다.
 
-[런타임 시의 JVM] (https://javapapers.com/core-jav/java-jvm-run-time-data-areas)
+[런타임 시의 JVM](https://javapapers.com/core-jav/java-jvm-run-time-data-areas)
 
 ## 실행 엔진
 
@@ -89,7 +89,7 @@ method call을 의미한다.
 
 자바 애플리케이션에서 C, C++, 어셈블리로 작성된 함수를 사용할 수 있는 방법을 제공하며 Native 키워드를 사용해 메서드를 호출한다.
 
-[JNI Example] (https://medium.com/@bschlining/a-simple-java-native-interface-jni-example-in-java-and-scala-68fdafe76f5f)
+[JNI Example](https://medium.com/@bschlining/a-simple-java-native-interface-jni-example-in-java-and-scala-68fdafe76f5f)
 
 ## 네이티브 메소드 라이브러리
 
@@ -112,8 +112,8 @@ public class App {
 
 **Reference**
 
-[JVM 작동 방식] (https://www.geeksforgeeks.org/jvm-works-jvm-architecture/)
+[JVM 작동 방식](https://www.geeksforgeeks.org/jvm-works-jvm-architecture/)
 
-[JVM 아키텍처] (https://dzone.com/articles/jvm-architecture-explained)
+[JVM 아키텍처](https://dzone.com/articles/jvm-architecture-explained)
 
-[JVM Internals] (http://blog.jamesdbloom.com/JVMInternals.html)
+[JVM Internals](http://blog.jamesdbloom.com/JVMInternals.html)
