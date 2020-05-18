@@ -80,7 +80,7 @@ public class App {
         // 2. 이미 있는 인스턴스에서 가져오기
         Book book = new Book();
         Class<? extends Book> bookClass2 = book.getClass();
-        // 3. FQCN으로 가오기 
+        // 3. FQCN으로 가져오기 
         Class<?> bookClass3 = Class.forName("me.dodeon.Book");
 
         // 정보 가져오기

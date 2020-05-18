@@ -45,10 +45,12 @@
     
 ## JAVA <a id="the-java"></a>
 
-* [JVM 이해하기](the-java/01-understanding-of-jvm/README.md)
+* [JVM 이해하기](the-java/01-understanding-of-jvm)
     * [자바, JVM, JDK, JRE](the-java/01-understanding-of-jvm/01-java-jvm-jdk-jre.md)
     * [JVM 구조](the-java/01-understanding-of-jvm/02-jvm-structure.md)
     * [클래스 로더](the-java/01-understanding-of-jvm/03-class-loader.md)
+* [리플렉션](the-java/03-reflection)
+    * [클래스 정보 조회](the-java/03-reflection/01-class-info.md)
 
 
 ## 백기선 스프링 강좌 <a id="spring-keesun-baik"></a>
