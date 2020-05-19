@@ -96,6 +96,29 @@ public class App {
 
 ## 애너테이션과 리플렉션
 
+```java
+public @interface MyAnnotation {
+
+}
+
+@MyAnnotation
+public class Book {
+
+}
+```
+
+내가 아무리 애너테이션을 커스텀으로 만들어서 붙여도 `getAnnotations()`를 실행하면 조회되지 않는다. 애너테이션은 기본적으로 주석과 같은 취급을 받기 때문에 정보가 클래스까지는 남지만 바이트코드를 로딩했을 때 메모리 상에 남지는 않는다.
+
+만약 런타임까지도 이 애너테이션을 유지하고 싶다면 아래와 같이 옵션을 줘야 한다.
+
+```java
+// 기본값은 RetentionPolicy.CLASS
+@Retention(RetentionPolicy.RUNTIME)
+public @interface MyAnnotation {
+
+}
+```
+
 **Reference**
 
 [Class](https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html)
