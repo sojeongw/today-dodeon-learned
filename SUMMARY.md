@@ -43,6 +43,11 @@
     * [트랜잭션 서비스 추상화](toby-spring/5-abstraction/transaction-abstraction.md)
     * [트랜잭션 동기화](toby-spring/5-abstraction/transaction-synchronization.md)
     
+## 자바 ORM 표준 JPA 프로그래밍 <a id="inflearn-orm-jpa"></a>
+
+* [프록시와 연관관계 관리](inflearn-orm-jpa/01-proxy-and-relation.md)
+    * [자바, JVM, JDK, JRE](inflearn-orm-jpa/01-proxy.md)
+    
 ## JAVA <a id="the-java"></a>
 
 * [JVM 이해하기](the-java/01-understanding-of-jvm)
