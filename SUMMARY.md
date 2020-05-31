@@ -46,7 +46,8 @@
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="inflearn-orm-jpa"></a>
 
 * [프록시와 연관관계 관리](inflearn-orm-jpa/01-proxy-and-relation.md)
-    * [자바, JVM, JDK, JRE](inflearn-orm-jpa/01-proxy.md)
+    * [프록시](inflearn-orm-jpa/01-proxy.md)
+    * [즉시 로딩과 지연 로딩](inflearn-orm-jpa/02-eager-and-lazy.md)
     
 ## JAVA <a id="the-java"></a>
 
