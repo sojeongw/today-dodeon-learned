@@ -1,6 +1,6 @@
 # Heap 영역
 
-![](../../.gitbook/assets/the-java/01/스크린샷%202020-07-06%20오전%2012.47.29.png)
+![](../../.gitbook/assets/inflearn-the-java/01/스크린샷%202020-07-06%20오전%2012.47.29.png)
 
 Heap 영역은 Young, Old, Perm 세 가지로 나뉘는데, Young 영역에서 발생한 GC를 Minor, 나머지 두 영역에서 발생한 GC를 Major 혹은 Full이라고 부른다.
 

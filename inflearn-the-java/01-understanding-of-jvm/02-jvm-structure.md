@@ -1,6 +1,6 @@
 # JVM 구조
 
-![](../../.gitbook/assets/the-java/01/스크린샷%202020-07-05%20오후%208.28.42.png)
+![](../../.gitbook/assets/inflearn-the-java/01/스크린샷%202020-07-05%20오후%208.28.42.png)
 
 ## 클래스 로더 시스템
 
@@ -56,7 +56,7 @@ public class Dodeon {
 
 method call을 의미한다.
 
-![](../../.gitbook/assets/the-java/01/스크린샷%202020-07-05%20오후%209.38.29.png)
+![](../../.gitbook/assets/inflearn-the-java/01/스크린샷%202020-07-05%20오후%209.38.29.png)
 
 에러가 나면 에러가 쭉 쌓이는 걸 볼 수 있다. 이것이 바로 스택 안에 호출된 메서드가 쌓인 것이다.
 
@@ -109,7 +109,7 @@ public class App {
 
 예를 들어 `Thread`에는 `currentThread()`메서드가 있는데,
 
-![](../../.gitbook/assets/the-java/01/스크린샷%202020-07-05%20오후%209.51.47.png)
+![](../../.gitbook/assets/inflearn-the-java/01/스크린샷%202020-07-05%20오후%209.51.47.png)
 
 들어가보면 `native`가 붙어있어 네이티브 메서드인 것을 알 수 있다. currentThread()는 사용할 수 있도록 연결해주는 인터페이스 즉, JNI이고 실제 구현은 C로 되어있는 네이티브 메서드 라이브러리이다.
 

@@ -1,6 +1,6 @@
 # 클래스 로더
 
-![](../../.gitbook/assets/the-java/01/스크린샷%202020-07-05%20오후%2010.21.37.png)
+![](../../.gitbook/assets/inflearn-the-java/01/스크린샷%202020-07-05%20오후%2010.21.37.png)
 
 클래스 로더는 로딩, 링크, 초기화 순으로 진행된다.
 
@@ -97,13 +97,13 @@ public class App {
 }
 ```
 
-![](../../.gitbook/assets/the-java/01/스크린샷%202020-07-05%20오후%2011.05.21.png)
+![](../../.gitbook/assets/inflearn-the-java/01/스크린샷%202020-07-05%20오후%2011.05.21.png)
 
 현재 클래스의 클래스 로더는 `AppClassLoader`이며 부모 클래스 로더는 `PlatformClassLoader`임을 알 수 있다. 그 위의 부모는 존재는 하지만 네이티브로 구현되어 있어 자바 코드로 참조할 수가 없으므로 `null`이 출력된다.
 
-![](../../.gitbook/assets/the-java/01/스크린샷%202020-07-05%20오후%2011.07.54.png)
+![](../../.gitbook/assets/inflearn-the-java/01/스크린샷%202020-07-05%20오후%2011.07.54.png)
 
-![](../../.gitbook/assets/the-java/01/스크린샷%202020-07-05%20오후%2011.07.29.png)
+![](../../.gitbook/assets/inflearn-the-java/01/스크린샷%202020-07-05%20오후%2011.07.29.png)
 
 `PlatformClassLoader`에 들어가면 내용을 직접 볼 수 있다.
 
