@@ -60,7 +60,7 @@
 * [리플렉션](inflearn-the-java/03-reflection)
     * [클래스 정보 조회](inflearn-the-java/03-reflection/01-class-info.md)
     
-## JAVA <a id="inflearn-the-java-test"></a>
+## 테스트 코드 <a id="inflearn-the-java-test"></a>
 
 * [JUnit 5](inflearn-the-java-test/01-junit-5)
     * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/01-introduction.md)
