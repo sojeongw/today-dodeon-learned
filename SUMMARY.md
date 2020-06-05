@@ -64,6 +64,8 @@
 
 * [JUnit 5](inflearn-the-java-test/01-junit-5)
     * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/01-introduction.md)
+    * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/02-assertion.md)
+* [Mockito](inflearn-the-java-test/02-mockito.md)
 
 
 ## 백기선 스프링 강좌 <a id="spring-keesun-baik"></a>
