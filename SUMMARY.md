@@ -43,6 +43,10 @@
     * [트랜잭션 서비스 추상화](toby-spring/5-abstraction/transaction-abstraction.md)
     * [트랜잭션 동기화](toby-spring/5-abstraction/transaction-synchronization.md)
     
+## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
+
+* [1장. IntelliJ로 스프링부트 시작하기](freelac-jojoldu-spring-aws/01-springboot-intellij.md)
+
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="inflearn-orm-jpa"></a>
 
 * [프록시와 연관관계 관리](inflearn-orm-jpa/01-proxy-and-relation.md)
