@@ -25,7 +25,7 @@ TestEngine API 구현체로, JUnit 5를 제공한다.
 
 JUnit 3, 4를 지원하는 TestEngine 구현체이다.
 
-*Reference*
+**Reference**
 
 [JUnit User Guide](https://junit.org/junit5/docs/current/user-guide/)
 
@@ -164,6 +164,6 @@ class StudyTest {
 }
 ```
 
-*Reference*
+**Reference**
 
 [Display Name](https://junit.org/junit5/docs/current/user-guide/#writing-tests-display-names)

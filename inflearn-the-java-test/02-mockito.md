@@ -14,7 +14,7 @@ Mock 객체를 쉽게 만들고 관리하고 검증할 수 있는 방법을 제�
 
 단위에 대한 의견은 분분하다. 행동, 오브젝트 등등 다양한데 프로젝트 성격에 따라 정하면 된다. 
 
-*Reference*
+**Reference**
 
 [Unit Test](https://martinfowler.com/bliki/UnitTest.html)
 

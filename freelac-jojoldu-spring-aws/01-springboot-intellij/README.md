@@ -9,7 +9,7 @@
 - HTML, CSS, JS, XML 등에 대한 강력한 기능 지원
 - 자바, 스프링부트 버전에 맞춘 빠른 업데이트
 
-![](../.gitbook/assets/freelac-jojoldu-spring-aws/01/스크린샷%202020-07-19%20오후%208.27.52.png)
+![](../../.gitbook/assets/freelac-jojoldu-spring-aws/01/스크린샷%202020-07-19%20오후%208.27.52.png)
 
 Maximum Heap Size가 750MB로 되어있는데, 이 설정은 IntelliJ를 실행할 때 얼마나 메모리를 할당할지 결정하는 값이다.
 
@@ -19,7 +19,7 @@ Maximum Heap Size가 750MB로 되어있는데, 이 설정은 IntelliJ를 실행�
 
 IntelliJ에는 Eclipse의 Workspace 개념이 없다. Project와 Module 개념만 존재한다. 따라서 모든 프로젝트를 한 번에 불러올 수 없다. 한 화면에 한 프로젝트만 열 수 있다.
 
-*Reference*
+**Reference**
 
 [IntelliJ의 Project](http://bit.ly/2orXeGl)
 
