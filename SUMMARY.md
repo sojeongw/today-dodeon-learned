@@ -45,7 +45,9 @@
     
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
 
-* [1장. IntelliJ로 스프링부트 시작하기](freelac-jojoldu-spring-aws/01-springboot-intellij.md)
+* [1장. IntelliJ 시작하기](freelac-jojoldu-spring-aws/01-springboot-intellij.md)
+* [2장. 테스트 코드 작성하기](freelac-jojoldu-spring-aws/02-springboot-testcode.md)
+* [3장. JPA로 데이터베이스 다루기](freelac-jojoldu-spring-aws/03-jpa-database.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="inflearn-orm-jpa"></a>
 
