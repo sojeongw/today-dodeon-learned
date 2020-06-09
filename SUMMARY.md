@@ -2,6 +2,13 @@
 
 * [개발왕, 도던](README.md)
 
+## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
+
+* [1장. IntelliJ 시작하기](freelac-jojoldu-spring-aws/01-springboot-intellij/README.md)
+* [2장. 테스트 코드 작성하기](freelac-jojoldu-spring-aws/02-springboot-testcode/README.md)
+* [3장. JPA로 데이터베이스 다루기](freelac-jojoldu-spring-aws/03-jpa-database/README.md)
+    * [Spring Data JPA 적용하기](freelac-jojoldu-spring-aws/03-jpa-database/project-jpa.md)
+
 ## 토비의 스프링 <a id="toby-spring"></a>
 
 * [첫 장을 펼치며](toby-spring/intro.md)
@@ -42,13 +49,6 @@
     * [서비스 추상화 및 개선](toby-spring/5-abstraction/code-refactoring.md)
     * [트랜잭션 서비스 추상화](toby-spring/5-abstraction/transaction-abstraction.md)
     * [트랜잭션 동기화](toby-spring/5-abstraction/transaction-synchronization.md)
-    
-## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
-
-* [1장. IntelliJ 시작하기](freelac-jojoldu-spring-aws/01-springboot-intellij/README.md)
-* [2장. 테스트 코드 작성하기](freelac-jojoldu-spring-aws/02-springboot-testcode/README.md)
-* [3장. JPA로 데이터베이스 다루기](freelac-jojoldu-spring-aws/03-jpa-database/README.md)
-    * [Spring Data JPA 적용하기](freelac-jojoldu-spring-aws/03-jpa-database/project-jpa.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="inflearn-orm-jpa"></a>
 
@@ -73,7 +73,6 @@
     * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/01-introduction.md)
     * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/02-assertion.md)
 * [Mockito](inflearn-the-java-test/02-mockito.md)
-
 
 ## 백기선 스프링 강좌 <a id="spring-keesun-baik"></a>
 
