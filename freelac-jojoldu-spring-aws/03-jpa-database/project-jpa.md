@@ -209,7 +209,7 @@ Example.builer()
 public interface PostsRepository extends JpaRepository<Posts, Long> {
 }
 ```
-{% endtab %}}
+{% endtab %}
 {% endtabs %}
 
 `Repository`는 DB에 접근하는 인터페이스다. `JpaRepository<Entity 클래스, PK 타입>`을 상속하면 기본 CRUD 메서드가 자동으로 생성된다. `@Repository`를 추가할 필요도 없다.
@@ -255,7 +255,7 @@ public class PostsRepositoryTest {
     }
 }
 ```
-{% endtab %}}
+{% endtab %}
 {% endtabs %}
 
 ### @SpringBootTest
@@ -283,7 +283,7 @@ spring:
   jpa:
     show-sql: true
 ```
-{% endtab %}}
+{% endtab %}
 {% endtabs %}
 
 ![](../../.gitbook/assets/freelac-jojoldu-spring-aws/03/스크린샷%202020-07-19%20오후%2010.58.56.png)
@@ -304,7 +304,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 ```
-{% endtab %}}
+{% endtab %}
 {% endtabs %}
 
 ![](../../.gitbook/assets/freelac-jojoldu-spring-aws/03/스크린샷%202020-07-19%20오후%2011.03.27.png)
