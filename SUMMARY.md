@@ -9,6 +9,7 @@
 * [3장. JPA로 데이터베이스 다루기](freelac-jojoldu-spring-aws/03-jpa-database/README.md)
     * [Spring Data JPA 적용하기](freelac-jojoldu-spring-aws/03-jpa-database/project-jpa.md)
     * [등록/수정/조회 API 만들기](freelac-jojoldu-spring-aws/03-jpa-database/crud-api.md)
+    * [JPA Auditing으로 자동화하기](freelac-jojoldu-spring-aws/03-jpa-database/jpa-auditing.md)
 
 ## 토비의 스프링 <a id="toby-spring"></a>
 
