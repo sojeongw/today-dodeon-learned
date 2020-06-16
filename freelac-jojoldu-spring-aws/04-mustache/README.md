@@ -25,6 +25,7 @@ $(document).ready(function() {
 
 > 흔히 말하는 Vue.js나 React.js를 이용한 SPA(Single Page Application)는 브라우저에서 화면을 생성한다. 즉, 서버에서 이미 코드가 벗어난 경우다. 이럴 때는 서버에서 JSON이나 XML 데이터만 전달하고 클라이언트에서 조립한다. 
 
+
 > 최근에는 자바스크립트 프레임워크의 화면 생성을 서버에서 하기도 하는데, 이것을 `서버 사이드 렌더링`이라고 한다. 이는 Nashor, J2V8 등의 V8 엔진 라이브러리의 지원 덕분이다. 
 
 ### JSP, Velocity

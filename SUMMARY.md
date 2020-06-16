@@ -11,6 +11,7 @@
     * [등록/수정/조회 API 만들기](freelac-jojoldu-spring-aws/03-jpa-database/02-crud-api.md)
     * [JPA Auditing으로 자동화하기](freelac-jojoldu-spring-aws/03-jpa-database/03-jpa-auditing.md)
 * [4장. 머스테치로 화면 구성하기](freelac-jojoldu-spring-aws/04-mustache/README.md)
+    * [기본 페이지 만들기](freelac-jojoldu-spring-aws/04-mustache/01-create-page.md)
 
 ## 토비의 스프링 <a id="toby-spring"></a>
 
