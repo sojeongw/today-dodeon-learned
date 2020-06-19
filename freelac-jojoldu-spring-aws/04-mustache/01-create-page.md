@@ -97,9 +97,6 @@ public class IndexControllerTest {
 ```html
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<!--index.js 추가-->
-<script src="/js/app/index.js"></script>
 </body>
 </html>
 ```
@@ -112,4 +109,176 @@ public class IndexControllerTest {
 
 bootstrap.js는 제이쿼리가 꼭 있어야 하기 때문에 부트스트랩보다 먼저 호출되도록 작성했다. 이 상황을 bootstrap.js가 제이쿼리에 의존한다고 표현한다.
 
-(작성중)
+이제 라이브러리와 기타 HTML 태그가 모두 레이아웃에 추가되어 `index.mustache`에는 필요한 코드만 남게 되었다. 파일을 분리했으니 글 등록 버튼을 하나 추가한다.
+
+{% tabs %}
+{% tab title="index.mustache" %}
+```html
+{{>layout/header}}
+<h1>스프링 부트 웹서비스</h1>
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-6">
+            <a href="posts/save" role="button" class="btn btn-primary">글 등록</a>
+        </div>
+    </div>
+</div>
+{{>layout/footer}}
+```
+{% endtab %}
+{% endtabs %}
+
+`{{>}}`는 현재 머스테치 파일(여기서는 `index.mustache`)을 기준으로 다른 파일을 가져온다.
+
+`<a>` 태그를 통해 글 등록 페이지로 이동한다. 이동할 페이지의 주소는 `/posts/save`가 된다.
+
+{% tabs %}
+{% tab title="IndexController.java" %}
+```java
+@Controller
+@RequiredArgsConstructor
+public class IndexController {
+
+    ...
+
+    @GetMapping("/posts/save")
+    public String postsSave() {
+        return "posts-save";
+    }
+}
+```
+{% endtab %}
+{% tab title="posts-save.mustache" %}
+```html
+{{>layout/header}}
+
+<h1>게시글 등록</h1>
+
+<div class="col-md-12">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="title">제목</label>
+                <input type="text" class="form-control" id="title" placeholder="제목을 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="author"> 작성자 </label>
+                <input type="text" class="form-control" id="author" placeholder="작성자를 입력하세요">
+            </div>
+            <div class="form-group">
+                <label for="content"> 내용 </label>
+                <textarea class="form-control" id="content" placeholder="내용을 입력하세요"></textarea>
+            </div>
+        </form>
+        <a href="/" role="button" class="btn btn-secondary">취소</a>
+        <button type="button" class="btn btn-primary" id="btn-save">등록</button>
+    </div>
+</div>
+
+{{>layout/footer}}
+```
+{% endtab %}
+{% tab title="index.js" %}
+```javascript 1.5
+var main = {
+    init : function () {
+        var _this = this;
+        $('#btn-save').on('click', function () {
+            _this.save();
+        });
+
+        $('#btn-update').on('click', function () {
+            _this.update();
+        });
+
+        $('#btn-delete').on('click', function () {
+            _this.delete();
+        });
+    },
+    save : function () {
+        var data = {
+            title: $('#title').val(),
+            author: $('#author').val(),
+            content: $('#content').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/posts',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('글이 등록되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    update : function () {
+        var data = {
+            title: $('#title').val(),
+            content: $('#content').val()
+        };
+
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/posts/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('글이 수정되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    delete : function () {
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/posts/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function() {
+            alert('글이 삭제되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+
+};
+
+main.init();
+```
+{% endtab %}
+{% tab title="footer.mustache" %}
+```html
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!--index.js 추가-->
+<script src="/js/app/index.js"></script>
+</body>
+</html>
+```
+{% endtab %}
+{% endtabs %}
+
+`/posts/save`에 해당하는 컨트롤러를 생성하고 이동할 페이지를 만든다. 이 화면에 있는 버튼에 기능을 추가하기 위해 JS파일인 `index.js`도 구현한다. `footer.mustache`엔 `index.js`를 머스테치 파일이 쓸 수 있게 추가해준다.
+
+### 정적 파일 URL
+
+`index.js` 호출 코드를 보면 절대 경로 `/`로 바로 시작한다. 스프링 부트에서 `src/main/resources/static`에 위치한 자바스크립트, CSS, 이미지 등의 정적 파일은 URL에서 `/`로 설정된다.
+
+- src/main/resources/static/js/...
+    - http://도메인/js/...
+- src/main/resources/static/css/...
+    - http://도메인/css/...
+- src/main/resources/static/image/...
+    - http://도메인/image/...
