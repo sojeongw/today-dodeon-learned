@@ -1,5 +1,7 @@
 # 게시글 수정, 삭제 화면 만들기
 
+## 게시글 수정
+
 {% tabs %}
 {% tab title="IndexController.java" %}
 ```java
@@ -171,6 +173,8 @@ public class IndexController {
 
 수정한 화면을 연결할 controller를 구현한다.
 
+## 게시글 삭제
+
 {% tabs %}
 {% tab title="posts-update.mustache" %}
 ```html
@@ -206,6 +210,45 @@ public class IndexController {
 </div>
 
 {{>layout/footer}}
+```
+{% endtab %}
+{% tab title="index.js" %}
+```javascript 1.5
+var main = {
+    init : function () {
+        var _this = this;
+        $('#btn-save').on('click', function () {
+            _this.save();
+        });
+
+        $('#btn-update').on('click', function () {
+            _this.update();
+        });
+
+        $('#btn-delete').on('click', function () {
+            _this.delete();
+        });
+    },
+    ...
+
+    delete : function () {
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/posts/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function() {
+            alert('글이 삭제되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+};
+
+main.init();
 ```
 {% endtab %}
 {% tab title="PostsService.java" %}
