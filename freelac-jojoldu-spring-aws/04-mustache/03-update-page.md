@@ -20,7 +20,6 @@ public class IndexController {
 }
 ```
 {% endtab %}
-
 {% tab title="posts-update.mustache" %}
 ```html
 {{>layout/header}}
@@ -55,9 +54,8 @@ public class IndexController {
 {{>layout/footer}}
 ```
 {% endtab %}
-
 {% tab title="index.js" %}
-```javascript 1.5
+```javascript
 var main = {
     init : function () {
         var _this = this;
@@ -98,7 +96,6 @@ var main = {
 main.init();
 ```
 {% endtab %}
-
 {% tab title="index.mustache" %}
 ```html
 {{>layout/header}}
@@ -213,7 +210,7 @@ public class IndexController {
 ```
 {% endtab %}
 {% tab title="index.js" %}
-```javascript 1.5
+```javascript
 var main = {
     init : function () {
         var _this = this;
