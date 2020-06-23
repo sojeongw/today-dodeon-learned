@@ -14,6 +14,7 @@
     * [기본 페이지 만들기](freelac-jojoldu-spring-aws/04-mustache/01-create-page.md)
     * [전체 조회 화면 만들기](freelac-jojoldu-spring-aws/04-mustache/02-get-list-page.md)
     * [수정, 삭제 화면 만들기](freelac-jojoldu-spring-aws/04-mustache/03-update-page.md)
+* [5장. 스프링 시큐리티와 OAuth 2.0](freelac-jojoldu-spring-aws/05-security-oauth/README.md)
 
 ## 토비의 스프링 <a id="toby-spring"></a>
 
