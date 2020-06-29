@@ -15,7 +15,8 @@
     * [전체 조회 화면 만들기](freelac-jojoldu-spring-aws/04-mustache/02-get-list-page.md)
     * [수정, 삭제 화면 만들기](freelac-jojoldu-spring-aws/04-mustache/03-update-page.md)
 * [5장. 스프링 시큐리티와 OAuth 2.0](freelac-jojoldu-spring-aws/05-security-oauth/README.md)
-    * [구글 로그인 연동](freelac-jojoldu-spring-aws/05-security-oauth/google-login.md)
+    * [구글 로그인 연동하기](freelac-jojoldu-spring-aws/05-security-oauth/google-login.md)
+    * [애너테이션 기반으로 개선하기](freelac-jojoldu-spring-aws/05-security-oauth/annotation.md)
 
 ## 토비의 스프링 <a id="toby-spring"></a>
 
