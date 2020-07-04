@@ -147,7 +147,6 @@ public class IndexController {
 }
 ```
 {% endtab %}
-
 {% endtabs %}
 
 ### @LoginUser SessionUser user

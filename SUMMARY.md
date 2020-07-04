@@ -17,6 +17,7 @@
 * [5장. 스프링 시큐리티와 OAuth 2.0](freelac-jojoldu-spring-aws/05-security-oauth/README.md)
     * [구글 로그인 연동하기](freelac-jojoldu-spring-aws/05-security-oauth/google-login.md)
     * [애너테이션 기반으로 개선하기](freelac-jojoldu-spring-aws/05-security-oauth/annotation.md)
+    * [세션 저장소로 DB 사용하기](freelac-jojoldu-spring-aws/05-security-oauth/session-db.md)
 
 ## 토비의 스프링 <a id="toby-spring"></a>
 
