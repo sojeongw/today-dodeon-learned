@@ -113,7 +113,7 @@
     * [프록시](inflearn-orm-jpa/01-proxy.md)
     * [즉시 로딩과 지연 로딩](inflearn-orm-jpa/02-eager-and-lazy.md)
 
-## JAVA <a id="inflearn-the-java"></a>
+## 백기선 THE JAVA <a id="inflearn-the-java"></a>
 
 * [JVM 이해하기](inflearn-the-java/01-understanding-of-jvm)
     * [자바, JVM, JDK, JRE](inflearn-the-java/01-understanding-of-jvm/01-java-jvm-jdk-jre.md)
@@ -123,13 +123,6 @@
     * [Garbage Collector](inflearn-the-java/01-understanding-of-jvm/05-garbage-collector.md)
 * [리플렉션](inflearn-the-java/03-reflection)
     * [클래스 정보 조회](inflearn-the-java/03-reflection/01-class-info.md)
-
-## 테스트 코드 <a id="inflearn-the-java-test"></a>
-
-* [JUnit 5](inflearn-the-java-test/01-junit-5)
-    * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/01-introduction.md)
-    * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/02-assertion.md)
-* [Mockito](inflearn-the-java-test/02-mockito.md)
 
 ## 백기선 스프링 강좌 <a id="spring-keesun-baik"></a>
 
@@ -169,6 +162,13 @@
 * [Spring with Annotations](spring-hibernate-for-beginners/spring-with-annotations/README.md)
     * [Dependency Injection](spring-hibernate-for-beginners/spring-with-annotations/dependency-injection.md)
     * [Constructor Injection](spring-hibernate-for-beginners/spring-with-annotations/constructor-injection.md)
+
+## 테스트 코드 <a id="inflearn-the-java-test"></a>
+
+* [JUnit 5](inflearn-the-java-test/01-junit-5)
+  * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/01-introduction.md)
+  * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/02-assertion.md)
+* [Mockito](inflearn-the-java-test/02-mockito.md)
 
 ## 실전 자바 스프트웨어 개발 <a id="real-world-software-development"></a>
 
