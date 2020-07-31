@@ -1,6 +1,6 @@
 # Garbage Collector
 
-동적으로 할당한 메모리 영역 중 사용하지 않는 영역을 탐지하여 해제하는 기능
+동적으로 할당한 메모리 영역 중 사용하지 않는 영역을 탐지하여 해제하는 기능이다.
 
 여기서 동적으로 할당했다는 의미는 자바의 Heap을 말한다.
 
@@ -110,7 +110,7 @@ Age가 특정 값이 되면 Old Generation으로 옮겨진다. 이 과정을 `Pr
 
 ### Serial GC
 
-![](../../.gitbook/assets/interview/jvm-and-java/screenshot%202021-03-02%20오후%208.24.54.png)
+![](../../.gitbook/assets/interview/jvm-and-java/screenshot%202021-03-02%20오후%208.56.08.png)
 
 - GC를 처리하는 스레드가 1개다.
 - CPU 코어가 1개만 있을 때 사용하는 방식이다.
