@@ -2,7 +2,7 @@
 
 * [개발왕, 도던](README.md)
 
-##  <a id="interview"></a>
+## 지식 벌크업 <a id="interview"></a>
 
 * [JAVA](interview/jvm-and-java/README.md)
   * [JVM과 메모리](interview/jvm-and-java/jvm.md)
