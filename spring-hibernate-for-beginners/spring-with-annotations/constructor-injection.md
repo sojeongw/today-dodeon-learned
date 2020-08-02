@@ -2,13 +2,13 @@
 
 ## dependency 인터페이스와 구현하는 클래스 정의
 
-![](../../.gitbook/assets/20200107170026%20%281%29.png)
+![](../../.gitbook/assets/udemy/20200107170026.png)
 
 `FortuneService`라는 인터페이스와 이를 구현하는 `HappyFortuneService` 클래스를 만든다. `@Component`를 붙여 스프링이 자동으로 스캔하고 구현체를 찾을 수 있게 한다.
 
 ## 주입할 생성자 생성
 
-![](../../.gitbook/assets/20200107170034%20%281%29.png)
+![](../../.gitbook/assets/udemy/20200107170034.png)
 
 실제 dependency injection을 활용할 `TennisCoach` 클래스에 생성자를 만들고 `FortuneService`를 받는다.
 
