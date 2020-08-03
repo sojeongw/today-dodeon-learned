@@ -70,8 +70,9 @@ test {
 
 - 타입리프 템플릿 엔진(view)
 
-### spring-boot-starter: 스프링부트 + 스프링코어 + 로킹
+### spring-boot-starter
 
+- 스프링부트 + 스프링코어 + 로킹
 - spring-boot
     - spring-core
     
