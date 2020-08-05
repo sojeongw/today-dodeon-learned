@@ -53,6 +53,7 @@
 * [1. 프로젝트 환경설정](kimyounghan-spring-introduction/01-project-settings/README.md)
 * [2. 스프링 웹 개발 기초](kimyounghan-spring-introduction/02-spring-basic/README.md)
 * [3. 회원 관리 예제 - 백엔드](kimyounghan-spring-introduction/03-example-backend/README.md)
+* [4. 스프링 빈과 의존 관계](kimyounghan-spring-introduction/04-spring-bean-dependencies/README.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
@@ -177,6 +178,6 @@
   * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/02-assertion.md)
 * [Mockito](inflearn-the-java-test/02-mockito.md)
 
-## 실전 자바 스프트웨어 개발 <a id="real-world-software-development"></a>
+[comment]: <> (## 실전 자바 스프트웨어 개발 <a id="real-world-software-development"></a>)
 
-* [2장. 입출금 내역 분석기](real-world-software-development/01-bank-transaction-analyzer/README.md)
+[comment]: <> (* [2장. 입출금 내역 분석기]&#40;real-world-software-development/01-bank-transaction-analyzer/README.md&#41;)
