@@ -54,6 +54,7 @@
 * [2. 스프링 웹 개발 기초](kimyounghan-spring-introduction/02-spring-basic/README.md)
 * [3. 회원 관리 예제 - 백엔드](kimyounghan-spring-introduction/03-example-backend/README.md)
 * [4. 스프링 빈과 의존 관계](kimyounghan-spring-introduction/04-spring-bean-dependencies/README.md)
+* [5. 회원 관리 예제 - MVC](kimyounghan-spring-introduction/05-example-web-mvc/README.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
