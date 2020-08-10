@@ -123,18 +123,7 @@
     * [프록시](inflearn-orm-jpa/01-proxy.md)
     * [즉시 로딩과 지연 로딩](inflearn-orm-jpa/02-eager-and-lazy.md)
 
-## 백기선 THE JAVA <a id="inflearn-the-java"></a>
-
-* [JVM 이해하기](inflearn-the-java/01-understanding-of-jvm)
-    * [자바, JVM, JDK, JRE](inflearn-the-java/01-understanding-of-jvm/01-java-jvm-jdk-jre.md)
-    * [JVM 구조](inflearn-the-java/01-understanding-of-jvm/02-jvm-structure.md)
-    * [클래스 로더](inflearn-the-java/01-understanding-of-jvm/03-class-loader.md)
-    * [Heap](inflearn-the-java/01-understanding-of-jvm/04-heap.md)
-    * [Garbage Collector](inflearn-the-java/01-understanding-of-jvm/05-garbage-collector.md)
-* [리플렉션](inflearn-the-java/03-reflection)
-    * [클래스 정보 조회](inflearn-the-java/03-reflection/01-class-info.md)
-
-## 백기선 스프링 강좌 <a id="spring-keesun-baik"></a>
+## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
 
 * [예제로 배우는 스프링 입문(개정판)](spring-keesun-baik/spring-framework-introduction/README.md)
     * [PetClinic 예제](spring-keesun-baik/spring-framework-introduction/01-pet-clinic.md)
@@ -160,25 +149,45 @@
     * [스프링 AOP](spring-keesun-baik/spring-framework-core/05-spring-aop.md)
     * [Null-Safety](spring-keesun-baik/spring-framework-core/06-null-safety.md)
 
-## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>
-
-* [Spring Overview](spring-hibernate-for-beginners/spring-overview.md)
-* [Spring with XML](spring-hibernate-for-beginners/spring-with-xml/README.md)
-    * [Inversion of Control](spring-hibernate-for-beginners/spring-with-xml/inversion-of-control.md)
-    * [Dependency Injection](spring-hibernate-for-beginners/spring-with-xml/dependency-injection.md)
-    * [Constructor Injection](spring-hibernate-for-beginners/spring-with-xml/constructor-injection.md)
-    * [Setter Injection](spring-hibernate-for-beginners/spring-with-xml/setter-injection.md)
-    * [Bean Scopes](spring-hibernate-for-beginners/spring-with-xml/bean-scopes.md)
-* [Spring with Annotations](spring-hibernate-for-beginners/spring-with-annotations/README.md)
-    * [Dependency Injection](spring-hibernate-for-beginners/spring-with-annotations/dependency-injection.md)
-    * [Constructor Injection](spring-hibernate-for-beginners/spring-with-annotations/constructor-injection.md)
-
-## 테스트 코드 <a id="inflearn-the-java-test"></a>
+## 백기선 테스트 코드 강의 <a id="inflearn-the-java-test"></a>
 
 * [JUnit 5](inflearn-the-java-test/01-junit-5)
   * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/01-introduction.md)
   * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/02-assertion.md)
 * [Mockito](inflearn-the-java-test/02-mockito.md)
+
+## 백기선 THE JAVA <a id="inflearn-the-java"></a>
+
+* [JVM 이해하기](inflearn-the-java/01-understanding-of-jvm)
+  * [자바, JVM, JDK, JRE](inflearn-the-java/01-understanding-of-jvm/01-java-jvm-jdk-jre.md)
+  * [JVM 구조](inflearn-the-java/01-understanding-of-jvm/02-jvm-structure.md)
+  * [클래스 로더](inflearn-the-java/01-understanding-of-jvm/03-class-loader.md)
+  * [Heap](inflearn-the-java/01-understanding-of-jvm/04-heap.md)
+  * [Garbage Collector](inflearn-the-java/01-understanding-of-jvm/05-garbage-collector.md)
+* [리플렉션](inflearn-the-java/03-reflection)
+  * [클래스 정보 조회](inflearn-the-java/03-reflection/01-class-info.md)
+
+[comment]: <> (## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>)
+
+[comment]: <> (* [Spring Overview]&#40;spring-hibernate-for-beginners/spring-overview.md&#41;)
+
+[comment]: <> (* [Spring with XML]&#40;spring-hibernate-for-beginners/spring-with-xml/README.md&#41;)
+
+[comment]: <> (    * [Inversion of Control]&#40;spring-hibernate-for-beginners/spring-with-xml/inversion-of-control.md&#41;)
+
+[comment]: <> (    * [Dependency Injection]&#40;spring-hibernate-for-beginners/spring-with-xml/dependency-injection.md&#41;)
+
+[comment]: <> (    * [Constructor Injection]&#40;spring-hibernate-for-beginners/spring-with-xml/constructor-injection.md&#41;)
+
+[comment]: <> (    * [Setter Injection]&#40;spring-hibernate-for-beginners/spring-with-xml/setter-injection.md&#41;)
+
+[comment]: <> (    * [Bean Scopes]&#40;spring-hibernate-for-beginners/spring-with-xml/bean-scopes.md&#41;)
+
+[comment]: <> (* [Spring with Annotations]&#40;spring-hibernate-for-beginners/spring-with-annotations/README.md&#41;)
+
+[comment]: <> (    * [Dependency Injection]&#40;spring-hibernate-for-beginners/spring-with-annotations/dependency-injection.md&#41;)
+
+[comment]: <> (    * [Constructor Injection]&#40;spring-hibernate-for-beginners/spring-with-annotations/constructor-injection.md&#41;)
 
 [comment]: <> (## 실전 자바 스프트웨어 개발 <a id="real-world-software-development"></a>)
 
