@@ -50,12 +50,12 @@
   
 ## 스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술 <a id="kimyounghan-spring-introduction"></a>
 
-* [1. 프로젝트 환경설정](kimyounghan-spring-introduction/01-project-settings/README.md)
-* [2. 스프링 웹 개발 기초](kimyounghan-spring-introduction/02-spring-basic/README.md)
-* [3. 회원 관리 예제 - 백엔드](kimyounghan-spring-introduction/03-example-backend/README.md)
-* [4. 스프링 빈과 의존 관계](kimyounghan-spring-introduction/04-spring-bean-dependencies/README.md)
-* [5. 회원 관리 예제 - MVC](kimyounghan-spring-introduction/05-example-web-mvc/README.md)
-* [6. 스프링 DB 접근 기술](kimyounghan-spring-introduction/06-database/README.md)
+* [프로젝트 환경설정](kimyounghan-spring-introduction/01-project-settings/README.md)
+* [스프링 웹 개발 기초](kimyounghan-spring-introduction/02-spring-basic/README.md)
+* [회원 관리 예제 - 백엔드](kimyounghan-spring-introduction/03-example-backend/README.md)
+* [스프링 빈과 의존 관계](kimyounghan-spring-introduction/04-spring-bean-dependencies/README.md)
+* [회원 관리 예제 - MVC](kimyounghan-spring-introduction/05-example-web-mvc/README.md)
+* [스프링 DB 접근 기술](kimyounghan-spring-introduction/06-database/README.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
