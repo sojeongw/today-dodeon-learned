@@ -32,7 +32,7 @@ public class User {
 각 레벨을 문자 그대로 저장하는 것 대신 코드화 해서 넣으면 DB 용량을 줄일 수 있다. 하지만 int 타입의 엉뚱한 값이 들어가면 컴파일러가 체크하지 못하고 버그가 발생한다.
 
 ```java
-user.setLevel(otehr.getSum());
+user.setLevel(other.getSum());
 ```
 
 예를 들어, 엉뚱한 계산의 결과로 1, 2, 3이 들어갈 수 있다.
