@@ -21,6 +21,7 @@
   * [랭킹 알고리즘](interview/algorithm/ranking.md)
 * [데이터 베이스](interview/database/README.md)
   * [데이터 베이스 설계](interview/database/dbms-design.md)
+  * [인덱스](interview/database/index.md)
   * [NoSQL](interview/database/no-sql.md)
   * [서버 확장](interview/database/scaling.md)
   * [샤딩](interview/database/sharding.md)
