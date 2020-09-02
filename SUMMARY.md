@@ -56,6 +56,8 @@
 * [스프링 빈과 의존 관계](kimyounghan-spring-introduction/04-spring-bean-dependencies/README.md)
 * [회원 관리 예제 - MVC](kimyounghan-spring-introduction/05-example-web-mvc/README.md)
 * [스프링 DB 접근 기술](kimyounghan-spring-introduction/06-database/README.md)
+  * [JDBC](kimyounghan-spring-introduction/06-database/jdbc.md)
+  * [JPA](kimyounghan-spring-introduction/06-database/jpa.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
