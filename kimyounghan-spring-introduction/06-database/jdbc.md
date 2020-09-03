@@ -285,9 +285,10 @@ public class SpringConfig {
 
 DB를 직접 연결했으므로 스프링을 실행하고 DB를 연결해서 동작시키는 통합 테스트를 해보겠다.
 
-{% tabs %}
-{% tab title="MemberServiceIntegrationTest.java" %}
+{% tabs %} {% tab title="MemberServiceIntegrationTest.java" %}
+
 ```java
+
 @SpringBootTest
 @Transactional
 class MemberServiceIntegrationTest {
@@ -298,7 +299,7 @@ class MemberServiceIntegrationTest {
   // 생성자 인젝션 대신 그냥 필드 기반 @Autowired 한다.
   @Autowired
   MemberService memberService;
-  
+
   @Autowired
   MemberRepository memberRepository;
 
@@ -327,13 +328,14 @@ class MemberServiceIntegrationTest {
     //When
     memberService.join(member1);
     IllegalStateException e = assertThrows(IllegalStateException.class,
-            () -> memberService
-                    .join(member2));//예외가 발생해야 한다. assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
+        () -> memberService
+            .join(member2));//예외가 발생해야 한다. assertThat(e.getMessage()).isEqualTo("이미 존재하는 회원입니다.");
   }
 }
 ```
-{% endtab %}
-{% tab title="MemberServiceTest.java" %}
+
+{% endtab %} {% tab title="MemberServiceTest.java" %}
+
 ```java
 class MemberServiceTest {
 
@@ -387,10 +389,11 @@ class MemberServiceTest {
   }
 }
 ```
-{% endtab %}
-{% endtabs %}
 
-기존의 `MemberServiceTest`는 JVM 내에서 실행되고 끝나기 때문에 빠르다. `MemberServiceIntegrationTest`는 로그를 보면 알 수 있듯 스프링을 온전히 띄우고 테스트를 실행하느라 상대적으로 느리다.
+{% endtab %} {% endtabs %}
+
+기존의 `MemberServiceTest`는 JVM 내에서 실행되고 끝나기 때문에 빠르다. `MemberServiceIntegrationTest`는 로그를 보면 알 수 있듯
+스프링을 온전히 띄우고 테스트를 실행하느라 상대적으로 느리다.
 
 ### @SpringBootTest
 
@@ -398,8 +401,102 @@ class MemberServiceTest {
 
 ### @Transactional
 
-테스트 케이스에 이 애너테이션이 있으면 테스트 시작 전에 트랜잭션을 시작하고 테스트 완료 후에 항상 롤백한다. 이렇게 하면 DB에 데이터가 남지 않아 다음 테스트에 영향을 주지 않는다. 테스트 메서드마다 다 적용된다. 하나 시작하고 끝나면 롤백하고, 하나 시작하고 끝나면 롤백하는 식이다.
+테스트 케이스에 이 애너테이션이 있으면 테스트 시작 전에 트랜잭션을 시작하고 테스트 완료 후에 항상 롤백한다. 이렇게 하면 DB에 데이터가 남지 않아 다음 테스트에 영향을 주지
+않는다. 테스트 메서드마다 다 적용된다. 하나 시작하고 끝나면 롤백하고, 하나 시작하고 끝나면 롤백하는 식이다.
 
 ### 단위 테스트는 그럼 왜 필요할까?
 
-가급적이면 순수한 자바 코드로 만든 단위 테스트가 훨씬 좋은 테스트일 확률이 높다. 컨테이너 없이 테스트할 수 있도록 훈련해야 한다. 컨테이너까지 올릴 정도면 테스트 설계가 잘못됐을 수 있다.
+가급적이면 순수한 자바 코드로 만든 단위 테스트가 훨씬 좋은 테스트일 확률이 높다. 컨테이너 없이 테스트할 수 있도록 훈련해야 한다. 컨테이너까지 올릴 정도면 테스트 설계가
+잘못됐을 수 있다.
+
+## JDBC Template
+
+- 순수 JDBC와 환경 설정이 동일하다.
+- 스프링 JdbcTemplate과 MyBatis 같은 라이브러리는 JPBC API에서 봤던 반복 코드를 대부분 제거해준다. 하지만 SQL은 직접 작성해야 한다.
+
+{% tabs %} {% tab title="JdbcTemplateMemberRepository.java" %}
+
+```java
+public class JdbcTemplateMemberRepository implements MemberRepository {
+
+  private final JdbcTemplate jdbcTemplate;
+
+  // 생성자가 딱 하나만 있으면 @Autowired 애너테이션을 생략할 수 있다.
+  public JdbcTemplateMemberRepository(DataSource dataSource) {
+    jdbcTemplate = new JdbcTemplate(dataSource);
+  }
+
+  @Override
+  public Member save(Member member) {
+    SimpleJdbcInsert jdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
+    // 직접 쿼리를 쓸 필요 없이 인서트 문을 만들어준다.
+    jdbcInsert.withTableName("member").usingGeneratedKeyColumns("id");
+    
+    Map<String, Object> parameters = new HashMap<>();
+    parameters.put("name", member.getName());
+    
+    // 키를 받아서 id로 세팅한다.
+    Number key = jdbcInsert.executeAndReturnKey(new MapSqlParameterSource(parameters));
+    member.setId(key.longValue());
+    
+    return member;
+  }
+
+  @Override
+  public Optional<Member> findById(Long id) {
+    List<Member> result = jdbcTemplate.query("select * from member where id = ? ", memberRowMapper(), id);
+    return result.stream().findAny();
+  }
+
+  @Override
+  public List<Member> findAll() {
+    return jdbcTemplate.query("select * from member", memberRowMapper());
+  }
+
+  @Override
+  public Optional<Member> findByName(String name) {
+    List<Member> result = jdbcTemplate.query("select * from member where name = ? ", memberRowMapper(), name);
+    return result.stream().findAny();
+  }
+
+  private RowMapper<Member> memberRowMapper() {
+    return (rs, rowNum) -> {
+      Member member = new Member();
+      member.setId(rs.getLong("id"));
+      member.setName(rs.getString("name"));
+      return member;
+    };
+  }
+}
+```
+
+{% endtab %} {% tab title="SpringConfig.java" %}
+
+```java
+
+@Configuration
+public class SpringConfig {
+
+  private final DataSource dataSource;
+
+  public SpringConfig(DataSource dataSource) {
+    this.dataSource = dataSource;
+  }
+
+  @Bean
+  public MemberService memberService() {
+    return new MemberService(memberRepository());
+  }
+
+  @Bean
+  public MemberRepository memberRepository() {
+//    return new MemoryMemberRepository();
+//    return new JdbcMemberRepository(dataSource);
+    
+    // JdbcTemplate을 사용하도록 바꿔준다.
+    return new JdbcTemplateMemberRepository(dataSource);
+  }
+}
+```
+
+{% endtab %} {% endtabs %}
