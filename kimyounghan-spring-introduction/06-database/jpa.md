@@ -159,3 +159,55 @@ public class SpringConfig {
 ```
 
 {% endtab %}{% endtabs %}
+
+## 스프링 데이터 JPA
+
+repository에 구현 클래스 없이 인터페이스만으로 개발을 완료할 수 있다. 기본 CRUD 기능도 모두 제공한다. 스프링 부트와 JPA 위에 스프링 데이터 JPA라는
+프레임워크를 더하면 핵심 비즈니스 개발에 집중할 수 있다.
+
+스프링 데이터 JPA는 JPA를 편리하게 사용하도록 도와주는 기술이다. 따라서 JPA를 먼저 학습한 후에 스프링 데이터 JPA를 학습해야 한다.
+
+{% tabs %} {% tab title="SpringDataJpaMemberRepository.java" %}
+
+```java
+// 엔티티와 Id 타입을 맞춰 JpaRepository를 상속한 인터페이스를 만들어야 한다. 그럼 스프링 데이터 JPA가 SpringDataJpaMemberRepository 빈을 자동으로 만들어준다.
+// 우리가 만들었던 MemberRepository도 상속한다.
+public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Long>,
+    MemberRepository {
+  // 이렇게만 선언해주면 구현할 필요없이 쓸 수 있다.
+  Optional<Member> findByName(String name);
+}
+```
+
+{% endtab %} {% tab title="MemberService.java" %}
+
+```java
+
+@Configuration
+public class SpringConfig {
+
+  // 스프링 데이터 JPA가 만들어 놓은 구현체를
+  private final MemberRepository memberRepository;
+
+  // 주입받는다.
+  public SpringConfig(MemberRepository memberRepository) {
+    this.memberRepository = memberRepository;
+  }
+
+  // MemberService에 의존 관계를 세팅해준다.
+  @Bean
+  public MemberService memberService() {
+    return new MemberService(memberRepository);
+  }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+## 스프링 데이터 JPA 기본 기능
+
+![](../../.gitbook/assets/kimyounghan-spring-introduction/06/스크린샷%202021-03-09%20오전%208.57.22.png)
+
+인터페이스를 통해 기본적인 CRUD와 페이징 기능을 쓸 수 있다. 하지만 `name`, `email`처럼 비즈니스 로직에 따라 다양해지는 내용은 인터페이스가 공통으로 제공할 수가 없다. 그래서 스프링 데이터 JPA는 `findByName()`, `findByEmail()`처럼 규칙에 따라 작성하면 JPQL로 `select m from MEmber m where m.name = ?`이라는 쿼리를 날려준다.
+
+실무에서는 JPA와 스프링 데이터 JPA를 기본으로 사용하고, 복잡한 동적 쿼리는 QueryDsl이라는 라이브러리를 사용한다. QueryDsl을 사용하면 쿼리를 자바 코드로 안전하게 작성할 수 있다. 이 조합으로 해결하기 어려운 쿼리는 JPA가 제공하는 네이티브 쿼리를 사용하거나 JdbcTemplate을 사용하면 된다.
