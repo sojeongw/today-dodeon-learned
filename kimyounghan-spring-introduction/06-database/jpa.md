@@ -170,7 +170,8 @@ repository에 구현 클래스 없이 인터페이스만으로 개발을 완료�
 {% tabs %} {% tab title="SpringDataJpaMemberRepository.java" %}
 
 ```java
-// 엔티티와 Id 타입을 맞춰 JpaRepository를 상속한 인터페이스를 만들어야 한다. 그럼 스프링 데이터 JPA가 SpringDataJpaMemberRepository 빈을 자동으로 만들어준다.
+// 엔티티와 Id 타입을 맞춰 JpaRepository를 상속한 인터페이스를 만들어야 한다. 
+// 그럼 스프링 데이터 JPA가 SpringDataJpaMemberRepository 빈을 자동으로 만들어준다.
 // 우리가 만들었던 MemberRepository도 상속한다.
 public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Long>,
     MemberRepository {

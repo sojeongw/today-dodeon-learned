@@ -58,6 +58,7 @@
 * [스프링 DB 접근 기술](kimyounghan-spring-introduction/06-database/README.md)
   * [JDBC](kimyounghan-spring-introduction/06-database/jdbc.md)
   * [JPA](kimyounghan-spring-introduction/06-database/jpa.md)
+* [AOP](kimyounghan-spring-introduction/07-aop/README.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
