@@ -180,7 +180,7 @@ public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Lon
 }
 ```
 
-{% endtab %} {% tab title="MemberService.java" %}
+{% endtab %} {% tab title="SpringConfig.java" %}
 
 ```java
 
