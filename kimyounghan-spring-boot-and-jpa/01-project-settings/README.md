@@ -62,7 +62,7 @@
     - 스프링 ORM
     - JPA, 하이버네이트
     - 스프링 데이터 JPA
-    
+
 - 기타 라이브러리
     - H2 데이터베이스 클라이언트
     - 커넥션 풀
@@ -70,5 +70,66 @@
     - WEB(thymeleaf)
     - 로깅 SLF4J & LogBack
     - 테스트
-    
+
 스프링 데이터 JPA는 스프링과 JPA를 먼저 이해하고 사용해야 하는 응용기술이다.
+
+## View 환경 설정
+
+### thymeleaf 템플릿 엔진
+
+[thymeleaf 공식 사이트](https://www.thymeleaf.org/)
+
+[스프링 공식 튜토리얼](https://spring.io/guides/gs/serving-web-content/)
+
+[스프링부트 메뉴얼](https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-developing-web-applications.html#boot-features-spring-mvc-template-engines)
+
+`resources:template/` + `{ViewName}` + `.html` 경로를 통해 스프링 부트에 thymeleaf viewName이 매핑된다.
+
+{% tabs %} {% tab title="HelloController.java" %}
+
+```java
+
+@Controller
+public class HelloController {
+
+  @GetMapping("hello")
+  public String hello(Model model) {
+    model.addAttribute("data", "hello!!");
+    return "hello";
+  }
+}
+```
+
+{% endtab %} {% tab title="/templates/hello.html" %}
+
+```thymeleafexpressions
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Hello</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'안녕하세요. ' + ${data}" >안녕하세요. 손님</p>
+</body>
+</html>
+```
+
+{% endtab %} {% tab title="static/index.html" %}
+
+```thymeleafexpressions
+<!DOCTYPE HTML>
+  <html xmlns:th="http://www.thymeleaf.org">
+       
+     <head>
+        <title>Hello</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+    Hello
+    <a href="/hello">hello</a>
+    </body>
+</html>
+```
+
+{% endtab %} {% endtabs %}
