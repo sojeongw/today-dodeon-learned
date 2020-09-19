@@ -83,8 +83,6 @@
 
 [스프링부트 메뉴얼](https://docs.spring.io/spring-boot/docs/2.1.6.RELEASE/reference/html/boot-features-developing-web-applications.html#boot-features-spring-mvc-template-engines)
 
-`resources:template/` + `{ViewName}` + `.html` 경로를 통해 스프링 부트에 thymeleaf viewName이 매핑된다.
-
 {% tabs %} {% tab title="HelloController.java" %}
 
 ```java
@@ -115,7 +113,7 @@ public class HelloController {
 </html>
 ```
 
-{% endtab %} {% tab title="static/index.html" %}
+{% endtab %} {% tab title="/static/index.html" %}
 
 ```thymeleafexpressions
 <!DOCTYPE HTML>
@@ -133,3 +131,7 @@ public class HelloController {
 ```
 
 {% endtab %} {% endtabs %}
+
+`resources:template/` + `{ViewName}` + `.html` 경로를 통해 스프링 부트에 thymeleaf viewName이 매핑된다. 기본 정적 화면은 `/static/index.html`에 정의한다.
+
+`spring-boot-devtools` 라이브러리를 추가한 뒤 html 파일을 컴파일만 하면 서버 재시작 없이 변경 사항이 반영된다. `build-recompile` 메뉴에서 컴파일 할 수 있다.
