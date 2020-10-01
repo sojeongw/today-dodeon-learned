@@ -65,7 +65,6 @@
 * [프로젝트 환경설정](kimyounghan-spring-boot-and-jpa/01-project-settings/README.md)
 
 
-
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
 
 * [1장. IntelliJ 시작하기](freelac-jojoldu-spring-aws/01-springboot-intellij/README.md)
@@ -127,9 +126,10 @@
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="inflearn-orm-jpa"></a>
 
-* [프록시와 연관관계 관리](inflearn-orm-jpa/01-proxy-and-relation.md)
-    * [프록시](inflearn-orm-jpa/01-proxy.md)
-    * [즉시 로딩과 지연 로딩](inflearn-orm-jpa/02-eager-and-lazy.md)
+* [JPA 소개](kimyounghan-orm-jpa/01-jpa-introduction/README.md)
+* [프록시와 연관관계 관리](kimyounghan-orm-jpa/08-proxy/README.md)
+    * [프록시](kimyounghan-orm-jpa/08-proxy/01-proxy.md)
+    * [즉시 로딩과 지연 로딩](kimyounghan-orm-jpa/08-proxy/02-eager-and-lazy.md)
 
 ## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
 

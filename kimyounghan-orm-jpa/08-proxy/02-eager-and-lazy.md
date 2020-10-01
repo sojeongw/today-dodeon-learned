@@ -1,6 +1,6 @@
 # 즉시 로딩과 지연 로딩
 
-![](../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%203.09.37.png)
+![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%203.09.37.png)
 
 다시 이 질문으로 돌아가보자. 단순히 Member 정보만 사용하는 로직이라면 Team까지 불러오는 것은 손해다. 이런 문제로 JPA는 지연 로딩을 지원하고 있다.
 
@@ -45,15 +45,15 @@ public class App {
 }
 ```
 
-![](../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.23.33.png)
+![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.23.33.png)
 
 당장 조회하려는 Member에 대한 쿼리만 실행되었다. 그리고 Team에 대한 내용은 프록시로 만들어져 있다.
 
-![](../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.27.34.png)
+![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.27.34.png)
 
 따라서 Team을 실제로 조회하는 시점이 되어서야 해당 쿼리를 보낸다.
 
-![](../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.29.49.png)
+![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.29.49.png)
 
 정리하자면 이렇다. Member를 조회하면 당장 조회하지 않는 Team은 프록시 객체로 박아놓는다.
 
@@ -101,11 +101,11 @@ public class App {
 
 즉시 로딩으로 바꾸고 다시 코드를 실행하면, 
 
-![](../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.34.31.png)
+![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.34.31.png)
 
 Member와 Team에 대해 한 번에 쿼리가 나간다. 따라서 Team에 대한 정보를 조회할 때 `getClass()`를 하면 프록시가 아니라 진짜 정보인 Team이 나온다.
 
-![](../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.37.29.png)
+![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.37.29.png)
 
 정리하면 위와 같다. 
 
@@ -159,7 +159,7 @@ public class App {
 }
 ```
 
-![](../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.52.01.png)
+![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%202.52.01.png)
 
 EAGER로 했는데도 불구하고 쿼리를 두 번 날리고 있다. `find()`는 PK를 찍어서 가져오는 것이기 때문에 JPA가 내부적으로 최적화를 할 수 있다. 하지만 JPQL은 코드에 적은 쿼리가 그대로 날아간다. 즉, 쓰여있는 Member만 조회한다. 
 
@@ -202,11 +202,11 @@ public class App {
 
 각자 다른 Team을 가진 멤버를 조회해보자.
 
-![](../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%203.03.03.png)
+![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%203.03.03.png)
 
 일단 Member를 한 번에 가지고 온다.
 
-![](../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%203.03.50.png)
+![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%203.03.50.png)
 
 그리고 Team A, B에 대한 쿼리를 각각 보낸다. 최초 쿼리를 한 번 날렸는데 그것 때문에 추가 쿼리를 N번 날려야 하는 상황인 것이다.
 
@@ -221,7 +221,7 @@ public class Member {
 
 하지만 LAZY로 설정한다면?
 
-![](../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%203.06.38.png)
+![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%203.06.38.png)
 
 당장 Team을 쓰지 않아 프록시로 박혀있기 때문에 쿼리 하나로 처리가 된다. 
 
@@ -267,6 +267,6 @@ public class App {
 }
 ```
 
-![](../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%203.13.12.png)
+![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%203.13.12.png)
 
 지연 로딩을 사용하더라도 Team을 루프로 돌리면 쿼리는 계속 나간다. 하지만 fetch join을 하면 한 번에 Team 정보까지 모두 가져오게 된다. 이미 값이 채워져 있기 때문에 루프를 돌려서 조회해도 전혀 문제가 없다.
