@@ -1,6 +1,6 @@
 # 프록시
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%203.09.37.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%203.09.37.png)
 
 이러한 구조에서 Member를 조회할 때 Team도 함께 조회해야 할까?
 
@@ -47,7 +47,7 @@ public class App {
 
 위의 코드를 실행하면,
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%203.42.46.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%203.42.46.png)
 
 `find()`만 했을 때도 `select` 쿼리가 실행되었다.
 
@@ -65,7 +65,7 @@ public class App {
 
 기존의 `em.find()` 대신에 `em.getReference()`로 조회하면,
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%203.32.27.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%203.32.27.png)
 
 `select` 쿼리가 나가지 않는 걸 확인할 수 있다.
 
@@ -79,7 +79,7 @@ public class App {
 }
 ```
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%203.40.40.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%203.40.40.png)
 
 하지만 `member`의 데이터를 실제 호출하는 순간엔 `select` 쿼리가 출력된다.
 
@@ -93,23 +93,23 @@ public class App {
 }
 ```
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%204.11.33.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%204.11.33.png)
 
 클래스를 출력해보면 `Proxy`라는 글자가 보인다. 하이버네이트가 강제로 만든 가짜 클래스라는 뜻이다.
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%203.22.25.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%203.22.25.png)
 
 프록시는 껍데기는 같지만 안은 텅텅 빈 객체다.
 
 ## 프록시 특징
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%204.21.18.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%204.21.18.png)
 
 - 실제 클래스를 상속 받아서 만들어지기 때문에 실제 클래스와 겉모습이 같다.
     - 하이버네이트가 내부적으로 라이브러리를 사용해 상속한다.
 - 이론상, 사용하는 입장에서는 진짜 객체인지 프록시 객체인지 구분하지 않고 사용한다.
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%204.28.11.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%204.28.11.png)
 
 - 프록시 객체는 실제 객체의 참조(target)을 보관한다.
 - 프록시 객체를 호출하면 프록시 객체는 실제 객체의 메서드를 호출한다.
@@ -131,7 +131,7 @@ public class App {
 }
 ```
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%204.35.16.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%204.35.16.png)
 
 1. 데이터를 요청했는데 `Member`의 `target`이 없으면 JPA가 진짜 `Member` 객체를 가져오라고 영속성 컨텍스트에 요청한다.
 2. 영속성 컨텍스트는 DB를 조회해서 실제 Entity를 보내준다.
@@ -166,7 +166,7 @@ public class App {
 
 그리고 같은 내용을 다시 실행하면,
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-08%20오후%204.56.02.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%204.56.02.png)
 
 프록시에서 가져다 쓰기 때문에 첫번째 `username`과는 달리 쿼리를 치지 않는다.
 
@@ -290,7 +290,7 @@ public class App {
 }
 ```
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%201.08.28.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-09%20오전%201.08.28.png)
 
 둘 다 프록시로 받을 때도 같은 프록시로 출력되는 것을 확인할 수 있다.
 
@@ -319,9 +319,9 @@ public class App {
 
 프록시가 초기화 된 상태에서 `find()`를 하면 어떻게 될까? JPA는 기본적으로 `refMember == findMember`의 값이 true임을 보장해야 한다. 하지만 코드를 보면 `refMember`는 프록시, `findMember`는 `Member`가 나올 것처럼 보인다. 정말 그럴까?
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%201.15.34.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-09%20오전%201.15.34.png)
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%201.15.44.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-09%20오전%201.15.44.png)
 
 `find()`를 했기 때문에 실제 DB를 조회하면서 select 쿼리는 찍힌다. 하지만 프록시를 한 번 조회한 뒤에는 `find()`를 한 객체에도 프록시로 반환을 하도록 되어있다. 그래야 JPA의 룰을 보장할 수 있기 때문이다.
 
@@ -382,7 +382,7 @@ public class App {
 }
 ```
 
-![](../../.gitbook/assets/inflearn-orm-jpa/01/스크린샷%202020-07-09%20오전%201.26.22.png)
+![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-09%20오전%201.26.22.png)
 
 `detach()`나 `clear()`, 혹은 `close()`로 준영속 상태가 되면 `org.hibernate.LazyInitializationException`을 날린다.
 
