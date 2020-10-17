@@ -60,6 +60,16 @@
   * [JPA](kimyounghan-spring-introduction/06-database/jpa.md)
 * [AOP](kimyounghan-spring-introduction/07-aop/README.md)
 
+## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
+
+* [JPA 소개](kimyounghan-orm-jpa/01-jpa-introduction/README.md)
+* [JPA 시작하기](kimyounghan-orm-jpa/02-starting-jpa/README.md)
+  * [프로젝트 생성](kimyounghan-orm-jpa/02-starting-jpa/project-setting.md)
+  * [애플리케이션 개발](kimyounghan-orm-jpa/02-starting-jpa/development.md)
+* [프록시와 연관관계 관리](kimyounghan-orm-jpa/08-proxy/README.md)
+  * [프록시](kimyounghan-orm-jpa/08-proxy/01-proxy.md)
+  * [즉시 로딩과 지연 로딩](kimyounghan-orm-jpa/08-proxy/02-eager-and-lazy.md)
+
 ## 스프링 부트와 JPA 활용 - 웹 애플리케이션 개발 <a id="kimyounghan-spring-boot-and-jpa"></a>
 
 * [프로젝트 환경설정](kimyounghan-spring-boot-and-jpa/01-project-settings/README.md)
@@ -123,13 +133,6 @@
     * [서비스 추상화 및 개선](toby-spring/5-abstraction/code-refactoring.md)
     * [트랜잭션 서비스 추상화](toby-spring/5-abstraction/transaction-abstraction.md)
     * [트랜잭션 동기화](toby-spring/5-abstraction/transaction-synchronization.md)
-
-## 자바 ORM 표준 JPA 프로그래밍 <a id="inflearn-orm-jpa"></a>
-
-* [JPA 소개](kimyounghan-orm-jpa/01-jpa-introduction/README.md)
-* [프록시와 연관관계 관리](kimyounghan-orm-jpa/08-proxy/README.md)
-    * [프록시](kimyounghan-orm-jpa/08-proxy/01-proxy.md)
-    * [즉시 로딩과 지연 로딩](kimyounghan-orm-jpa/08-proxy/02-eager-and-lazy.md)
 
 ## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
 
