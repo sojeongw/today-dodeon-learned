@@ -64,8 +64,8 @@
 
 * [JPA 소개](kimyounghan-orm-jpa/01-jpa-introduction/README.md)
 * [JPA 시작하기](kimyounghan-orm-jpa/02-starting-jpa/README.md)
-  * [프로젝트 생성](kimyounghan-orm-jpa/02-starting-jpa/project-setting.md)
-  * [애플리케이션 개발](kimyounghan-orm-jpa/02-starting-jpa/development.md)
+* [JPA 시작하기](kimyounghan-orm-jpa/02-starting-jpa/README.md)
+* [영속성 관리](kimyounghan-orm-jpa/03-persistence/README.md)
 * [프록시와 연관관계 관리](kimyounghan-orm-jpa/08-proxy/README.md)
   * [프록시](kimyounghan-orm-jpa/08-proxy/01-proxy.md)
   * [즉시 로딩과 지연 로딩](kimyounghan-orm-jpa/08-proxy/02-eager-and-lazy.md)
