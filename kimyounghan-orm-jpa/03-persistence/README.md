@@ -99,19 +99,19 @@ member2가 DB엔 있지만 1차 캐시엔 없다면 DB에서 조회한 데이터
 
 ```java
 Member member=new Member();
-    member.setId(101L);
-    member.setName("HelloJPA");
+member.setId(101L);
+member.setName("HelloJPA");
 
-    System.out.println("=== before ===");
-    entityManager.persist(member);
-    System.out.println("=== after ===");
+System.out.println("=== before ===");
+entityManager.persist(member);
+System.out.println("=== after ===");
 
-    Member findMember=entityManager.find(Member.class,101L);
+Member findMember=entityManager.find(Member.class,101L);
 
-    System.out.println("findMember.id: "+findMember.getId());
-    System.out.println("findMember.name: "+findMember.getName());
+System.out.println("findMember.id: "+findMember.getId());
+System.out.println("findMember.name: "+findMember.getName());
 
-    tx.commit();
+tx.commit();
 ```
 
 ```text
@@ -133,9 +133,9 @@ member가 1차 캐시에 저장되면서 조회 시 select 쿼리가 나가지 �
 
 ```java
 Member findMember1=entityManager.find(Member.class,101L);
-    Member findMember2=entityManager.find(Member.class,101L);
+Member findMember2=entityManager.find(Member.class,101L);
 
-    tx.commit();
+tx.commit();
 ```
 
 ```text
@@ -173,16 +173,16 @@ member를 저장하면 영속성 컨텍스트 안의 1차 캐시에 저장함과
 트랜잭션을 커밋하는 시점에 쓰기 지연 SQL 저장소에 있던 쿼리가 flush 되면서 DB에 날아간다.
 
 ```java
-Member member1=new Member(150L,"A");
-    Member member2=new Member(160L,"B");
+Member member1 = new Member(150L,"A");
+Member member2 = new Member(160L,"B");
 
 // 쓰기 지연 SQL 저장소에 저장된다.
-    entityManager.persist(member1);
-    entityManager.persist(member2);
-    System.out.println("------------");
+entityManager.persist(member1);
+entityManager.persist(member2);
+System.out.println("------------");
 
 // 실제 쿼리가 날아간다.
-    tx.commit();
+tx.commit();
 ```
 
 ```text
@@ -254,12 +254,12 @@ JPA는 자바 컬렉션에 넣은 것처럼 값을 다루는 게 목적이다. �
 
 ```java
 Member member=new Member(200L,"A");
-    entityManager.persist(member);
+entityManager.persist(member);
 
-    entityManager.flush();
-    System.out.println("-----");
+entityManager.flush();
+System.out.println("-----");
 
-    tx.commit();
+tx.commit();
 ```
 
 ```text
@@ -296,3 +296,52 @@ JPQL을 중간에 실행했는데 아직 커밋을 하지 않아서 `persist()`�
 ### 정리
 
 플러시는 영속성 컨텍스트를 비우지 않는다. 플러시라는 이름 때문에 오해하면 안된다. 영속성 컨텍스트의 변경 내용을 데이터베이스에 동기화하는 작업이다. 플러시가 동작할 수 있는 메커니즘은 트랜잭션이라는 개념이 있기 때문에 가능한 것이다. 트랜잭션이라는 작업 단위가 중요하므로 커밋 직전에만 동기화하면 된다.
+
+## 준영속 상태
+
+영속이란 영속성 컨텍스트에서 관리되는 상태다. insert뿐만 아니라 조회할 때 캐시에 없어서 가져오는 상태도 영속에 포함된다.
+
+준영속은 영속 상태의 엔티티가 영속성 컨텍스트에서 분리되는 상태다. `detach()`를 실행하면 트랜잭션을 커밋해도 영속성 컨텍스트가 더이상 관리하지 않는 상태이기 때문에 커밋이 영향을 주지 않는다. 즉, 영속성 컨텍스트가 제공하는 기능을 사용할 수 없다.
+
+### 준영속 상태로 만드는 법
+
+- em.detach(entity)
+  - 특정 엔티티만 준영속 상태로 전환한다.
+- em.clear()
+  - 영속성 컨텍스트를 완전히 초기화한다.
+- em.close()
+  - 영속성 컨텍스트를 종료한다.
+
+```java
+Member member1 = entityManager.find(Member.class, 150L);
+member1.setName("AAAAA");
+
+entityManager.clear();
+
+// 영속성 컨텍스트를 지워서 1차 캐시에 없으므로 다시 올리기 위해 select 쿼리가 다시 실행된다.
+Member member2 = entityManager.find(Member.class, 150L);
+
+System.out.println("-----");
+
+tx.commit();
+```
+
+```text
+Hibernate: 
+    select
+        member0_.id as id1_0_0_,
+        member0_.name as name2_0_0_ 
+    from
+        Member member0_ 
+    where
+        member0_.id=?
+Hibernate: 
+    select
+        member0_.id as id1_0_0_,
+        member0_.name as name2_0_0_ 
+    from
+        Member member0_ 
+    where
+        member0_.id=?
+-----
+```
