@@ -63,12 +63,12 @@ public class Team {
 public class JpaMain() {
 
   public static void main(String[] args) {
-// 팀 저장
+    // 팀 저장
     Team team = new Team();
     team.setName("TeamA");
     em.persist(team);
 
-// 회원 저장
+    // 회원 저장
     Member member = new Member();
     member.setName("member1");
     member.setTeamId(team.getId());
