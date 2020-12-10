@@ -74,6 +74,7 @@
 * [연관 관계 매핑](kimyounghan-orm-jpa/05-relationship-mapping/README.md)
   * [단방향 연관 관계](kimyounghan-orm-jpa/05-relationship-mapping/unidirectional.md)
   * [양방향 연관 관계](kimyounghan-orm-jpa/05-relationship-mapping/bidirectional.md)
+  * [양방향 연관 관계](kimyounghan-orm-jpa/05-relationship-mapping/example.md)
 * [프록시와 연관관계 관리](kimyounghan-orm-jpa/08-proxy/README.md)
   * [프록시](kimyounghan-orm-jpa/08-proxy/01-proxy.md)
   * [즉시 로딩과 지연 로딩](kimyounghan-orm-jpa/08-proxy/02-eager-and-lazy.md)
