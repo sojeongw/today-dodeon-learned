@@ -4,7 +4,7 @@
 
 객체 지향적으로 모델링을 하면 Member에는 teamId가 아니라 Team 참조값을 그대로 갖게 된다.
 
-{% endtab %} {% tab title="Entity 정의" %}
+{% tabs %} {% tab title="Entity 정의" %}
 
 ```java
 

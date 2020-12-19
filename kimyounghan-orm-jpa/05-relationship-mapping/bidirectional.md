@@ -6,7 +6,7 @@
 
 문제는 객체다. team에 member를 넣어줘야만 접근이 가능하다.
 
-{% endtab %} {% tab title="정의" %}
+{% tabs %} {% tab title="정의" %}
 
 ```java
 
@@ -251,7 +251,7 @@ public class JpaMain {
 
 `flush()`와 `clear()`를 하면 캐시를 날려서 DB를 다시 조회했지만 순수한 1차 캐시에 들어간 상태에서는 문제가 발생한다. 따라서 순수 객체 상태를 고려해 항상 양쪽에 값을 설정하자. 
 
-{% endtab %} {% tab title="Member.java" %}
+{% tabs %} {% tab title="Member.java" %}
 
 ```java
 @Entity
@@ -303,7 +303,7 @@ public class JpaMain {
 
 위와 같이 `setTeam()`을 할 때 자신도 팀의 회원에 넣어주도록 하면 놓치지 않을 수 있다. 메서드를 원자적으로 즉, 하나만 써도 양쪽으로 적용되도록 사용할 수 있는 것이다.
 
-{% endtab %} {% tab title="Member.java" %}
+{% tabs %} {% tab title="Member.java" %}
 
 ```java
 public class Member {
@@ -348,7 +348,7 @@ public class JpaMain {
 
 다만, `set()`은 로직이 없는 부분에만 관례상 사용하므로 메서드 이름을 `changeTeam()`으로 바꿔준다. 그러면 이 메서드가 단순히 setter가 아니라 중요한 역할을 하고 있음을 알게 된다.
 
-{% endtab %} {% tab title="Team.java" %}
+{% tabs %} {% tab title="Team.java" %}
 
 ```java
 public class Team {

@@ -13,7 +13,7 @@
 
 앞서 설명했듯 단방향 연관 관계 매핑과 연관 관계 주인을 설정하는 것이 중요하다. 테이블 구조를 다시 보고 외래키만 잘 넣어주면 된다.
 
-{% endtab %} {% tab title="before" %}
+{% tabs %} {% tab title="before" %}
 
 ```java
 
@@ -66,7 +66,7 @@ public class Order {
 
 {% endtab %} {% endtabs %}
 
-{% endtab %} {% tab title="before" %}
+{% tabs %} {% tab title="before" %}
 
 ```java
 
@@ -130,7 +130,7 @@ public class OrderItem {
 
 하지만 굳이 양방향 관계가 필요하다고 치고 넣는다면 아래와 같다.
 
-{% endtab %} {% tab title="before" %}
+{% tabs %} {% tab title="before" %}
 
 ```java
 
@@ -175,7 +175,7 @@ public class Member {
 
 {% endtab %} {% endtabs %}
 
-{% endtab %} {% tab title="before" %}
+{% tabs %} {% tab title="before" %}
 
 ```java
 
@@ -234,7 +234,7 @@ public class Order {
 
 이제 주문을 해보자.
 
-{% endtab %} {% tab title="JpaMain.java" %}
+{% tabs %} {% tab title="JpaMain.java" %}
 
 ```java
 public class JpaMain {

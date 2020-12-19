@@ -31,7 +31,7 @@
 
 객체를 테이블에 맞춰 모델링 했을 경우 연관 관계가 없이 이러한 형태가 나온다.
 
-{% endtab %} {% tab title="Entity 정의" %}
+{% tabs %} {% tab title="Entity 정의" %}
 
 ```java
 
