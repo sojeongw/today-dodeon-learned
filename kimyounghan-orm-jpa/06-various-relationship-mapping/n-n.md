@@ -16,7 +16,7 @@
 
 ## 단방향
 
-{% endtab %} {% tab title="Member.java" %}
+{% tabs %} {% tab title="Member.java" %}
 
 ```java
 @Entity
@@ -56,7 +56,7 @@ public class Product {
 
 ## 양방향
 
-{% endtab %} {% tab title="Member.java" %}
+{% tabs %} {% tab title="Member.java" %}
 
 ```java
 @Entity
@@ -103,7 +103,7 @@ public class Product {
 
 연결용 테이블 엔티티를 추가한다. 즉, 연결 테이블을 엔티티로 승격한다. 다대다를 일대다, 다대일로 풀어낸다.
 
-{% endtab %} {% tab title="Member.java" %}
+{% tabs %} {% tab title="Member.java" %}
 
 ```java
 @Entity
