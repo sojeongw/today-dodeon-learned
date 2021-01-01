@@ -112,7 +112,7 @@ public class App {
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%204.28.11.png)
 
 - 프록시 객체는 실제 객체의 참조(target)을 보관한다.
-- 프록시 객체를 호출하면 프록시 객체는 실제 객체의 메서드를 호출한다.
+- 프록시 객체에 있는 메서드를 호출하면 프록시 객체는 실제 객체의 메서드를 호출한다.
 
 만약 `getId()`를 호출하면 프록시는 `target`에 있는 `getId()`를 대신 호출한다.
 
@@ -263,9 +263,9 @@ public class App {
     
 - 영속성 컨텍스트가 이미 있는 엔티티를 찾게 되면 `em.getReference()`를 호출해도 실제 엔티티를 반환한다.
 
-원본을 반환하는 것이 성능 최적화에 좋은 것도 있지만, 다른 중요한 이유가 있다.
+JPA에서는 같은 인스턴스인지 비교할 때 같은 영속성 컨텍스트 안에 있으면 항상 같다고 나온다. 이미 멤버를 영속성 컨텍스트 1차 캐시에 넣어뒀기 때문에 굳이 프록시로 가져올 필요가 없어서 성능 최적화에 대한 이점이 없다.
 
-JPA에서는 원본과 레퍼런스를 `==` 비교 시 항상 `true`가 나온다. 한 트랜잭션 안에서는 값이 같다고 보장해주기 때문에, 하나의 영속성 컨텍스트 안에 있고 PK가 같으면 항상 `true`를 반환한다.
+더 중요한 이유가 있다. JPA에서는 원본과 레퍼런스를 `==` 비교 시 항상 `true`가 나온다. 한 트랜잭션 안에서는 값이 같다고 보장해주기 때문에, 하나의 영속성 컨텍스트 안에 있고 PK가 같으면 항상 `true`를 반환한다.
 
 ```java
 public class App {
@@ -292,7 +292,7 @@ public class App {
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-09%20오전%201.08.28.png)
 
-둘 다 프록시로 받을 때도 같은 프록시로 출력되는 것을 확인할 수 있다.
+둘 다 레퍼런스로 받을 때도 같은 프록시로 출력되는 것을 확인할 수 있다. 하나의 영속성 컨텍스트에 있을 때 같다는 점을 보장해줘야 하기 때문이다.
 
 ```java
 public class App {
@@ -305,11 +305,15 @@ public class App {
         em.clear();
 
         Member refMember = em.getReference(Member.class, member1.getId());
+        // 프록시값 출력
         System.out.println("refMember = " + refMember.getClass());
 
         Member findMember = em.find(Member.class, member1.getId());
+        // 당연히 Member 타입이 출력되어야 하는 것 아닌가?
+        // 같음을 보장해줘야 하기 때문에 프록시로 나온다.
         System.out.println("findMember = " + findMember.getClass());
    
+        // JPA에서는 무조건 이게 참이 되도록 맞춘다!
         System.out.println("a == a: " + (refMember == findMember));
 
         tx.commit();
@@ -369,6 +373,7 @@ public class App {
         Member refMember = em.getReference(Member.class, member1.getId());
         System.out.println("refMember = " + refMember.getClass());
 
+        // 영속성 컨텍스트를 준영속으로 만든다.
 //        em.detach(refMember);
 //        em.clear();
         em.close();
@@ -384,7 +389,7 @@ public class App {
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-09%20오전%201.26.22.png)
 
-`detach()`나 `clear()`, 혹은 `close()`로 준영속 상태가 되면 `org.hibernate.LazyInitializationException`을 날린다.
+`detach()`나 `clear()`, 혹은 `close()`로 준영속 상태가 되면 `org.hibernate.LazyInitializationException`을 날린다. 앞에서 살펴봤던 것 처럼 프록시를 초기화 할 때 영속성 컨텍스트를 통하기 때문이다.
 
 트랜잭션이 끝났는데 조회를 하려고 할 때 많이 만나는 에러이므로 기억해두도록 하자.
 
