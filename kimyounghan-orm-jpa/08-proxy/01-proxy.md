@@ -2,7 +2,7 @@
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/08/스크린샷%202020-07-08%20오후%203.09.37.png)
 
-이러한 구조에서 Member를 조회할 때 Team도 함께 조회해야 할까?
+이러한 구조에서 Member를 조회할 때 Team도 DB에서 함께 조회해야 할까?
 
 ```java
 public class App {

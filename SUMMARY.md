@@ -60,6 +60,14 @@
   * [JPA](kimyounghan-spring-introduction/06-database/jpa.md)
 * [AOP](kimyounghan-spring-introduction/07-aop/README.md)
 
+## 스프링 핵심 원리 <a id="kimyounghan-spring-core-principle"></a>
+
+* [객체 지향 설계와 스프링](kimyounghan-spring-core-principle/01-oop-spring/README.md)
+  * [스프링의 탄생](kimyounghan-spring-core-principle/01-oop-spring/spring.md)
+  * [객체 지향 프로그래밍](kimyounghan-spring-core-principle/01-oop-spring/oop.md)
+  * [객체 지향 설계와 스프링](kimyounghan-spring-core-principle/01-oop-spring/oop-spring.md)
+
+
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
 * [JPA 소개](kimyounghan-orm-jpa/01-jpa-introduction/README.md)
