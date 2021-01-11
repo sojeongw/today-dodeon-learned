@@ -27,12 +27,45 @@
 
 - IoC 컨테이너가 관리하는 객체
 
-## 빈 스코프
+### 빈 스코프
 
 - 싱글톤이 기본값
 - 애플리케이션 전반에 걸쳐 빈 인스턴스가 하나만 존재한다.
 - 객체는 생성할 때마다 메모리를 할당받아야 하므로 이러한 메모리 낭비를 방지한다.
-- 
+- 싱글턴으로 구현한 인스턴스는 전역이기 때문에 다른 클래스가 서로 데이터를 공유할 수 있다.
+
+### 라이프 사이클
+
+객체 생성 - 의존 설정 - 초기화(PostConstruct) - 사용 - 소멸(PreDestroy)
+
+1. 자바나 xml 정의에 의해 빈이 인스턴스화 된다.
+2. 사용 가능한 상태가 되기 위해 초기화한다.
+3. 이후 더 이상 필요하지 않으면 IoC 컨테이너가 삭제한다.
+
+![](../../.gitbook/assets/interview/spring/bean_life_cycle.png)
+
+1. 빈 팩토리가 `BeanPostProcessor`타입의 빈을 찾는다.
+2. 그 중 하나인 `AutowiredAnnotaionBeanPostProcessor`를 찾는다.
+3. `AutowiredAnnotaionBeanPostProcessor`가 빈을 처리한다.
+
+---
+
+### BeanPostProcessor
+
+- 빈 라이프 사이클 인터페이스
+- 이 인터페이스의 구현체에 의해 라이프 사이클이 동작한다.
+
+### AutowiredAnnotationBeanPostProcessor
+
+- `BeanPostProcessor`를 상속한다.
+- `@utowired`, `@Value`, `@Inject`를 처리한다.
+- `postProcessBeforeInitialization` 단계에서 `@Autowired`가 붙은 의존성을 주입한다.
+
+### Initialization
+
+- 빈의 인스턴스를 만든 후 초기화할 때의 라이프 사이클
+- 이 단계 앞 뒤로 `postProcessBeforeInitialization`과 `postProcessAfterInitialization`이라는 부가적인 라이프 사이클 콜백을 제공한다.
+- `PostConstruct` 애너테이션을 처리한다. 이 단계에서는 이미 빈이 주입된 상태가 된다.
 
 ## 빈 주입
 ### Constructor
