@@ -9,6 +9,7 @@
   * [Garbage Collector](interview/jvm-and-java/garbage-collector.md)
 * [스프링](interview/spring/README.md)
   * [IoC와 DI](interview/spring/ioc-di.md)
+  * [JPA](interview/spring/jpa.md)
   * [WebFlux](interview/spring/web-flux.md)
 * [디자인패턴](interview/design-pattern/README.md)
   * [싱글톤 패턴](interview/design-pattern/singleton-pattern.md)
