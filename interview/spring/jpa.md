@@ -64,6 +64,7 @@ private Set<Subject> subjects = new LinkedHashSet<>();
 ```
 
 - 1:N 필드의 타입을 Set으로 선언한다.
+- 중복을 허용하지 않는 자료 구조이기 때문에 중복 등록이 되지 않는다.
 
 ### distinct 사용
 
@@ -74,11 +75,13 @@ List<Academy> findAllWithTeacher();
 ```
 
 ```java
-// entioty graph
+// entity graph
 @EntityGraph(attributePaths = {"subjects", "subjects.teacher"})
 @Query("select DISTINCT a from Academy a")
 List<Academy> findAllEntityGraphWithTeacher();
 ```
+
+- set보다는 list가 적합한 상황이라면 중복을 제거해주는 distinct를 사용한다.
 
 ## 동시성 문제
 
