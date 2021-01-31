@@ -99,6 +99,7 @@
   * [프록시](kimyounghan-orm-jpa/08-proxy/01-proxy.md)
   * [즉시 로딩과 지연 로딩](kimyounghan-orm-jpa/08-proxy/02-eager-and-lazy.md)
   * [영속성 전이와 고아 객체](kimyounghan-orm-jpa/08-proxy/03-cascade.md)
+  * [실전 예제](kimyounghan-orm-jpa/08-proxy/04-example.md)
 
 ## 스프링 부트와 JPA 활용 - 웹 애플리케이션 개발 <a id="kimyounghan-spring-boot-and-jpa"></a>
 
