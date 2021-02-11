@@ -102,6 +102,7 @@
   * [실전 예제](kimyounghan-orm-jpa/08-proxy/04-example.md)
 * [값 타입](kimyounghan-orm-jpa/09-value-type/README.md)
   * [기본값 타입](kimyounghan-orm-jpa/09-value-type/primitive-type.md)
+  * [임베디드 타입](kimyounghan-orm-jpa/09-value-type/embedded-type.md)
 
 ## 스프링 부트와 JPA 활용 - 웹 애플리케이션 개발 <a id="kimyounghan-spring-boot-and-jpa"></a>
 
