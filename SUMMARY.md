@@ -104,6 +104,8 @@
   * [기본값 타입](kimyounghan-orm-jpa/09-value-type/primitive-type.md)
   * [임베디드 타입](kimyounghan-orm-jpa/09-value-type/embedded-type.md)
   * [값 타입과 불변 객체](kimyounghan-orm-jpa/09-value-type/immutable-value.md)
+  * [값 타입의 비교](kimyounghan-orm-jpa/09-value-type/comparison.md)
+  * [값 타입 컬렉션](kimyounghan-orm-jpa/09-value-type/collection.md)
 
 ## 스프링 부트와 JPA 활용 - 웹 애플리케이션 개발 <a id="kimyounghan-spring-boot-and-jpa"></a>
 
