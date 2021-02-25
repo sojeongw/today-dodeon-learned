@@ -154,7 +154,7 @@ public class JpaMain {
 
 만약 실수로 복사한 값 대신 원래 값을 집어넣는다면, 컴파일 단계에서 이 문제를 짚어낼 수가 없는 것이다.
 
-![](../../.gitbook/assets/kimyounghan-orm-jpa/09/screenshot%202021-03-31%20오후%209.25.32.png )
+![](../../.gitbook/assets/kimyounghan-orm-jpa/09/screenshot%202021-03-31%20오후%209.25.32.png)
 
 다시 정리하자면, 기본 타입은 값을 복사하기 때문에 문제가 없지만 객체 타입은 참조를 전달하기 때문에 변경하면 둘 다 반영되는 부작용이 발생한다. 
 
