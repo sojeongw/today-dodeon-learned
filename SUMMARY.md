@@ -107,6 +107,10 @@
   * [값 타입의 비교](kimyounghan-orm-jpa/09-value-type/comparison.md)
   * [값 타입 컬렉션](kimyounghan-orm-jpa/09-value-type/collection.md)
   * [실전 예제](kimyounghan-orm-jpa/09-value-type/example.md)
+* [객체 지향 쿼리 언어](kimyounghan-orm-jpa/10-object-oriented-query/README.md)
+  * [기본 문법과 쿼리 API](kimyounghan-orm-jpa/10-object-oriented-query/basic.md)
+  * [프로젝션](kimyounghan-orm-jpa/10-object-oriented-query/select.md)
+
 
 ## 스프링 부트와 JPA 활용 - 웹 애플리케이션 개발 <a id="kimyounghan-spring-boot-and-jpa"></a>
 
