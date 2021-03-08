@@ -111,6 +111,7 @@
   * [기본 문법과 쿼리 API](kimyounghan-orm-jpa/10-object-oriented-query/basic.md)
   * [프로젝션](kimyounghan-orm-jpa/10-object-oriented-query/select.md)
   * [페이징](kimyounghan-orm-jpa/10-object-oriented-query/paging.md)
+  * [조인](kimyounghan-orm-jpa/10-object-oriented-query/join.md)
 
 
 ## 스프링 부트와 JPA 활용 - 웹 애플리케이션 개발 <a id="kimyounghan-spring-boot-and-jpa"></a>
