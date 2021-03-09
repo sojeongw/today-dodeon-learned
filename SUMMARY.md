@@ -50,6 +50,14 @@
     * [docker](interview/cloud/docker.md)
     * [kubernetes](interview/cloud/kubernetes.md)
   
+## 모든 개발자를 위한 HTTP 웹 기본 지식 <a id="kimyounghan-http-basic"></a>
+
+* [인터넷 네트워크](kimyounghan-http-basic/01-internet-network/README.md)
+  * [IP](kimyounghan-http-basic/01-internet-network/ip.md)
+  * [TCP, UDP](kimyounghan-http-basic/01-internet-network/tcp-udp.md)
+  * [PORT](kimyounghan-http-basic/01-internet-network/port.md)
+  * [DNS](kimyounghan-http-basic/01-internet-network/dns.md)
+
 ## 스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술 <a id="kimyounghan-spring-introduction"></a>
 
 * [프로젝트 환경설정](kimyounghan-spring-introduction/01-project-settings/README.md)
@@ -107,13 +115,29 @@
   * [값 타입의 비교](kimyounghan-orm-jpa/09-value-type/comparison.md)
   * [값 타입 컬렉션](kimyounghan-orm-jpa/09-value-type/collection.md)
   * [실전 예제](kimyounghan-orm-jpa/09-value-type/example.md)
-* [객체 지향 쿼리 언어](kimyounghan-orm-jpa/10-object-oriented-query/README.md)
+* [객체 지향 쿼리 언어 - 기본](kimyounghan-orm-jpa/10-object-oriented-query/README.md)
   * [기본 문법과 쿼리 API](kimyounghan-orm-jpa/10-object-oriented-query/basic.md)
   * [프로젝션](kimyounghan-orm-jpa/10-object-oriented-query/select.md)
   * [페이징](kimyounghan-orm-jpa/10-object-oriented-query/paging.md)
   * [조인](kimyounghan-orm-jpa/10-object-oriented-query/join.md)
   * [서브 쿼리](kimyounghan-orm-jpa/10-object-oriented-query/sub-query.md)
   * [JPQL 타입 표현과 기타 식](kimyounghan-orm-jpa/10-object-oriented-query/type.md)
+
+[comment]: <> (  * [조건식]&#40;kimyounghan-orm-jpa/10-object-oriented-query/condition.md&#41;)
+
+[comment]: <> (  * [JPQL 함수]&#40;kimyounghan-orm-jpa/10-object-oriented-query/function.md&#41;)
+
+[comment]: <> (  * [경로 표현식]&#40;kimyounghan-orm-jpa/10-object-oriented-query/graph.md&#41;)
+
+[comment]: <> (  * [fetch join]&#40;kimyounghan-orm-jpa/10-object-oriented-query/fetch-join.md&#41;)
+
+[comment]: <> (  * [다형성 쿼리]&#40;kimyounghan-orm-jpa/10-object-oriented-query/polymorphism.md&#41;)
+
+[comment]: <> (  * [엔티티 직접 사용]&#40;kimyounghan-orm-jpa/10-object-oriented-query/direct-use.md&#41;)
+
+[comment]: <> (  * [Named 쿼리]&#40;kimyounghan-orm-jpa/10-object-oriented-query/named.md&#41;)
+
+[comment]: <> (  * [벌크 연산]&#40;kimyounghan-orm-jpa/10-object-oriented-query/bulk-calculation.md&#41;)
 
 
 ## 스프링 부트와 JPA 활용 - 웹 애플리케이션 개발 <a id="kimyounghan-spring-boot-and-jpa"></a>
