@@ -57,6 +57,7 @@
   * [TCP, UDP](kimyounghan-http-basic/01-internet-network/tcp-udp.md)
   * [PORT](kimyounghan-http-basic/01-internet-network/port.md)
   * [DNS](kimyounghan-http-basic/01-internet-network/dns.md)
+* [URI와 웹 브라우저 요청 흐름](kimyounghan-http-basic/02-uri-and-request/README.md)
 
 ## 스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술 <a id="kimyounghan-spring-introduction"></a>
 
