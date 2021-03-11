@@ -58,6 +58,11 @@
   * [PORT](kimyounghan-http-basic/01-internet-network/port.md)
   * [DNS](kimyounghan-http-basic/01-internet-network/dns.md)
 * [URI와 웹 브라우저 요청 흐름](kimyounghan-http-basic/02-uri-and-request/README.md)
+* [HTTP 기본](kimyounghan-http-basic/03-http-basic/README.md)
+  * [클라이언트-서버 구조](kimyounghan-http-basic/03-http-basic/client-server.md)
+  * [stateful, stateless](kimyounghan-http-basic/03-http-basic/state.md)
+  * [비 연결성](kimyounghan-http-basic/03-http-basic/connectionless.md)
+  * [HTTP 메시지](kimyounghan-http-basic/03-http-basic/message.md)
 
 ## 스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술 <a id="kimyounghan-spring-introduction"></a>
 
