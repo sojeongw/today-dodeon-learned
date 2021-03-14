@@ -65,6 +65,7 @@
   * [HTTP 메시지](kimyounghan-http-basic/03-http-basic/message.md)
 * [HTTP 메서드](kimyounghan-http-basic/04-http-method/README.md)
 * [HTTP 메서드 활용](kimyounghan-http-basic/05-http-method-usage/README.md)
+* [HTTP 상태 코드](kimyounghan-http-basic/06-http-status-code/README.md)
 
 ## 스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술 <a id="kimyounghan-spring-introduction"></a>
 
