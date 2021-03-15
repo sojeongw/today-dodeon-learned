@@ -66,6 +66,18 @@
 * [HTTP 메서드](kimyounghan-http-basic/04-http-method/README.md)
 * [HTTP 메서드 활용](kimyounghan-http-basic/05-http-method-usage/README.md)
 * [HTTP 상태 코드](kimyounghan-http-basic/06-http-status-code/README.md)
+* [HTTP 헤더 - 일반](kimyounghan-http-basic/07-http-header/README.md)
+  * [표현](kimyounghan-http-basic/07-http-header/representation.md)
+  * [콘텐츠 협상](kimyounghan-http-basic/07-http-header/content-negotiation.md)
+  * [전송 방식](kimyounghan-http-basic/07-http-header/transfer.md)
+  * [정보](kimyounghan-http-basic/07-http-header/information.md)
+  * [Authorization](kimyounghan-http-basic/07-http-header/authorization.md)
+  * [쿠키](kimyounghan-http-basic/07-http-header/cookie.md)
+* [HTTP 헤더 - 캐시](kimyounghan-http-basic/08-http-header-cache/README.md)
+  * [검증 헤더와 조건부 요청](kimyounghan-http-basic/08-http-header-cache/validation-and-conditional-request.md)
+  * [조건부 요청 헤더](kimyounghan-http-basic/08-http-header-cache/conditional-request-header.md)
+  * [프록시 캐시](kimyounghan-http-basic/08-http-header-cache/proxy-cache.md)
+  * [캐시 무효화](kimyounghan-http-basic/08-http-header-cache/cache-revalidation.md)
 
 ## 스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술 <a id="kimyounghan-spring-introduction"></a>
 
