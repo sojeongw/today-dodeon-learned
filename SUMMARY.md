@@ -96,6 +96,7 @@
 * [객체 지향 설계와 스프링](kimyounghan-spring-core-principle/01-oop-spring/README.md)
   * [스프링의 탄생](kimyounghan-spring-core-principle/01-oop-spring/spring.md)
   * [객체 지향 프로그래밍](kimyounghan-spring-core-principle/01-oop-spring/oop.md)
+  * [좋은 객체 지향 설계의 원칙](kimyounghan-spring-core-principle/01-oop-spring/oop-principle.md)
   * [객체 지향 설계와 스프링](kimyounghan-spring-core-principle/01-oop-spring/oop-spring.md)
 
 
