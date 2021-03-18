@@ -98,6 +98,7 @@
   * [객체 지향 프로그래밍](kimyounghan-spring-core-principle/01-oop-spring/oop.md)
   * [좋은 객체 지향 설계의 원칙](kimyounghan-spring-core-principle/01-oop-spring/oop-principle.md)
   * [객체 지향 설계와 스프링](kimyounghan-spring-core-principle/01-oop-spring/oop-spring.md)
+* [스프링 핵심 원리 이해](kimyounghan-spring-core-principle/02-understanding-core-principle/README.md)
 
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
