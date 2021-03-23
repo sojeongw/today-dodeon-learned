@@ -36,7 +36,7 @@ public class RateDiscountPolicy implements DiscountPolicy{
 
 ```
 
-{% endtab % {% tab title="RateDiscountPolicyTest.java" %}
+{% endtab %} {% tab title="RateDiscountPolicyTest.java" %}
 
 ```java
 class RateDiscountPolicyTest {
