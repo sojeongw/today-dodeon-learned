@@ -101,6 +101,7 @@
 * [스프링 핵심 원리 이해](kimyounghan-spring-core-principle/02-understanding-core-principle/README.md)
   * [회원 도메인 개발](kimyounghan-spring-core-principle/02-understanding-core-principle/example-member.md)
   * [주문 도메인 개발](kimyounghan-spring-core-principle/02-understanding-core-principle/example-order.md)
+* [객체 지향 원리 적용](kimyounghan-spring-core-principle/03-oop/README.md)
 
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
