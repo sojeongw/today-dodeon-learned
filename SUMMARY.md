@@ -102,6 +102,7 @@
   * [회원 도메인 개발](kimyounghan-spring-core-principle/02-understanding-core-principle/example-member.md)
   * [주문 도메인 개발](kimyounghan-spring-core-principle/02-understanding-core-principle/example-order.md)
 * [객체 지향 원리 적용](kimyounghan-spring-core-principle/03-oop/README.md)
+  * [관심사의 분리](kimyounghan-spring-core-principle/03-oop/concerns.md)
 
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
