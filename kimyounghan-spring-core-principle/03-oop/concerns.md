@@ -65,7 +65,6 @@ public class OrderServiceImpl implements OrderService {
     this.discountPolicy = discountPolicy;
   }
 }
-}
 ```
 
 {% endtab %} {% endtabs %}
@@ -75,15 +74,131 @@ public class OrderServiceImpl implements OrderService {
 `MemberServiceImpl`은 생성자를 통해 어떤 구현 객체가 주입될 지 알 수 없다. 오직 `AppConfig`라는 외부에 의해서
 결정된다. `MemberServiceImpl`은 이제 의존 관계에 대한 고민을 외부에 맡기고 실행에만 집중하면 된다.
 
+### 클래스 다이어그램
+
 ![](../../.gitbook/assets/kimyounghan-spring-core-principle/03/screenshot%202021-04-09%20오후%202.14.34.png)
 
 `MemberServiceImpl`이 `MemberService`를 구현하고 `MemberRepository`에 의존하는 건 동일하다. 대신 `AppConfig`
 가 `MemoryMemberRepository`를 생성하고 연결해준다.
 
 - DIP가 지켜진다.
-  -  `MemberServiceImpl`은 `MemberRepository`라는 추상에만 의존하면 된다.
+    - `MemberServiceImpl`은 `MemberRepository`라는 추상에만 의존하면 된다.
 - 관심사의 분리가 이루어졌다.
     - 객체를 생성하고 연결하는 역할과 실행하는 역할이 명확이 분리되었다.
-  
+
+### 회원 객체 인스턴스 다이어그램
+
 ![](../../.gitbook/assets/kimyounghan-spring-core-principle/03/screenshot%202021-04-09%20오후%202.19.52.png)
 
+`AppConfig` 객체는 `MemoryMemberRepository` 객체를 생성하고 그 참조값을 `MemberServiceImpl`을 생성하는 과정에서 생성자로 전달한다.
+
+클라이언트인 `MemberServiceImpl` 입장에서 보면 의존 관계를 마치 외부에서 주입해주는 것 같다고 해서 DI(Dependency Injection) 즉, 의존 관계
+주입이라고 한다.
+
+{% tabs %} {% tab title="OrderServiceImpl.java" %}
+
+```java
+public class OrderServiceImpl implements OrderService {
+
+  private final MemberRepository memberRepository;
+  private final DiscountPolicy discountPolicy;
+
+  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    this.memberRepository = memberRepository;
+    this.discountPolicy = discountPolicy;
+  }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+설계를 변경한 후로는 `OrderServiceImpl`이 `FixDiscountPolicy`를 의존하지 않는다. `DiscountPolicy` 인터페이스만 의존할 뿐이다.
+
+`OrderServiceImpl` 입장에선 생성자를 통해 어떤 구현 객체를 주입받을 지 알 수 없다. 오직 `AppConfig`에서 결정한다. `OrderServiceImpl`은
+실행에만 집중하면 된다.
+
+{% tabs %} {% tab title="MemberApp.java" %}
+
+```java
+public class MemberApp {
+
+  public static void main(String[] args) {
+    AppConfig appConfig = new AppConfig();
+    MemberService memberService = appConfig.memberService();
+
+    Member member = new Member(1L, "memberA", Grade.VIP);
+    memberService.join(member);
+
+    Member findMember = memberService.findMember(1L);
+    System.out.println("new member = " + member.getName());
+    System.out.println("findMember = " + findMember.getName());
+  }
+}
+```
+
+{% endtab %} {% tab title="OrderApp.java" %}
+
+```java
+public class OrderApp {
+
+  public static void main(String[] args) {
+    AppConfig appConfig = new AppConfig();
+    MemberService memberService = appConfig.memberService();
+    OrderService orderService = appConfig.orderService();
+
+    Long memberId = 1L;
+    Member member = new Member(memberId, "memberA", Grade.VIP);
+    memberService.join(member);
+
+    Order order = orderService.createOrder(memberId, "itemA", 10000);
+
+    System.out.println("order = " + order);
+    System.out.println("order.calculatePrice() = " + order.calculatePrice());
+  }
+
+}
+
+```
+
+{% endtab %} {% tab title="MemberServiceTest.java" %}
+
+```java
+public class MemberServiceTest {
+
+  MemberService memberService;
+
+  @BeforeEach
+  void beforeEach() {
+    AppConfig appConfig = new AppConfig();
+    memberService = appConfig.memberService();
+  }
+}
+```
+
+{% endtab %} {% tab title="OrderServiceTest.java" %}
+
+```java
+public class OrderServiceTest {
+
+  MemberService memberService;
+  OrderService orderService;
+
+  @BeforeEach
+  void beforeEach() {
+    AppConfig appConfig = new AppConfig();
+    memberService = appConfig.memberService();
+    orderService = appConfig.orderService();
+  }
+}
+
+```
+
+{% endtab %} {% endtabs %}
+
+메인 메서드와 테스트 코드도 `AppConfig`에서 받아오도록 수정한다.
+
+## 정리
+
+- `AppConfig`를 통해 관심사를 확실하게 분리했다.
+  - 배역에 맞는 배우를 선택하는 공연 기획자처럼 애플리케이션이 어떻게 동작할지 전체 구성을 책임진다.
+- 각 클래스들은 기능을 실행하는 책임만 지면 된다.
