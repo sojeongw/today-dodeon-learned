@@ -202,3 +202,65 @@ public class OrderServiceTest {
 - `AppConfig`를 통해 관심사를 확실하게 분리했다.
   - 배역에 맞는 배우를 선택하는 공연 기획자처럼 애플리케이션이 어떻게 동작할지 전체 구성을 책임진다.
 - 각 클래스들은 기능을 실행하는 책임만 지면 된다.
+
+## AppConfig 리팩토링
+
+![](../../.gitbook/assets/kimyounghan-spring-core-principle/03/screenshot%202021-04-10%20오전%2010.11.26.png)
+
+역할이 어떤 게 있고 그 역할이 어떤 걸 구현하는지 한 눈에 보이는 게 중요한데 현재의 `AppConfig`로는 그게 보이질 않는다.
+
+{% tabs %} {% tab title="AppConfig.java" %}
+
+```java
+public class AppConfig {
+  // 메서드 명을 보는 순간 역할이 드러난다.
+  // memberService에서는 memberServiceImpl을 쓸 것이다.
+  public MemberService memberService() {
+    return new MemberServiceImpl(memberRepository());
+  }
+
+  // memberRepository는 memory로 쓸 것이다.
+  // 그래서 나중에 다른 repository를 쓰려면 이 코드만 바꾸면 된다.
+  private MemberRepository memberRepository() {
+    return new MemoryMemberRepository();
+  }
+
+  public OrderService orderService() {
+    return new OrderServiceImpl(memberRepository(), discountPolicy());
+  }
+
+  private DiscountPolicy discountPolicy() {
+    return new FixDiscountPolicy();
+  }
+
+}
+```
+
+{% endtab %} {% endtabs %}
+
+이제 각 역할과 구현 클래스가 한 눈에 들어온다. 애플리케이션 전체 구성이 어떻게 되었는지 빠르게 파악할 수 있다.
+
+{% tabs %} {% tab title="AppConfig.java" %}
+
+```java
+public class AppConfig {
+  ...
+  
+  public OrderService orderService() {
+    return new OrderServiceImpl(memberRepository(), discountPolicy());
+  }
+
+  private DiscountPolicy discountPolicy() {
+    // 이 부분만 변경하면 된다.
+//    return new FixDiscountPolicy();
+    return new RateDiscountPolicy();
+  }
+
+}
+```
+
+{% endtab %} {% endtabs %}
+
+`AppConfig`에서 할인 정책 역할을 담당하는 구현을 `FixDiscountPolicy`에서 `RateDiscountPolicy` 객체로 변경했다. 할인 정책을 변경해도 구성 역할을 담당하는 `AppConfig`만 건드리면 된다. 사용 영역은 하나도 변경되지 않는다.
+
+구성 영역은 당연히 변경된다. 공연 기획자는 공연 참여자를 다 알아야 하듯, `AppConfig`는 구현 객체를 모두 알아야 한다.
