@@ -105,6 +105,7 @@
   * [관심사의 분리](kimyounghan-spring-core-principle/03-oop/concerns.md)
   * [새로운 구조와 정책 적용](kimyounghan-spring-core-principle/03-oop/new-policy.md)
   * [정리](kimyounghan-spring-core-principle/03-oop/summary.md)
+  * [IoC, DI, 컨테이너](kimyounghan-spring-core-principle/03-oop/ioc-di-container.md)
 
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
