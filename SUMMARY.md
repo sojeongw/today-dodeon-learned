@@ -107,6 +107,10 @@
   * [정리](kimyounghan-spring-core-principle/03-oop/summary.md)
   * [IoC, DI, 컨테이너](kimyounghan-spring-core-principle/03-oop/ioc-di-container.md)
   * [스프링으로 전환하기](kimyounghan-spring-core-principle/03-oop/convert-to-spring.md)
+* [스프링 컨테이너와 스프링 빈](kimyounghan-spring-core-principle/04-spring-container-and-bean/README.md)
+  * [스프링 빈 기본 조회](kimyounghan-spring-core-principle/04-spring-container-and-bean/get-bean.md)
+  * [동일 타입이 둘 이상일 때 조회](kimyounghan-spring-core-principle/04-spring-container-and-bean/get-bean-multiple-type.md)
+  * [상속일 때 조회](kimyounghan-spring-core-principle/04-spring-container-and-bean/get-bean-inheritance.md)
 
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
