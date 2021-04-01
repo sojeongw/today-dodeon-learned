@@ -111,6 +111,9 @@
   * [스프링 빈 기본 조회](kimyounghan-spring-core-principle/04-spring-container-and-bean/get-bean.md)
   * [동일 타입이 둘 이상일 때 조회](kimyounghan-spring-core-principle/04-spring-container-and-bean/get-bean-multiple-type.md)
   * [상속일 때 조회](kimyounghan-spring-core-principle/04-spring-container-and-bean/get-bean-inheritance.md)
+  * [BeanFactory와 ApplicationContext](kimyounghan-spring-core-principle/04-spring-container-and-bean/beanfactory-applicationcontext.md)
+  * [다양한 설정 형식](kimyounghan-spring-core-principle/04-spring-container-and-bean/configuration.md)
+  * [스프링 빈 설정 메타 데이터](kimyounghan-spring-core-principle/04-spring-container-and-bean/bean-metadata.md)
 
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
