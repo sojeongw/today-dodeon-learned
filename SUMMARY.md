@@ -115,7 +115,7 @@
   * [다양한 설정 형식](kimyounghan-spring-core-principle/04-spring-container-and-bean/configuration.md)
   * [스프링 빈 설정 메타 데이터](kimyounghan-spring-core-principle/04-spring-container-and-bean/bean-metadata.md)
 * [싱글턴 컨테이너](kimyounghan-spring-core-principle/05-singleton/README.md)
-  * [싱글턴 컨테이너](kimyounghan-spring-core-principle/05-singleton/README.md)
+  * [@Configuration과 싱글턴](kimyounghan-spring-core-principle/05-singleton/configuration.md)
 
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
