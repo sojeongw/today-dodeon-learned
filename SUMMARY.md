@@ -116,6 +116,9 @@
   * [스프링 빈 설정 메타 데이터](kimyounghan-spring-core-principle/04-spring-container-and-bean/bean-metadata.md)
 * [싱글턴 컨테이너](kimyounghan-spring-core-principle/05-singleton/README.md)
   * [@Configuration과 싱글턴](kimyounghan-spring-core-principle/05-singleton/configuration.md)
+* [컴포넌트 스캔](kimyounghan-spring-core-principle/06-component-scan/README.md)
+  * [탐색 위치와 기본 탐색 대상](kimyounghan-spring-core-principle/06-component-scan/location.md)
+  * [필터와 중복 등록](kimyounghan-spring-core-principle/06-component-scan/filter-and-duplication.md)
 
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
