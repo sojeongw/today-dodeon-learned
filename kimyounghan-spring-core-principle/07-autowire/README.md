@@ -166,7 +166,8 @@ public class OrderServiceImpl implements OrderService {
 
 ---
 
-의존 관계 자동 주입은 스프링 컨테이너가 관리하는 스프링 빈이어야만 동작한다. 스프링 빈이 아닌 클래스에서 `@Autowired`를 적용하면 아무 동작도 하지 않는다. 예제에서도 `OrderServiceImpl`가 스프링 빈이기 때문에 주입이 되는 것이다.
+의존 관계 자동 주입은 스프링 컨테이너가 관리하는 스프링 빈이어야만 동작한다. 스프링 빈이 아닌 클래스에서 `@Autowired`를 적용하면 아무 동작도 하지 않는다.
+예제에서도 `OrderServiceImpl`가 스프링 빈이기 때문에 주입이 되는 것이다.
 
 ## 옵션 처리
 
@@ -193,7 +194,7 @@ public class AutowiredTest {
   void autowiredOption() {
     // TestBean을 스프링 빈으로 등록한다.
     AnnotationConfigApplicationContext ac =
-            new AnnotationConfigApplicationContext(TestBean.class);
+        new AnnotationConfigApplicationContext(TestBean.class);
   }
 
   static class TestBean {
@@ -223,6 +224,94 @@ public class AutowiredTest {
 
 ![](../../.gitbook/assets/kimyounghan-spring-core-principle/07/screenshot%202021-04-11%20오후%207.26.38.png)
 
-사용되는 `Member`는 스프링 빈이 아니므로 의존 관계를 주입할 수 없다. 
+사용되는 `Member`는 스프링 빈이 아니므로 의존 관계를 주입할 수 없다.
 
-결과를 보면, `setNoBean1()`은 `@Autowired(required = false)`이므로 호출 자체가 되지 않았다. `@Nullable`과 `Optional`은 스프링 전반에 걸쳐서 지원된다. 생성자 자동 주입에서 특정 필드에 사용할 수 있다.
+결과를 보면, `setNoBean1()`은 `@Autowired(required = false)`이므로 호출 자체가 되지 않았다. `@Nullable`과 `Optional`은
+스프링 전반에 걸쳐서 지원된다. 생성자 자동 주입에서 특정 필드에 사용할 수 있다.
+
+## 생성자 주입을 선택하자
+
+과거에는 수정자 주입과 필드 주입을 많이 사용했지만 최근에는 DI 프레임워크 대부분이 생성자 주입을 권장한다.
+
+### 불변
+
+대부분의 의존 관계 주입은 한번 일어나면 애플리케이션이 종료될 때까지 의존 관계를 변경할 일이 없다. 오히려 변하면 안된다.
+
+수정자 주입을 사용하면 setter 메서드를 public으로 열어둬야 하므로 누군가 실수로 변경할 수 있다. 생성자 주입은 객체 생성 시에 딱 1번만 호출되므로 불면하게 설계할 수
+있다.
+
+### 누락
+
+프레임워크 없이 순수한 자바 코드를 단위 테스트 하는 경우가 많다.
+
+{% tabs %} {% tab title="OrderServiceImpl.java" %}
+
+```java
+public class OrderServiceImpl implements OrderService {
+
+  private MemberRepository memberRepository;
+  private DiscountPolicy discountPolicy;
+
+  @Autowired
+  public void setMemberRepository(MemberRepository memberRepository) {
+    this.memberRepository = memberRepository;
+  }
+
+  @Autowired
+  public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+    this.discountPolicy = discountPolicy;
+  }
+}
+```
+
+{% endtab %} {% tab title="OrderServiceImpl.java" %}
+
+```java
+public class OrderServiceTest {
+
+  // 스프링 없이 순수한 자바 코드로 직접 구현체를 주입해서 테스트 하는 방식이라
+  // 의존 관계가 없어도 `@Autowired` 관련 오류가 발생하지 않는다.
+  @Test
+  void createOrder() {
+    // memberRepository와 discountPolicy의 의존 관게 주입이 누락되어 NPE가 발생한다.
+    // 생성자 주입을 사용했다면 컴파일 오류가 발생하므로 바로 알 수 있다.
+    OrderServiceImpl orderService = new OrderServiceImpl(/* 누락됨 */);
+    orderService.createOrder(1L, "itemA", 10000);
+  }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+### final 키워드
+
+생성자 주입을 사용하면 필드에 `final`을 사용할 수 있다. 생성자에 혹시라도 값이 설정되지 않았다면 컴파일 시점에 막아줄 수 있다.
+
+수정자 주입을 포함한 나머지 주입 방식은 모두 생성자 이후에 호출되기 때문에 `final`을 사용할 수 없다. 오직 생성자 주입만 가능하다.
+
+```java
+
+@Component
+public class OrderServiceImpl implements OrderService {
+
+  private final MemberRepository memberRepository;
+  private final DiscountPolicy discountPolicy;
+
+  @Autowired
+  public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy
+      discountPolicy) {
+    this.memberRepository = memberRepository;
+  }
+}
+```
+
+필수 필드인 `discountPolicy`가 주입이 누락되었다. 자바는 `java: variable discountPolicy might not have been initialized` 오류를 발생시킨다.
+
+> 컴파일 오류는 세상에서 가장 빠르고 좋은 오류다.
+
+## 정리
+
+- 생성자 주입은 프레임워크에 의존하지 않고 순수한 자바 언어의 특징을 살릴 수 있다.
+- 기본적으로는 생성자 주입을 사용하고 필수 값이 아닌 경우 수정자 주입 방식을 동시에 사용한다.
+    - 항상 생성자 주입을 선택하고 가끔 옵션이 필요할 때만 수정자 주입을 사용한다.
+    - 필드 주입은 사용하지 않는 게 좋다.
