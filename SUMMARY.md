@@ -120,6 +120,8 @@
   * [탐색 위치와 기본 탐색 대상](kimyounghan-spring-core-principle/06-component-scan/location.md)
   * [필터와 중복 등록](kimyounghan-spring-core-principle/06-component-scan/filter-and-duplication.md)
 * [의존 관계 자동 주입](kimyounghan-spring-core-principle/07-autowire/README.md)
+  * [롬복과 최신 트렌드](kimyounghan-spring-core-principle/07-autowire/lombok.md)
+  * [조회 빈이 2개 이상일 때](kimyounghan-spring-core-principle/07-autowire/multiple-beans.md)
 
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
