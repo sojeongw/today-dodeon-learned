@@ -28,7 +28,7 @@ public class RateDiscountPolicy implements DiscountPolicy {
 }
 ```
 
-{% endtab %} {% tab title=".java" %}
+{% endtab %} {% tab title="OrderServiceImpl.java" %}
 
 ```java
 public class OrderServiceImpl implements OrderService {
