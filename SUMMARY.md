@@ -125,6 +125,7 @@
   * [애너테이션 직접 만들기](kimyounghan-spring-core-principle/07-autowire/custom-annotation.md)
   * [조회한 빈이 모두 필요할 때](kimyounghan-spring-core-principle/07-autowire/retrieve-all-beans.md)
   * [올바른 실무 운영 기준](kimyounghan-spring-core-principle/07-autowire/standard.md)
+* [빈 생명 주기 콜백](kimyounghan-spring-core-principle/08-lifecycle/README.md)
 
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
