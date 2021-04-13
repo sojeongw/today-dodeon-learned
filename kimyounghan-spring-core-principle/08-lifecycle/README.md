@@ -41,7 +41,7 @@ public class NetworkClient {
 
 ```
 
-{% endtab %} {% tab title=".java" %}
+{% endtab %} {% tab title="BeanLifeCycleTest.java" %}
 
 ```java
 public class BeanLifeCycleTest {
@@ -49,7 +49,7 @@ public class BeanLifeCycleTest {
   @Test
   public void lifeCycleTest() {
     ConfigurableApplicationContext ac =
-        new AnnotationConfigApplicationContext(NetworkClient.class);
+        new AnnotationConfigApplicationContext(LifeCycleConfig.class);
     NetworkClient client = ac.getBean(NetworkClient.class);
 
     // ApplicatoinContext 대신, 이를 상속하는

@@ -126,7 +126,10 @@
   * [조회한 빈이 모두 필요할 때](kimyounghan-spring-core-principle/07-autowire/retrieve-all-beans.md)
   * [올바른 실무 운영 기준](kimyounghan-spring-core-principle/07-autowire/standard.md)
 * [빈 생명 주기 콜백](kimyounghan-spring-core-principle/08-lifecycle/README.md)
-
+  * [인터페이스 방식](kimyounghan-spring-core-principle/08-lifecycle/interface.md)
+  * [메서드 지정 방식](kimyounghan-spring-core-principle/08-lifecycle/method.md)
+  * [애너테이션 방식](kimyounghan-spring-core-principle/08-lifecycle/annotation.md)
+  
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
