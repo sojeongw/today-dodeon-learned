@@ -219,10 +219,10 @@ public class SingletonWithPrototypeTest1 {
 7. 클라이언트 B가 clientBean을 스프링 컨테이너에 요청하고 싱글턴이므로 같은 clientBean을 받는다.
     - clientBean이 내부에 가지고 있는 프로토타입 빈은 이미 과거에 주입이 끝난 빈이다.
     - 주입 시점에 스프링 컨테이너에 요청할 때마다 프로토타입이 생성되는 것이지 사용할 때마다 생성되는 것이 아니다.
-8. 클라이언트 Brㅏ clinetBean.logic()을 호출한다.
+8. 클라이언트 B가 clinetBean.logic()을 호출한다.
 9. clientBean은 addCount()를 호출해서 count를 증가시키고 count는 2가 된다.
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="SingletonWithPrototypeTest1.java" %}
 
 ```java
 public class SingletonWithPrototypeTest1 {
