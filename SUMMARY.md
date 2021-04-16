@@ -132,6 +132,7 @@
 * [빈 스코프](kimyounghan-spring-core-principle/09-bean-scope/README.md)
   * [프로토타입 스코프](kimyounghan-spring-core-principle/09-bean-scope/prototype.md)
   * [Provider](kimyounghan-spring-core-principle/09-bean-scope/provider.md)
+  * [웹 스코프](kimyounghan-spring-core-principle/09-bean-scope/web-scope.md)
   
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
