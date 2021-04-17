@@ -70,9 +70,11 @@ server.port=9090
 {% tabs %} {% tab title="MyLogger.java" %}
 
 ```java
+
 @Component
 @Scope(value = "request")
 public class MyLogger {
+
   private String uuid;
   private String requestURL;
 
@@ -100,13 +102,15 @@ public class MyLogger {
 
 {% endtab %} {% endtabs %}
 
-request 스코프이기 때문에 HTTP 요청마다 빈이 생성되고 소멸될 것이다. 빈이 생성되는 시점에는 `@PostConstruct`로 uuid를 생성해 저장해둔다. 빈이 요청 당 하나씩 생성되므로 uuid를 저장해두면 다른 요청과 구분할 수 있다.
+request 스코프이기 때문에 HTTP 요청마다 빈이 생성되고 소멸될 것이다. 빈이 생성되는 시점에는 `@PostConstruct`로 uuid를 생성해 저장해둔다. 빈이 요청 당
+하나씩 생성되므로 uuid를 저장해두면 다른 요청과 구분할 수 있다.
 
 빈이 소멸되는 시점에는 `@PreDestroy`를 사용해 종료 메시지를 남긴다. `requestURL`은 빈이 생성되는 시점에는 알 수 없어 외부에서 setter로 입력받는다.
 
 {% tabs %} {% tab title="LogDemoController.java" %}
 
 ```java
+
 @Controller
 // 생성자에 자동으로 autowired로 자동 주입된다.
 @RequiredArgsConstructor
@@ -139,6 +143,7 @@ public class LogDemoController {
 {% tabs %} {% tab title="LogDemoService.java" %}
 
 ```java
+
 @Service
 @RequiredArgsConstructor
 public class LogDemoService {
@@ -153,13 +158,16 @@ public class LogDemoService {
 
 {% endtab %} {% endtabs %}
 
-서비스 계층에서도 로그를 찍어보자. request 스코프를 사용하지 않고 모든 정보를 서비스 계층에 넘긴다면 파라미터가 많아서 지저분해진다. `requestURL`처럼 웹과 관련된 정보가 웹과 관련없는 서비스 계층까지 넘어가는 문제도 있다. 웹과 관련된 부분은 컨트롤러까지만 사용하고 서비스 계층은 웹 기술에 종속되지 않아야 하므로 가급적 순수하게 유지하는 것이 유지 보수에 좋다.
+서비스 계층에서도 로그를 찍어보자. request 스코프를 사용하지 않고 모든 정보를 서비스 계층에 넘긴다면 파라미터가 많아서 지저분해진다. `requestURL`처럼 웹과 관련된
+정보가 웹과 관련없는 서비스 계층까지 넘어가는 문제도 있다. 웹과 관련된 부분은 컨트롤러까지만 사용하고 서비스 계층은 웹 기술에 종속되지 않아야 하므로 가급적 순수하게 유지하는
+것이 유지 보수에 좋다.
 
 reqeust 스코프의 `MyLogger` 덕분에 웹과 관련된 부분을 파라미터로 넘기지 않고 `MyLogger`의 멤버 변수에 저장해 코드와 계층을 깔끔하게 유지할 수 있다.
 
 ![](../../.gitbook/assets/kimyounghan-spring-core-principle/09/screenshot%202021-04-17%20오후%203.02.25.png)
 
-실행해보면 위와 같은 에러가 뜬다. `LogDemoController`가 만들어지려면 `MyLogger`를 주입받아야 하는데 `MyLogger`는 실제 HTTP 요청이 있을 때 빈을 생성하므로 실패한 것이다.
+실행해보면 위와 같은 에러가 뜬다. `LogDemoController`가 만들어지려면 `MyLogger`를 주입받아야 하는데 `MyLogger`는 실제 HTTP 요청이 있을 때
+빈을 생성하므로 실패한 것이다.
 
 ## 스코프와 Provider
 
@@ -168,6 +176,7 @@ reqeust 스코프의 `MyLogger` 덕분에 웹과 관련된 부분을 파라미�
 {% tabs %} {% tab title="LogDemoController.java" %}
 
 ```java
+
 @Controller
 @RequiredArgsConstructor
 public class LogDemoController {
@@ -193,9 +202,10 @@ public class LogDemoController {
 }
 ```
 
-{% endtab %} {% tab title="LogDemoController.java" %}
+{% endtab %} {% tab title="LogDemoService.java" %}
 
 ```java
+
 @Service
 @RequiredArgsConstructor
 public class LogDemoService {
@@ -211,7 +221,8 @@ public class LogDemoService {
 
 {% endtab %} {% endtabs %}
 
-`ObjectProvider` 덕분에 `ObjectProvider.getObject()`를 호출하는 시점까지 request 스코프 빈의 생성을 지연할 수 있다.
+`ObjectProvider` 덕분에 `ObjectProvider.getObject()`를 호출할 때까지 request 스코프 빈을 생성해달라고 스프링 컨테이너에 요청하는 시점을
+지연할 수 있다.
 
 `ObjectProvider.getObject()`를 호출하는 시점에는 HTTP 요청이 진행 중이므로 request 스코프 빈이 생성된다.
 
@@ -222,3 +233,137 @@ public class LogDemoService {
 ![](../../.gitbook/assets/kimyounghan-spring-core-principle/09/screenshot%202021-04-17%20오후%203.19.15.png)
 
 한 번 더 요청하면 다른 uuid로 로그가 찍힌다.
+
+## 스코프와 프록시
+
+두 번째 해결 방안은 프록시 방식이다.
+
+{% tabs %} {% tab title="MyLogger.java" %}
+
+```java
+
+@Component
+// 프록시 모드 추가
+@Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class MyLogger {
+  ...
+}
+```
+
+{% endtab %} {% tab title="LogDemoController.java" %}
+
+```java
+
+@Controller
+@RequiredArgsConstructor
+public class LogDemoController {
+
+  private final LogDemoService logDemoService;
+  // 원복한다.
+  private final MyLogger myLogger;
+
+  @RequestMapping("log-demo")
+  @ResponseBody
+  public String logDemo(HttpServletRequest request) {
+    String requestURL = request.getRequestURL().toString();
+    myLogger.setRequestURL(requestURL);
+
+    myLogger.log("controller test");
+    logDemoService.logic("testId");
+
+    return "OK";
+  }
+}
+```
+
+{% endtab %} {% tab title="LogDemoService.java" %}
+
+```java
+
+@Service
+@RequiredArgsConstructor
+public class LogDemoService {
+
+  // 원복한다.
+  private final MyLogger myLogger;
+
+  public void logic(String id) {
+    myLogger.log("service id = " + id);
+  }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+`proxyMode`를 추가하면 `MyLogger`의 가짜 프록시 클래스를 만들어두고 HTTP request와 상관 없이 가짜 프록시 클래스를 다른 빈에 미리 주입한다.
+
+적용 대상이 클래스면 `TARGET_CLASS`, 인터페이스면 `INTERFACES`를 선택한다.
+
+![](../../.gitbook/assets/kimyounghan-spring-core-principle/09/screenshot%202021-04-17%20오후%203.34.59.png)
+
+`Provider` 사용 시와 같이 정상적으로 동작한다.
+
+### 동작 원리
+
+- CGLIB라는 라이브러리로 내 클래스를 상속 받은 가짜 프록시 객체를 만들어 주입한다.
+- 이 가짜 프록시 객체는 실제 요청이 오면 그때 내부에서 실제 빈을 요청하는 위임 로직을 가진다.
+- 가짜 프록시 객체는 실제 request 스코프와는 관계가 없다. 어디든 사용할 수 있다.
+  - 그냥 가짜이고, 내부에 단순한 위임 로직만 있다.
+  - `myLogger`처럼 사용하는 객체가 간단하게 싱글턴처럼 동작한다.
+
+{% tabs %} {% tab title=".java" %}
+
+```java
+
+@Controller
+@RequiredArgsConstructor
+public class LogDemoController {
+
+  private final LogDemoService logDemoService;
+  private final MyLogger myLogger;
+
+  @RequestMapping("log-demo")
+  @ResponseBody
+  public String logDemo(HttpServletRequest request) {
+    System.out.println("myLogger = " + myLogger.getClass());
+
+    ...
+
+    return "OK";
+  }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+![](../../.gitbook/assets/kimyounghan-spring-core-principle/09/screenshot%202021-04-17%20오후%203.39.36.png)
+
+`myLogger`를 찍어보면 이상한 값이 나왔다.
+
+`@Scope`의 `proxyMode = ScopedProxyMode.TARGET_CLASS`를 설정하면 스프링 컨테이너는 `CGLIB`이라는 바이트 코드 조작
+라이브러리로 `MyLogger`를 상속 받은 가짜 프록시 객체를 생성한다.
+
+일단 스프링 컨테이너에 `myLogger`라는 이름의 가짜 프록시 객체를 넣어두고 실제 필요한 시점에 가져와서 동작하는
+것이다. `ac.Bean("myLoger", MyLogger.class)`로 찍어봐도 프록시 객체가 조회된다. 그래서 의존 관계 주입도 이 가짜 프록시 객체로 주입된다.
+
+![](../../.gitbook/assets/kimyounghan-spring-core-principle/09/screenshot%202021-04-17%20오후%203.44.02.png)
+
+가짜 프록시 객체는 요청이 오면 그때가 돼서야 내부에서 진짜 빈을 요청하는 위임 로직을 실행한다.
+
+1. 가짜 프록시 객체는 내부에 진짜 `myLogger`를 찾는 방법을 알고 있다.
+2. 클라이언트가 `myLogger.logic()`을 호출하면 가짜 프록시 객체의 메서드가 호출된다.
+3. 가짜 프록시 객체는 request 스코프의 진짜 `myLogger.logic()`을 호출한다.
+4. 가짜 프록시 객체는 원본 클래스를 상속받아 만들어졌기 때문에 사용하는 클라이언트 객체는 원본이든 아니든 다형성을 활용해 동일하게 사용한다.
+
+### 정리
+
+- 프록시 객체 덕분에 클라이언트는 싱글턴 빈을 사용하듯 편리하게 request 스코프를 사용할 수 있다.
+- Provider와 프록시의 핵심은 진짜 객체 조회를 꼭 필요한 시점까지 지연 처리 한다는 점이다.
+- 애너테이션 설정 변경만으로 원본 객체를 프록시 객체로 대체할 수 있다.
+  - 다형성과 DI가 가진 큰 강점이다.
+- 꼭 웹 스코프가 아니어도 프록시는 사용할 수 있다.
+
+### 주의점
+
+- 싱글턴을 사용하는 것 같지만 다르게 동작하므로 주의해서 사용해야 한다.
+- 이런 특별한 scope는 꼭 필요한 곳에만 최소로 사용하자. 유지보수가 어려워질 수 있다.
