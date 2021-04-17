@@ -311,7 +311,7 @@ public class LogDemoService {
   - 그냥 가짜이고, 내부에 단순한 위임 로직만 있다.
   - `myLogger`처럼 사용하는 객체가 간단하게 싱글턴처럼 동작한다.
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="LogDemoController.java" %}
 
 ```java
 
