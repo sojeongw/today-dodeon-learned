@@ -200,6 +200,7 @@
 ## 스프링 부트와 JPA 활용 - 웹 애플리케이션 개발 <a id="kimyounghan-spring-boot-and-jpa"></a>
 
 * [프로젝트 환경설정](kimyounghan-spring-boot-and-jpa/01-project-settings/README.md)
+* [도메인 분석 설계](kimyounghan-spring-boot-and-jpa/01-project-settings/domain-design.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
