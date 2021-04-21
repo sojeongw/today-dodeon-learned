@@ -203,6 +203,7 @@
 * [도메인 분석 설계](kimyounghan-spring-boot-and-jpa/02-domain-design/README.md)
   * [도메인 분석 설계](kimyounghan-spring-boot-and-jpa/02-domain-design/domain-design.md)
   * [엔티티 클래스 개발](kimyounghan-spring-boot-and-jpa/02-domain-design/entity.md)
+  * [엔티티 설계 시 주의점](kimyounghan-spring-boot-and-jpa/02-domain-design/cautions.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
