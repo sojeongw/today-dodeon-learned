@@ -23,7 +23,7 @@ public class Member {
 
 예를 들어 생성, 수정 정보를 모든 클래스에 추가해야 한다고 해보자.
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="BaseEntity.java" %}
 
 ```java
 @MappedSuperclass
@@ -35,7 +35,7 @@ public abstract class BaseEntity {
 }
 ```
 
-{% endtab %} {% tab title=".java" %}
+{% endtab %} {% tab title="Member.java" %}
 
 ```java
 public class Member extends BaseEntity {
@@ -43,7 +43,7 @@ public class Member extends BaseEntity {
 }
 ```
 
-{% endtab %} {% tab title=".java" %}
+{% endtab %} {% tab title="JpaMain.java" %}
 
 ```java
 public class JpaMain {
