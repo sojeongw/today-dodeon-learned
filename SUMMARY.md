@@ -206,6 +206,7 @@
   * [엔티티 설계 시 주의점](kimyounghan-spring-boot-and-jpa/02-domain-design/cautions.md)
 * [애플리케이션 아키텍처](kimyounghan-spring-boot-and-jpa/03-architecture/README.md)
 * [회원 도메인 개발](kimyounghan-spring-boot-and-jpa/04-member/README.md)
+* [상품 도메인 개발](kimyounghan-spring-boot-and-jpa/05-product/README.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
