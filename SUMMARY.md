@@ -211,6 +211,8 @@
   * [엔티티, 리포지토리, 서비스 개발](kimyounghan-spring-boot-and-jpa/06-order/development.md)
   * [주문 기능 테스트](kimyounghan-spring-boot-and-jpa/06-order/test.md)
   * [주문 검색 기능 개발](kimyounghan-spring-boot-and-jpa/06-order/search.md)
+* [웹 계층 개발](kimyounghan-spring-boot-and-jpa/07-web-layer/README.md)
+  * [변경 감지와 병합](kimyounghan-spring-boot-and-jpa/07-web-layer/dirty-checking-and-merge.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
