@@ -180,6 +180,7 @@
   * [서브 쿼리](kimyounghan-orm-jpa/10-object-oriented-query/sub-query.md)
   * [JPQL 타입 표현과 기타 식](kimyounghan-orm-jpa/10-object-oriented-query/type.md)
   * [조건식](kimyounghan-orm-jpa/10-object-oriented-query/conditional-expression.md)
+  * [JPQL 함수](kimyounghan-orm-jpa/10-object-oriented-query/function.md)
 
 [comment]: <> (  * [조건식]&#40;kimyounghan-orm-jpa/10-object-oriented-query/condition.md&#41;)
 
