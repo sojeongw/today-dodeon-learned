@@ -181,22 +181,13 @@
   * [JPQL 타입 표현과 기타 식](kimyounghan-orm-jpa/10-object-oriented-query/type.md)
   * [조건식](kimyounghan-orm-jpa/10-object-oriented-query/conditional-expression.md)
   * [JPQL 함수](kimyounghan-orm-jpa/10-object-oriented-query/function.md)
-
-[comment]: <> (  * [조건식]&#40;kimyounghan-orm-jpa/10-object-oriented-query/condition.md&#41;)
-
-[comment]: <> (  * [JPQL 함수]&#40;kimyounghan-orm-jpa/10-object-oriented-query/function.md&#41;)
-
-[comment]: <> (  * [경로 표현식]&#40;kimyounghan-orm-jpa/10-object-oriented-query/graph.md&#41;)
-
-[comment]: <> (  * [fetch join]&#40;kimyounghan-orm-jpa/10-object-oriented-query/fetch-join.md&#41;)
-
-[comment]: <> (  * [다형성 쿼리]&#40;kimyounghan-orm-jpa/10-object-oriented-query/polymorphism.md&#41;)
-
-[comment]: <> (  * [엔티티 직접 사용]&#40;kimyounghan-orm-jpa/10-object-oriented-query/direct-use.md&#41;)
-
-[comment]: <> (  * [Named 쿼리]&#40;kimyounghan-orm-jpa/10-object-oriented-query/named.md&#41;)
-
-[comment]: <> (  * [벌크 연산]&#40;kimyounghan-orm-jpa/10-object-oriented-query/bulk-calculation.md&#41;)
+* [객체 지향 쿼리 언어 - 중급](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/README.md)
+  * [경로 표현식](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/graph.md)
+  * [fetch join](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/fetch-join.md)
+  * [다형성 쿼리](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/polymorphism.md)
+  * [엔티티 직접 사용](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/direct-use.md)
+  * [Named 쿼리](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/named-query.md)
+  * [벌크 연산](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/bulk-calculation.md)
 
 
 ## 스프링 부트와 JPA 활용 - 웹 애플리케이션 개발 <a id="kimyounghan-spring-boot-and-jpa"></a>
