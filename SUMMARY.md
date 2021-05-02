@@ -190,22 +190,29 @@
   * [벌크 연산](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/bulk-calculation.md)
 
 
-## 스프링 부트와 JPA 활용 - 웹 애플리케이션 개발 <a id="kimyounghan-spring-boot-and-jpa"></a>
+## 스프링 부트와 JPA 활용 - 웹 애플리케이션 개발 <a id="kimyounghan-spring-boot-and-jpa-development"></a>
 
-* [프로젝트 환경설정](kimyounghan-spring-boot-and-jpa/01-project-settings/README.md)
-* [도메인 분석 설계](kimyounghan-spring-boot-and-jpa/02-domain-design/README.md)
-  * [도메인 분석 설계](kimyounghan-spring-boot-and-jpa/02-domain-design/domain-design.md)
-  * [엔티티 클래스 개발](kimyounghan-spring-boot-and-jpa/02-domain-design/entity.md)
-  * [엔티티 설계 시 주의점](kimyounghan-spring-boot-and-jpa/02-domain-design/cautions.md)
-* [애플리케이션 아키텍처](kimyounghan-spring-boot-and-jpa/03-architecture/README.md)
-* [회원 도메인 개발](kimyounghan-spring-boot-and-jpa/04-member/README.md)
-* [상품 도메인 개발](kimyounghan-spring-boot-and-jpa/05-product/README.md)
-* [주문 도메인 개발](kimyounghan-spring-boot-and-jpa/06-order/README.md)
-  * [엔티티, 리포지토리, 서비스 개발](kimyounghan-spring-boot-and-jpa/06-order/development.md)
-  * [주문 기능 테스트](kimyounghan-spring-boot-and-jpa/06-order/test.md)
-  * [주문 검색 기능 개발](kimyounghan-spring-boot-and-jpa/06-order/search.md)
-* [웹 계층 개발](kimyounghan-spring-boot-and-jpa/07-web-layer/README.md)
-  * [변경 감지와 병합](kimyounghan-spring-boot-and-jpa/07-web-layer/dirty-checking-and-merge.md)
+* [프로젝트 환경설정](kimyounghan-spring-boot-and-jpa-development/01-project-settings/README.md)
+* [도메인 분석 설계](kimyounghan-spring-boot-and-jpa-development/02-domain-design/README.md)
+  * [도메인 분석 설계](kimyounghan-spring-boot-and-jpa-development/02-domain-design/domain-design.md)
+  * [엔티티 클래스 개발](kimyounghan-spring-boot-and-jpa-development/02-domain-design/entity.md)
+  * [엔티티 설계 시 주의점](kimyounghan-spring-boot-and-jpa-development/02-domain-design/cautions.md)
+* [애플리케이션 아키텍처](kimyounghan-spring-boot-and-jpa-development/03-architecture/README.md)
+* [회원 도메인 개발](kimyounghan-spring-boot-and-jpa-development/04-member/README.md)
+* [상품 도메인 개발](kimyounghan-spring-boot-and-jpa-development/05-product/README.md)
+* [주문 도메인 개발](kimyounghan-spring-boot-and-jpa-development/06-order/README.md)
+  * [엔티티, 리포지토리, 서비스 개발](kimyounghan-spring-boot-and-jpa-development/06-order/development.md)
+  * [주문 기능 테스트](kimyounghan-spring-boot-and-jpa-development/06-order/test.md)
+  * [주문 검색 기능 개발](kimyounghan-spring-boot-and-jpa-development/06-order/search.md)
+* [웹 계층 개발](kimyounghan-spring-boot-and-jpa-development/07-web-layer/README.md)
+  * [변경 감지와 병합](kimyounghan-spring-boot-and-jpa-development/07-web-layer/dirty-checking-and-merge.md)
+  
+## 스프링 부트와 JPA 활용 - API 개발과 성능 최적화 <a id="kimyounghan-spring-boot-and-jpa-optimization"></a>
+
+* [API 개발 기본](kimyounghan-spring-boot-and-jpa-optimization/01-api-development/README.md)
+  * [회원 등록 API](kimyounghan-spring-boot-and-jpa-optimization/01-api-development/register-member.md)
+  * [회원 수정 API](kimyounghan-spring-boot-and-jpa-optimization/01-api-development/modify-member.md)
+  * [회원 조회 API](kimyounghan-spring-boot-and-jpa-optimization/01-api-development/search-member.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
