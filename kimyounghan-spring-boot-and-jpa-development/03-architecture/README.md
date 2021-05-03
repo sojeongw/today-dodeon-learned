@@ -1,6 +1,6 @@
 # 애플리케이션 아키텍처
 ## 계층형 구조
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/03/screenshot%202021-05-19%20오후%205.17.10.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/03/screenshot%202021-05-19%20오후%205.17.10.png)
 
 - controller, web
     - 웹 계층

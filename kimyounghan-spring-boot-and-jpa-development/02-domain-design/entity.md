@@ -292,6 +292,6 @@ public class Address {
 
 기본 생성자도 함께 만들어주어야 한다. JPA가 생성 시에 리플렉션이나 프록시 같은 기술을 써야하는데 기본 생성자가 없으면 사용할 수가 없다. JPA 스펙 상 엔티티나 임베디드 타입은 기본 생성자를 public이나 protected로 설정해야 한다. public보다는 안전하게 protected로 해주자.
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/02/screenshot%202021-05-16%20오후%206.38.14.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/02/screenshot%202021-05-16%20오후%206.38.14.png)
 
 실행하면 잘 동작하는 것을 확인할 수 있다. 로그를 보면 자동으로 FK를 걸어주고 있다. DB엔 웬만하면 인덱스만 걸어주면 되는데 정말 정확해야 하는 돈 관련 문제라면 FK까지 걸어주는 것이 좋다.

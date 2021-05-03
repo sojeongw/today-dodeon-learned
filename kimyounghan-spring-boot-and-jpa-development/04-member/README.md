@@ -235,7 +235,7 @@ public class MemberServiceTest {
     - 즉, 각 테스트 실행마다 테스트가 끝나면 트랜잭션을 롤백한다.
     - 자동 롤백은 테스트 케이스에서만 적용된다.
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/04/screenshot%202021-05-19%20오후%208.17.32.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/04/screenshot%202021-05-19%20오후%208.17.32.png)
 
 select만 나가고 실제 회원 가입을 하면서 생겨야 할 insert 쿼리는 나가지 않았다.
 
@@ -272,7 +272,7 @@ spring의 transactional은 기본 값이 트랜잭션을 롤백하는 것이다.
 
 이럴 땐 `@Rollback`에 false 옵션을 주어야 커밋이 실행된다.
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/04/screenshot%202021-05-19%20오후%208.22.32.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/04/screenshot%202021-05-19%20오후%208.22.32.png)
 
 정상적으로 insert 쿼리가 나간 것을 볼 수 있다.
 
@@ -310,11 +310,11 @@ public class MemberServiceTest {
 
 테스트는 완전히 격리된 환경에서 실행하는 것이 좋다. 끝나면 데이터를 초기화하기 위해 메모리 DB를 사용한다.
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/04/screenshot%202021-05-19%20오후%208.38.47.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/04/screenshot%202021-05-19%20오후%208.38.47.png)
 
 `test`에 `resources`를 따로 만들어두면 테스트 시에 `main`의 `resources`보다 우선권을 가진다.
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/04/screenshot%202021-05-19%20오후%208.41.11.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/04/screenshot%202021-05-19%20오후%208.41.11.png)
 
 ```yaml
 spring:

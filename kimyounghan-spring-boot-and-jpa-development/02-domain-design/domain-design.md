@@ -20,7 +20,7 @@
 
 ## 도메인 모델과 테이블 설계
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/01/screenshot%202021-05-16%20오후%202.05.22.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/01/screenshot%202021-05-16%20오후%202.05.22.png)
 
 - 회원이 한 번 주문할 때 여러 상품을 주문할 수 있다.
     - 주문 상품 테이블을 중간에 만들어서 다대다를 풀어낸다.
@@ -28,7 +28,7 @@
 - 상품은 카테고리에 다대다로 매핑된다.
     - 상품이 여러 카테고리에 포함될 수 있고 카테고리도 여러 상품에 적용될 수 있다.
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/01/screenshot%202021-05-16%20오후%202.08.52.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/01/screenshot%202021-05-16%20오후%202.08.52.png)
 
 - Member
     - 임베디드 타입인 Address를 가진다.
@@ -49,7 +49,7 @@
 
 회원이 주문을 하니까 회원이 주문을 참조하면 되겠구나 생각하지만 사실 시스템은 회원을 통해서 주문을 생성하는 게 아니라 주문을 생성할 때 회원이 필요하다. 따라서 회원에서 주문을 가지고 있을 필요는 없지만 예제를 위해 orders를 넣었다.
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/01/screenshot%202021-05-16%20오후%202.15.15.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/01/screenshot%202021-05-16%20오후%202.15.15.png)
 
 - Member
     - city, street, zipcode는 임베디드 타입인 Address에서 내려온 것이다.

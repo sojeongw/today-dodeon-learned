@@ -83,7 +83,7 @@ public class ItemRepository {
 
 영속성 컨텍스트에서 똑같은 식별자를 가진 데이터를 찾고, 파라미터 값으로 모든 값을 바꿔치기 한다.
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/07/screenshot%202021-05-22%20오후%207.50.15.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/07/screenshot%202021-05-22%20오후%207.50.15.png)
 
 1. merge()를 실행한다.
 2. 파라미터로 넘어온 준영속 엔티티의 식별자 값으로 1차 캐시에서 엔티티를 조회한다.

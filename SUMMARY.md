@@ -213,6 +213,8 @@
   * [회원 등록 API](kimyounghan-spring-boot-and-jpa-optimization/01-api-development/register-member.md)
   * [회원 수정 API](kimyounghan-spring-boot-and-jpa-optimization/01-api-development/modify-member.md)
   * [회원 조회 API](kimyounghan-spring-boot-and-jpa-optimization/01-api-development/search-member.md)
+* [지연 로딩과 조회 성능 최적화](kimyounghan-spring-boot-and-jpa-optimization/02-lazy-loading-and-optimization/README.md)
+  * [엔티티 직접 노출](kimyounghan-spring-boot-and-jpa-optimization/02-lazy-loading-and-optimization/entity.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>

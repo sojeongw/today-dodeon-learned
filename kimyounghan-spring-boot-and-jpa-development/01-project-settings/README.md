@@ -19,7 +19,7 @@
 ./gradlew dependencies —configuration compileClasspath
 ```
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/01/스크린샷%202021-03-10%20오후%2012.39.41.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/01/스크린샷%202021-03-10%20오후%2012.39.41.png)
 
 ```groovy
 plugins {
@@ -327,7 +327,7 @@ logging.level:
 
 {% endtab %} {% endtabs %}
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/01/스크린샷%202021-03-11%20오전%2010.38.20.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/01/스크린샷%202021-03-11%20오전%2010.38.20.png)
 
 아래에 각 파라미터의 값을 출력해준다.
 
@@ -339,7 +339,7 @@ implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.6'
 
 [spring-boot-data-source-decorator](https://github.com/gavlyukovskiy/spring-boot-data-source-decorator)
 
-![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa/01/스크린샷%202021-03-11%20오전%2010.44.07.png)
+![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/01/스크린샷%202021-03-11%20오전%2010.44.07.png)
 
 파라미터 값이 출력되는 것을 볼 수 있다.
 
