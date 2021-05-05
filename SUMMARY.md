@@ -216,6 +216,7 @@
 * [지연 로딩과 조회 성능 최적화](kimyounghan-spring-boot-and-jpa-optimization/02-lazy-loading-and-optimization/README.md)
   * [엔티티 직접 노출](kimyounghan-spring-boot-and-jpa-optimization/02-lazy-loading-and-optimization/entity.md)
   * [엔티티를 DTO로 변환](kimyounghan-spring-boot-and-jpa-optimization/02-lazy-loading-and-optimization/entity-to-dto.md)
+  * [JPA에서 DTO로 바로 조회](kimyounghan-spring-boot-and-jpa-optimization/02-lazy-loading-and-optimization/dto.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
