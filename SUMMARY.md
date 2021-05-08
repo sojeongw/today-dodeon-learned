@@ -220,6 +220,7 @@
 * [컬렉션 조회 최적화](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/README.md)
   * [엔티티 직접 노출](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/entity.md)
   * [엔티티를 DTO로 변환](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/entity-to-dto.md)
+  * [페이징과 한계 돌파](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/paging.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
