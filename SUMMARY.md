@@ -223,6 +223,7 @@
   * [페이징과 한계 돌파](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/paging.md)
   * [JPA에서 DTO 직접 조회](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/dto.md)
   * [컬렉션 조회 최적화](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/collection-optimization.md)
+  * [플랫 데이터 최적화](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/flat.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
