@@ -225,6 +225,7 @@
   * [컬렉션 조회 최적화](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/collection-optimization.md)
   * [플랫 데이터 최적화](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/flat.md)
   * [정리](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/summary.md)
+* [OSIV와 성능 최적화](kimyounghan-spring-boot-and-jpa-optimization/04-osiv/README.md)
 
 
 ## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
