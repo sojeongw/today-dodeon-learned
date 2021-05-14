@@ -49,38 +49,9 @@
     * [SQS](interview/cloud/sqs.md)
     * [docker](interview/cloud/docker.md)
     * [kubernetes](interview/cloud/kubernetes.md)
-  
-## 모든 개발자를 위한 HTTP 웹 기본 지식 <a id="kimyounghan-http-basic"></a>
 
-* [인터넷 네트워크](kimyounghan-http-basic/01-internet-network/README.md)
-  * [IP](kimyounghan-http-basic/01-internet-network/ip.md)
-  * [TCP, UDP](kimyounghan-http-basic/01-internet-network/tcp-udp.md)
-  * [PORT](kimyounghan-http-basic/01-internet-network/port.md)
-  * [DNS](kimyounghan-http-basic/01-internet-network/dns.md)
-* [URI와 웹 브라우저 요청 흐름](kimyounghan-http-basic/02-uri-and-request/README.md)
-* [HTTP 기본](kimyounghan-http-basic/03-http-basic/README.md)
-  * [클라이언트-서버 구조](kimyounghan-http-basic/03-http-basic/client-server.md)
-  * [stateful, stateless](kimyounghan-http-basic/03-http-basic/state.md)
-  * [비 연결성](kimyounghan-http-basic/03-http-basic/connectionless.md)
-  * [HTTP 메시지](kimyounghan-http-basic/03-http-basic/message.md)
-* [HTTP 메서드](kimyounghan-http-basic/04-http-method/README.md)
-* [HTTP 메서드 활용](kimyounghan-http-basic/05-http-method-usage/README.md)
-* [HTTP 상태 코드](kimyounghan-http-basic/06-http-status-code/README.md)
-* [HTTP 헤더 - 일반](kimyounghan-http-basic/07-http-header/README.md)
-  * [표현](kimyounghan-http-basic/07-http-header/representation.md)
-  * [콘텐츠 협상](kimyounghan-http-basic/07-http-header/content-negotiation.md)
-  * [전송 방식](kimyounghan-http-basic/07-http-header/transfer.md)
-  * [정보](kimyounghan-http-basic/07-http-header/information.md)
-  * [Authorization](kimyounghan-http-basic/07-http-header/authorization.md)
-  * [쿠키](kimyounghan-http-basic/07-http-header/cookie.md)
-* [HTTP 헤더 - 캐시](kimyounghan-http-basic/08-http-header-cache/README.md)
-  * [검증 헤더와 조건부 요청](kimyounghan-http-basic/08-http-header-cache/validation-and-conditional-request.md)
-  * [조건부 요청 헤더](kimyounghan-http-basic/08-http-header-cache/conditional-request-header.md)
-  * [프록시 캐시](kimyounghan-http-basic/08-http-header-cache/proxy-cache.md)
-  * [캐시 무효화](kimyounghan-http-basic/08-http-header-cache/cache-revalidation.md)
-
-## 스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술 <a id="kimyounghan-spring-introduction"></a>
-
+## 스프링 입문 <a id="kimyounghan-spring-introduction"></a>
+ㅋㅋㅋㅋ
 * [프로젝트 환경설정](kimyounghan-spring-introduction/01-project-settings/README.md)
 * [스프링 웹 개발 기초](kimyounghan-spring-introduction/02-spring-basic/README.md)
 * [회원 관리 예제 - 백엔드](kimyounghan-spring-introduction/03-example-backend/README.md)
@@ -133,7 +104,40 @@
   * [프로토타입 스코프](kimyounghan-spring-core-principle/09-bean-scope/prototype.md)
   * [Provider](kimyounghan-spring-core-principle/09-bean-scope/provider.md)
   * [웹 스코프](kimyounghan-spring-core-principle/09-bean-scope/web-scope.md)
-  
+
+## 모든 개발자를 위한 HTTP 웹 기본 지식 <a id="kimyounghan-http-basic"></a>
+
+* [인터넷 네트워크](kimyounghan-http-basic/01-internet-network/README.md)
+  * [IP](kimyounghan-http-basic/01-internet-network/ip.md)
+  * [TCP, UDP](kimyounghan-http-basic/01-internet-network/tcp-udp.md)
+  * [PORT](kimyounghan-http-basic/01-internet-network/port.md)
+  * [DNS](kimyounghan-http-basic/01-internet-network/dns.md)
+* [URI와 웹 브라우저 요청 흐름](kimyounghan-http-basic/02-uri-and-request/README.md)
+* [HTTP 기본](kimyounghan-http-basic/03-http-basic/README.md)
+  * [클라이언트-서버 구조](kimyounghan-http-basic/03-http-basic/client-server.md)
+  * [stateful, stateless](kimyounghan-http-basic/03-http-basic/state.md)
+  * [비 연결성](kimyounghan-http-basic/03-http-basic/connectionless.md)
+  * [HTTP 메시지](kimyounghan-http-basic/03-http-basic/message.md)
+* [HTTP 메서드](kimyounghan-http-basic/04-http-method/README.md)
+* [HTTP 메서드 활용](kimyounghan-http-basic/05-http-method-usage/README.md)
+* [HTTP 상태 코드](kimyounghan-http-basic/06-http-status-code/README.md)
+* [HTTP 헤더 - 일반](kimyounghan-http-basic/07-http-header/README.md)
+  * [표현](kimyounghan-http-basic/07-http-header/representation.md)
+  * [콘텐츠 협상](kimyounghan-http-basic/07-http-header/content-negotiation.md)
+  * [전송 방식](kimyounghan-http-basic/07-http-header/transfer.md)
+  * [정보](kimyounghan-http-basic/07-http-header/information.md)
+  * [Authorization](kimyounghan-http-basic/07-http-header/authorization.md)
+  * [쿠키](kimyounghan-http-basic/07-http-header/cookie.md)
+* [HTTP 헤더 - 캐시](kimyounghan-http-basic/08-http-header-cache/README.md)
+  * [검증 헤더와 조건부 요청](kimyounghan-http-basic/08-http-header-cache/validation-and-conditional-request.md)
+  * [조건부 요청 헤더](kimyounghan-http-basic/08-http-header-cache/conditional-request-header.md)
+  * [프록시 캐시](kimyounghan-http-basic/08-http-header-cache/proxy-cache.md)
+  * [캐시 무효화](kimyounghan-http-basic/08-http-header-cache/cache-revalidation.md)
+
+## 스프링 MVC <a id="kimyounghan-spring-mvc"></a>
+
+* [웹 애플리케이션 이해](kimyounghan-spring-mvc/01-web-application/README.md)
+  * [서버](kimyounghan-spring-mvc/01-web-application/server.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
