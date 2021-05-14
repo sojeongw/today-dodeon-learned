@@ -138,6 +138,7 @@
 
 * [웹 애플리케이션 이해](kimyounghan-spring-mvc/01-web-application/README.md)
   * [서버](kimyounghan-spring-mvc/01-web-application/server.md)
+  * [서블릿](kimyounghan-spring-mvc/01-web-application/servlet.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
