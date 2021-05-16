@@ -140,6 +140,7 @@
   * [서버](kimyounghan-spring-mvc/01-web-application/server.md)
   * [서블릿](kimyounghan-spring-mvc/01-web-application/servlet.md)
   * [멀티 스레드](kimyounghan-spring-mvc/01-web-application/multi-thread.md)
+  * [HTML, HTTP API, CSR, SSR](kimyounghan-spring-mvc/01-web-application/html-httpapi-csr-ssr.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
