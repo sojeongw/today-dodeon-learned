@@ -124,5 +124,3 @@ logging.level.org.apache.coyote.http11=debug
 서버는 request, response 객체를 만들어 싱글턴으로 떠 있는 helloServlet를 호출한 뒤, 필요한 작업을 해서 response를 생성한다.
 
 response content-length는 WAS가 자동으로 만들어준다.
-
-## 웰컴 페이지 추가

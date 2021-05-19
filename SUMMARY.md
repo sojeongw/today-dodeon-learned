@@ -143,7 +143,7 @@
   * [HTML, HTTP API, CSR, SSR](kimyounghan-spring-mvc/01-web-application/html-httpapi-csr-ssr.md)
   * [자바 백엔드 웹 기술 역사](kimyounghan-spring-mvc/01-web-application/history.md)
 * [서블릿](kimyounghan-spring-mvc/02-servlet/README.md)
-  * [HttpServletRequest](kimyounghan-spring-mvc/02-servlet/README.md)
+  * [HttpServletRequest](kimyounghan-spring-mvc/02-servlet/http-servlet-request.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
