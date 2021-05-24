@@ -117,3 +117,78 @@ content-type은 HTTP 메시지 바디의 데이터 형식을 지정한다.
 - json, xml, text 
 - 주로 json을 사용한다.
 - POST, PUT, PATCH에서 사용한다.
+
+### 단순 텍스트
+
+```java
+@WebServlet(name = "requestBodyStringServlet", urlPatterns = "/request-body-string")
+public class RequestBodyStringServlet extends HttpServlet {
+
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // 메시지 내용을 바이트 코드로 바로 받는다.
+        ServletInputStream inputStream = request.getInputStream();
+        // 메시지를 꺼내면서 인코딩 정보를 알려준다.
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("messageBody = " + messageBody);
+
+        response.getWriter().write("ok");
+    }
+}
+```
+
+```text
+messageBody = hi
+```
+
+### JSON
+
+```java
+@Getter
+@Setter
+public class HelloData {
+    private String username;
+    private int age;
+}
+```
+
+json 형식은 객체로 바꿔서 쓰기 때문에 파싱할 수 있게 객체를 먼저 만든다.
+
+```java
+@WebServlet(name = "requestBodyJsonServlet", urlPatterns = "/request-body-json")
+public class RequestBodyJsonServlet extends HttpServlet {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+
+        System.out.println("messageBody = " + messageBody);
+
+        HelloData helloData = objectMapper.readValue(messageBody, HelloData.class);
+        System.out.println("helloData.getUsername() = " + helloData.getUsername());
+        System.out.println("helloData.getAge() = " + helloData.getAge());
+
+        response.getWriter().write("ok");
+    }
+}
+```
+
+json 결과를 파싱해서 자바 객체로 변환하려면 jackson, gson같은 라이브러리가 필요하다. 스프링 부트로 Spring MVC를 선택하면 기본으로 jackson이 제공된다.
+
+```text
+{
+    "username": "hello",
+    "age": 100
+}
+```
+
+```text
+helloData.getUsername() = hello
+helloData.getAge() = 100
+```
+
+객체를 통해 데이터를 불러왔다. HTML Form 데이터도 메시지 바디를 통해 전송되므로 직접 읽을 수 있다. 하지만 request.getParameter()로 파라미터 조회 기능을 제공하기 때문에 이걸 사용하면 된다.
