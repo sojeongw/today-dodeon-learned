@@ -145,6 +145,7 @@
 * [서블릿](kimyounghan-spring-mvc/02-servlet/README.md)
   * [HttpServletRequest](kimyounghan-spring-mvc/02-servlet/http-servlet-request.md)
   * [HTTP 요청 데이터](kimyounghan-spring-mvc/02-servlet/http-request-data.md)
+  * [HttpServletResponse](kimyounghan-spring-mvc/02-servlet/http-servlet-response.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
