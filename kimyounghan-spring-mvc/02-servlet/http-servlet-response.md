@@ -23,7 +23,7 @@ public class ResponseHeaderServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // status
+        // start line
         response.setStatus(HttpServletResponse.SC_OK);
 
         // headers
