@@ -150,6 +150,7 @@
 * [서블릿, JSP, MVC 패턴](kimyounghan-spring-mvc/03-servlet-jsp-mvc/README.md)
   * [서블릿으로 만들기](kimyounghan-spring-mvc/03-servlet-jsp-mvc/servlet.md)
   * [JSP로 만들기](kimyounghan-spring-mvc/03-servlet-jsp-mvc/jsp.md)
+  * [MVC 패턴](kimyounghan-spring-mvc/03-servlet-jsp-mvc/mvc-pattern.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
