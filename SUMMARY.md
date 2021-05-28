@@ -148,7 +148,8 @@
   * [HttpServletResponse](kimyounghan-spring-mvc/02-servlet/http-servlet-response.md)
   * [HTTP 응답 데이터](kimyounghan-spring-mvc/02-servlet/http-response-data.md)
 * [서블릿, JSP, MVC 패턴](kimyounghan-spring-mvc/03-servlet-jsp-mvc/README.md)
-  * [회원 관리 요구 사항](kimyounghan-spring-mvc/03-servlet-jsp-mvc/requirements.md)
+  * [서블릿으로 만들기](kimyounghan-spring-mvc/03-servlet-jsp-mvc/servlet.md)
+  * [JSP로 만들기](kimyounghan-spring-mvc/03-servlet-jsp-mvc/jsp.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 

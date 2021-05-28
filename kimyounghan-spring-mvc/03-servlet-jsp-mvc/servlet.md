@@ -1,4 +1,4 @@
-# 회원 관리 요구 사항
+# 서블릿으로 회원 관리 앱 만들기
 
 - 회원 저장
 - 회원 목록 조회
@@ -114,9 +114,7 @@ class MemberRepositoryTest {
 
 {% endtab %} {% endtabs %}
 
-## 서블릿으로 회원 관리 앱 만들기
-
-### 회원 등록 폼
+## 회원 등록 폼
 
 ```java
 @WebServlet(name = "memberFormServlet", urlPatterns = "/servlet/members/new-form")
@@ -148,7 +146,7 @@ public class MemberFormServlet extends HttpServlet {
 
 HTML을 자바 코드로 작성해야 해서 불편하다.
 
-### 회원 저장
+## 회원 저장
 
 ```java
 @WebServlet(name = "memberSaveServlet", urlPatterns = "/servlet/members/save")
@@ -191,7 +189,7 @@ public class MemberSaveServlet extends HttpServlet {
 2. Member 객체를 MemberRepository를 통해 저장한다.
 3. Member 객체를 사용해 결과 화면용 HTML을 동적으로 만들어서 응답한다.
 
-### 회원 목록
+## 회원 목록
 
 ```java
 @WebServlet(name = "memberListServlet", urlPatterns = "/servlet/members")
@@ -242,7 +240,7 @@ public class MemberListServlet extends HttpServlet {
 1. memberRepository.findAll()로 모든 회원을 조회한다.
 2. 회원 목록 HTML을 for 루프로 회원 수 만큼 동적으로 생성하고 응답한다.
 
-### 템플릿 엔진
+## 템플릿 엔진
 
 서블릿과 자바 코드만으로 HTML을 만들어보았다. 서블릿 덕에 동적으로 원하는 HTML을 만들 수 있었다. 정적인 HTML은 회원의 저장 결과나 회원 목록같이 계속 바뀌는 결과를 HTML로 만들지 못할 것이다.
 
