@@ -1,5 +1,7 @@
 # MVC 패턴
+
 ## 개요
+
 ### 너무 많은 역할
 
 서블릿이나 JSP 하나로 비즈니스 로직과 뷰 렌더링까지 다 처리하면 너무 많은 역할을 해서 유지 보수가 어렵다.
@@ -13,6 +15,7 @@
 JSP 같은 뷰 템플릿은 화면을 렌더링하는 데에 최적화되어 있기 때문에 이 업무만 담당하는 것이 효과적이다.
 
 ## Model View Controller
+
 ### Model
 
 - 뷰에 출력할 데이터를 담는다.
@@ -39,17 +42,18 @@ MVC 이전에는 모든 로직을 하나로 처리했다.
 
 ![](../../.gitbook/assets/kimyounghan-spring-mvc/03/screenshot%202021-06-19%20오후%207.21.18.png)
 
-실제로는 비즈니스 로직이 서비스, 리포지토리에서 처리된다. 컨트롤러에 두면 너무 많은 역할을 담당하게 되기 때문이다. 그래서 서비스 계층을 별도로 만들어 비즈니스 로직을 처리한다. 컨트롤러는 비즈니스 로직이 있는 서비스를 호출하는 역할을 한다. 
+실제로는 비즈니스 로직이 서비스, 리포지토리에서 처리된다. 컨트롤러에 두면 너무 많은 역할을 담당하게 되기 때문이다. 그래서 서비스 계층을 별도로 만들어 비즈니스 로직을 처리한다. 컨트롤러는 비즈니스 로직이 있는
+서비스를 호출하는 역할을 한다.
 
 1. 사용자가 호출한다.
-2. 컨트롤러는 HTTP 스펙과 파라미터를 확인하고 서비스를 호출해 비즈니스 로직을 수행한다. 
-3. 그 결과를 받아 모델에 데이터를 저장하고 뷰에 넘긴다. 
+2. 컨트롤러는 HTTP 스펙과 파라미터를 확인하고 서비스를 호출해 비즈니스 로직을 수행한다.
+3. 그 결과를 받아 모델에 데이터를 저장하고 뷰에 넘긴다.
 4. 뷰는 그 값을 가져다 쓴다.
 5. 결과가 출력된다.
 
 ## 적용
 
-서블릿이 컨트롤러, JSP가 뷰로 사용되는 MVC 패턴을 적용해본다. 
+서블릿이 컨트롤러, JSP가 뷰로 사용되는 MVC 패턴을 적용해본다.
 
 모델은 HttpServletRequest 객체가 담당한다. request.setAttribute(), request.getAttribute()를 사용하면 데이터를 보관, 조회할 수 있다.
 
@@ -58,6 +62,7 @@ MVC 이전에는 모든 로직을 하나로 처리했다.
 {% tabs %} {% tab title="MvcMemberFormServlet.java" %}
 
 ```java
+
 @WebServlet(name = "mvcMemberFormServlet", urlPatterns = "/servlet-mvc/members/new-form")
 public class MvcMemberFormServlet extends HttpServlet {
 
@@ -105,6 +110,7 @@ JSP는 `/WEB-INF`에 생성한다. 이 경로에 있으면 외부에서 직접 J
 {% tabs %} {% tab title="MvcMemberSaveServlet.java" %}
 
 ```java
+
 @WebServlet(name = "mvcMemberSaveServlet", urlPatterns = "/servlet-mvc/members/save")
 public class MvcMemberSaveServlet extends HttpServlet {
     private MemberRepository memberRepository = MemberRepository.getInstance();
@@ -122,7 +128,7 @@ public class MvcMemberSaveServlet extends HttpServlet {
         request.setAttribute("member", member);
         String viewPath = "/WEB-INF/views/save-result.jsp";
         RequestDispatcher dispatcher = request.getRequestDispatcher(viewPath);
-        
+
         dispatcher.forward(request, response);
     }
 }
@@ -154,6 +160,7 @@ public class MvcMemberSaveServlet extends HttpServlet {
 {% tabs %} {% tab title="MvcMemberListServlet.java" %}
 
 ```java
+
 @WebServlet(name = "mvcMemberListServlet", urlPatterns = "/servlet-mvc/members")
 public class MvcMemberListServlet extends HttpServlet {
     private MemberRepository memberRepository = MemberRepository.getInstance();
@@ -194,11 +201,11 @@ public class MvcMemberListServlet extends HttpServlet {
     </thead>
     <tbody>
     <c:forEach var="item" items="${members}">
-    <tr>
-        <td>${item.id}</td>
-        <td>${item.username}</td>
-        <td>${item.age}</td>
-    </tr>
+        <tr>
+            <td>${item.id}</td>
+            <td>${item.username}</td>
+            <td>${item.age}</td>
+        </tr>
     </c:forEach>
     </tbody>
 </table>
@@ -207,3 +214,42 @@ public class MvcMemberListServlet extends HttpServlet {
 ```
 
 {% endtab %} {% endtabs %}
+
+## 한계
+
+MVC 패턴 덕분에 컨트롤러와 뷰를 구분할 수 있었다. 하지만 컨트롤러에 중복이 많고 불필요한 코드도 많아보인다.
+
+### 포워드 중복
+
+```java
+RequestDispatcher dispatcher=request.getRequestDispatcher(viewPath);
+dispatcher.forward(request,response);
+```
+
+뷰로 이동하는 코드가 항상 중복으로 호출되어야 한다.
+
+### ViewPath 중복
+
+```java
+String viewPath = "/WEB-INF/views/new-form.jsp";
+```
+
+디렉토리나 어떤 요소가 바뀐다면 모든 코드를 다 바꿔야 한다.
+
+### 사용하지 않는 코드
+
+```java
+HttpServletRequest request, HttpServletResponse response
+```
+
+둘 중 하나만 사용하거나 사용하지 않는 경우가 있다.
+
+### 공통 처리의 어려움
+
+기능이 복잡해지면 컨트롤러에서 공통으로 처리해야 하는 것이 점점 많아진다. 
+
+공통 기능을 메서드로 뽑아도 그 메서드를 항상 호출해야 하고 실수로 호출을 빼먹을 수도 있다. 게다가 호출하는 것 자체도 중복된다.
+
+---
+
+결국 공통 처리가 어렵다는 문제가 있다. 수문장 역할을 하는 기능이 필요하다. 프론트 컨트롤러 패턴을 이용하면 해결할 수 있다.
