@@ -155,6 +155,7 @@
   * [프론트 컨트롤러 패턴](kimyounghan-spring-mvc/04-create-mvc-framework/front-controller-pattern.md)
   * [View 분리](kimyounghan-spring-mvc/04-create-mvc-framework/view.md)
   * [Model 추가](kimyounghan-spring-mvc/04-create-mvc-framework/model.md)
+  * [단순하고 실용적인 컨트롤러](kimyounghan-spring-mvc/04-create-mvc-framework/simple-controller.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
