@@ -72,7 +72,7 @@ public class RequestHeaderServlet extends HttpServlet {
         // http://localhost:8080/request-header
         System.out.println("request.getRequestURL() = " + request.getRequestURL());
 
-        // /request-test
+        // /request-header
         System.out.println("request.getRequestURI() = " + request.getRequestURI());
 
         // username=hi
