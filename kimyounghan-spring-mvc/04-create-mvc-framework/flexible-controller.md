@@ -1,6 +1,40 @@
 # V5: 유연한 컨트롤러
 
-하나의 프로젝트 안에서 V3, V4 등 다양한 버전의 컨트롤러를 돌려 쓰고 싶다면 어댑터 패턴을 이용한다.
+```java
+public interface ControllerV3 {
+    ModelView process(Map<String, String> paramMap);
+}
+```
+
+```java
+public interface ControllerV4 {
+    String process(Map<String, String> paramMap, Map<String, Object> model);
+}
+```
+
+어떤 개발자는 V3로, 어떤 개발자는 V4로 개발하고 싶다면 어떻게 해야할까?
+
+```java
+
+@WebServlet(name = "frontControllerServletV4", urlPatterns = "/front-controller/V4/*")
+public class FrontControllerServletV4 extends HttpServlet {
+
+    private Map<String, ControllerV4> controllerMap = new HashMap<>();
+
+    public FrontControllerServletV4() {
+        controllerMap.put("/front-controller/V4/members/new-form", new MemberFormControllerV4());
+        controllerMap.put("/front-controller/V4/members/save", new MemberSaveControllerV4());
+        controllerMap.put("/front-controller/V4/members", new MemberListControllerV4());
+        // value의 타입이 맞지 않아 사용할 수 없다!
+        controllerMap.put("/front-controller/V3/members", new MemberListControllerV3());
+    }
+}
+```
+
+프론트 컨트롤러에는 이미 버전으로 타입이 박혀있기 때문에 다른 버전을 사용할 수가 없다.
+
+하나의 프로젝트 안에서 V3, V4 등 다양한 버전의 컨트롤러를 돌려 쓰고 싶다면 어댑터 패턴을 이용한다. 110v와 220v 콘센트를 동시에 사용하고 싶다면 어댑터를 사용하듯, 타입이 달라 호환이 불가할 때 사용할
+수 있다.
 
 ## 어댑터 패턴
 
@@ -8,35 +42,44 @@
 
 ControllerV3, V4처럼 완전히 다른 인터페이스를 호환하기 위해 어댑터 패턴을 적용한다.
 
+### 핸들러 어댑터 목록
+
+핸들러는 컨트롤러라고 생각하면 된다. 핸들러 어댑터 목록은 호환되는 어댑터를 찾아온다. 110v용 어댑터, 220v용 어댑터를 찾아오듯 V3를 처리할 수 있는 어댑터를 찾아오는 것이다.
+
+프론트 컨트롤러가 핸들러 어댑터에서 어댑터를 가지고 왔으면, 예전처럼 컨트롤러를 직접 호출하지 않고 어댑터를 통해서 호출한다. 110v 콘센트를 그대로 쓰지 않고 어댑터를 통해서 사용하듯.
+
 ### 핸들러 어댑터
 
-어댑터를 통해 다양한 종류의 컨트롤러를 호출한다.
+프론트 컨트롤러가 핸들러 어댑터에게 컨트롤러를 넘긴다. 그럼 어댑터는 컨트롤러를 대신 호출해준다. 처리 후 결과인 모델 뷰를 반환한다.
+
+이렇게 핸들러 어댑터 덕분에 다양한 컨트롤러를 호출할 수 있게 된다.
 
 ### 핸들러
 
-컨트롤러의 이름을 더 넓은 범위인 핸들러로 변경한다. 어댑터가 생겼기 때문에 꼭 컨트롤러 뿐만 아니라 해당 종류의 어댑터만 있으면 뭐든 다 처리할 수 있기 때문이다.
+컨트롤러의 이름을 더 넓은 범위인 핸들러로 변경한 것이다. 꼭 컨트롤러 뿐만 아니라 어떤 종류든 어댑터만 있으면 다 처리할 수 있기 때문이다.
 
 {% tabs %} {% tab title="MyHandlerAdapter.java" %}
 
 ```java
 public interface MyHandlerAdapter {
     boolean supports(Object handler);
+
     ModelView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException;
 }
 ```
 
 {% endtab %} {% endtabs %}
 
-### supports
+### supports()
 
-- handler는 컨트롤러를 의미한다.
-- 어댑터가 해당 컨트롤러를 처리할 수 있으면 true를 반환한다.
+- 핸들러 매핑 정보를 통해 V3인 걸 알았으면 핸들러 어댑터에서 V3용 어댑터를 꺼내와야 한다. 그때 사용하는 것이 supports()다.
+  - 즉, 어댑터가 해당 컨트롤러를 처리할 수 있으면 true를 반환한다.
 
-### handle
+### handle()
 
-- 실제 컨트롤러를 호출하고 ModelView를 반환한다.
+- 컨트롤러를 실제로 호출하고 ModelView를 반환한다.
 - 컨트롤러가 ModelView를 반환하지 못하면 어댑터가 직접 생성해서라도 반환한다.
-- 이전에는 프론트 컨트롤러가 컨트롤러를 호출했지만 이제는 어댑터를 통해 호출한다.
+- 이전에는 프론트 컨트롤러가 직접 컨트롤러를 호출했지만 이제는 어댑터를 통해 호출한다.
 
 {% tabs %} {% tab title="ControllerV3HandlerAdaptor.java" %}
 
@@ -73,8 +116,9 @@ public class ControllerV3HandlerAdaptor implements MyHandlerAdapter {
 {% endtab %} {% tab title="FrontControllerServletV5.java" %}
 
 ```java
+
 @WebServlet(name = "frontControllerServletV5", urlPatterns = "/front-controller/v5/*")
-public class FrontControllerServletV5  extends HttpServlet {
+public class FrontControllerServletV5 extends HttpServlet {
 
     private final Map<String, Object> handlerMappingMap = new HashMap<>();
     private final List<MyHandlerAdapter> handlerAdapters = new ArrayList<>();
@@ -100,7 +144,7 @@ public class FrontControllerServletV5  extends HttpServlet {
         // 1. 핸들러를 찾아온다.
         Object handler = getHandler(request);
 
-        if(handler == null) {
+        if (handler == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
@@ -108,7 +152,7 @@ public class FrontControllerServletV5  extends HttpServlet {
         // 2. 해당하는 컨트롤러를 가진 어댑터를 가져온다.
         MyHandlerAdapter adapter = getHandlerAdapter(handler);
 
-        // 3. 어댑터를 통해 컨트롤러에서 model view를 가져온다.
+        // 3. 어댑터를 통해 컨트롤러를 호출하고 model view를 가져온다.
         ModelView modelView = adapter.handle(request, response, handler);
 
         String viewName = modelView.getViewName();
@@ -125,7 +169,7 @@ public class FrontControllerServletV5  extends HttpServlet {
 
     private MyHandlerAdapter getHandlerAdapter(Object handler) {
         for (MyHandlerAdapter adapter : handlerAdapters) {
-            if(adapter.supports(handler)) {
+            if (adapter.supports(handler)) {
                 return adapter;
             }
         }
@@ -139,5 +183,3 @@ public class FrontControllerServletV5  extends HttpServlet {
 ```
 
 {% endtab %} {% endtabs %}
-
-
