@@ -73,7 +73,7 @@ public interface MyHandlerAdapter {
 ### supports()
 
 - 핸들러 매핑 정보를 통해 V3인 걸 알았으면 핸들러 어댑터에서 V3용 어댑터를 꺼내와야 한다. 그때 사용하는 것이 supports()다.
-  - 즉, 어댑터가 해당 컨트롤러를 처리할 수 있으면 true를 반환한다.
+    - 즉, 어댑터가 해당 컨트롤러를 처리할 수 있으면 true를 반환한다.
 
 ### handle()
 
@@ -183,3 +183,88 @@ public class FrontControllerServletV5 extends HttpServlet {
 ```
 
 {% endtab %} {% endtabs %}
+
+## 다른 버전의 핸들러 추가
+
+이제 V3만 있던 프론트 컨트롤러에 V4 컨트롤러를 추가해보자.
+
+{% tabs %} {% tab title="FrontControllerServletV5.java" %}
+
+```java
+
+@WebServlet(name = "frontControllerServletV5", urlPatterns = "/front-controller/v5/*")
+public class FrontControllerServletV5 extends HttpServlet {
+
+    private final Map<String, Object> handlerMappingMap = new HashMap<>();
+    private final List<MyHandlerAdapter> handlerAdapters = new ArrayList<>();
+
+    public FrontControllerServletV5() {
+        initHandlerMappingMap();
+        initHandlerAdapters();
+    }
+
+    private void initHandlerMappingMap() {
+        handlerMappingMap.put("/front-controller/v5/v3/members/new-form", new MemberFormControllerV3());
+        handlerMappingMap.put("/front-controller/v5/v3/members/save", new MemberSaveControllerV3());
+        handlerMappingMap.put("/front-controller/v5/v3/members", new MemberListControllerV3());
+
+        // V4 핸들러를 추가한다.
+        handlerMappingMap.put("/front-controller/v5/v4/members/new-form", new MemberFormControllerV4());
+        handlerMappingMap.put("/front-controller/v5/v4/members/save", new MemberSaveControllerV4());
+        handlerMappingMap.put("/front-controller/v5/v4/members", new MemberListControllerV4());
+    }
+
+    private void initHandlerAdapters() {
+        handlerAdapters.add(new ControllerV3HandlerAdaptor());
+        // V4의 어댑터를 추가한다.
+        handlerAdapters.add(new ControllerV4HandlerAdaptor());
+    }
+}
+```
+
+{% endtab %} {% tab title="ControllerV4HandlerAdaptor.java" %}
+
+```java
+public class ControllerV4HandlerAdaptor implements MyHandlerAdapter {
+    @Override
+    public boolean supports(Object handler) {
+        return handler instanceof ControllerV4;
+    }
+
+    @Override
+    public ModelView handle(HttpServletRequest request, HttpServletResponse response, Object handler) throws ServletException, IOException {
+        ControllerV4 controller = (ControllerV4) handler;
+
+        Map<String, String> paramMap = createParamMap(request);
+        HashMap<String, Object> model = new HashMap<>();
+
+        String viewName = controller.process(paramMap, model);
+
+        // 콘센트에 어댑터를 끼우듯 ModelView로 타입을 맞추기 위해 어댑터에서 modelView를 만들어준다.
+        ModelView modelView = new ModelView(viewName);
+        modelView.setModel(model);
+
+        return modelView;
+    }
+
+    private Map<String, String> createParamMap(HttpServletRequest request) {
+        Map<String, String> paramMap = new HashMap<>();
+
+        request.getParameterNames().asIterator()
+                .forEachRemaining(paramName -> paramMap.put(paramName, request.getParameter(paramName)));
+
+        return paramMap;
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+- 하나의 프론트 컨트롤러에서 다양한 버전의 컨트롤러를 호출할 수 있게 되었다. 
+- 어댑터 덕분에 프론트 컨트롤러의 메인 로직은 건드리지 않고 확장할 수 있었다.
+- V4는 뷰 이름을 반환하지만, 어댑터 덕분에 모델 뷰로 변환해주었다.
+  - 마치 110V 콘센터를 220v로 변경하듯이!
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/04/screenshot%202021-07-19%20오전%207.52.15.png)
+
+다시 그림을 보자. 인터페이스를 통하도록 설계했더니 프론트 컨트롤러를 크게 수정하지 않고 OCP를 지키면서 개발할 수 있었다.
