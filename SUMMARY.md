@@ -157,6 +157,7 @@
   * [Model 추가](kimyounghan-spring-mvc/04-create-mvc-framework/model.md)
   * [단순하고 실용적인 컨트롤러](kimyounghan-spring-mvc/04-create-mvc-framework/simple-controller.md)
   * [유연한 컨트롤러](kimyounghan-spring-mvc/04-create-mvc-framework/flexible-controller.md)
+* [정리](kimyounghan-spring-mvc/04-create-mvc-framework/summary.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
