@@ -157,7 +157,14 @@
   * [Model 추가](kimyounghan-spring-mvc/04-create-mvc-framework/model.md)
   * [단순하고 실용적인 컨트롤러](kimyounghan-spring-mvc/04-create-mvc-framework/simple-controller.md)
   * [유연한 컨트롤러](kimyounghan-spring-mvc/04-create-mvc-framework/flexible-controller.md)
-* [정리](kimyounghan-spring-mvc/04-create-mvc-framework/summary.md)
+  * [정리](kimyounghan-spring-mvc/04-create-mvc-framework/summary.md)
+* [스프링 MVC의 구조 이해](kimyounghan-spring-mvc/05-spring-mvc-architecture/README.md)
+  * [스프링 MVC 전체 구조](kimyounghan-spring-mvc/05-spring-mvc-architecture/architecture.md)
+  * [핸들러 매핑과 핸들러 어댑터](kimyounghan-spring-mvc/05-spring-mvc-architecture/handler.md)
+  * [스프링 MVC 시작하기](kimyounghan-spring-mvc/05-spring-mvc-architecture/introduction.md)
+  * [스프링 MVC 컨트롤러 통합](kimyounghan-spring-mvc/05-spring-mvc-architecture/controller-combination.md)
+  * [스프링 MVC 실용적인 방식](kimyounghan-spring-mvc/05-spring-mvc-architecture/practice.md)
+  * [정리](kimyounghan-spring-mvc/05-spring-mvc-architecture/summary.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
