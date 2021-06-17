@@ -161,6 +161,7 @@
 * [스프링 MVC의 구조 이해](kimyounghan-spring-mvc/05-spring-mvc-architecture/README.md)
   * [스프링 MVC 전체 구조](kimyounghan-spring-mvc/05-spring-mvc-architecture/architecture.md)
   * [핸들러 매핑과 핸들러 어댑터](kimyounghan-spring-mvc/05-spring-mvc-architecture/handler.md)
+  * [뷰 리졸버](kimyounghan-spring-mvc/05-spring-mvc-architecture/view-resolver.md)
   * [스프링 MVC 시작하기](kimyounghan-spring-mvc/05-spring-mvc-architecture/introduction.md)
   * [스프링 MVC 컨트롤러 통합](kimyounghan-spring-mvc/05-spring-mvc-architecture/controller-combination.md)
   * [스프링 MVC 실용적인 방식](kimyounghan-spring-mvc/05-spring-mvc-architecture/practice.md)
