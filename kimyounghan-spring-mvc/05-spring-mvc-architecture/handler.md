@@ -12,7 +12,7 @@ public interface Controller {
 
 예전에 스프링이 제공하던 Controller 인터페이스다. @Controller와는 완전히 다르다.
 
-## OldController
+## Controller
 
 {% tabs %} {% tab title="OldController.java" %}
 
@@ -71,10 +71,11 @@ public class OldController implements Controller {
 
 1. 핸들러 매핑으로 핸들러 조회
     1. HandlerMapping을 순서대로 실행해서 핸들러를 찾는다.
-    2. 우리의 경우 빈 이름을 핸들러를 찾아야 하므로 BeanNameUrlHandlerMapping을 실행하고 OldController 핸들러를 반환한다.
+    2. 우리의 경우 빈 이름을 핸들러를 찾아야 하므로 BeanNameUrlHandlerMapping을 실행한다.
+    3. 핸들러인 OldController 반환한다.
 2. 핸들러 어댑터 조회
     1. HandlerAdapter의 supports()를 순서대로 호출한다.
-    2. SimpleControllerHandlerAdapter가 Controller 인터페이스를 지원하므로 대상이 된다.
+    2. Controller 인터페이스를 지원하는 SimpleControllerHandlerAdapter가 대상이 된다.
 3. 핸들러 어댑터 실행
     1. DispatcherServlet이 조회한 SimpleControllerHandlerAdapter를 실행하면서 핸들러 정보를 함께 넘긴다.
     2. SimpleControllerHandlerAdapter는 핸들러인 OldController를 내부에서 실행하고 결과를 반환한다.
@@ -85,3 +86,52 @@ public class OldController implements Controller {
     - BeanNameUrlHandlerMapping
 - HandlerAdapter
     - SimpleControllerHandlerAdapter
+
+## HttpRequestHandler
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/05/screenshot%202022-02-14%20오후%2010.47.56.png)
+
+이번에는 HttpRequestHandler를 사용해보자.
+
+{% tabs %} {% tab title="MyHttpRequestHandler.java" %}
+
+```java
+
+@Component("/springmvc/request-handler")
+public class MyHttpRequestHandler implements HttpRequestHandler {
+    @Override
+    public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("MyHttpRequestHandler.handleRequest");
+    }
+}
+
+```
+
+{% endtab %} {% endtabs %}
+
+### 실행 과정
+
+1. 핸들러 매핑으로 핸들러 조회
+    1. HanlderMapping을 순서대로 실행해서 빈 이름인 `/springmvc/request-handler`로 핸들러를 찾는다.
+    2. 빈 이름으로 핸들러를 찾아야 하므로 BeanNameUrlHandlerMapping을 실행한다.
+    3. 핸들러인 MyHttpRequestHandler를 반환한다.
+2. 핸들러 어댑터 조회
+    1. HandlerAdapter의 supports()를 순서대로 호출한다.
+    2. HttpRequestHandler 인터페이스를 지원하는 HttpRequestHandlerAdapter가 대상이 된다.
+3. 핸들러 어댑터 실행
+    1. DispatcherServlet이 조회한 HttpRequestHandlerAdapter를 실행하면서 핸들러 정보를 함꼐 넘긴다.
+        - DispatcherServlet.doDispatch() 에서 HttpRequestHandlerAdapter.handle()이 호출된다.
+    2. HttpRequestHandlerAdapter는 핸들러인 MyHttpRequestHandler를 내부에서 실행하고 결과를 반환한다.
+
+### 정리
+
+- HandlerMapping
+    - BeanNameUrlHandlerMapping
+- HandlerAdapter
+    - HttpRequestHandlerAdapter
+
+## @RequestMapping
+
+- 가장 우선 순위가 높은 핸들러 매핑은 RequestMppingHandlerMapping, 핸들러 어댑터는 RequestMappingHandlerAdapter
+- @RequestMapping에서 따온 이름이다.
+- 실무에서는 99.9% 이 방식을 사용한다.
