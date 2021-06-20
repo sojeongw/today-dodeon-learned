@@ -26,7 +26,7 @@ view를 사용하도록 코드를 추가했지만 컨트롤러를 호출하면 �
 
 ```properties
 logging.level.org.apache.coyote.http11=debug
-spring.mvc.view.prefix=/WEB-INF/view
+spring.mvc.view.prefix=/WEB-INF/views/
 spring.mvc.view.suffix=.jsp
 ```
 
