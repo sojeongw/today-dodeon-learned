@@ -54,7 +54,6 @@ public class SpringMemberFormControllerV1 {
 
 RequestMappingHandlerMapping은 스프링 빈 중에서 @RequestMapping 또는 @Controller가 **클래스 레벨**에 붙어있으면 매핑 정보로 인식한다.
 
-
 ### ModelAndView
 
 - 모델과 뷰 정보를 담아 반환한다.
@@ -62,10 +61,11 @@ RequestMappingHandlerMapping은 스프링 빈 중에서 @RequestMapping 또는 @
 {% tabs %} {% tab title="SpringMemberFormControllerV1.java" %}
 
 ```java
+
 @Controller
+@RequestMapping("/springmvc/v1/members/new-form")
 public class SpringMemberFormControllerV1 {
 
-    @RequestMapping("/springmvc/v1/members/new-form")
     public ModelAndView process() {
         // 이전에는 직접 만든 ModelView를 썼지만 이제는 스프링이 제공하는 ModelAndView를 쓴다.
         return new ModelAndView("new-form");
@@ -76,12 +76,13 @@ public class SpringMemberFormControllerV1 {
 {% endtab %} {% tab title="SpringMemberSaveControllerV1.java" %}
 
 ```java
+
 @Controller
+@RequestMapping("/springmvc/v1/members/save")
 public class SpringMemberSaveControllerV1 {
 
     private final MemberRepository memberRepository = MemberRepository.getInstance();
 
-    @RequestMapping("/springmvc/v1/members/save")
     // paramMap 대신 서블릿 request, response를 받는다.
     public ModelAndView process(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
@@ -101,20 +102,21 @@ public class SpringMemberSaveControllerV1 {
 {% endtab %} {% tab title="SpringMemberListControllerV1.java" %}
 
 ```java
+
 @Controller
+@RequestMapping("/springmvc/v1/members")
 public class SpringMemberListControllerV1 {
 
-  private final MemberRepository memberRepository = MemberRepository.getInstance();
+    private final MemberRepository memberRepository = MemberRepository.getInstance();
 
-  @RequestMapping("/springmvc/v1/members")
-  public ModelAndView process() {
-    List<Member> members = memberRepository.findAll();
-    ModelAndView modelView = new ModelAndView("members");
+    public ModelAndView process() {
+        List<Member> members = memberRepository.findAll();
+        ModelAndView modelView = new ModelAndView("members");
 
-    modelView.addObject("members", members);
+        modelView.addObject("members", members);
 
-    return modelView;
-  }
+        return modelView;
+    }
 }
 ```
 
