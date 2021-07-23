@@ -165,7 +165,9 @@
   * [스프링 MVC 시작하기](kimyounghan-spring-mvc/05-spring-mvc-architecture/introduction.md)
   * [스프링 MVC 컨트롤러 통합](kimyounghan-spring-mvc/05-spring-mvc-architecture/controller-combination.md)
   * [스프링 MVC 실용적인 방식](kimyounghan-spring-mvc/05-spring-mvc-architecture/practice.md)
-  * [정리](kimyounghan-spring-mvc/05-spring-mvc-architecture/summary.md)
+* [기본 기능](kimyounghan-spring-mvc/06-basic/README.md)
+  * [프로젝트 생성](kimyounghan-spring-mvc/06-basic/initializing-project.md)
+  * [로깅](kimyounghan-spring-mvc/06-basic/logging.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
