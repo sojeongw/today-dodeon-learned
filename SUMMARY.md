@@ -169,6 +169,7 @@
   * [프로젝트 생성](kimyounghan-spring-mvc/06-basic/initializing-project.md)
   * [로깅](kimyounghan-spring-mvc/06-basic/logging.md)
   * [요청 매핑](kimyounghan-spring-mvc/06-basic/request-mapping.md)
+  * [HTTP 요청의 기본 및 헤더 조회](kimyounghan-spring-mvc/06-basic/http-request-basic.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
