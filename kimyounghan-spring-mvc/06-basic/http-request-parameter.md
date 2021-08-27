@@ -76,3 +76,165 @@ public class RequestParamController {
 ```
 
 - HTML Form으로 요청 파라미터를 조회한다.
+
+## @RequestParam
+
+```java
+
+@Slf4j
+@Controller
+public class RequestParamController {
+
+    // RestController처럼 스트링 값을 뷰가 아니라 문자 그래도 반환하도록 해준다.
+    @ResponseBody
+    @RequestMapping("/request-param-v2")
+    public String requestParamV2(
+            @RequestParam("username") String memberName,
+            @RequestParam("age") int memberAge
+    ) {
+        log.info("memberName = {}, memberAge = {}", memberName, memberAge);
+
+        return "ok";
+    }
+}
+```
+
+```text
+2022-03-01 13:23:16.760  INFO 76287 --- [nio-8080-exec-1] h.s.b.request.RequestParamController     : memberName = hello, memberAge = 20
+```
+
+- @RequestParam
+    - 파라미터 이름으로 바인딩 한다.
+    - GET 쿼리 파라미터든, HTML Form이든 파라미터를 잘 받아온다.
+- @ResponseBody
+    - view 조회 대신 HTTP message body에 직접 입력한다.
+
+```text
+@RequestParam("username") String memberName = request.getParameter("username")
+```
+
+- @RequestParam의 name(value) 속성이 파라미터와 일치해야 한다.
+
+```java
+
+@Slf4j
+@Controller
+public class RequestParamController {
+
+    @ResponseBody
+    @RequestMapping("/request-param-v3")
+    public String requestParamV3(
+            @RequestParam String username,
+            @RequestParam int age
+    ) {
+        log.info("username = {}, age = {}", username, age);
+
+        return "ok";
+    }
+}
+
+```
+
+- 이름과 변수명이 같다면 생략할 수 있다.
+
+````java
+
+@Slf4j
+@Controller
+public class RequestParamController {
+
+    @ResponseBody
+    @RequestMapping("/request-param-v4")
+    public String requestParamV4(String username, int age) {
+        log.info("username = {}, age = {}", username, age);
+
+        return "ok";
+    }
+}
+````
+
+- 이름과 변수명이 같고 String, int, Integer 등의 단순한 타입이면 @RequestParam 애너테이션까지 생략할 수 있다.
+- 너무 다 생략하면 과할 수 있으니 애너테이션 정도는 붙여줘서 요청 파라미터를 읽는다고 명확하게 표시해주자.
+
+### 필수값 지정
+
+```java
+
+@Slf4j
+@Controller
+public class RequestParamController {
+
+    @ResponseBody
+    @RequestMapping("/request-param-required")
+    public String requestParamRequired(
+            @RequestParam(required = true) String username,
+            @RequestParam(required = false) int age
+    ) {
+        log.info("username = {}, age = {}", username, age);
+
+        return "ok";
+    }
+}
+```
+
+```text
+# 쿼리 스트링에서 username을 뺐을 때
+2022-03-01 13:36:44.587WARN 77398---[nio-8080-exec-4].w.s.m.s.DefaultHandlerExceptionResolver:Resolved
+[org.springframework.web.bind.MissingServletRequestParameterException:Required String parameter'username'is not present]
+
+# 쿼리 스트링에서 age를 뺐을 때
+java.lang.IllegalStateException:Optional int parameter'age'is present but cannot be translated into a null value due to being declared as a primitive type.
+Consider declaring it as object wrapper for the corresponding primitive type.
+```
+
+- required 옵션은 기본적으로 true다.
+- 필수값이 아니면 false로 지정한다.
+    - 필수값을 넣지 않으면 400 에러가 발생한다.
+    - null이 아니라 `?username=`처럼 빈 값이 들어오는 경우라면 ok가 떨어지므로 주의한다.
+- 필수가 아니더라도 primitive type이면 null이 들어갈 수 없으므로 Wrapper 클래스로 바꿔줘야 한다.
+
+```java
+
+@Slf4j
+@Controller
+public class RequestParamController {
+
+    @ResponseBody
+    @RequestMapping("/request-param-default")
+    public String requestParamDefault(
+            @RequestParam(required = true, defaultValue = "guest") String username,
+            @RequestParam(required = false, defaultValue = "-1") int age
+    ) {
+        log.info("username = {}, age = {}", username, age);
+
+        return "ok";
+    }
+}
+```
+
+- required 상관없이 정상 동작하게 하려면 defaultValue를 사용할 수 있다.
+- 빈 문자도 기본값을 적용해준다.
+
+```java
+
+@Slf4j
+@Controller
+public class RequestParamController {
+
+    @ResponseBody
+    @RequestMapping("/request-param-map")
+    public String requestParamMap(@RequestParam Map<String, Object> paramMap) {
+        log.info("username = {}, age = {}", paramMap.get("username"), paramMap.get("age"));
+
+        return "ok";
+    }
+}
+```
+
+- 파라미터를 한 번에 전부 받고 싶다면 Map을 사용할 수 있다.
+- @RequestParam Map
+    - 값이 확실하게 1개인 경우에 사용한다.
+    - Map(key=value)
+- @RequestParam MultiValueMap
+    - MultiValueMap(key=[value1, value2, ...])
+    - ex. (key=userIds, value=[id1, id2])
