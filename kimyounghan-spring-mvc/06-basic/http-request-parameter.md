@@ -238,3 +238,84 @@ public class RequestParamController {
 - @RequestParam MultiValueMap
     - MultiValueMap(key=[value1, value2, ...])
     - ex. (key=userIds, value=[id1, id2])
+
+## @ModelAttribute
+
+```java
+
+@Controller
+class ExampleController {
+
+    @RequestMapping
+    void example(
+            @RequestParam String username,
+            @RequestParam int age
+    ) {
+        HelloData data = new HelloData();
+
+        data.setUsername(username);
+        data.setAge(age);
+    }
+}
+```
+
+- 실제 개발 하면 요청 파라미터를 다시 객체에 넣는 과정을 반복한다.
+- @ModelAttribute를 사용하면 이 과정을 자동화할 수 있다.
+
+```java
+
+@Data
+public class HelloData {
+    private String username;
+    private int age;
+}
+
+@Slf4j
+@Controller
+public class RequestParamController {
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+        return "ok";
+    }
+}
+```
+
+1. HelloData라는 객체를 생성한다.
+2. 요청 파라미터의 이름으로 HelloData 객체의 프로퍼티를 찾는다.
+3. 해당 프로퍼티의 setter를 호출해 파라미터의 값을 바인딩한다.
+    - 파라미터가 username이면 setUsername()을 호출해 값을 입력한다.
+    - 문자에 숫자가 들어오거나 한다면 BindException이 발생한다.
+
+### @ModelAttribute 생략
+
+```java
+
+@Slf4j
+@Controller
+public class RequestParamController {
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    public String modelAttributeV2(HelloData helloData) {
+        log.info("username={}, age={}", helloData.getUsername(), helloData.getAge());
+        return "ok";
+    }
+}
+```
+
+- 애너테이션을 빼도 작동한다.
+- 객체 이름은 상관 없이 그 내부의 프로퍼티 이름만 맞으면 된다.
+- @RequestParam 또한 생략 가능해 혼란스러우므로 붙여주는 게 좋다.
+
+애너테이션 생략 시 규칙은 다음과 같다.
+
+- @RequestParam
+    - String, int, Integer 등 단순한 타입
+- @ModelAttribute
+    - 나머지
+    - argument resolver로 지정해둔 타입 외의 것들
+        - ex. HttpServletResponse
+        
