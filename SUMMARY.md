@@ -171,6 +171,7 @@
   * [요청 매핑](kimyounghan-spring-mvc/06-basic/request-mapping.md)
   * [HTTP 요청의 기본 및 헤더 조회](kimyounghan-spring-mvc/06-basic/http-request-basic.md)
   * [HTTP 요청 파라미터](kimyounghan-spring-mvc/06-basic/http-request-parameter.md)
+  * [HTTP 요청 메시지](kimyounghan-spring-mvc/06-basic/http-request-message.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
