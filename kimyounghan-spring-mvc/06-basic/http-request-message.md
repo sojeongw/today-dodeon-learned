@@ -133,3 +133,125 @@ public class RequestBodyStringController {
 
 ## JSON
 
+### HttpServletRequest
+
+```java
+
+@Slf4j
+@Controller
+public class RequestBodyJsonController {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    @PostMapping("/request-body-json-v1")
+    public void requestBodyJsonV1(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        ServletInputStream inputStream = request.getInputStream();
+        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+        log.info("messageBody={}", messageBody);
+
+        HelloData data = objectMapper.readValue(messageBody, HelloData.class);
+        log.info("username={}, age={}", data.getUsername(), data.getAge());
+
+        response.getWriter().write("ok");
+    }
+}
+```
+
+- Jackson 라이브러리인 objectMapper로 JSON 데이터를 컨버팅한다.
+
+### @RequestBody
+
+```java
+
+@Slf4j
+@Controller
+public class RequestBodyJsonController {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    @ResponseBody
+    @PostMapping("/request-body-json-v2")
+    public String requestBodyJsonV2(@RequestBody String messageBody) throws IOException {
+        HelloData data = objectMapper.readValue(messageBody, HelloData.class);
+
+        log.info("username={}, age={}", data.getUsername(), data.getAge());
+        return "ok";
+    }
+}
+```
+
+- @RequestBody로 InputStream을 사용하는 번거로운 절차를 생략했다.
+- 여전히 objectMapper로 굳이 바꿔줘야 한다.
+
+```java
+
+@Slf4j
+@Controller
+public class RequestBodyJsonController {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    @ResponseBody
+    @PostMapping("/request-body-json-v3")
+    public String requestBodyJsonV3(@RequestBody HelloData data) {
+        log.info("username={}, age={}", data.getUsername(), data.getAge());
+        return "ok";
+    }
+}
+```
+
+- String 대신 객체 자체로 바로 받을 수 있다.
+- HTTP 메시지 컨버터가 HTTP 메시지 바디를 문자나 객체, JSON으로 바꿔준다.
+- @RequestBody는 생략할 수 없다.
+    - 생략 시 단순한 타입 외에는 모두 @ModelAttribute를 적용하도록 되어있기 때문이다.
+    - 따라서 메시지 바디가 아니라 요청 파라미터를 처리하게 된다.
+
+### ResponseBody
+
+```java
+
+@Slf4j
+@Controller
+public class RequestBodyJsonController {
+    @ResponseBody
+    @PostMapping("/request-body-json-v5")
+    public HelloData requestBodyJsonV5(@RequestBody HelloData data) {
+        log.info("username={}, age={}", data.getUsername(), data.getAge());
+
+        // 객체를 자동으로 JSON으로 반환해준다.
+        return data;
+    }
+}
+```
+
+- @RequestBody
+    - JSON 요청 -> HTTP 메시지 컨버터 -> 객체
+    - `content-type:application/json`
+- @ResponseBody
+    - 객체 -> HTTP 메시지 컨버터 -> JSON 응답
+    - `accept:application/json`
+
+참고로, content-type이 application/json이어야 JSON을 사용할 수 있는 메시지 컨버터가 실행된다.
+
+### HttpEntity
+
+```java
+
+@Slf4j
+@Controller
+public class RequestBodyJsonController {
+
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    @ResponseBody
+    @PostMapping("/request-body-json-v4")
+    public String requestBodyJsonV4(HttpEntity<HelloData> httpEntity) {
+        HelloData data = httpEntity.getBody();
+
+        log.info("username={}, age={}", data.getUsername(), data.getAge());
+        return "ok";
+    }
+}
+```
+
+- 단순 텍스트 때 배운 것과 마찬가지로 HttpEntity도 사용 가능하다.

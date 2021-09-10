@@ -318,4 +318,5 @@ public class RequestParamController {
     - 나머지
     - argument resolver로 지정해둔 타입 외의 것들
         - ex. HttpServletResponse
+    - @RequestParam과 달리 기본값을 알아서 넣어준다.
         
