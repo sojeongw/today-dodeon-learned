@@ -98,4 +98,125 @@ spring.thymeleaf.suffix=.html
 ## HTTP 메시지
 
 - HTTP API를 제공하는 경우엔 HTML 대신 데이터를 전달해야 하므로 HTTP 메시지 바디에 JSON 등을 보낸다.
+- HTML이나 뷰 템플릿도 HTTP 응답 메시지 바디에 담겨서 전달되지만, 여기서는 정적 리소스나 뷰 템플릿 없이 직접 HTTP 응답 메시지를 전달하는 경우를 말한다.
 
+### 단순 텍스트
+
+```java
+
+@Slf4j
+@Controller
+public class ResponseBodyController {
+
+    @GetMapping("/response-body-string-v1")
+    public void responseBodyV1(HttpServletResponse response) throws IOException {
+        response.getWriter().write("ok");
+    }
+}
+```
+
+- 바디에 직접 ok를 담아 보낸다.
+
+```java
+
+@Slf4j
+@Controller
+public class ResponseBodyController {
+
+    @GetMapping("/response-body-string-v2")
+    public ResponseEntity<String> responseBodyV2() {
+        return new ResponseEntity<>("ok", HttpStatus.OK);
+    }
+}
+```
+
+- ResponseEntity
+    - HttpEntity를 상속받았기 때문에 HTTP 메시지의 헤더, 바디 정보를 가지고 있다.
+    - ResponseEntity는 HTTP 응답 코드까지 설정할 수 있다.
+
+```java
+
+@Slf4j
+@Controller
+public class ResponseBodyController {
+
+    @ResponseBody
+    @GetMapping("/response-body-string-v3")
+    public String responseBodyV3() {
+        return "ok";
+    }
+}
+```
+
+- @ResponseBody
+    - 뷰를 사용하지 않고 HTTP 메시지 컨버터를 통해 직접 HTTP 메시지를 입력할 수 있다.
+
+### JSON
+
+```java
+
+@Slf4j
+@Controller
+public class ResponseBodyController {
+
+    @GetMapping("/response-body-json-v1")
+    public ResponseEntity<HelloData> responseBodyJsonV1() {
+        HelloData helloData = new HelloData();
+
+        helloData.setUsername("userA");
+        helloData.setAge(20);
+
+        return new ResponseEntity<>(helloData, HttpStatus.OK);
+    }
+}
+```
+
+- ResponseEntity에 HttpStatus를 담아 보낸다.
+
+```java
+
+@Slf4j
+@Controller
+public class ResponseBodyController {
+
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @GetMapping("/response-body-json-v2")
+    public HelloData responseBodyJsonV2() {
+        HelloData helloData = new HelloData();
+
+        helloData.setUsername("userA");
+        helloData.setAge(20);
+
+        return helloData;
+    }
+}
+```
+
+- ResponseEntity 없이 상태 코드를 반환하고 싶다면 @ResponseStatus를 사용한다.
+    - 애너테이션이기 때문에 응답 코드를 동적으로 설정할 수 없다.
+    - 조건에 따라 동적으로 하려면 ResponseEntity를 사용한다.
+
+```java
+
+@ResponseBody
+public class ResponseBodyController {
+
+}
+```
+
+- @ResponseBody를 메서드마다 붙이기 귀찮으면 클래스에 달아도 된다.
+
+```java
+
+@RestController
+public class ResponseBodyController {
+
+}
+```
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/06/screenshot%202022-03-01%20오후%204.40.56.png)
+
+- @Controller와 @ResponseBody를 합친 것이 @RestController다.
+- 뷰 템플릿 대신 HTTP 메시지 바디에 직접 데이터를 입력한다.
+- 이름 그대로 REST API(HTTP API)를 만드는 컨트롤러다.
