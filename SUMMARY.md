@@ -173,6 +173,7 @@
   * [HTTP 요청 파라미터](kimyounghan-spring-mvc/06-basic/http-request-parameter.md)
   * [HTTP 요청 메시지](kimyounghan-spring-mvc/06-basic/http-request-message.md)
   * [HTTP 응답](kimyounghan-spring-mvc/06-basic/http-response.md)
+  * [HTTP 메시지 컨버터](kimyounghan-spring-mvc/06-basic/http-message-converter.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
