@@ -51,7 +51,7 @@
     * [kubernetes](interview/cloud/kubernetes.md)
 
 ## 스프링 입문 <a id="kimyounghan-spring-introduction"></a>
-ㅋㅋㅋㅋ
+
 * [프로젝트 환경설정](kimyounghan-spring-introduction/01-project-settings/README.md)
 * [스프링 웹 개발 기초](kimyounghan-spring-introduction/02-spring-basic/README.md)
 * [회원 관리 예제 - 백엔드](kimyounghan-spring-introduction/03-example-backend/README.md)
@@ -175,6 +175,7 @@
   * [HTTP 응답](kimyounghan-spring-mvc/06-basic/http-response.md)
   * [HTTP 메시지 컨버터](kimyounghan-spring-mvc/06-basic/http-message-converter.md)
   * [요청 매핑 핸들러 어댑터](kimyounghan-spring-mvc/06-basic/request-mapping-handler-adapter.md)
+* [스프링 MVC 웹 페이지 만들기](kimyounghan-spring-mvc/07-example/README.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
