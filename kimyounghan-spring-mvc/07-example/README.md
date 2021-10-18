@@ -257,3 +257,52 @@ public class BasicItemController {
 
 - @ModelAttribute를 완전히 생략해도 그대로 모델에 자동 등록된다. 동작 방식도 같다.
     - 단순 타입은 @RequestParam, 임의의 객체는 @ModelAttribute가 적용된다.
+
+## 상품 수정
+
+{% tabs %} {% tab title="BasicItemController" %}
+
+```java
+
+@Controller
+@RequiredArgsConstructor
+@RequestMapping("/basic/items")
+public class BasicItemController {
+
+    private final ItemRepository itemRepository;
+
+    ...
+
+    @GetMapping("/{itemId}/edit")
+    public String editForm(@PathVariable Long itemId, Model model) {
+        Item item = itemRepository.findById(itemId);
+        model.addAttribute("item", item);
+
+        return "basic/editForm";
+    }
+
+    @PostMapping("/{itemId}/edit")
+    public String edit(@PathVariable Long itemId, @ModelAttribute Item item) {
+        itemRepository.update(itemId, item);
+        return "redirect:/basic/items/{itemId}";
+    }
+    
+    ...
+}
+```
+
+{% endtab %} {% endtabs %}
+
+- @GetMapping("/{itemId}/edit")
+    - 상품 수정 폼으로 이동
+- @PostMapping("/{itemId}/edit")
+    - 상품 수정 로직 처리
+- redirect:/basic/items/{itemId}
+    - 뷰 템플릿 호출 대신, 상품 상세 화면으로 이동하도록 리다이렉트 한다.
+    - 컨트롤러에 매핑된 @PathVariable 값도 사용할 수 있다.
+
+### HTML Form 전송
+
+- GET, POST만 지원한다.
+    - PUT, PATCH는 HTTP API 전송 시에 사용한다.
+    - HTTP POST로 Form 요청 시 히든 필드를 통해 PUT, PATCH를 사용할 수도 있지만 HTTP 요청 상으로는 POST다.
