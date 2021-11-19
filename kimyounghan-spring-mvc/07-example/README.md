@@ -111,7 +111,7 @@ public class ItemRepository {
 
 ### addItemV1
 
-{% tabs %} {% tab title="BasicItemController" %}
+{% tabs %} {% tab title="BasicItemController.java" %}
 
 ```java
 
@@ -150,7 +150,7 @@ public class BasicItemController {
 
 ### addItemV2
 
-{% tabs %} {% tab title="BasicItemController" %}
+{% tabs %} {% tab title="BasicItemController.java" %}
 
 ```java
 
@@ -200,7 +200,7 @@ public class BasicItemController {
 
 ### addItemV3
 
-{% tabs %} {% tab title="BasicItemController" %}
+{% tabs %} {% tab title="BasicItemController.java" %}
 
 ```java
 
@@ -230,7 +230,7 @@ public class BasicItemController {
 
 ### addItemV4
 
-{% tabs %} {% tab title="BasicItemController" %}
+{% tabs %} {% tab title="BasicItemController.java" %}
 
 ```java
 
@@ -260,7 +260,7 @@ public class BasicItemController {
 
 ## 상품 수정
 
-{% tabs %} {% tab title="BasicItemController" %}
+{% tabs %} {% tab title="BasicItemController.java" %}
 
 ```java
 
@@ -306,3 +306,147 @@ public class BasicItemController {
 - GET, POST만 지원한다.
     - PUT, PATCH는 HTTP API 전송 시에 사용한다.
     - HTTP POST로 Form 요청 시 히든 필드를 통해 PUT, PATCH를 사용할 수도 있지만 HTTP 요청 상으로는 POST다.
+
+## PRG Post/Redirect/Get
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/07/screenshot%202022-03-05%20오후%201.15.40.png)
+
+상픔 등록 폼에서 상품 등록을 요청하면 상품 상세 페이지가 나오도록 개발했다.
+
+사실 이 애플리케이션엔 상품 등록 폼에서 상품 등록을 한 뒤 새로고침을 하면 계속 상품이 생성되는 버그가 있다.
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/07/screenshot%202022-03-05%20오후%201.16.23.png)
+
+웹 브라우저의 새로고침은 마지막에 서버에 전송한 데이터를 다시 전송한다는 의미다.
+
+따라서 상품 등록을 요청한 뒤 새로고침을 누르면 다시 같은 데이터를 서버로 전송하게 된다.
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/07/screenshot%202022-03-05%20오후%201.21.38.png)
+
+확인하면 똑같은 데이터로 POST 요청을 하고 있음을 알 수 있다.
+
+### 해결 방법
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/07/screenshot%202022-03-05%20오후%201.16.41.png)
+
+저장 후 리다이렉트를 하면 웹 브라우저 입장에서는 완전히 다른 url을 받게 된다. 그럼 새로고침을 해도 직전에 요청한 GET의 결과를 받게 된다. 이 방식을 PRG라고 부른다.
+
+{% tabs %} {% tab title="addItemV5" %}
+
+```java
+
+@Controller
+@RequiredArgsConstructor
+@RequestMapping("/basic/items")
+public class BasicItemController {
+
+    private final ItemRepository itemRepository;
+
+    ...
+
+    @PostMapping("/add")
+    public String addItemV5(Item item) {
+        itemRepository.save(item);
+
+        // redirect로 바꾼다.
+        return "redirect:/basic/items/" + item.getId();
+    }
+    
+    ...
+}
+```
+
+{% endtab %} {% tab title="addItemV4" %}
+
+```java
+
+@Controller
+@RequiredArgsConstructor
+@RequestMapping("/basic/items")
+public class BasicItemController {
+
+    private final ItemRepository itemRepository;
+
+    ...
+
+    @PostMapping("/add")
+    public String addItemV4(Item item) {
+        itemRepository.save(item);
+        return "basic/item";
+    }
+    
+    ...
+}
+```
+
+{% endtab %} {% endtabs %}
+
+따라서 상품 등록 후 상품 상세로 가도록 redirect 하면 문제가 해결된다.
+
+### 주의 사항
+
+`+ item.getId()`처럼 URL에 변수를 더해서 넣으면 URL 인코딩이 안되기 때문에 위험하다. 다음에 나올 RedirectAttributes를 사용하면 해결된다.
+
+## RedirectAttributes
+
+고객 입장에서 등록이 잘 된건지 확인이 어려우니 개선해보자.
+
+{% tabs %} {% tab title="BasicItemController.java" %}
+
+```java
+
+@Controller
+@RequiredArgsConstructor
+@RequestMapping("/basic/items")
+public class BasicItemController {
+
+    private final ItemRepository itemRepository;
+
+    ...
+
+    @PostMapping("/add")
+    public String addItemV6(Item item, RedirectAttributes redirectAttributes) {
+        Item savedItem = itemRepository.save(item);
+
+        // 여기 적힌 attributeName인 itemId가
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+
+        // 이곳 url로 들어온다.
+        return "redirect:/basic/items/{itemId}";
+    }
+    
+    ...
+}
+```
+
+{% endtab %} {% endtabs %}
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/07/screenshot%202022-03-05%20오후%201.41.40.png)
+
+itemId와 status가 전달된 걸 확인할 수 있다.
+
+{% tabs %} {% tab title="item.html" %}
+
+```html
+...
+
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>상품 상세</h2></div>
+    <div>
+        <!-- 추가 -->
+        <h2 th:if="${param.status}" th:text="'저장 완료!'"></h2>
+
+        ...
+    </div>
+</div>
+
+...
+```
+
+{% endtab %} {% endtabs %}
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/07/screenshot%202022-03-05%20오후%201.43.29.png)
+
+status가 true면 텍스트를 띄우도록 설정하면 등록이 확실하게 됐다는 걸 알 수 있다.
