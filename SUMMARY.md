@@ -176,6 +176,8 @@
   * [HTTP 메시지 컨버터](kimyounghan-spring-mvc/06-basic/http-message-converter.md)
   * [요청 매핑 핸들러 어댑터](kimyounghan-spring-mvc/06-basic/request-mapping-handler-adapter.md)
 * [스프링 MVC 웹 페이지 만들기](kimyounghan-spring-mvc/07-example/README.md)
+* [메시지, 국제화](kimyounghan-spring-mvc/08-message-and-internationalization/README.md)
+  * [스프링 메시지 소스](kimyounghan-spring-mvc/08-message-and-internationalization/spring-message-source.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
