@@ -35,7 +35,7 @@ class Example {
 {% tabs %} {% tab title="application.properties" %}
 
 ```properties
-# 스프링 부트 기본값
+# 스프링 부트 기본값. 적지 않아도 아래의 내용으로 동작한다.
 # spring.messages.basename=messages
 # 쉼표로 여러 파일 설정
 spring.messages.basename=messages,config.i18n.messages
@@ -66,5 +66,130 @@ hello.name=hello {0}
 
 {% endtab %} {% endtabs %}
 
-## 스프링 메시지 소스 사용하기
+## 스프링 메시지 소스 사용
 
+![](../../.gitbook/assets/kimyounghan-spring-mvc/08/screenshot%202022-03-09%20오후%202.13.42.png)
+
+```java
+
+@SpringBootTest
+public class MessageSourceTest {
+
+    @Autowired
+    MessageSource messageSource;
+
+    @Test
+    void helloMessage() {
+        String result = messageSource.getMessage("hello", null, null);
+        assertThat(result).isEqualTo("안녕");
+    }
+}
+```
+
+- code
+    - hello
+- args
+    - null
+- locale
+    - null
+    - locale 정보가 없으면 basename에서 설정한 기본 이름의 메시지 파일을 조회한다.
+    - basename이 messages이므로 messages.properties에서 데이터를 조회한다.
+
+### 메시지가 없는 경우
+
+```java
+
+@SpringBootTest
+public class MessageSourceTest {
+
+    @Autowired
+    MessageSource messageSource;
+
+    @Test
+    void notFoundMessageCode() {
+        assertThatThrownBy(() -> messageSource.getMessage("no_code", null, null))
+                .isInstanceOf(NoSuchMessageException.class);
+    }
+}
+
+```
+
+- 설정에 없는 메시지는 NoSuchMessageException을 던진다.
+
+### 기본 메시지 지정
+
+```java
+
+@SpringBootTest
+public class MessageSourceTest {
+
+    @Autowired
+    MessageSource messageSource;
+
+    @Test
+    void notFoundMessageCodeDefaultMessage() {
+        String result = messageSource.getMessage("no_code", null, "기본 메시지", null);
+        assertThat(result).isEqualTo("기본 메시지");
+    }
+}
+```
+
+- 메시지가 없어도 defaultMessage를 지정해주면 그 데이터를 반환한다.
+
+### 매개 변수 사용
+
+```java
+
+@SpringBootTest
+public class MessageSourceTest {
+
+    @Autowired
+    MessageSource messageSource;
+
+    @Test
+    void argumentMessage() {
+        String result = messageSource.getMessage("hello.name", new Object[]{"Spring"}, null);
+        assertThat(result).isEqualTo("안녕 Spring");
+    }
+}
+```
+
+- 메시지 설정 파일에 넣은 `{0}`을 매개변수로 치환할 수 있다.
+
+### 국제화 파일 선택
+
+```java
+
+@SpringBootTest
+public class MessageSourceTest {
+
+    @Autowired
+    MessageSource messageSource;
+
+    @Test
+    void defaultLang() {
+        assertThat(messageSource.getMessage("hello", null, null)).isEqualTo("안녕");
+        assertThat(messageSource.getMessage("hello", null, Locale.KOREA)).isEqualTo("안녕");
+    }
+}
+```
+
+- locale 정보가 없으면 messages를 사용한다.
+- locale 정보를 지정했지만 message_ko가 없으므로 messages를 사용한다.
+
+```java
+
+@SpringBootTest
+public class MessageSourceTest {
+
+    @Autowired
+    MessageSource messageSource;
+
+    @Test
+    void enLang() {
+        assertThat(messageSource.getMessage("hello", null, Locale.ENGLISH)).isEqualTo("hello");
+    }
+}
+```
+
+- locale 정보가 ENGLISH이므로 message_en을 찾아 사용한다.

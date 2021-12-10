@@ -55,4 +55,3 @@ item.quantity=수량
 - 국가 인식 방법
     - HTTP accept-language 헤더 값
     - 사용자가 직접 언어 선택 후 쿠키를 사용해 처리
-    - 국가에 해당하는 파일이 없으면 suffix가 붇지 않은 기본 값을 사용한다.
