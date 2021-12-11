@@ -193,3 +193,62 @@ public class MessageSourceTest {
 ```
 
 - locale 정보가 ENGLISH이므로 message_en을 찾아 사용한다.
+
+## 웹 애플리케이션에 메시지 적용
+
+{% tabs %} {% tab title="messages.properties" %}
+
+```properties
+label.item=상품
+label.item.id=상품 ID
+label.item.itemName=상품명
+label.item.price=가격
+label.item.quantity=수량
+page.items=상품 목록
+page.item=상품 상세
+page.addItem=상품 등록
+page.updateItem=상품 수정
+```
+
+{% endtab %} {% tab title="addForm.html" %}
+
+```thymeleafexpressions
+<label for="itemName" th:text="#{label.item.itemName}">상품명</label>
+```
+
+{% endtab %} {% endtabs %}
+
+## 웹 애플리케이션에 국제화 적용
+
+{% tabs %} {% tab title="messages.properties" %}
+
+```properties
+label.item=Item
+label.item.id=Item ID
+label.item.itemName=Item Name
+label.item.price=price
+label.item.quantity=quantity
+page.items=Item List
+page.item=Item Detail
+page.addItem=Item Add
+page.updateItem=Item Update
+button.save=Save
+button.cancel=Cancel
+
+```
+
+{% endtab %} {% endtabs %}
+
+- 크롬 설정을 영어로 바꾸고 접속하면 적용된다.
+    - 설정을 바꾸면 accept-language 헤더가 언어 정보를 담아 요청하고 해당 언어로 화면이 출력된다.
+- 스프링은 기본적으로 Locale 정보를 알아야 언어를 선택할 수 있다.
+    - 언어 선택 시 기본으로 accept-language 헤더의 값을 사용한다.
+
+### LocaleResolver
+
+스프링의 Locale 선택 방식을 바꾸고 싶다면 LocaleResolver 인터페이스를 사용한다.
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/08/screenshot%202022-03-09%20오후%202.58.54.png)
+
+- 스프링 부트는 기본적으로 AcceptHeaderLocaleResolver로 accept-language를 사용한다.
+- 이 설정을 바꾸고 싶다면 LocaleResolver의 구현체를 쿠키나 세션 기반으로 바꾸면 된다.
