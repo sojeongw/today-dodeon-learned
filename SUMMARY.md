@@ -179,6 +179,8 @@
 * [메시지, 국제화](kimyounghan-spring-mvc/08-message-and-internationalization/README.md)
     * [스프링 메시지 소스](kimyounghan-spring-mvc/08-message-and-internationalization/spring-message-source.md)
 * [Validation](kimyounghan-spring-mvc/09-validation/README.md)
+  * [BindingResult](kimyounghan-spring-mvc/09-validation/binding-result.md)
+  * [FieldError, ObjectError](kimyounghan-spring-mvc/09-validation/field-error-obejct-error.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
