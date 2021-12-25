@@ -8,6 +8,97 @@
     - ex. @ModelAttribute 바로 옆에 둬야 한다.
 - Model에 자동으로 포함되어 뷰에 넘어간다.
 
+## ValidationItemControllerV2
+
+{% tabs %} {% tab title="ValidationItemControllerV2.java" %}
+
+```java
+
+@Slf4j
+@Controller
+@RequestMapping("/validation/v2/items")
+@RequiredArgsConstructor
+public class ValidationItemControllerV2 {
+
+    @PostMapping("/add")
+    // BindingResult는 꼭 @ModelAttribute 옆에 있어야 한다.
+    public String addItemV1(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        // 검증 로직
+        if (!StringUtils.hasText(item.getItemName())) {
+            bindingResult.addError(new FieldError("itemName", "itemName", "상품 이름은 필수입니다."));
+        }
+
+        if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1_000_000) {
+            bindingResult.addError(new FieldError("item", "price", "가격은 1,000원에서 1,000,000원까지 허용합니다."));
+        }
+
+        if (item.getQuantity() == null || item.getQuantity() >= 9999) {
+            bindingResult.addError(new FieldError("item", "quantity", "수량은 최대 9,999까지 허용합니다."));
+        }
+
+        if (item.getPrice() != null && item.getQuantity() != null) {
+            int resultPrice = item.getPrice() * item.getQuantity();
+
+            if (resultPrice < 10000) {
+                bindingResult.addError(new ObjectError("item", "가격 * 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice));
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return "validation/v2/addForm";
+        }
+
+        // 성공 로직
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+
+        return "redirect:/validation/v2/items/{itemId}";
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+- BindingResult
+    - @ModelAttribute 옆에 위치해야 어떤 데이터를 바인딩 하는지 인식할 수 있다.
+- FieldError
+    - 필드 오류를 담는다.
+    - ObjectError의 자식이다.
+- ObjectError
+    - 글로벌 오류를 담는다.
+
+### FieldError
+
+```java
+class FieldError extends ObjectError {
+    public FieldError(String objectName, String field, String defaultMessage) {
+    }
+}
+```
+
+- objectName
+    - @ModelAttribute 이름
+- field
+    - 오류가 발생한 필드 이름
+- defaultMessage
+    - 오류 기본 메시지
+
+### ObjectError
+
+```java
+class ObjectError {
+    public ObjectError(String objectName, String defaultMessage) {
+    }
+}
+```
+
+- objectName
+    - @ModelAttribute 이름
+- defaultMessage
+    - 오류 기본 메시지
+
 ## BindingResult에 검증 오류를 적용하는 3가지 방법
 
 1. @ModelAttribute에 타입 요류 등 바인딩이 실패하는 경우 스프링이 FieldError를 생성해 BindingResult에 넣는다.
