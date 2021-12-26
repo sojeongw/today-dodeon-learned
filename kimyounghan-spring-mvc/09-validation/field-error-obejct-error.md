@@ -77,4 +77,4 @@ public class ValidationItemControllerV2 {
 
 사용자의 입력 데이터가 컨트롤러의 @ModelAttribute에 바인딩 되는 시점에 오류가 발생하면 모델 객체에 입력했던 값을 유지하기가 힘들다. Integer 타입에 문자를 입력한다면 보관할 수 있는 방법이 없다. 따라서 오류가 발생하면 FieldError를 이용해 입력 값을 별도로 저장하고 화면에 다시 출력한다.
 
-스프링은 타입 오류로 바인딩에 실패하면 FieldError를 생성하면서 사용자가 입력한 오류를 넣어둔다. 그리고 해당 오류를 BindingResult에 담아 컨트롤러럴 호출한다.
+스프링은 타입 오류로 바인딩에 실패하면 FieldError를 생성하면서 사용자가 입력한 오류를 넣어둔다. 그리고 해당 오류를 BindingResult에 담아 컨트롤러를 호출한다.

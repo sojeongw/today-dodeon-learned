@@ -181,6 +181,7 @@
 * [Validation](kimyounghan-spring-mvc/09-validation/README.md)
   * [BindingResult](kimyounghan-spring-mvc/09-validation/binding-result.md)
   * [FieldError, ObjectError](kimyounghan-spring-mvc/09-validation/field-error-obejct-error.md)
+  * [오류 코드와 메시지 처리](kimyounghan-spring-mvc/09-validation/error-code-and-message.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
