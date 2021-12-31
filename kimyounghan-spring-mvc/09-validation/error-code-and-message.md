@@ -189,3 +189,133 @@ required: 필수 값 입니다.
 ```
 
 이렇게 상세한 메시지를 우선순위 높게 사용하는 것이다. 범용성 있게 잘 개발해두면 메시지를 추가해야할 때도 편리하게 관리할 수 있다.
+
+## MessageCodesResolver
+
+- 검증 오류 코드로 메시지 코드를 생성한다.
+- MessageCodesResolver
+    - 인터페이스
+- DefaultMessageCodesResolver
+    - 기본 구현체
+- ObjectError, FieldError와 함께 사용한다.
+
+```java
+public class DefaultMessageCodesResolver implements MessageCodesResolver, Serializable {
+
+    @Override
+    public String[] resolveMessageCodes(String errorCode, String objectName) {
+        return resolveMessageCodes(errorCode, objectName, "", null);
+    }
+
+    @Override
+    public String[] resolveMessageCodes(String errorCode, String objectName, String field, @Nullable Class<?> fieldType) {
+    ...
+    }
+}
+```
+
+MessageCodesResolver.resolveMessageCodes()는 errorCode objectName, field를 받는다.
+
+```java
+public class MessageCodesResolverTest {
+
+    MessageCodesResolver messageCodesResolver = new DefaultMessageCodesResolver();
+
+    @Test
+    void messageCodesResolverObject() {
+        // 에러 코드를 넣으면 메시지 코드가 여러개 나온다.
+        String[] messageCodes = messageCodesResolver.resolveMessageCodes("required", "item");
+
+        for (String messageCode : messageCodes) {
+            System.out.println("messageCode = " + messageCode);
+        }
+    }
+}
+```
+
+```text
+messageCode = required.item
+messageCode = required
+```
+
+실행해보면 errorCode와 objectName을 조합해 세세한 메시지 코드를 먼저 만들고 그 다음에 범용적인 코드를 만든다.
+
+```java
+public class MessageCodesResolverTest {
+
+    MessageCodesResolver messageCodesResolver = new DefaultMessageCodesResolver();
+
+    @Test
+    void messageCodesResolverField() {
+        String[] messageCodes = messageCodesResolver.resolveMessageCodes("required", "item", "itemName", String.class);
+
+        assertThat(messageCodes).containsExactly(
+                "required.item.itemName",
+                "required.itemName",
+                "required.java.lang.String",
+                "required"
+        );
+    }
+}
+```
+
+field를 넣으면 그것까지 포함해서 만들어준다. `required.java.lang.String`는 타입도 거를 수 있다.
+
+## DefaultMessageCodesResolver의 기본 메시지 생성 규칙
+
+### 객체 오류
+
+1. code + "." + object name
+2. code
+
+`errorCode: required`, `object name: item`이라면
+
+1. required.item
+2. required
+
+### 필드 오류
+
+1. code + "." + object name + "." + field
+2. code + "." + field
+3. code + "." + field type
+4. code
+
+`errorCode: typeMismatch`, `object name: user`, `field: age`, `field type: int`이라면
+
+1. typeMismatch.user.age
+2. typeMismatch.age
+3. typeMismatch.int
+4. typeMismatch
+
+## 동작 방식
+
+- rejectValue(), reject()는 내부에서 MessageCodesResolver를 사용한다.
+    - 여기서 메시지 코드를 생성한다.
+- MessageCodesResolver를 통해 생성된 순서대로 오류 코드를 보관한다.
+    - FieldError, ObjectError의 생성자를 보면 오류 코드는 여러 개를 가질 수 있다.
+
+```text
+codes [range.item.price, range.price, range.java.lang.Integer, range]
+```
+
+BindingResult 로그를 통해서도 확인할 수 있다. 
+
+### FieldError
+
+```java
+rejectValue("itemName", "required")
+```
+
+- required.item.itemName
+- required.itemName
+- required.java.lang.String
+- required
+
+### ObjectError
+
+```java
+reject("totalPriceMin")
+```
+
+- totalPriceMin.item
+- totalPriceMin
