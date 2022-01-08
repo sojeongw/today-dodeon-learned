@@ -319,3 +319,78 @@ reject("totalPriceMin")
 
 - totalPriceMin.item
 - totalPriceMin
+
+## 오류 코드 관리 전략
+
+- 구체적인 것에서 덜 구체적인 것으로
+- 모든 오류 코드에 대해 메시지를 각각 정의하면 관리가 힘들다.
+- 중요하지 않은 건 범용성 있는 메시지로, 중요한 메시지는 필요할 때 구체적으로 적는다.
+
+{% tabs %} {% tab title="errors.properties" %}
+
+```properties
+## ObjectError
+# Level 1
+totalPriceMin.item=상품의 가격 * 수량의 합은 {0}원 이상이어야 합니다. 현재 값 = {1}
+
+# Level 2 - 생략
+totalPriceMin=전체 가격은 {0}원 이상이어야 합니다. 현재 값 = {1}
+
+## FieldError
+# Level 1
+required.item.itemName=상품 이름은 필수입니다.
+range.item.price=가격은 {0} ~ {1} 까지 허용합니다.
+max.item.quantity=수량은 최대 {0} 까지 허용합니다.
+
+# Level 2 - 생략
+
+# Level 3
+required.java.lang.String=필수 문자입니다.
+required.java.lang.Integer=필수 숫자입니다.
+min.java.lang.String={0} 이상의 문자를 입력해주세요.
+min.java.lang.Integer={0} 이상의 숫자를 입력해주세요.
+range.java.lang.String={0} ~ {1} 까지의 문자를 입력해주세요.
+range.java.lang.Integer={0} ~ {1} 까지의 숫자를 입력해주세요.
+max.java.lang.String={0} 까지의 문자를 허용합니다.
+max.java.lang.Integer={0} 까지의 숫자를 허용합니다.
+
+# Level 4
+required=필수 값 입니다.
+min={0} 이상이어야 합니다.
+range={0} ~ {1} 범위를 허용합니다.
+max={0} 까지 허용합니다.
+```
+
+{% endtab %} {% endtabs %}
+
+객체 오류와 필드 오류로 나누고 그 안에서 범용성에 따라 레벨을 나눈다.
+
+1. required.item.itemName
+2. required.itemName
+3. required.java.lang.String
+4. required
+
+메시지 코드는 이렇게 생성된다. 메시지에 1번이 없으면 2번으로, 2번이 없으면 3번을 찾는다.
+
+## ValidationUtils
+
+### before
+```java
+if (!StringUtils.hasText(item.getItemName())) {
+    bindingResult.rejectValue("itemName", "required", "기본: 상품 이름은 필수입니다.");
+}
+```
+
+### after
+```java
+ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "itemName", "required");
+```
+
+empty, white space 같은 간단한 기능은 한 줄로 줄일 수 있다.
+
+## 정리
+
+1. rejectValue()를 호출한다.
+2. MessageCodesResolver로 검증 오류 코드를 이용해 메시지 코드를 생성한다.
+3. new FieldError()를 생성하면서 메시지 코드를 보관한다.
+4. th:errors에서 메시지 코드로 메시지를 순서대로 찾는다.
