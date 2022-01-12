@@ -394,3 +394,31 @@ empty, white space 같은 간단한 기능은 한 줄로 줄일 수 있다.
 2. MessageCodesResolver로 검증 오류 코드를 이용해 메시지 코드를 생성한다.
 3. new FieldError()를 생성하면서 메시지 코드를 보관한다.
 4. th:errors에서 메시지 코드로 메시지를 순서대로 찾는다.
+
+## 스프링이 직접 만든 오류 메시지 처리
+
+```text
+codes[typeMismatch.item.price,typeMismatch.price,typeMismatch.java.lang.Integer,typeMismatch]
+```
+
+price 필드에 문자를 넣으면 typeMismatch를 설정해준 적이 없는데 이렇게 찍힌다. 스프링은 타입 오류가 발생하면 직접 생성해준다.
+
+```text
+Failed to convert property value of type java.lang.String to required type
+java.lang.Integer for property price; nested exception is
+java.lang.NumberFormatException: For input string: "A"
+```
+
+하지만 메시지가 복잡하기 때문에 따로 설정해주는 것이 좋다.
+
+{% tabs %} {% tab title="errors.properties" %}
+
+```properties
+...
+typeMismatch.java.lang.Integer=숫자를 입력해주세요.
+typeMismatch=타입 오류입니다.
+```
+
+{% endtab %} {% endtabs %}
+
+소스 코드를 건들지 않고도 메시지를 단계별로 설정할 수 있다.
