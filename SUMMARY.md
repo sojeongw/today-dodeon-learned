@@ -183,6 +183,7 @@
   * [FieldError, ObjectError](kimyounghan-spring-mvc/09-validation/field-error-obejct-error.md)
   * [오류 코드와 메시지 처리](kimyounghan-spring-mvc/09-validation/error-code-and-message.md)
   * [Validator 분리](kimyounghan-spring-mvc/09-validation/validator.md)
+* [Bean Validation](kimyounghan-spring-mvc/10-bean-validation/README.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
