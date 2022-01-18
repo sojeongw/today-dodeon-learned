@@ -37,7 +37,7 @@ public class Item {
     @NotNull
     @Range(min = 1000, max = 1_000_000)
     private Integer price;
-    
+
     @NotNull
     @Max(9999)
     private Integer quantity;
@@ -56,24 +56,24 @@ public class Item {
 ```java
 public class BeanValidationTest {
 
-  @Test
-  void beanValidation() {
-    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    // 검증기 생성
-    Validator validator = factory.getValidator();
+    @Test
+    void beanValidation() {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        // 검증기 생성
+        Validator validator = factory.getValidator();
 
-    Item item = new Item();
-    item.setItemName(" ");
-    item.setPrice(0);
-    item.setQuantity(10000);
+        Item item = new Item();
+        item.setItemName(" ");
+        item.setPrice(0);
+        item.setQuantity(10000);
 
-    Set<ConstraintViolation<Item>> violations = validator.validate(item);
+        Set<ConstraintViolation<Item>> violations = validator.validate(item);
 
-    for (ConstraintViolation<Item> violation : violations) {
-      System.out.println("violation=" + violation);
-      System.out.println("violation.message=" + violation.getMessage());
+        for (ConstraintViolation<Item> violation : violations) {
+            System.out.println("violation=" + violation);
+            System.out.println("violation.message=" + violation.getMessage());
+        }
     }
-  }
 }
 
 ```
@@ -90,3 +90,55 @@ violation.message=1000에서 1000000 사이여야 합니다
 ```
 
 애너테이션 하나로 간단하게 검증할 수 있다. 스프링은 빈 검증기를 통합해뒀기 때문에 실제로 직접 빈 검증기를 쓸 일은 없다.
+
+## 스프링 적용
+
+{% tabs %} {% tab title=".java" %}
+
+```java
+
+@Slf4j
+@Controller
+@RequestMapping("/validation/v3/items")
+@RequiredArgsConstructor
+public class ValidationItemControllerV3 {
+
+    @PostMapping("/add")
+    public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return "validation/v3/addForm";
+        }
+
+        Item savedItem = itemRepository.save(item);
+        redirectAttributes.addAttribute("itemId", savedItem.getId());
+        redirectAttributes.addAttribute("status", true);
+
+        return "redirect:/validation/v3/items/{itemId}";
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+기존 Validator 코드를 제거해도 실행해보면 검증기가 적용된다. validation 의존성을 추가하면 스프링이 자동으로 처리해주기 때문이다.
+
+### 작동 원리
+
+1. LocalValidatorFactoryBean을 글로벌 Validator로 등록한다.
+2. 애너테이션을 보고 검증을 수행한다.
+
+따라서 @Valid, Validated 애너테이션만 적용하면 된다. 검증 오류가 발생하면 FieldError, ObjectError를 생성해 BindingResult에 담는다.
+
+만약 이전에 만들었던 글로벌 검증기를 적용하고 있다면 스프링 부트가 자동으로 Validator를 등록하지 않기 때문에 제거해준다.
+
+### 검증 순서
+
+1. @ModelAttribute가 각 필드에 타입 변환을 시도한다.
+    - requestParam을 각 필드에 넣어준다.
+2. 성공하면 Validatior를 적용한다.
+3. 실패하면 typeMismatch로 FieldError를 추가한다.
+    - Validator는 적용하지 않는다.
+
+즉, 바인딩에 성공한 필드만 Bean Validation을 적용한다. 일단 모델 객체에서 바인딩 받는 값이 정상으로 들어와야 검증도 의미가 있기 때문이다.
+
