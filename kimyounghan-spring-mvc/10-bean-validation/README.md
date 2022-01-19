@@ -142,3 +142,41 @@ public class ValidationItemControllerV3 {
 
 즉, 바인딩에 성공한 필드만 Bean Validation을 적용한다. 일단 모델 객체에서 바인딩 받는 값이 정상으로 들어와야 검증도 의미가 있기 때문이다.
 
+## 에러 코드
+
+각 애너테이션은 그 이름을 오류 코드로 해서 메시지 코드를 생성한다.
+
+### @NotBlank
+
+- NotBlank.item.itemName
+- NotBlank.itemName
+- NotBlank.java.lang.String
+- NotBlank
+
+### @Range
+
+- Range.item.price
+- Range.price
+- Range.java.lang.Integer
+- Range
+
+따라서 메시지를 등록하면 Bean Validation의 기본 기능의 메시지를 수정할 수 있다.
+
+{% tabs %} {% tab title="errors.properties" %}
+
+```properties
+...
+# Bean Validation 추가
+NotBlank={0} 공백X
+Range={0}, {2} ~ {1} 허용
+Max={0}, 최대 {1}
+```
+
+{% endtab %} {% endtabs %}
+
+## Bean Validation 메시지 검색 우선순위
+
+1. 생성된 메시지 코드의 순서대로 messageSource에서 메시지 검색
+2. 애너테이션에 정의한 message 속성
+    - @NotBlank(message = "공백은 넣을 수 없습니다. {0}")
+3. 라이브러리가 제공하는 기본값
