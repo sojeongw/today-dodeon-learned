@@ -180,3 +180,60 @@ Max={0}, 최대 {1}
 2. 애너테이션에 정의한 message 속성
     - @NotBlank(message = "공백은 넣을 수 없습니다. {0}")
 3. 라이브러리가 제공하는 기본값
+
+## Bean Validation 오브젝트 오류
+### @ScriptAssert
+Bean Validation 애너테이션은 필드에 선언한다. 오브젝트 에러를 만들고 싶다면 어떻게 해야할까?
+
+{% tabs %} {% tab title="Item.java" %}
+
+```java
+
+@Data
+@ScriptAssert(lang = "javascript", script = "_this.price * _this.quantity >= 10000")
+public class Item {
+
+    ...
+}
+
+```
+
+{% endtab %} {% endtabs %}
+
+```text
+스크립트 표현식 "_this.price * _this.quantity >= 10000"가 true로 평가되지 않았습니다
+상품의 가격 * 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = 1,000
+```
+
+- 메시지 코드
+    - ScriptAssert.item
+    - ScriptAssert
+
+이 방식은 제약 조건이 많고 복잡하다. 실무에서 나오는 다양한 조건을 만족하기도 어렵다.
+
+### 자바 코드 작성
+
+```java
+
+@Slf4j
+@Controller
+@RequestMapping("/validation/v3/items")
+@RequiredArgsConstructor
+public class ValidationItemControllerV3 {
+    
+    @PostMapping("/add")
+    public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (item.getPrice() != null && item.getQuantity() != null) {
+            int resultPrice = item.getPrice() * item.getQuantity();
+            
+            if (resultPrice < 10000) {
+                bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
+            }
+        }
+        
+        ...
+    }
+}
+```
+
+따라서 그냥 자바 코드로 풀어내는 것을 권장한다.
