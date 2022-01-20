@@ -174,15 +174,17 @@ Max={0}, 최대 {1}
 
 {% endtab %} {% endtabs %}
 
-## Bean Validation 메시지 검색 우선순위
+## 메시지 검색 우선순위
 
 1. 생성된 메시지 코드의 순서대로 messageSource에서 메시지 검색
 2. 애너테이션에 정의한 message 속성
     - @NotBlank(message = "공백은 넣을 수 없습니다. {0}")
 3. 라이브러리가 제공하는 기본값
 
-## Bean Validation 오브젝트 오류
+## 오브젝트 오류
+
 ### @ScriptAssert
+
 Bean Validation 애너테이션은 필드에 선언한다. 오브젝트 에러를 만들고 싶다면 어떻게 해야할까?
 
 {% tabs %} {% tab title="Item.java" %}
@@ -220,12 +222,12 @@ public class Item {
 @RequestMapping("/validation/v3/items")
 @RequiredArgsConstructor
 public class ValidationItemControllerV3 {
-    
+
     @PostMapping("/add")
     public String addItem(@Validated @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (item.getPrice() != null && item.getQuantity() != null) {
             int resultPrice = item.getPrice() * item.getQuantity();
-            
+
             if (resultPrice < 10000) {
                 bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
             }
@@ -237,3 +239,83 @@ public class ValidationItemControllerV3 {
 ```
 
 따라서 그냥 자바 코드로 풀어내는 것을 권장한다.
+
+## Groups
+
+데이터 등록과 수정의 요구 사항이 다를 수 있다. 만약 수정 기능에선 id가 @NotNull이라면 같은 객체를 사용하는 등록 기능에 문제가 발생한다.
+
+그래서 Bean Validation은 groups라는 기능을 제공한다. 예를 들어 등록과 수정을 다른 그룹으로 나눠 적용할 수 있다.
+
+{% tabs %} {% tab title="SaveCheck.java" %}
+
+```java
+public interface SaveCheck {
+}
+```
+
+{% endtab %} {% tab title="UpdateCheck.java" %}
+
+```java
+public interface UpdateCheck {
+}
+```
+
+{% endtab %} {% endtabs %}
+
+{% tabs %} {% tab title="Item.java" %}
+
+```java
+
+@Data
+public class Item {
+
+    // 수정할 때만 적용한다.
+    @NotNull(groups = UpdateCheck.class)
+    private Long id;
+
+    @NotBlank(groups = {SaveCheck.class, UpdateCheck.class})
+    private String itemName;
+
+    @NotNull(groups = {SaveCheck.class, UpdateCheck.class})
+    @Range(min = 1000, max = 1000000, groups = {SaveCheck.class, UpdateCheck.class})
+    private Integer price;
+
+    @NotNull(groups = {SaveCheck.class, UpdateCheck.class})
+    // 등록할 때만 적용한다.
+    @Max(value = 9999, groups = SaveCheck.class)
+    private Integer quantity;
+
+    public Item() {
+    }
+
+    public Item(String itemName, Integer price, Integer quantity) {
+        this.itemName = itemName;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+```
+
+{% endtab %} {% tab title=".java" %}
+
+```java
+
+@Slf4j
+@Controller
+@RequestMapping("/validation/v3/items")
+@RequiredArgsConstructor
+public class ValidationItemControllerV3 {
+
+    @PostMapping("/add")
+    // 각 메서드에 적용한다.
+    public String addItemV2(@Validated(SaveCheck.class) @ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        ...
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+@Validated에 groups 기능을 적용하면 된다. @Valid에는 이 기능이 없다.
+
+하지만 복잡도가 올라가고 실무에서는 다른 방법을 쓰기 때문에 잘 쓰지 않는다.
