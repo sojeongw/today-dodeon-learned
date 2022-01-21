@@ -184,6 +184,7 @@
   * [오류 코드와 메시지 처리](kimyounghan-spring-mvc/09-validation/error-code-and-message.md)
   * [Validator 분리](kimyounghan-spring-mvc/09-validation/validator.md)
 * [Bean Validation](kimyounghan-spring-mvc/10-bean-validation/README.md)
+  * [Form 전송 객체 분리](kimyounghan-spring-mvc/10-bean-validation/html-form.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
