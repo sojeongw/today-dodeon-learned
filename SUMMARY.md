@@ -185,6 +185,7 @@
   * [Validator 분리](kimyounghan-spring-mvc/09-validation/validator.md)
 * [Bean Validation](kimyounghan-spring-mvc/10-bean-validation/README.md)
   * [Form 전송 객체 분리](kimyounghan-spring-mvc/10-bean-validation/html-form.md)
+  * [HTTP 메시지 컨버터](kimyounghan-spring-mvc/10-bean-validation/http-message-converter.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
