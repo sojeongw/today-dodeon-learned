@@ -179,15 +179,15 @@
 * [메시지, 국제화](kimyounghan-spring-mvc/08-message-and-internationalization/README.md)
     * [스프링 메시지 소스](kimyounghan-spring-mvc/08-message-and-internationalization/spring-message-source.md)
 * [Validation](kimyounghan-spring-mvc/09-validation/README.md)
-  * [BindingResult](kimyounghan-spring-mvc/09-validation/binding-result.md)
-  * [FieldError, ObjectError](kimyounghan-spring-mvc/09-validation/field-error-obejct-error.md)
-  * [오류 코드와 메시지 처리](kimyounghan-spring-mvc/09-validation/error-code-and-message.md)
-  * [Validator 분리](kimyounghan-spring-mvc/09-validation/validator.md)
+    * [BindingResult](kimyounghan-spring-mvc/09-validation/binding-result.md)
+    * [FieldError, ObjectError](kimyounghan-spring-mvc/09-validation/field-error-obejct-error.md)
+    * [오류 코드와 메시지 처리](kimyounghan-spring-mvc/09-validation/error-code-and-message.md)
+    * [Validator 분리](kimyounghan-spring-mvc/09-validation/validator.md)
 * [Bean Validation](kimyounghan-spring-mvc/10-bean-validation/README.md)
-  * [Form 전송 객체 분리](kimyounghan-spring-mvc/10-bean-validation/html-form.md)
-  * [HTTP 메시지 컨버터](kimyounghan-spring-mvc/10-bean-validation/http-message-converter.md)
+    * [Form 전송 객체 분리](kimyounghan-spring-mvc/10-bean-validation/html-form.md)
+    * [HTTP 메시지 컨버터](kimyounghan-spring-mvc/10-bean-validation/http-message-converter.md)
 * [로그인](kimyounghan-spring-mvc/11-login/README.md)
-  * [쿠키, 세션](kimyounghan-spring-mvc/11-login/cookie-session.md)
+    * [쿠키, 세션](kimyounghan-spring-mvc/11-login/cookie-session.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
