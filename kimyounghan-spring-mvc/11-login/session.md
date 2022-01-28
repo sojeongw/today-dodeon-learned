@@ -58,3 +58,99 @@ Cookie: mySessionId=zz0101xx-bab9-4b92-9b32-dadb280f4b61
 - 쿠키를 탈취해 영원히 사용한다.
     - 토큰을 털어도 세션 만료 시간을 짧게 해서 사용할 수 없게 한다.
     - 해킹이 의심되면 서버에서 해당 세션을 강제로 제거한다.
+
+## 직접 만든 세션 적용하기
+
+- 세션 생성
+    - sessionId 생성
+        - 임의의 추정 불가능한 랜덤 값
+    - 세션 저장소에 sessionId와 보관할 값을 저장한다.
+    - sessionId로 응답 쿠키를 생성해 클라이언트에 전달한다.
+- 세션 조회
+    - 클라이언트가 요청한 sessionId 쿠키 값으로 세션 저장소에 보관한 값을 조회한다.
+- 세션 만료
+    - 클라이언트가 요청한 sessionId 쿠키 값으로 세션 저장소에 보관한 sessionId와 값을 제거한다.
+    
+{% tabs %} {% tab title="SessionManager.java" %}
+
+```java
+@Component
+public class SessionManager {
+
+    private static final String SESSION_COOKIE_NAME = "mySessionId";
+    private Map<String, Object> sessionStore = new ConcurrentHashMap<>();
+
+    public void createSession(Object value, HttpServletResponse response) {
+        // 세션 ID를 생성한 뒤 값을 세션에 저장한다.
+        String sessionId = UUID.randomUUID().toString();
+        sessionStore.put(sessionId, value);
+
+        // 쿠키를 생성한다.
+        Cookie mySessionCookie = new Cookie(SESSION_COOKIE_NAME, sessionId);
+        response.addCookie(mySessionCookie);
+    }
+
+    public Object getSession(HttpServletRequest request) {
+        Cookie sessionCookie = findCookie(request, SESSION_COOKIE_NAME);
+
+        if (sessionCookie == null) {
+            return null;
+        }
+
+        return sessionStore.get(sessionCookie.getValue());
+    }
+
+    public void expire(HttpServletRequest request) {
+        Cookie sessionCookie = findCookie(request, SESSION_COOKIE_NAME);
+
+        if (sessionCookie != null) {
+            sessionStore.remove(sessionCookie.getValue());
+        }
+    }
+
+    private Cookie findCookie(HttpServletRequest request, String cookieName) {
+        if (request.getCookies() == null) {
+            return null;
+        }
+
+        return Arrays.stream(request.getCookies())
+                .filter(c -> c.getName().equals(cookieName))
+                .findAny()
+                .orElse(null);
+    }
+}
+```
+
+{% endtab %} {% tab title="SessionManagerTest.java" %}
+
+```java
+class SessionManagerTest {
+
+    SessionManager sessionManager = new SessionManager();
+
+    @Test
+    void sessionTest() {
+        // 세션 생성
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        Member member = new Member();
+        sessionManager.createSession(member, response);
+
+        // 응답에 있던 쿠키를 요청에 저장
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setCookies(response.getCookies());
+
+        // 세션 조회
+        Object result = sessionManager.getSession(request);
+        assertThat(result).isEqualTo(member);
+
+        // 세션 만료
+        sessionManager.expire(request);
+        Object expired = sessionManager.getSession(request);
+        assertThat(expired).isEqualTo(null);
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+세션을 관리하는 빈을 만든다.
