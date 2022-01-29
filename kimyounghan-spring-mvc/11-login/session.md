@@ -70,10 +70,11 @@ Cookie: mySessionId=zz0101xx-bab9-4b92-9b32-dadb280f4b61
     - 클라이언트가 요청한 sessionId 쿠키 값으로 세션 저장소에 보관한 값을 조회한다.
 - 세션 만료
     - 클라이언트가 요청한 sessionId 쿠키 값으로 세션 저장소에 보관한 sessionId와 값을 제거한다.
-    
+
 {% tabs %} {% tab title="SessionManager.java" %}
 
 ```java
+
 @Component
 public class SessionManager {
 
@@ -154,3 +155,67 @@ class SessionManagerTest {
 {% endtab %} {% endtabs %}
 
 세션을 관리하는 빈을 만든다.
+
+{% tabs %} {% tab title="LoginController.java" %}
+
+```java
+
+@Slf4j
+@Controller
+@RequiredArgsConstructor
+public class LoginController {
+
+    private final SessionManager sessionManager;
+
+    @PostMapping("/login")
+    public String loginV2(@Valid @ModelAttribute LoginForm form, BindingResult bindingResult, HttpServletResponse response) {
+        ...
+
+        sessionManager.createSession(loginMember, response);
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/logout")
+    public String logoutV2(HttpServletRequest request) {
+        sessionManager.expire(request);
+        return "redirect:/";
+    }
+}
+```
+
+{% endtab %} {% tab title="HomeController.java" %}
+
+```java
+
+@Slf4j
+@Controller
+@RequiredArgsConstructor
+public class HomeController {
+
+    private final SessionManager sessionManager;
+
+    @GetMapping("/")
+    public String homeLoginV2(HttpServletRequest request, Model model) {
+        // 세션 저장소에서 정보를 가져온다.
+        Member member = (Member) sessionManager.getSession(request);
+
+        if (member == null) {
+            return "home";
+        }
+
+        model.addAttribute("member", member);
+        return "loginHome";
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+수동으로 쿠키를 생성하고 만료시키던 로직 대신 sessionManager를 주입받아 사용한다.
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/11/screenshot%202022-03-13%20오후%201.39.21.png)
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/11/screenshot%202022-03-13%20오후%201.39.34.png)
+
+쿠키 값이 mySessionId로 바뀌었다.
