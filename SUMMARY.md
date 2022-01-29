@@ -2,54 +2,6 @@
 
 * [개발왕, 도던](README.md)
 
-## 지식 벌크업 <a id="interview"></a>
-
-* [JAVA](interview/jvm-and-java/README.md)
-    * [JVM과 메모리](interview/jvm-and-java/jvm.md)
-    * [Garbage Collector](interview/jvm-and-java/garbage-collector.md)
-* [스프링](interview/spring/README.md)
-    * [IoC와 DI](interview/spring/ioc-di.md)
-    * [JPA](interview/spring/jpa.md)
-    * [WebFlux](interview/spring/web-flux.md)
-* [디자인패턴](interview/design-pattern/README.md)
-    * [싱글톤 패턴](interview/design-pattern/singleton-pattern.md)
-    * [템플릿 메소드 패턴](interview/design-pattern/template-method-pattern.md)
-* [자료구조 & 알고리즘](interview/algorithm/README.md)
-    * [시간/공간 복잡도](interview/algorithm/complexity.md)
-    * [리스트](interview/algorithm/list.md)
-    * [우선 순위 큐](interview/algorithm/priority-queue.md)
-    * [해시 테이블](interview/algorithm/hash-table.md)
-    * [매칭 알고리즘](interview/algorithm/matching.md)
-    * [랭킹 알고리즘](interview/algorithm/ranking.md)
-* [데이터 베이스](interview/database/README.md)
-    * [데이터 베이스 설계](interview/database/dbms-design.md)
-    * [NoSQL](interview/database/no-sql.md)
-    * [서버 확장](interview/database/scaling.md)
-    * [샤딩](interview/database/sharding.md)
-    * [GraphQL](interview/database/graphql.md)
-* [네트워크](interview/network/README.md)
-    * [CDN](interview/network/cdn.md)
-    * [OSI 7계층](interview/network/osi-layers.md)
-    * [HTTP 프로토콜](interview/network/http-protocol.md)
-    * [HTTP 상태 코드](interview/network/status-code.md)
-    * [웹 서버](interview/network/web-server.md)
-    * [WAS](interview/network/was.md)
-    * [REST API](interview/network/rest-api.md)
-    * [서블릿](interview/network/servlet.md)
-    * [상태 정보](interview/network/state.md)
-* [아키텍처](interview/architecture/README.md)
-    * [Layered Architecture](interview/architecture/layered-architecture.md)
-    * [MSA](interview/architecture/micro-service/README.md)
-        * [MSA의 구성](interview/architecture/micro-service/architecture.md)
-* [클라우드 & 기타](interview/cloud/README.md)
-    * [AWS](interview/cloud/aws.md)
-    * [Elastic Beanstalk](interview/cloud/elastic-beanstalk.md)
-    * [ElasticCache](interview/cloud/elasticache-redis.md)
-    * [ECS](interview/cloud/ecs.md)
-    * [SQS](interview/cloud/sqs.md)
-    * [docker](interview/cloud/docker.md)
-    * [kubernetes](interview/cloud/kubernetes.md)
-
 ## 스프링 입문 <a id="kimyounghan-spring-introduction"></a>
 
 * [프로젝트 환경설정](kimyounghan-spring-introduction/01-project-settings/README.md)
@@ -189,6 +141,7 @@
 * [로그인](kimyounghan-spring-mvc/11-login/README.md)
     * [쿠키](kimyounghan-spring-mvc/11-login/cookie.md)
     * [세션](kimyounghan-spring-mvc/11-login/session.md)
+    * [서블릿 HTTP 세션](kimyounghan-spring-mvc/11-login/servlet-http-session.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
@@ -281,65 +234,6 @@
     * [정리](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/summary.md)
 * [OSIV와 성능 최적화](kimyounghan-spring-boot-and-jpa-optimization/04-osiv/README.md)
 
-## 스프링부트와 AWS로 혼자 구현하는 웹 서비스 <a id="freelac-jojoldu-spring-aws"></a>
-
-* [1장. IntelliJ 시작하기](freelac-jojoldu-spring-aws/01-springboot-intellij/README.md)
-* [2장. 테스트 코드 작성하기](freelac-jojoldu-spring-aws/02-springboot-testcode/README.md)
-* [3장. JPA로 데이터베이스 다루기](freelac-jojoldu-spring-aws/03-jpa-database/README.md)
-    * [Spring Data JPA 적용하기](freelac-jojoldu-spring-aws/03-jpa-database/01-project-jpa.md)
-    * [등록/수정/조회 API 만들기](freelac-jojoldu-spring-aws/03-jpa-database/02-crud-api.md)
-    * [JPA Auditing으로 자동화하기](freelac-jojoldu-spring-aws/03-jpa-database/03-jpa-auditing.md)
-* [4장. 머스테치로 화면 구성하기](freelac-jojoldu-spring-aws/04-mustache/README.md)
-    * [기본 페이지 만들기](freelac-jojoldu-spring-aws/04-mustache/01-create-page.md)
-    * [전체 조회 화면 만들기](freelac-jojoldu-spring-aws/04-mustache/02-get-list-page.md)
-    * [수정, 삭제 화면 만들기](freelac-jojoldu-spring-aws/04-mustache/03-update-page.md)
-* [5장. 스프링 시큐리티와 OAuth 2.0](freelac-jojoldu-spring-aws/05-security-oauth/README.md)
-    * [구글 로그인 연동하기](freelac-jojoldu-spring-aws/05-security-oauth/google-login.md)
-    * [애너테이션 기반으로 개선하기](freelac-jojoldu-spring-aws/05-security-oauth/annotation.md)
-    * [세션 저장소로 DB 사용하기](freelac-jojoldu-spring-aws/05-security-oauth/session-db.md)
-    * [기존 테스트에 시큐리티 적용하기](freelac-jojoldu-spring-aws/05-security-oauth/test-security.md)
-
-## 토비의 스프링 <a id="toby-spring"></a>
-
-* [첫 장을 펼치며](toby-spring/intro.md)
-* [1장. 오브젝트와 의존관계](toby-spring/1-object-dependency/README.md)
-    * [초난감 DAO](toby-spring/1-object-dependency/dao.md)
-    * [클래스의 분리](toby-spring/1-object-dependency/class.md)
-    * [관심사의 분리](toby-spring/1-object-dependency/interest.md)
-    * [인터페이스 도입](toby-spring/1-object-dependency/interface.md)
-    * [관계 설정 책임의 분리](toby-spring/1-object-dependency/relation.md)
-    * [원칙과 패턴](toby-spring/1-object-dependency/pattern.md)
-    * [오브젝트 팩토리](toby-spring/1-object-dependency/object-factory.md)
-    * [제어의 역전](toby-spring/1-object-dependency/inversion-of-control.md)
-    * [오브젝트 스코프](toby-spring/1-object-dependency/object-scope.md)
-    * [의존 관계](toby-spring/1-object-dependency/dependency-injection.md)
-* [2장. 테스트](toby-spring/2-unit-test/README.md)
-    * [단위 테스트의 필요성](toby-spring/2-unit-test/user-dao-test.md)
-    * [JUnit 프레임워크](toby-spring/2-unit-test/junit-framework.md)
-    * [JUnit 적용하기](toby-spring/2-unit-test/develop-testcode.md)
-    * [테스트가 이끄는 개발](toby-spring/2-unit-test/test-driven-development.md)
-    * [테스트 코드 리팩토링](toby-spring/2-unit-test/test-refactoring.md)
-    * [애플리케이션 컨텍스트의 문제점](toby-spring/2-unit-test/context-problem.md)
-    * [DI와 테스트](toby-spring/2-unit-test/test-and-di.md)
-    * [학습 테스트](toby-spring/2-unit-test/learning-test.md)
-    * [버그 테스트](toby-spring/2-unit-test/bug-test.md)
-    * [정리](toby-spring/2-unit-test/summary.md)
-* [3장. 템플릿](toby-spring/3-template/README.md)
-    * [템플릿 메소드 패턴](toby-spring/3-template/template-pattern.md)
-    * [내부 클래스를 이용한 리팩토링](toby-spring/3-template/refactoring.md)
-    * [컨텍스트와 DI](toby-spring/3-template/context-and-di.md)
-    * [템플릿과 콜백](toby-spring/3-template/template-and-callback.md)
-    * [템플릿/콜백의 활용](toby-spring/3-template/template-and-callback-example.md)
-    * [정리](toby-spring/3-template/summary.md)
-* [4장. 예외처리](toby-spring/4-exception/README.md)
-    * [예외처리 전략](toby-spring/4-exception/exception-strategy.md)
-    * [예외 전환](toby-spring/4-exception/exception-transition.md)
-    * [정리](toby-spring/4-exception/summary.md)
-* [5장. 서비스 추상화](toby-spring/5-abstraction/README.md)
-    * [서비스 추상화 및 개선](toby-spring/5-abstraction/code-refactoring.md)
-    * [트랜잭션 서비스 추상화](toby-spring/5-abstraction/transaction-abstraction.md)
-    * [트랜잭션 동기화](toby-spring/5-abstraction/transaction-synchronization.md)
-
 ## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
 
 * [예제로 배우는 스프링 입문(개정판)](spring-keesun-baik/spring-framework-introduction/README.md)
@@ -383,6 +277,98 @@
     * [Garbage Collector](inflearn-the-java/01-understanding-of-jvm/05-garbage-collector.md)
 * [리플렉션](inflearn-the-java/03-reflection)
     * [클래스 정보 조회](inflearn-the-java/03-reflection/01-class-info.md)
+
+[comment]: <> (## 지식 벌크업 <a id="interview"></a>)
+
+[comment]: <> (* [JAVA]&#40;interview/jvm-and-java/README.md&#41;)
+
+[comment]: <> (  * [JVM과 메모리]&#40;interview/jvm-and-java/jvm.md&#41;)
+
+[comment]: <> (  * [Garbage Collector]&#40;interview/jvm-and-java/garbage-collector.md&#41;)
+
+[comment]: <> (* [스프링]&#40;interview/spring/README.md&#41;)
+
+[comment]: <> (  * [IoC와 DI]&#40;interview/spring/ioc-di.md&#41;)
+
+[comment]: <> (  * [JPA]&#40;interview/spring/jpa.md&#41;)
+
+[comment]: <> (  * [WebFlux]&#40;interview/spring/web-flux.md&#41;)
+
+[comment]: <> (* [디자인패턴]&#40;interview/design-pattern/README.md&#41;)
+
+[comment]: <> (  * [싱글톤 패턴]&#40;interview/design-pattern/singleton-pattern.md&#41;)
+
+[comment]: <> (  * [템플릿 메소드 패턴]&#40;interview/design-pattern/template-method-pattern.md&#41;)
+
+[comment]: <> (* [자료구조 & 알고리즘]&#40;interview/algorithm/README.md&#41;)
+
+[comment]: <> (  * [시간/공간 복잡도]&#40;interview/algorithm/complexity.md&#41;)
+
+[comment]: <> (  * [리스트]&#40;interview/algorithm/list.md&#41;)
+
+[comment]: <> (  * [우선 순위 큐]&#40;interview/algorithm/priority-queue.md&#41;)
+
+[comment]: <> (  * [해시 테이블]&#40;interview/algorithm/hash-table.md&#41;)
+
+[comment]: <> (  * [매칭 알고리즘]&#40;interview/algorithm/matching.md&#41;)
+
+[comment]: <> (  * [랭킹 알고리즘]&#40;interview/algorithm/ranking.md&#41;)
+
+[comment]: <> (* [데이터 베이스]&#40;interview/database/README.md&#41;)
+
+[comment]: <> (  * [데이터 베이스 설계]&#40;interview/database/dbms-design.md&#41;)
+
+[comment]: <> (  * [NoSQL]&#40;interview/database/no-sql.md&#41;)
+
+[comment]: <> (  * [서버 확장]&#40;interview/database/scaling.md&#41;)
+
+[comment]: <> (  * [샤딩]&#40;interview/database/sharding.md&#41;)
+
+[comment]: <> (  * [GraphQL]&#40;interview/database/graphql.md&#41;)
+
+[comment]: <> (* [네트워크]&#40;interview/network/README.md&#41;)
+
+[comment]: <> (  * [CDN]&#40;interview/network/cdn.md&#41;)
+
+[comment]: <> (  * [OSI 7계층]&#40;interview/network/osi-layers.md&#41;)
+
+[comment]: <> (  * [HTTP 프로토콜]&#40;interview/network/http-protocol.md&#41;)
+
+[comment]: <> (  * [HTTP 상태 코드]&#40;interview/network/status-code.md&#41;)
+
+[comment]: <> (  * [웹 서버]&#40;interview/network/web-server.md&#41;)
+
+[comment]: <> (  * [WAS]&#40;interview/network/was.md&#41;)
+
+[comment]: <> (  * [REST API]&#40;interview/network/rest-api.md&#41;)
+
+[comment]: <> (  * [서블릿]&#40;interview/network/servlet.md&#41;)
+
+[comment]: <> (  * [상태 정보]&#40;interview/network/state.md&#41;)
+
+[comment]: <> (* [아키텍처]&#40;interview/architecture/README.md&#41;)
+
+[comment]: <> (  * [Layered Architecture]&#40;interview/architecture/layered-architecture.md&#41;)
+
+[comment]: <> (  * [MSA]&#40;interview/architecture/micro-service/README.md&#41;)
+
+[comment]: <> (    * [MSA의 구성]&#40;interview/architecture/micro-service/architecture.md&#41;)
+
+[comment]: <> (* [클라우드 & 기타]&#40;interview/cloud/README.md&#41;)
+
+[comment]: <> (  * [AWS]&#40;interview/cloud/aws.md&#41;)
+
+[comment]: <> (  * [Elastic Beanstalk]&#40;interview/cloud/elastic-beanstalk.md&#41;)
+
+[comment]: <> (  * [ElasticCache]&#40;interview/cloud/elasticache-redis.md&#41;)
+
+[comment]: <> (  * [ECS]&#40;interview/cloud/ecs.md&#41;)
+
+[comment]: <> (  * [SQS]&#40;interview/cloud/sqs.md&#41;)
+
+[comment]: <> (  * [docker]&#40;interview/cloud/docker.md&#41;)
+
+[comment]: <> (  * [kubernetes]&#40;interview/cloud/kubernetes.md&#41;)
 
 [comment]: <> (## Spring & Hibernate for Beginners <a id="spring-hibernate-for-beginners"></a>)
 
