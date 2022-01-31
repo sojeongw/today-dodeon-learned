@@ -91,7 +91,7 @@ public class LoginController {
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
-    
+
     @GetMapping("/")
     public String homeLoginV3(HttpServletRequest request, Model model) {
         // 로그인 하지 않은 사용자도 있으므로 false로 만든다.
@@ -122,3 +122,55 @@ public class HomeController {
 ![](../../.gitbook/assets/kimyounghan-spring-mvc/11/screenshot%202022-03-13%20오후%202.12.48.png)
 
 JSESSIONID를 확인할 수 있다.
+
+## @SessionAttribute
+
+{% tabs %} {% tab title="HomeController.java" %}
+
+```java
+
+@Slf4j
+@Controller
+@RequiredArgsConstructor
+public class HomeController {
+
+    @GetMapping("/")
+    public String homeLoginV3Spring(@SessionAttribute(name = SessionConst.LOGIN_MEMBER, required = false) Member loginMember, Model model) {
+        // 세션에 회원 데이터가 없으면 home으로 이동한다.
+        if (loginMember == null) {
+            return "home";
+        }
+
+        // 세션이 유지되면 로그인으로 이동한다.
+        model.addAttribute("member", loginMember);
+        return "loginHome";
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+getAttribute()를 일일이 하지 않아도 알아서 데이터를 처리해준다.
+
+## TrackingModes
+
+```text
+http://localhost:8080/;jsessionid=F59911518B921DF62D09F0DF8F83F872
+```
+
+로그인을 처음 시도하면 url에 jsessionid가 붙는다.
+
+- 웹 브라우저가 쿠키를 지원하지 않을 때 url로 세션을 유지하는 방법
+- url에 값을 계속 포함해서 전달해야 한다.
+    - 번거로운 작업이라 거의 사용하지 않는다.
+- 서버 입장에서는 쿠키 지원 여부를 최초에 판단하지 못하기 때문에 쿠키와 url의 jsessionid 모두 전달한다.
+
+{% tabs %} {% tab title="application.properties" %}
+
+```properties
+server.servlet.session.tracking-modes=cookie
+```
+
+{% endtab %} {% endtabs %}
+
+이렇게 설정하면 url에 더 이상 노출되지 않는다.
