@@ -69,3 +69,101 @@ public interface Filter {
     - 서블릿 컨테이너가 종료될 때 호출된다.
 
 필터 인터페이스를 구현하고 등록하면 서블릿 컨테이너가 필터를 싱글톤 객체로 생성하고 관리한다.
+
+## Log 필터 구현
+
+{% tabs %} {% tab title="LogFilter.java" %}
+
+```java
+
+@Slf4j
+public class LogFilter implements Filter {
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        log.info("log filter init");
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        log.info("log filter doFilter");
+
+        // 자식인 HttpServletRequest로 다운캐스팅 해야 한다.
+        HttpServletRequest httpRequest = (HttpServletRequest) request;
+        String requestURI = httpRequest.getRequestURI();
+
+        // 각 HTTP 요청을 구분하기 위해 요청당 UUID를 할당한다.
+        String uuid = UUID.randomUUID().toString();
+
+        try {
+            log.info("REQUEST [{}][{}]", uuid, requestURI);
+            // 다음 필터를 꼭 호출해줘야 한다.
+            chain.doFilter(request, response);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            // 필터를 호출하고 나면 실행된다.
+            log.info("RESPONSE [{}][{}]", uuid, requestURI);
+        }
+    }
+
+    @Override
+    public void destroy() {
+        log.info("log filter destroy");
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+- 필터를 사용하려면 Filter 인터페이스를 구현해야 한다.
+- HTTP 요청이 오면 doFilter()가 호출된다.
+- chain.doFilter();
+    - 다음 필터가 있으면 필터를 호출하고 필터가 없으면 서블릿을 호출한다.
+    - 이 로직이 없으면 다음 단계로 진행되지 않는다.
+
+{% tabs %} {% tab title="WebConfig.java" %}
+
+```java
+
+@Configuration
+public class WebConfig {
+
+    @Bean
+    public FilterRegistrationBean logFilter() {
+        FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
+
+        // 만들어 둔 필터를 추가한다.
+        filterRegistrationBean.setFilter(new LogFilter());
+        // 필터는 체인으로 동작하기 때문에 순서를 지정해줘야 한다.
+        filterRegistrationBean.setOrder(1);
+        // 모든 url 패턴에 적용한다.
+        filterRegistrationBean.addUrlPatterns("/*");
+
+        return filterRegistrationBean;
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+- 필터를 실제로 사용하려면 등록이 필요하다.
+    - 스프링 부트를 쓴다면 FilterRegistrationBean으로 등록한다.
+
+```java
+@ServletComponentScan @WebFilter(filterName = "logFilter", urlPatterns = "/*")
+```
+
+필터를 이렇게도 등록할 수 있지만 필터 순서 조절이 안되므로 FilterRegistrationBean을 쓰자.
+
+```text
+log filter doFilter
+REQUEST [e6ad5d37-f4c6-4047-a899-610aa2416783][/]
+RESPONSE [e6ad5d37-f4c6-4047-a899-610aa2416783][/]
+
+log filter doFilter
+REQUEST [5eaf3f1b-7d5d-429f-baae-28b56956c4cd][/login]
+RESPONSE [5eaf3f1b-7d5d-429f-baae-28b56956c4cd][/login]
+```
+
+실무에서 같은 HTTP 요청에 대해 같은 식별자를 남기고 싶다면 logback mdc로 검색해보자.
