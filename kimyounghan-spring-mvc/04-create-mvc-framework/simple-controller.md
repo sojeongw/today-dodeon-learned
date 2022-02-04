@@ -74,7 +74,7 @@ public class MemberListControllerV4 implements ControllerV4 {
 
 컨트롤러는 ViewName만 반환한다.
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="FrontControllerServletV4.java" %}
 
 ```java
 @WebServlet(name = "frontControllerServletV4", urlPatterns = "/front-controller/V4/*")

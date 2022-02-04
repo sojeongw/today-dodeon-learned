@@ -93,7 +93,7 @@ violation.message=1000에서 1000000 사이여야 합니다
 
 ## 스프링 적용
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="ValidationItemControllerV3.java" %}
 
 ```java
 
@@ -296,7 +296,7 @@ public class Item {
 }
 ```
 
-{% endtab %} {% tab title=".java" %}
+{% endtab %} {% tab title="ValidationItemControllerV3.java" %}
 
 ```java
 

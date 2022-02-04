@@ -21,7 +21,7 @@ public abstract class SessionConst {
 }
 ```
 
-{% endtab %} {% tab title=".java" %}
+{% endtab %} {% tab title="LoginController.java" %}
 
 ```java
 
@@ -60,7 +60,7 @@ public class LoginController {
 
 session.setAttribute()로 하나의 세션에 여러 값을 저장할 수 있다.
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="LoginController.java" %}
 
 ```java
 
@@ -83,7 +83,7 @@ public class LoginController {
 }
 ```
 
-{% endtab %} {% tab title=".java" %}
+{% endtab %} {% tab title="HomeController.java" %}
 
 ```java
 

@@ -1,6 +1,6 @@
 # 컬렉션 조회 최적화
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="OrderApiController.java" %}
 
 ```java
 @RestController
@@ -18,7 +18,7 @@ public class OrderApiController {
 }
 ```
 
-{% endtab %} {% tab title=".java" %}
+{% endtab %} {% tab title="OrderQueryRepository.java" %}
 
 ```java
 @Repository

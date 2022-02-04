@@ -144,7 +144,7 @@ public class ComponentFilterAppConfigTest {
 
 ### 수동 빈 등록 + 자동 빈 등록
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="MemoryMemberRepository.java" %}
 
 ```java
 
@@ -154,7 +154,7 @@ public class MemoryMemberRepository implements MemberRepository {
 }
 ```
 
-{% endtab %} {% tab title=".java" %}
+{% endtab %} {% tab title="AutoAppConfig.java" %}
 
 ```java
 
