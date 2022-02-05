@@ -119,7 +119,7 @@ public class MyHttpRequestHandler implements HttpRequestHandler {
     1. HandlerAdapter의 supports()를 순서대로 호출한다.
     2. HttpRequestHandler 인터페이스를 지원하는 HttpRequestHandlerAdapter가 대상이 된다.
 3. 핸들러 어댑터 실행
-    1. DispatcherServlet이 조회한 HttpRequestHandlerAdapter를 실행하면서 핸들러 정보를 함꼐 넘긴다.
+    1. DispatcherServlet이 조회한 HttpRequestHandlerAdapter를 실행하면서 핸들러 정보를 함께 넘긴다.
         - DispatcherServlet.doDispatch() 에서 HttpRequestHandlerAdapter.handle()이 호출된다.
     2. HttpRequestHandlerAdapter는 핸들러인 MyHttpRequestHandler를 내부에서 실행하고 결과를 반환한다.
 

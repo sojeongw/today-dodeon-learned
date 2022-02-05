@@ -120,7 +120,7 @@ public class OrderServiceImpl implements OrderService{
 
 ![](../../.gitbook/assets/kimyounghan-spring-core-principle/03/screenshot%202021-04-09%20오전%2010.13.37.png)
 
-`OrderServiceImpl`이 인터페이스만 보는 게 아니라 `FixDiscountPolicy`도 보고 있기 때문에 `RateDiscountPolicy`로 변경하는 순간 `OrderServiceImpl`의 소스 코드도 함꼐 변경해야 한다.
+`OrderServiceImpl`이 인터페이스만 보는 게 아니라 `FixDiscountPolicy`도 보고 있기 때문에 `RateDiscountPolicy`로 변경하는 순간 `OrderServiceImpl`의 소스 코드도 함께 변경해야 한다.
 
 기능을 확장해서 변경하면 클라이언트 코드에 영향을 주므로 OCP를 위반한다.
 
