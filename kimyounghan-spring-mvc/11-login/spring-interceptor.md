@@ -218,6 +218,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/css/**", "/*.ico", "/error");
     }
+    
+    ...
 }
 ```
 
@@ -235,3 +237,76 @@ public class WebConfig implements WebMvcConfigurer {
 
 - LoginCheckFilter 뒤에 LogInterceptor가 실행되었다.
     - ModelAndView부터 핸들러 정보, Member, Model 등의 파라미터 정보까지 다 찍힌다.
+
+## 인증 체크 인터셉터 구현하기
+
+{% tabs %} {% tab title="LoginCheckInterceptor.java" %}
+
+```java
+
+@Slf4j
+public class LoginCheckInterceptor implements HandlerInterceptor {
+
+    @Override
+    public boolean preHandle(HttpServletRequest request,
+                             HttpServletResponse response,
+                             Object handler) throws Exception {
+
+        String requestURI = request.getRequestURI();
+        log.info("인증 체크 인터셉터 실행 {}", requestURI);
+        HttpSession session = request.getSession(false);
+
+        if (session == null || session.getAttribute(SessionConst.LOGIN_MEMBER) == null) {
+            log.info("미인증 사용자 요청");
+            response.sendRedirect("/login?redirectURL=" + requestURI);
+
+            // 더 이상 진행하지 않고 끝낸다.
+            return false;
+        }
+        return true;
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+- 인증은 컨트롤러 호출 전에만 한 번 하면 되므로 preHandle()만 구현한다.
+    - 서블릿과 달리 메서드가 나눠져 있어 관심사에 따라 분리할 수 있어 편하다.
+
+{% tabs %} {% tab title=".java" %}
+
+```java
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new LogInterceptor())
+                .order(1)
+                .addPathPatterns("/**")
+                .excludePathPatterns("/css/**", "/*.ico", "/error");
+
+        registry.addInterceptor(new LoginCheckInterceptor())
+                .order(2)
+                .addPathPatterns("/**")
+                .excludePathPatterns(
+                        "/", "/members/add", "/login", "/logout",
+                        "/css/**", "/*.ico", "/error"
+                );
+    }
+    
+    ...
+}
+```
+
+{% endtab %} {% endtabs %}
+
+- 서블릿보다 간단하게 패턴을 적용할 수 있다.
+    - 화이트 리스트에 따른 복잡한 로직을 수행하지 않는다.
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/11/screenshot%202022-03-13%20오후%205.54.46.png)
+
+- 로그와 로그인 모두 인터셉터로 처리되었다.
+
+서블릿 필터와 스프링 인터셉터는 웹의 공통 관심사를 해결하기 위한 기술이지만 스프링 인터셉터가 개발자 입장에서 훨씬 편리하므로 인터셉터를 주로 사용하는 게 좋다.
