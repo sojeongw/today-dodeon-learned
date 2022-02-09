@@ -149,7 +149,7 @@ Cloud Watch와 연동해 EC2 인스턴스의 CPU, 네트워크 사용량이 늘�
 
 ![](../../.gitbook/assets/interview/cloud/elb.png)
 
-HTTP, TCP, SSL 트래픽이 한 곳에 집중될 떄 여러 EC2 인스턴스로 분산시킨다. 서비스가 정상적으로 가동 중인지 확인해 일부 EC2 인스턴스가 중단되어도 트래픽을 정상 EC2 인스턴스로 보내준다.
+HTTP, TCP, SSL 트래픽이 한 곳에 집중될 때 여러 EC2 인스턴스로 분산시킨다. 서비스가 정상적으로 가동 중인지 확인해 일부 EC2 인스턴스가 중단되어도 트래픽을 정상 EC2 인스턴스로 보내준다.
 
 ## Cloud Front
 

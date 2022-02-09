@@ -273,7 +273,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
 - 인증은 컨트롤러 호출 전에만 한 번 하면 되므로 preHandle()만 구현한다.
     - 서블릿과 달리 메서드가 나눠져 있어 관심사에 따라 분리할 수 있어 편하다.
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="WebConfig.java" %}
 
 ```java
 

@@ -150,7 +150,7 @@ public class AppConfig {
 
 {% endtab %} {% endtabs %}
 
-`memberService`가 `AppConfig`에서 `MemberService`를 반환한다고 메서드가 정의되어 있어도, 실제로는 `MemberServiceImpl`라는 인스턴스 타입을 보고 결정하기 떄문에 구체 클래스로도 조회할 수 있다.
+`memberService`가 `AppConfig`에서 `MemberService`를 반환한다고 메서드가 정의되어 있어도, 실제로는 `MemberServiceImpl`라는 인스턴스 타입을 보고 결정하기 때문에 구체 클래스로도 조회할 수 있다.
 
 하지만 이 방법은 좋지 않다. 역할과 구현을 구분하고 역할에 의존해야 하기 때문이다.
 

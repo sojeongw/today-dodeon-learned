@@ -39,7 +39,7 @@
 
 ![](../../.gitbook/assets/kimyounghan-http-web-basic/08/screenshot%202021-04-04%20오후%207.13.19.png)
 
-다시 서버에 요청을 한다. 서버는 다시 캐시 유효 시간을 담아 보낸다. 이떄 다시 네트워크 다운로드가 발생한다.
+다시 서버에 요청을 한다. 서버는 다시 캐시 유효 시간을 담아 보낸다. 이때 다시 네트워크 다운로드가 발생한다.
 
 ![](../../.gitbook/assets/kimyounghan-http-web-basic/08/screenshot%202021-04-04%20오후%207.13.24.png)
 

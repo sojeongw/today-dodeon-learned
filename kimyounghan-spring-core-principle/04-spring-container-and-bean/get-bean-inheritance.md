@@ -4,7 +4,7 @@
 
 ![](../../.gitbook/assets/kimyounghan-spring-core-principle/04/screenshot%202021-04-10%20오후%205.01.41.png)
 
-상속 관계가 위와 같다면 1번 타입으로 조회했을 떄 모든 빈이 조회된다. 그 다음 번호들도 자기 자식만큼 나온다.
+상속 관계가 위와 같다면 1번 타입으로 조회했을 때 모든 빈이 조회된다. 그 다음 번호들도 자기 자식만큼 나온다.
 
 {% tabs %} {% tab title="ApplicationContextInheritanceTest.java" %}
 

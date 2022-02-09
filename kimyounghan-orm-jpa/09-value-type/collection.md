@@ -262,7 +262,7 @@ public class JpaMain {
 
 {% endtab %} {% endtabs %}
 
-`addressHistory`에서 `old1`만 수정하고 싶다면 해당 값을 찾아서 지우고 다시 넣는다. 컬렉션은 찾을 떄 기본적으로 `equals()`를 사용하므로 반드시 오버라이딩이 필요하다.  
+`addressHistory`에서 `old1`만 수정하고 싶다면 해당 값을 찾아서 지우고 다시 넣는다. 컬렉션은 찾을 때 기본적으로 `equals()`를 사용하므로 반드시 오버라이딩이 필요하다.  
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/09/screenshot%202021-04-03%20오후%203.21.19.png)
 

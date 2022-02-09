@@ -1,6 +1,6 @@
 # 애너테이션 직접 만들기
 
-`@Qualifier("mainDiscountPolicy")`로 쓰면 String이므로 컴파일 할 떄 타입 체크가 안된다.
+`@Qualifier("mainDiscountPolicy")`로 쓰면 String이므로 컴파일 할 때 타입 체크가 안된다.
 
 {% tabs %} {% tab title="MainDiscountPolicy.java" %}
 

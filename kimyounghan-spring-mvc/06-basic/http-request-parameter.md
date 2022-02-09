@@ -31,7 +31,7 @@ content-type: application/x-www-form-urlencoded
 username=hello&age=20
 ```
 
-- 요청 파랄미터 조회라고도 한다.
+- 요청 파라미터 조회라고도 한다.
 - HttpServletRequest의 request.getParameter()
     - GET 쿼리 파라미터든 POST HTML Form이든 둘 다 형식이 같으므로 구분없이 조회할 수 있다.
 
@@ -317,6 +317,6 @@ public class RequestParamController {
 - @ModelAttribute
     - 나머지
     - argument resolver로 지정해둔 타입 외의 것들
-        - ex. HttpServletResponse
+        - ex. HttpServletResponse 등은 ArgumentResolver가 처리한다.
     - @RequestParam과 달리 기본값을 알아서 넣어준다.
         

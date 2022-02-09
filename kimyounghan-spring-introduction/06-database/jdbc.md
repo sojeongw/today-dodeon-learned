@@ -11,7 +11,7 @@ MacOS는 H2 설치 뒤 권한을 주어야 제대로 실행된다.
 
 ![](../../.gitbook/assets/kimyounghan-spring-introduction/06/_2021-01-27__1.25.00.png)
 
-상황에 따라 IP가 잡히면서 안될 떄가 있는데, 뒤는 그대로 두고(세션 키가 있어서 중요함) `localhost`로 바꿔서 접속하면 된다.
+상황에 따라 IP가 잡히면서 안될 때가 있는데, 뒤는 그대로 두고(세션 키가 있어서 중요함) `localhost`로 바꿔서 접속하면 된다.
 
 ![](../../.gitbook/assets/kimyounghan-spring-introduction/06/_2021-01-27__1.27.20.png)
 

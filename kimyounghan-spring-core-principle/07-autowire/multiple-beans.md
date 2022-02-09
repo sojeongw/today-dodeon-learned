@@ -81,7 +81,7 @@ public class FixDiscountPolicy implements DiscountPolicy {
 }
 ```
 
-`@Qualifier`를 붙여 구분해준다. 주입할 떄 추가적인 방법을 제공하는 것이지 빈 이름을 변경하는 것은 아니다.
+`@Qualifier`를 붙여 구분해준다. 주입할 때 추가적인 방법을 제공하는 것이지 빈 이름을 변경하는 것은 아니다.
 
 {% tabs %} {% tab title="생성자 자동 주입" %}
 

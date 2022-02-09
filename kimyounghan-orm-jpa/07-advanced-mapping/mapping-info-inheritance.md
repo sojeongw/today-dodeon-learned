@@ -4,7 +4,7 @@
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/07/screenshot%202021-05-16%20오후%207.50.38.png)
 
-공통 매핑 정보가 필요할 떄 사용한다.
+공통 매핑 정보가 필요할 때 사용한다.
 
 ```java
 public class Member {

@@ -266,7 +266,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
 ### userNameAttributeName
 
-OAuth2 로그인을 할 때 Primary Key처럼 키가 되는 필드값을 의미한다. 구글은 `sub`이라는 기본 코드를 지원하고 네이버, 카카오 등은 지원하지 않는다. 나중에 네이버와 구글 로그인을 동시에 지원할 떄 사용할 것이다.
+OAuth2 로그인을 할 때 Primary Key처럼 키가 되는 필드값을 의미한다. 구글은 `sub`이라는 기본 코드를 지원하고 네이버, 카카오 등은 지원하지 않는다. 나중에 네이버와 구글 로그인을 동시에 지원할 때 사용할 것이다.
 
 ### OAuthAttributes
 

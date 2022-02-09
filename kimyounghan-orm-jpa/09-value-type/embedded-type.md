@@ -205,7 +205,7 @@ public class Member {
 
 {% endtab %} {% endtabs %}
 
-한 엔티티에서 같은 값 타입을 사용하면 어떻게 해야할까? 이떄 사용하는 것이 `@AttributeOverride`다.
+한 엔티티에서 같은 값 타입을 사용하면 어떻게 해야할까? 이때 사용하는 것이 `@AttributeOverride`다.
 
 {% tabs %} {% tab title="Member.java" %}
 

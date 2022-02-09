@@ -12,7 +12,7 @@
 
 ## 리소스 반환과 close\(\)
 
-`Connection`이나 `PreparedStatement`의 `close()`는 리소스를 반환하는 메소드다. 이 둘은 보통 pool 방식으로 운영된다. 미리 정해진 풀 안에 제한된 수의 리소스\(Connection, Statement\)를 만들어두고 필요할떄 할당하고 반환하면 다시 풀에 넣는다.
+`Connection`이나 `PreparedStatement`의 `close()`는 리소스를 반환하는 메소드다. 이 둘은 보통 pool 방식으로 운영된다. 미리 정해진 풀 안에 제한된 수의 리소스\(Connection, Statement\)를 만들어두고 필요할때 할당하고 반환하면 다시 풀에 넣는다.
 
 서버 환경에서는 요청이 매우 많아 매번 새로운 리소스를 생성하는 대신 풀에 미리 만들어둔 리소스를 돌려가며 사용하는 것이 훨씬 유리하다. 대신 사용한 리소스는 빠르게 반환해야 한다.
 
@@ -157,7 +157,7 @@ try 블록을 사용했다면 반드시 `close()` 호출로 가져온 리소스�
 
 ### getConnection\(\)에서 DB 커넥션을 가져올 때
 
-일시적으로 DB나 네트워크에 문제가 있거나 다른 예외가 생겼다면 `ps`와 `c` 둘 다 null 상태다. `null`일 떄 `close()`를 호출하면 `NullPointerException`이 발생하므로 `close()`를 호출해서는 안된다.
+일시적으로 DB나 네트워크에 문제가 있거나 다른 예외가 생겼다면 `ps`와 `c` 둘 다 null 상태다. `null`일 때 `close()`를 호출하면 `NullPointerException`이 발생하므로 `close()`를 호출해서는 안된다.
 
 ### PreparedStatement를 생성하다가 예외가 발생했을 때
 

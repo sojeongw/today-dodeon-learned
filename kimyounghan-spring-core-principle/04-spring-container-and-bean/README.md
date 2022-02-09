@@ -24,7 +24,7 @@ public class OrderApp {
 new AnnotationConfigApplicationContext(AppConfig.class);
 ```
 
-스프링 컨테이너를 생성할 떄 구성 정보를 지정해줘야 한다. 여기서는 `AppConfig.class`를 구성 정보로 지정했다.
+스프링 컨테이너를 생성할 때 구성 정보를 지정해줘야 한다. 여기서는 `AppConfig.class`를 구성 정보로 지정했다.
 
 스프링 컨테이너에는 키가 bean 이름, 값이 bean 객체로 되어있는 스프링 저장소가 들어있다.
 

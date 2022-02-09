@@ -355,7 +355,7 @@ public class UserDao {
         jdbcContextWithStatementStrategy(st);
     }
 
-    // 이 컨텍스트를 호출할 떄 클라이언트가 StatementStrategy라는 전략을 넘겨준다.
+    // 이 컨텍스트를 호출할 때 클라이언트가 StatementStrategy라는 전략을 넘겨준다.
     public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException {
         Connection c = null;
         PreparedStatement ps = null;

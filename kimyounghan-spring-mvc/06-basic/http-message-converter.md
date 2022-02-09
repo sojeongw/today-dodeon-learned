@@ -131,4 +131,4 @@ content-type: text/html
 void hello(@RequestBody HelloData data) {}
 ```
 
-만약 이렇게 되어있다면, 클래스 타입은 맞아도 미디어 타입이 application/json이 아니므로 탈락된다.
+만약 이렇게 되어있다면, 클래스 타입은 맞아도 미디어 타입이 application/json이 아니므로 탈락하고 오류가 발생한다.
