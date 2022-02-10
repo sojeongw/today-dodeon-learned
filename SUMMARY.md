@@ -145,6 +145,7 @@
     * [서블릿 필터](kimyounghan-spring-mvc/11-login/servlet-filter.md)
     * [스프링 인터셉터](kimyounghan-spring-mvc/11-login/spring-interceptor.md)
     * [ArgumentResolver 활용](kimyounghan-spring-mvc/11-login/argument-resolver.md)
+* [예외 처리와 오류 페이지](kimyounghan-spring-mvc/12-exception/README.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
