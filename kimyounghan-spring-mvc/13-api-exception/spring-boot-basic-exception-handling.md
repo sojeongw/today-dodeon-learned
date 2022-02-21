@@ -43,3 +43,8 @@ server.error.include-stacktrace=always
 
 ## HTML 페이지 vs API 오류
 
+- BasicErrorController를 확장하면 JSON 메시지 변경이 가능하다.
+- BasicErrorController는 HTML 페이지를 제공하는 경우는 편리하다.
+    - 하지만 API 오류 처리는 예외마다 각각 다른 응답을 던져줘야 할 수 있다.
+    - 예를 들어 회원 API와 상품 API의 예외 처리는 각자 다르다.
+- 따라서 보통 @ExceptionHandler를 사용하는 게 더 편리하다.
