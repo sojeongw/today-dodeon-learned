@@ -152,6 +152,7 @@
     * [스프링 부트 오류 페이지](kimyounghan-spring-mvc/12-exception/spring-boot-error-page.md)
 * [API 예외 처리](kimyounghan-spring-mvc/13-api-exception/api-exception-handling.md)
     * [스프링 부트 기본 오류 처리](kimyounghan-spring-mvc/13-api-exception/spring-boot-basic-exception-handling.md)
+    * [HandlerExceptionResolver](kimyounghan-spring-mvc/13-api-exception/handler-exception-resolver.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
