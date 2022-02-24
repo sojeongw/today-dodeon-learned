@@ -170,3 +170,155 @@ public class WebConfig implements WebMvcConfigurer {
         - 스프링이 기본으로 등록하는 ExceptionResolver가 제거된다.
     - extendHandlerExceptionResolvers()
         - 따라서 이 메서드를 활용하자.
+
+## 예외를 여기서 마무리하기
+
+- 굳이 WAS까지 예외를 던지고 WAS에서 다시 오류 페이지 정보를 찾아 호출하는 것은 복잡하다.
+- ExceptionResolver에서 예외를 깔끔하게 마무리 해보자.
+
+{% tabs %} {% tab title="ApiExceptionController.java" %}
+
+```java
+
+@Slf4j
+@RestController
+public class ApiExceptionController {
+
+    @GetMapping("/api/members/{id}")
+    public MemberDto getMember(@PathVariable("id") String id) {
+        ...
+
+        if (id.equals("user-ex")) {
+            throw new UserException("사용자 오류");
+        }
+
+        return new MemberDto(id, "hello " + id);
+    }
+
+    ...
+}
+```
+
+{% endtab %} {% tab title="UserException.java" %}
+
+```java
+public class UserException extends RuntimeException {
+
+    public UserException() {
+        super();
+    }
+
+    public UserException(String message) {
+        super(message);
+    }
+
+    public UserException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public UserException(Throwable cause) {
+        super(cause);
+    }
+
+    protected UserException(String message, Throwable cause,
+                            boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/13/screenshot%202022-03-26%20오후%202.19.00.png)
+
+- user-ex를 호출하면 dispatcherServlet을 거친 걸 알 수 있다.
+
+{% tabs %} {% tab title="UserHandlerExceptionResolver.java" %}
+
+```java
+
+@Slf4j
+public class UserHandlerExceptionResolver implements HandlerExceptionResolver {
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    public ModelAndView resolveException(HttpServletRequest request,
+                                         HttpServletResponse response, Object handler, Exception ex) {
+        try {
+            if (ex instanceof UserException) {
+                log.info("UserException resolver to 400");
+
+                // application/json 인 것과 아닌 것을 구분해서 처리하기 위해 헤더 값을 가져온다.
+                String acceptHeader = request.getHeader("accept");
+
+                // 응답에 상태 코드를 지정한다.
+                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
+                if ("application/json".equals(acceptHeader)) {
+                    Map<String, Object> errorResult = new HashMap<>();
+                    errorResult.put("ex", ex.getClass());
+                    errorResult.put("message", ex.getMessage());
+
+                    // API 응답이기 때문에 결과를 JSON으로 변환한다.
+                    String result = objectMapper.writeValueAsString(errorResult);
+
+                    // HTTP 응답 바디를 설정한다.
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("utf-8");
+                    response.getWriter().write(result);
+
+                    // 빈 객체를 넘긴다.
+                    return new ModelAndView();
+                } else {
+                    // 요청이 text/html 등 다를 경우 500 에러 페이지를 반환한다.
+                    return new ModelAndView("error/500");
+                }
+            }
+        } catch (IOException e) {
+            log.error("resolver ex", e);
+        }
+        return null;
+    }
+}
+```
+
+{% endtab %} {% tab title="WebConfig.java" %}
+
+```java
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void extendHandlerExceptionResolvers(List<HandlerExceptionResolver> resolvers) {
+        // 만든 resolver를 등록해준다.
+        resolvers.add(new UserHandlerExceptionResolver());
+        resolvers.add(new MyHandlerExceptionResolver());
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+- HTTP 요청 헤더의 Accept가 `application/json`이면 JSON으로 오류를 내려준다.
+- 그 외에는 `error/500`에 있는 HTML 오류 페이지를 보여준다.
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/13/screenshot%202022-03-26%20오후%202.30.41.png)
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/13/screenshot%202022-03-26%20오후%202.31.21.png)
+
+- `application/json` 요청에는 직접 만든 오류 메시지가 뜬다.
+- 로그를 보면 UserHandlerExceptionResolver만 찍히고 dispatcherServlet은 찍히지 않았다.
+    - 서블릿 컨테이너까지 갔다가 다시 호출하는 번거로운 작업을 하지 않았다.
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/13/screenshot%202022-03-26%20오후%202.32.30.png)
+
+- 그 외 요청은 html 화면을 반환한다.
+
+## 정리
+
+- ExceptionResolver를 사용하면 컨트롤러에서 예외가 발생해도 ExceptionResolver에서 처리한다.
+    - 서블릿 컨테이너까지 예외가 전달되지 않고 스프링 단에서 끝난다.
+- 결과적으로 WAS 입장에서는 정상 처리로 인식한다.
+- 예외를 모두 ExceptionResolver 한 곳에서 처리할 수 있는 것이 핵심이다.
