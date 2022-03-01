@@ -108,5 +108,36 @@ public class ApiExceptionController {
 
 ## DefaultHandlerExceptionResolver
 
+- 스프링 내부에서 발생하는 스프링 예외를 해결한다.
+    - 파라미터 바인딩 시점에 타입이 맞지 않으면 TypeMismatchException이 발생한다.
+    - 일반적으로 예외는 500을 던지지만 파라미터 바인딩은 클라이언트에서 잘못 보낸 것이므로 400을 보내주는 게 좋다.
+    - DefaultHandlerExceptionResolver는 이럴 때 500에서 400으로 변경해 응답한다.
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/13/screenshot%202022-03-26%20오후%203.13.20.png)
+
+- 코드를 까보면 결국 response.sendError()로 해결한다.
+- 따라서 WAS에서 다시 오류 페이지를 요청할 것이다.
+
+```java
+
+@Slf4j
+@RestController
+public class ApiExceptionController {
+
+    @GetMapping("/api/default-handler-ex")
+    public String defaultException(@RequestParam Integer data) {
+        return "ok";
+    }
+}
+```
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/13/screenshot%202022-03-26%20오후%203.07.47.png)
+
+- 일부러 틀린 타입으로 요청하면 400 에러로 찍히는 걸 확인할 수 있다.
+
 ## ExceptionHandlerExceptionResolver
 
+- HandlerExceptionResolver를 직접 사용하는 건 복잡하다.
+    - API 요청 오류는 response에 직접 데이터를 넣어야 해서 불편하다.
+    - ModelAndView를 반환하는 것도 API 요청 형식에 맞지 않는다.
+- 스프링은 이 문제를 해결하기 위해 @ExceptionHandler를 제공한다.
