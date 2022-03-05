@@ -155,6 +155,7 @@
     * [HandlerExceptionResolver](kimyounghan-spring-mvc/13-api-exception/handler-exception-resolver.md)
     * [ExceptionResolver](kimyounghan-spring-mvc/13-api-exception/exception-resolver.md)
     * [ControllerAdvice](kimyounghan-spring-mvc/13-api-exception/controller-advice.md)
+* [스프링 타입 컨버터](kimyounghan-spring-mvc/14-spring-type-converter/README.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
