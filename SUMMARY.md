@@ -159,6 +159,7 @@
     * [Converter](kimyounghan-spring-mvc/14-spring-type-converter/converter.md)
     * [ConversionService](kimyounghan-spring-mvc/14-spring-type-converter/conversion-service.md)
     * [뷰 템플릿에 적용하기](kimyounghan-spring-mvc/14-spring-type-converter/view-template.md)
+    * [Formatter](kimyounghan-spring-mvc/14-spring-type-converter/formatter.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
