@@ -93,3 +93,47 @@ class MyNumberFormatterTest {
 테스트 해보면 문자를 숫자로, 숫자를 한국 형식에 맞는 문자로 변환한다.
 
 [Formatter](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#format)
+
+## Foramtter를 지원하는 ConversionService
+
+- ConversionService에는 Converter만 등록할 수 있고 Formatter는 불가하다.
+- Foramtter도 결국 Converter의 한 종류이기 때문에 Formatter를 지원하는 ConversionService를 통해 추가할 수 있다.
+
+### FormattingConversionService
+
+```java
+public class FormattingConversionServiceTest {
+
+    @Test
+    void formattingConversionService() {
+        DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
+
+        // 컨버터 등록
+        conversionService.addConverter(new StringToIpPortConverter());
+        conversionService.addConverter(new IpPortToStringConverter());
+
+        // 포매터 등록
+        conversionService.addFormatter(new MyNumberFormatter());
+
+        // 컨버터 동작 확인
+        IpPort ipPort = conversionService.convert("127.0.0.1:8080", IpPort.class);
+        assertThat(ipPort).isEqualTo(new IpPort("127.0.0.1", 8080));
+
+        // 포매터 동작 확인
+        assertThat(conversionService.convert(1000, String.class)).isEqualTo("1,000");
+        assertThat(conversionService.convert("1,000", Long.class)).isEqualTo(1000L);
+    }
+}
+
+```
+
+- Formatter를 지원하는 컨버전 서비스
+- DefaultFormattingConversionService
+    - FormattingConversionService에 통화, 숫자 등 추가적인 기능을 제공한다.
+
+### 상속 관계
+
+- FormattingConversionService는 ConversionService 기능을 상속받는다.
+    - 따라서 컨버터와 포매터 모두 등록할 수 있다.
+- 사용할 때는 ConversionService.convert()를 사용하면 된다.
+- 스프링 부트는 DefaultFormattingConversionService를 상속 받은 WebConversionService를 사용한다.
