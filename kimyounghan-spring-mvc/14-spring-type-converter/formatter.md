@@ -137,3 +137,50 @@ public class FormattingConversionServiceTest {
     - 따라서 컨버터와 포매터 모두 등록할 수 있다.
 - 사용할 때는 ConversionService.convert()를 사용하면 된다.
 - 스프링 부트는 DefaultFormattingConversionService를 상속 받은 WebConversionService를 사용한다.
+
+## Formatter 적용
+
+{% tabs %} {% tab title=".java" %}
+
+```java
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        /*
+        포매터보다 컨버터가 우선 순위가 높기 때문에
+        포매터와 비슷한 기능을 수행하는 컨버터를 주석 처리 한다.
+        registry.addConverter(new IntegerToStringConverter());
+        registry.addConverter(new StringToIntegerConverter());
+        */
+        registry.addConverter(new IpPortToStringConverter());
+        registry.addConverter(new StringToIpPortConverter());
+
+        // 포매터를 추가한다.
+        registry.addFormatter(new MyNumberFormatter());
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+```text
+# before
+${number}: 10000
+${{number}}: 10000
+${ipPort}: hello.typeconverter.type.IpPort@59cb0946
+${{ipPort}}: 127.0.0.1:8080
+```
+
+```text
+# after
+${number}: 10000
+${{number}}: 10,000
+${ipPort}: hello.typeconverter.type.IpPort@59cb0946
+${{ipPort}}: 127.0.0.1:8080
+```
+
+- WebConfig에 포매터를 추가한다.
+- 숫자에 쉼표를 붙이는 포매터가 적용되었다.
