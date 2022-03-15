@@ -184,3 +184,64 @@ ${{ipPort}}: 127.0.0.1:8080
 
 - WebConfig에 포매터를 추가한다.
 - 숫자에 쉼표를 붙이는 포매터가 적용되었다.
+
+## 스프링이 제공하는 기본 Formatter
+
+- 스프링은 자바의 기본 타입에 대해 Formatter를 기본으로 제공한다.
+- Formatter는 기본 형식이 지정되어 있어서 필드마다 다른 형식을 지정하기 힘들다.
+
+이 문제를 해결하기 위해 스프링은 애너테이션으로 형식을 지정할 수 있게 지원한다.
+
+- @NumberFormat
+    - 숫자 관련 형식 지정
+    - NumberFormatAnnotationFormatterFactory
+- @DateTimeFormat
+    - 날짜 관련 형식 지정
+    - Jsr310DateTimeFormatAnnotationFormatterFactory
+
+{% tabs %} {% tab title="FormatterController.java" %}
+
+```java
+
+@Controller
+public class FormatterController {
+
+    @GetMapping("/formatter/edit")
+    public String formatterForm(Model model) {
+        Form form = new Form();
+        
+        form.setNumber(10000);
+        form.setLocalDateTime(LocalDateTime.now());
+        
+        model.addAttribute("form", form);
+        return "formatter-form";
+    }
+
+    @PostMapping("/formatter/edit")
+    public String formatterEdit(@ModelAttribute Form form) {
+        return "formatter-view";
+    }
+
+    @Data
+    static class Form {
+
+        @NumberFormat(pattern = "###,###")
+        private Integer number;
+
+        @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+        private LocalDateTime localDateTime;
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/14/screenshot%202022-03-26%20오후%209.15.21.png)
+
+- 지정한 포맷대로 값이 준비되어 있다.
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/14/screenshot%202022-03-26%20오후%209.16.36.png)
+
+- 결과를 보면 포매터를 적용 안 한것과 한 것의 차이가 보인다. 
+
+[애너테이션 추가 설명](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#format-CustomFormatAnnotations)
