@@ -100,7 +100,7 @@ parts=[ApplicationPart1, ApplicationPart2]
 ### 참고
 
 1. spring.servlet.multipart.enabled를 켜면
-   - DispatcherServlet에서 MultipartResolver를 실행한다.
+    - DispatcherServlet에서 MultipartResolver를 실행한다.
 2. MultipartResolver는 multipart 요청이 들어오면
     - 서블릿 컨테이너가 일반적으로 전달하는 HttpServletRequest를 MultipartHttpServletRequest로 변환해서 반환한다.
     - MultipartHttpServletRequest
@@ -110,3 +110,108 @@ parts=[ApplicationPart1, ApplicationPart2]
 4. 컨트롤러는 HttpServletRequest 대신 MultipartHttpServletRequest를 주입 받게 된다.
     - multipart와 관련된 여러 처리를 편리하게 할 수 있다.
     - 하지만 추후 설명할 MultipartFile이 더 편하기 때문에 잘 사용하지 않는다.
+
+## 프로젝트 적용
+
+{% tabs %} {% tab title="application.properties" %}
+
+```properties
+file.dir=/Users/myMac/Downloads/
+```
+
+{% endtab %} {% tab title="ServletUploadControllerV2.java" %}
+
+```java
+
+@Slf4j
+@Controller
+@RequestMapping("/servlet/v2")
+public class ServletUploadControllerV2 {
+
+    // properties 값을 바로 가져올 수 있다.
+    @Value("${file.dir}")
+    private String fileDir;
+
+    @GetMapping("/upload")
+    public String newFile() {
+        return "upload-form";
+    }
+
+    @PostMapping("/upload")
+    public String saveFileV2(HttpServletRequest request) throws ServletException, IOException {
+        log.info("request={}", request);
+
+        String itemName = request.getParameter("itemName");
+        log.info("itemName={}", itemName);
+
+        Collection<Part> parts = request.getParts();
+        log.info("parts={}", parts);
+
+        for (Part part : parts) {
+            log.info("=== PART ===");
+            log.info("name = {}", part.getName());
+
+            // part도 헤더와 바디로 나눠져있다.
+            Collection<String> headerNames = part.getHeaderNames();
+
+            for (String headerName : headerNames) {
+                log.info("header {}: {}", headerName, part.getHeader(headerName));
+            }
+
+            // content-disposition의 fileName
+            log.info("submittedFileName = {}", part.getSubmittedFileName());
+            log.info("size = {}", part.getSize());
+
+            // 데이터를 읽는다.
+            InputStream inputStream = part.getInputStream();
+            String body = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
+            log.info("body = {}", body);
+
+            // 파일에 저장한다.
+            if (StringUtils.hasText(part.getSubmittedFileName())) {
+                String fullPath = fileDir + part.getSubmittedFileName();
+                log.info("파일 저장 fullPath = {}", fullPath);
+
+                part.write(fullPath);
+            }
+        }
+
+        return "upload-form";
+    }
+
+}
+```
+
+{% endtab %} {% endtabs %}
+
+- application.properties에 파일을 저장할 경로를 지정한다.
+- @Value
+    - properties에 있는 경로 주입
+- getSubmittedFileName()
+    - 클라이언트가 전달한 파일명
+- getInputStream()
+    - Part의 전송 데이터 조회
+- write()
+    - Part를 통해 전송된 데이터 저장
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/15/screenshot%202022-03-27%20오후%201.23.37.png)
+
+관련 헤더 값을 모두 조회할 수 있다.
+
+![](../../.gitbook/assets/kimyounghan-spring-mvc/15/screenshot%202022-03-27%20오후%201.20.34.png)
+
+설정한 경로에 파일이 저장되었다.
+
+### 참고
+
+```properties
+logging.level.org.apache.coyote.http11=debug
+```
+
+- 큰 파일을 업로드 할때는 로그가 너무 많이 남기 때문에 debug 옵션을 꺼둔다.
+
+```text
+log.info("body={}", body);
+```
+
+- 파일의 바이너리 데이터를 모두 출력하므로 역시 꺼두는 게 좋다.
