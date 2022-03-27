@@ -163,6 +163,7 @@
 * [파일 업로드](kimyounghan-spring-mvc/15-file-upload/README.md)
     * [서블릿과 파일 업로드](kimyounghan-spring-mvc/15-file-upload/servlet-file-upload.md)
     * [스프링과 파일 업로드](kimyounghan-spring-mvc/15-file-upload/spring-file-upload.md)
+    * [파일 업로드 및 다운로드 예제](kimyounghan-spring-mvc/15-file-upload/file-upload-download-example.md)
 
 ## 자바 ORM 표준 JPA 프로그래밍 <a id="kimyounghan-orm-jpa"></a>
 
