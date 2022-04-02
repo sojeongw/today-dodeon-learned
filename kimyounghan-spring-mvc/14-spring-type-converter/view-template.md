@@ -52,7 +52,7 @@ ${{ipPort}}: 127.0.0.1:8080
 
 ## Form에 적용하기
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="ConverterController.java" %}
 
 ```java
 

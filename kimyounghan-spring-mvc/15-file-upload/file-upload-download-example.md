@@ -235,7 +235,7 @@ public class ItemController {
         return "item-view";
     }
 
-    // 파일 리스트에서 이미지를 보여줄 떄 HTML img 태그에 넣을 이미지 주소를 반환한다.
+    // 파일 리스트에서 이미지를 보여줄 때 HTML img 태그에 넣을 이미지 주소를 반환한다.
     @ResponseBody
     @GetMapping("/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {

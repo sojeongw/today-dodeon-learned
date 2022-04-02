@@ -34,7 +34,7 @@ public interface Formatter<T> extends Printer<T>, Parser<T> {
 - parse()
     - 문자를 객체로 변환한다.
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="MyNumberFormatter.java" %}
 
 ```java
 
@@ -140,7 +140,7 @@ public class FormattingConversionServiceTest {
 
 ## Formatter 적용
 
-{% tabs %} {% tab title=".java" %}
+{% tabs %} {% tab title="WebConfig.java" %}
 
 ```java
 
