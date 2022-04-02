@@ -242,6 +242,6 @@ public class FormatterController {
 
 ![](../../.gitbook/assets/kimyounghan-spring-mvc/14/screenshot%202022-03-26%20오후%209.16.36.png)
 
-- 결과를 보면 포매터를 적용 안 한것과 한 것의 차이가 보인다. 
+- 결과를 보면 포매터를 적용 안 한 것과 한 것의 차이가 보인다. 
 
-[애너테이션 추가 설명](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#format-CustomFormatAnnotations)
+[스프링의 기본 Formatter](https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#format-CustomFormatAnnotations)
