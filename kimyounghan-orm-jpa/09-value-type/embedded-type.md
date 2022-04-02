@@ -39,7 +39,7 @@
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/09/screenshot%202021-03-31%20오후%208.02.23.png)
 
-DB 입장에서는 데이터가 바뀔 일이 없다. 테이블 안의 컬럼은 똑같다. 다만 매핑만 그림과 같이 적절하게 해주면 된다.
+DB 입장에서는 데이터가 바뀔 일이 없다. 테이블 안의 칼럼은 똑같다. 다만 매핑만 그림과 같이 적절하게 해주면 된다.
 
 {% tabs %} {% tab title="Member.java" %}
 
@@ -246,4 +246,4 @@ public class Member {
 
 ## 임베디드 타입과 null
 
-임베디드 타입의 값이 null이면, 그 타입 안에 정의해서 매핑한 컬럼 값은 모두 null이 된다. 즉, `Period`가 null이면 그 안에 있는 `startDate` 등도 null이 된다.
+임베디드 타입의 값이 null이면, 그 타입 안에 정의해서 매핑한 칼럼 값은 모두 null이 된다. 즉, `Period`가 null이면 그 안에 있는 `startDate` 등도 null이 된다.

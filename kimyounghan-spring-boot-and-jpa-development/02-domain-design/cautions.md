@@ -119,13 +119,13 @@ class Test {
 하이버네이트는 Entity를 영속화할 때 컬렉션을 감싼 뒤 하이버네이트가 제공하는 내장 컬렉션으로 변경한다. 만약 `getOrders()`같은 임의의 메서드에서 컬렉션을 잘못 생성하면
 하이버네이트 내부에 문제가 발생한다. 따라서 필드 레벨에서 생성하는 것이 가장 안전하고 코드도 간결하다. 처음에 딱 컬렉션을 생성해두고 절대 바꾸면 안된다.
 
-## 테이블 컬럼명 생성 전략
+## 테이블 칼럼명 생성 전략
 
 [hibernate naming strategy](https://docs.spring.io/spring-boot/docs/2.1.3.RELEASE/reference/htmlsingle/#howto-configure-hibernate-naming-strategy)
 
 [hibernate naming guide](http://docs.jboss.org/hibernate/orm/5.4/userguide/html_single/Hibernate_User_Guide.html#naming)
 
-옛날에는 하이버네이트에서 `SpringPhysicalNamingStrategy`를 기본으로 채택해 Entity 필드명이 그대로 컬럼명이 되었다. 예를 들어 필드가 `orderDate`
+옛날에는 하이버네이트에서 `SpringPhysicalNamingStrategy`를 기본으로 채택해 Entity 필드명이 그대로 칼럼명이 되었다. 예를 들어 필드가 `orderDate`
 면 `orderDate` 그대로 생성된다.
 
 반면 스프링 부트는 아래의 설정을 사용한다.
@@ -143,7 +143,7 @@ spring.jpa.hibernate.naming.implicit-strategy:
 ```
 
 - 논리명 적용
-- 명시적으로 컬럼, 테이블명을 직접 적지 않으면 사용한다.
+- 명시적으로 칼럼, 테이블명을 직접 적지 않으면 사용한다.
 
 ### PhysicalNamingStrategy
 

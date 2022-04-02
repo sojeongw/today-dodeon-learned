@@ -173,7 +173,7 @@
 * [Entity 매핑](kimyounghan-orm-jpa/04-entity-mapping/README.md)
     * [객체와 테이블 매핑](kimyounghan-orm-jpa/04-entity-mapping/object-and-table-mapping.md)
     * [데이터베이스 스키마 자동 생성](kimyounghan-orm-jpa/04-entity-mapping/auto-generating-schema.md)
-    * [필드와 컬럼 매핑](kimyounghan-orm-jpa/04-entity-mapping/column-mapping.md)
+    * [필드와 칼럼 매핑](kimyounghan-orm-jpa/04-entity-mapping/column-mapping.md)
     * [기본 키 매핑](kimyounghan-orm-jpa/04-entity-mapping/primary-key-mapping.md)
     * [실전 예제](kimyounghan-orm-jpa/04-entity-mapping/example.md)
 * [연관 관계 매핑](kimyounghan-orm-jpa/05-relationship-mapping/README.md)

@@ -1,4 +1,4 @@
-# 필드와 컬럼 매핑
+# 필드와 칼럼 매핑
 
 아래와 같은 요구 사항이 추가되었다고 해보자.
 
@@ -11,32 +11,33 @@
 @Entity
 public class Member {
 
-  @Id
-  private Long id;
+    @Id
+    private Long id;
 
-  @Column(name = "name")
-  private String username;
+    // DB의 칼럼 명을 따로 명시할 수 있다.
+    @Column(name = "name")
+    private String username;
 
-  private Integer age;
+    private Integer age;
 
-  // DB에는 enum 타입이 없어서 이 애너테이션을 달아줘야 한다.
-  @Enumerated(EnumType.STRING)
-  private RoleType roleType;
+    // DB에는 enum 타입이 없어서 이 애너테이션을 달아줘야 한다.
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
-  // 날짜 타입은 @Temporal을 달아준다.
-  // DB는 DATE, TIME, TIMESTAMP로 나뉘기 때문에 정보를 줘야 한다.
-  @Temporal(TemporalType.TIMESTAMP)
-  private Date createdDate;
+    // 날짜 타입은 @Temporal을 달아준다.
+    // DB는 DATE, TIME, TIMESTAMP로 나뉘기 때문에 정보를 줘야 한다.
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdDate;
 
-  @Temporal(TemporalType.TIMESTAMP)
-  private Date lastModifiedDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModifiedDate;
 
-  // varchar를 넘어서는 큰 컨텐츠를 넣고 싶을 때 사용한다.
-  // String 타입이면 DB에서 clob으로 생성된다.
-  @Lob
-  private String description;
-  
-  // getter, setter
+    // varchar를 넘어서는 큰 컨텐츠를 넣고 싶을 때 사용한다.
+    // String 타입이면 DB에서 clob으로 생성된다.
+    @Lob
+    private String description;
+
+    // getter, setter
 }
 ```
 
@@ -48,7 +49,8 @@ public class Member {
 
 - insertable, updatable
     - 해당 column이 수정됐을 때 DB에 insert, update를 할 건지 결정한다.
-    - 즉 insert, update 문이 나갈 때 반영할 것인지를 의미한다.
+    - 즉 insert, update 문이 나갈 때 해당 칼럼을 반영할 것인지를 의미한다.
+        - false면 메모리 상에만 존재하게 된다.
     - 기본값이 true로 되어있다.
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/04/스크린샷%202021-03-16%20오전%209.13.54.png)
@@ -61,18 +63,22 @@ public class Member {
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/04/스크린샷%202021-03-15%20오후%2012.40.10.png)
 
-자바 enum 타입을 매핑할 때 사용한다. `ORDINAL`의 경우, 요구 사항이 추가되어 맨 앞에 다른 enum이 추가되면 그 값이 0이 되는 등 문제가 많아서 사용하지 않는다.
+- 자바 enum 타입을 매핑할 때 사용한다.
+- `ORDINAL`은 사용하면 안된다.
+    - 요구 사항이 추가되어 맨 앞에 다른 enum이 추가되면 새로운 값이 0이 되는 등 문제가 많아서 사용하지 않는다.
 
 ## @Temporal
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/04/스크린샷%202021-03-15%20오후%2012.40.18.png)
 
-날짜 타입 `java.util.Date`, `java.util.Calendar`를 매핑할 때 사용한다. `LocalDate`, `LocalDateTime`을 사용할 때는 생략 가능하다.
+- 날짜 타입 `java.util.Date`, `java.util.Calendar`를 매핑할 때 사용한다.
+- `LocalDate`, `LocalDateTime`을 사용할 때는 생략 가능하다.
+    - 최신 하이버네이트를 쓴다면 생략할 수 있게 지원하고 있다.
 
 ## @Lob
 
-데이터베이스 blob과 clob 타입을 매핑한다. 지정할 수 있는 속성은 없으며 문자면 clob, 나머지는 blob으로 매핑된다.
-
+- 데이터베이스 blob과 clob 타입을 매핑한다.
+- 지정할 수 있는 속성은 없으며 문자면 clob, 나머지는 blob으로 매핑된다.
 - clob
     - String, char[], java.sql.CLOB
 - blob
