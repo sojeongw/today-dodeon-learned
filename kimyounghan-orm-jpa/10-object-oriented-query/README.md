@@ -12,13 +12,13 @@ JPA는 다양한 쿼리 방법을 지원한다.
 그동안은 `EntityManager.find()`로 찾아서 `a.getB().getC()`로 객체 그래프를 탐색하는 가장 단순한 조회를 했다. 하지만 복잡한 조회 조건이 붙는다면
 어떻게 해야할까?
 
-JPA를 사용하면 엔티티 객체를 중심으로 개발할 수 있다. 검색을 할 때도 테이블이 아니라 엔티티 객체를 대상으로 실행된다. 하지만 모든 DB 데이터를 객체로 변환해서 검색하는
+JPA를 사용하면 Entity 객체를 중심으로 개발할 수 있다. 검색을 할 때도 테이블이 아니라 Entity 객체를 대상으로 실행된다. 하지만 모든 DB 데이터를 객체로 변환해서 검색하는
 것은 불가능하다. 애플리케이션이 필요한 데이터만 DB에서 불러오려면 결국 검색 조건이 포함된 SQL이 필요하다.
 
 그래서 JPA는 SQL을 추상화한 JPQL이라는 객체 지향 쿼리 언어를 제공한다. 추상화했기 때문에 특정 DB SQL에 의존하지 않는다. SQL 문법과 유사해서 select,
 from, where, group by, having, join을 사용할 수 있다.
 
-정리하자면 JPQL은 엔티티 객체를 대상으로 쿼리하고, SQL은 DB 테이블을 대상으로 쿼리한다.
+정리하자면 JPQL은 Entity 객체를 대상으로 쿼리하고, SQL은 DB 테이블을 대상으로 쿼리한다.
 
 {% tabs %} {% tab title="JpaMain.java" %}
 
@@ -37,11 +37,11 @@ public class JpaMain {
 
 {% endtab %} {% endtabs %}
 
-위와 같이 엔티티 대상으로 쿼리를 하면,
+위와 같이 Entity 대상으로 쿼리를 하면,
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/10/screenshot%202021-04-03%20오후%204.21.46.png)
 
-엔티티 매핑 정보를 읽어서 SQL을 만들어 보낸다.
+Entity 매핑 정보를 읽어서 SQL을 만들어 보낸다.
 
 ## Criteria
 

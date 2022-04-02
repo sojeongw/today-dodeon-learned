@@ -286,13 +286,13 @@ OAuth2 로그인을 할 때 Primary Key처럼 키가 되는 필드값을 의미�
 Failed to convert from type [java.lang.Object] to type [byte[]] for value 'domain.user.User@4a43d6'
 ```
 
-`User` 클래스를 세션에 저장하려고 하자 `User` 클래스에 직렬화를 구현하지 않았다는 의미다. 그럼 `User` 클래스에 직렬화 코드를 넣으면 해결될까? 아니다. `User` 클래스는 엔티티이기 때문이다. 
+`User` 클래스를 세션에 저장하려고 하자 `User` 클래스에 직렬화를 구현하지 않았다는 의미다. 그럼 `User` 클래스에 직렬화 코드를 넣으면 해결될까? 아니다. `User` 클래스는 Entity이기 때문이다. 
 
-엔티티 클래스는 언제 다른 엔티티와 관계가 형성될지 모른다. 만약 `@OneToMany` 등으로 인해 자식 엔티티를 갖고 있다면 자식 엔티티도 직렬화를 시켜주어야 하므로 성능 이슈나 생각하지 못한 상황이 발생할 수 있다. 따라서 직렬화 기능을 가진 DTO를 따로 만들어주는 게 운영, 유지보수를 위해 좋다.
+Entity 클래스는 언제 다른 Entity와 관계가 형성될지 모른다. 만약 `@OneToMany` 등으로 인해 자식 Entity를 갖고 있다면 자식 Entity도 직렬화를 시켜주어야 하므로 성능 이슈나 생각하지 못한 상황이 발생할 수 있다. 따라서 직렬화 기능을 가진 DTO를 따로 만들어주는 게 운영, 유지보수를 위해 좋다.
 
 ### saveOrUpdate()
 
-구글 사용자 정보가 업데이트 될 때를 대비해 update를 같이 구현했다. 사용자 이름이나 프로필 사진이 변경되면 `User` 엔티티에도 반영된다.
+구글 사용자 정보가 업데이트 될 때를 대비해 update를 같이 구현했다. 사용자 이름이나 프로필 사진이 변경되면 `User` Entity에도 반영된다.
 
 {% tabs %}
 {% tab title="OAuthAttributes.java" %}
@@ -347,7 +347,7 @@ public class OAuthAttributes {
 
 ### toEntity()
 
-처음 가입할 시점에 `OAuthAttributes`에서 `User` 엔티티를 생성한다. 기본 권한은 `GUEST`로 설정한다. `OAuthAttributes` 클래스 생성이 끝나면 같은 패키지의 `SessionUser` 클래스를 생성한다.
+처음 가입할 시점에 `OAuthAttributes`에서 `User` Entity를 생성한다. 기본 권한은 `GUEST`로 설정한다. `OAuthAttributes` 클래스 생성이 끝나면 같은 패키지의 `SessionUser` 클래스를 생성한다.
 
 {% tabs %}
 {% tab title="SessionUser.java" %}

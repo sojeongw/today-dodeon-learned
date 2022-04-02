@@ -267,4 +267,4 @@ public class PostsService {
 {% endtab %}
 {% endtabs %}
 
-존재하는 Posts인지 확인하기 위해 엔티티를 조회한 후 그대로 삭제한다.
+존재하는 Posts인지 확인하기 위해 Entity를 조회한 후 그대로 삭제한다.

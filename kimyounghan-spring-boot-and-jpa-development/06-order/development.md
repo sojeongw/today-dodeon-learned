@@ -1,5 +1,5 @@
 # 주문 도메인 개발
-## 주문, 주문 상품 엔티티 개발
+## 주문, 주문 상품 Entity 개발
 ### 생성 메서드
 
 ```java
@@ -28,7 +28,7 @@ public class OrderItem {
 
 ```
 
-엔티티에 생성 메서드를 만들어주면, 생성하는 로직을 바꿀 때 여기만 손대면 된다.
+Entity에 생성 메서드를 만들어주면, 생성하는 로직을 바꿀 때 여기만 손대면 된다.
 
 ```java
 @Entity
@@ -198,7 +198,7 @@ public class OrderService {
    */
   @Transactional
   public Long order(Long memberId, Long itemId, int count) {
-    // 엔티티 조회
+    // Entity 조회
     Member member = memberRepository.findOne(memberId);
     Item item = itemRepository.findOne(itemId);
 
@@ -299,7 +299,7 @@ public class OrderService {
    */
   @Transactional
   public void cancelOrder(Long orderId) {
-    // 주문 엔티티 조회
+    // 주문 Entity 조회
     Order order = orderRepository.findOne(orderId);
 
     // 주문 취소
@@ -355,14 +355,14 @@ public class OrderItem {
 
 ### 도메인 모델 패턴
 
-- 엔티티가 비즈니스 로직을 가지고 객체 지향을 적극 활용하는 패턴이다.
-- 예제를 보면 비즈니스 로직 대부분이 엔티티에 있다.
-- 서비스 계층은 단순히 엔티티에 필요한 요청을 위임하는 역할을 한다.
+- Entity가 비즈니스 로직을 가지고 객체 지향을 적극 활용하는 패턴이다.
+- 예제를 보면 비즈니스 로직 대부분이 Entity에 있다.
+- 서비스 계층은 단순히 Entity에 필요한 요청을 위임하는 역할을 한다.
 
 [도메인 모델 패턴](http://martinfowler.com/eaaCatalog/domainModel.html)
 
 ### 트랜잭션 스크립트 패턴
 
-- 엔티티에 비즈니스 로직이 거의 없고 서비스 계층에서 대부분의 로직을 처리한다.
+- Entity에 비즈니스 로직이 거의 없고 서비스 계층에서 대부분의 로직을 처리한다.
 
 [트랜잭션 스크립트 패턴](http://martinfowler.com/eaaCatalog/transactionScript.html)

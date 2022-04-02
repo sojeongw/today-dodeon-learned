@@ -29,7 +29,7 @@ select count(m) from Member m, Team t where m.username = t.name
 JPA 2.1부터 지원하는 기능이다.
 
 - 조인할 대상을 미리 필터링 할 수 있다. 
-- 연관 관계 없는 엔티티를 외부 조인할 수 있다.
+- 연관 관계 없는 Entity를 외부 조인할 수 있다.
     - 과거에는 내부 조인만 가능했다.
     - 하이버네이트 5.1부터 지원한다.
     
@@ -49,7 +49,7 @@ SELECT m.*, t.* FROM Member m LEFT JOIN Team t ON m.TEAM_ID=t.id and t.name='A'
 
 실제 나가는 SQL
 
-### 연관 관계 없는 엔티티 외부 조인
+### 연관 관계 없는 Entity 외부 조인
 
 회원의 이름과 팀의 이름이 같은 데이터를 대상으로 외부 조인한다.
 

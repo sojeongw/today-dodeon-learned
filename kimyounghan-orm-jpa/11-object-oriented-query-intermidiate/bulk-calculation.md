@@ -3,7 +3,7 @@
 재고가 10개 미만인 모든 상품의 가격을 10% 상승하려면 어떻게 해야할까? 
 
 1. 재고가 10개 미만인 상품을 리스트로 조회한다.
-2. 상품 엔티티의 가격을 10% 증가시킨다.
+2. 상품 Entity의 가격을 10% 증가시킨다.
 3. 트랜잭션 커밋 시점에 변경 감지가 동작한다.
 
 이렇게 JPA 변경 감지 기능으로 실행하려면 너무 많은 SQL이 실행된다. 변경할 데이터가 100건이라면 100번의 update sql을 실행해야 한다.
@@ -18,7 +18,7 @@ public class JpaMain {
     
     int resultCount = em.createQuery(qlString)
         .setParameter("stockAmount", 10)
-        // 영향받은 엔티티 수를 반환한다.
+        // 영향받은 Entity 수를 반환한다.
         .executeUpdate();
   }
 }

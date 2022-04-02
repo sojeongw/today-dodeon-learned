@@ -96,15 +96,15 @@ public class OrderSimpleQueryRepository {
 }
 ```
 
-반면 V4는 내가 필요한 것만 직접 쿼리를 짰기 때문에 재사용성이 떨어진다. DTO로 조회하기 때문에 엔티티를 수정할 수도 없다. 
+반면 V4는 내가 필요한 것만 직접 쿼리를 짰기 때문에 재사용성이 떨어진다. DTO로 조회하기 때문에 Entity를 수정할 수도 없다. 
 
 사실 대부분의 성능은 from, join에서 먹는다. select를 몇 개 줄인다고 엄청나게 성능이 개선되지 않는다. 실시간으로 사용하는 유저가 많다면 그때 고려해보자.
 
-DTO가 엔티티를 위한 respository단에 사용되는 것도 애매하기 때문에 `OrderSimpleQueryRepository`처럼 패키지를 구분해 쿼리용 repository를 따로 파는 게 좋다.
+DTO가 Entity를 위한 respository단에 사용되는 것도 애매하기 때문에 `OrderSimpleQueryRepository`처럼 패키지를 구분해 쿼리용 repository를 따로 파는 게 좋다.
 
 ## 쿼리 방식 선택 권장 순서
 
-1. 우선 엔티티를 DTO로 변환한다.
+1. 우선 Entity를 DTO로 변환한다.
 2. 필요하면 fetch join으로 성능을 최적화 한다.
     - 대부분의 이슈가 여기서 해결된다.
 3. 그래도 안되면 DTO로 직접 조회한다.

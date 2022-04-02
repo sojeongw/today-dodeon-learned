@@ -117,4 +117,4 @@ orders.stream().map(OrderDto::new).collect(Collectors.toList());
 
 ## @BatchSize
 
-- 개별로 설정하고 싶다면 컬렉션은 컬렉션 필드에, 엔티티는 엔티티 클래스에 `@BatchSize`를 적용한다.
+- 개별로 설정하고 싶다면 컬렉션은 컬렉션 필드에, Entity는 Entity 클래스에 `@BatchSize`를 적용한다.

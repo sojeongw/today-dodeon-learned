@@ -1,14 +1,14 @@
-# 엔티티 클래스 개발
+# Entity 클래스 개발
 
-해당 예제에서는 설명을 쉽게 하기 위해 엔티티 클래스에 getter, setter를 모두 열어두고 최대한 단순하게 작업한다. 실무에서는 가급적 getter는 열고 setter는 꼭
+해당 예제에서는 설명을 쉽게 하기 위해 Entity 클래스에 getter, setter를 모두 열어두고 최대한 단순하게 작업한다. 실무에서는 가급적 getter는 열고 setter는 꼭
 필요한 경우에만 사용하자.
 
 이론적으로는 꼭 필요한 별도 메서드로 제공하는 게 좋으나 실무에서는 데이터를 조회할 일이 많으므로 getter는 모두 열어두는 게 편하다.
 
-하지만 setter는 호출하면 데이터가 변하므로 막 열어두면 엔티티가 도대체 왜 변경되는지 추적하기가 힘들다. 따라서 엔티티를 변경할 때는 setter 대신 변경만을 위한 비즈니스
+하지만 setter는 호출하면 데이터가 변하므로 막 열어두면 Entity가 도대체 왜 변경되는지 추적하기가 힘들다. 따라서 Entity를 변경할 때는 setter 대신 변경만을 위한 비즈니스
 메서드를 따로 제공해야 한다. 그럼 변경 지점이 명확해진다.
 
-## 회원 엔티티
+## 회원 Entity
 
 ```java
 
@@ -50,13 +50,13 @@ public class Address {
 }
 ```
 
-엔티티 식별자는 `id`를 사용하고 PK 컬럼은 `member_id`를 사용했다. 엔티티는 `Member`라는 타입이 있으니까 `id`라는 필드만으로도 쉽게 구분할 수 있지만, 테이블은 타입이 없어 구분이 힘들기 때문이다.
+Entity 식별자는 `id`를 사용하고 PK 컬럼은 `member_id`를 사용했다. Entity는 `Member`라는 타입이 있으니까 `id`라는 필드만으로도 쉽게 구분할 수 있지만, 테이블은 타입이 없어 구분이 힘들기 때문이다.
 
 테이블은 관례상 `테이블명 + id`를 많이 사용한다. 객체에서도 `id` 대신 `memberId`를 써도 된다. 중요한 건 일관성이다.
 
-## 주문 엔티티
+## 주문 Entity
 
-객체는 가지고 있는 엔티티 둘 다 변경해줘야 하지만 DB는 FK로 한 번만 변경해주면 된다. 따라서 FK가 있는 곳을 연관 관계의 주인으로 정한다. 해당 FK로 값을 변경한다는 의미다.
+객체는 가지고 있는 Entity 둘 다 변경해줘야 하지만 DB는 FK로 한 번만 변경해주면 된다. 따라서 FK가 있는 곳을 연관 관계의 주인으로 정한다. 해당 FK로 값을 변경한다는 의미다.
 
 Order 테이블 다이어그램을 보면 `MEMBER_ID`라는 FK가 존재한다. 따라서 Order가 연관 관계의 주인이다. 
 
@@ -93,7 +93,7 @@ public class Order {
 
 ```
 
-## 주문 상품 엔티티
+## 주문 상품 Entity
 
 ```java
 @Entity
@@ -123,7 +123,7 @@ public class OrderItem {
 
 하나의 주문 아이디에 여러 주문 상품이 들어가므로 FK로 `order_id`와 `item_id`를 갖는다. 
 
-## 상품 엔티티
+## 상품 Entity
 
 {% tabs %} {% tab title="Item.java" %}
 
@@ -199,7 +199,7 @@ public class Movie extends Item {
 
 상속 관계로 정의한다.
 
-## 배송 엔티티
+## 배송 Entity
 
 ```java
 @Entity
@@ -227,7 +227,7 @@ public class Delivery {
 
 배송과 주문은 일대일 매핑이다. 일대일은 FK를 어디다 둘지 선택할 수 있다. 주로 접근하는 데이터에 두면 좋다. 주문을 보면서 배송을 보는 일이 많으므로 주문에 `delivery_id`를 FK로 둔다. 연관 관계 주인은 `Order.delivery`가 된다.
 
-## 카테고리 엔티티
+## 카테고리 Entity
 
 ```java
 @Entity
@@ -261,7 +261,7 @@ public class Category {
 
 ```
 
-## 주소 엔티티
+## 주소 Entity
 
 ```java
 // 내장 타입 정의
@@ -290,7 +290,7 @@ public class Address {
 
 값 타입은 기본적으로 immutable하게 즉, 변경이 되지 않아야 한다. 그래서 setter를 사용하지 않고 무조건 새로 생성해서 쓰도록 생성자를 만들어둔다.
 
-기본 생성자도 함께 만들어주어야 한다. JPA가 생성 시에 리플렉션이나 프록시 같은 기술을 써야하는데 기본 생성자가 없으면 사용할 수가 없다. JPA 스펙 상 엔티티나 임베디드 타입은 기본 생성자를 public이나 protected로 설정해야 한다. public보다는 안전하게 protected로 해주자.
+기본 생성자도 함께 만들어주어야 한다. JPA가 생성 시에 리플렉션이나 프록시 같은 기술을 써야하는데 기본 생성자가 없으면 사용할 수가 없다. JPA 스펙 상 Entity나 임베디드 타입은 기본 생성자를 public이나 protected로 설정해야 한다. public보다는 안전하게 protected로 해주자.
 
 ![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-development/02/screenshot%202021-05-16%20오후%206.38.14.png)
 

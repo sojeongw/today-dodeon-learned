@@ -2,7 +2,7 @@
 
 ![](../../.gitbook/assets/kimyounghan-spring-boot-and-jpa-optimization/03/screenshot%202021-05-31%20오후%208.45.44.png)
 
-엔티티를 조회하는 것과 별개로 화면에 fit한 용도로만 사용하는 쿼리는 패키지를 따로 파서 구현한다. 화면과 관련된 로직과 중요 핵심 비즈니스 로직을 분리할 수 있다.
+Entity를 조회하는 것과 별개로 화면에 fit한 용도로만 사용하는 쿼리는 패키지를 따로 파서 구현한다. 화면과 관련된 로직과 중요 핵심 비즈니스 로직을 분리할 수 있다.
 
 {% tabs %} {% tab title="OrderQueryRepository.java" %}
 

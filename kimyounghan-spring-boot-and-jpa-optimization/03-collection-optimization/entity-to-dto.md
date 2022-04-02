@@ -1,4 +1,4 @@
-# 엔티티를 DTO로 변환
+# Entity를 DTO로 변환
 
 ```java
 
@@ -47,7 +47,7 @@ public class OrderApiController {
 }
 ```
 
-OrderDto에는 OrderItem이 아니라 OrderItemDto 형태로 있어야 한다. 안에 있는 필드도 엔티티를 그대로 노출하면 안된다.
+OrderDto에는 OrderItem이 아니라 OrderItemDto 형태로 있어야 한다. 안에 있는 필드도 Entity를 그대로 노출하면 안된다.
 
 이 코드에서도 지연 로딩으로 인해 많은 SQL이 실행된다.
 
@@ -57,7 +57,7 @@ OrderDto에는 OrderItem이 아니라 OrderItemDto 형태로 있어야 한다. �
 - item N번
     - orderItem 결과 개수만큼
 
-다만, 같은 엔티티가 영속성 컨텍스트에 있다면 지연 로딩이더라도 SQL을 실행하지 않는다.
+다만, 같은 Entity가 영속성 컨텍스트에 있다면 지연 로딩이더라도 SQL을 실행하지 않는다.
 
 ## 페치 조인 최적화
 
@@ -143,7 +143,7 @@ public class OrderRepository {
 - SQL에 distinct를 추가해서 실제 distinct 쿼리가 나간다.
     - DB의 distinct는 한 줄이 완전히 똑같아야 제거된다.
     - 하지만 몇몇 상황에서는 중복 데이터의 모든 컬럼 데이터가 똑같지 않아 제거되지 않는다.
-- 조회 결과에 같은 엔티티가 조회되면 애플리케이션에서 중복을 거른다.
+- 조회 결과에 같은 Entity가 조회되면 애플리케이션에서 중복을 거른다.
     - 레퍼런스가 같은 중복 데이터를 날린다.
 - 페이징이 불가능하다는 단점이 있다.
     - 컬렉션 fetch join에서 페이징을 사용하면 모든 데이터를 DB에서 일단 읽어온 뒤 메모리에서 페이징 하기 때문에 OOM이 발생할 수 있다.

@@ -8,9 +8,9 @@
     - 비즈니스 로직, 트랜잭션 처리
 - repository
     - JPA를 직접 사용하는 계층
-    - 엔티티 매니저 사용
+    - EntityManager 사용
 - domain
-    - 엔티티가 모여있는 계층
+    - Entity가 모여있는 계층
     - 모든 계층에서 사용
     
 controller도 repository에 직접 접근할 수 있되 방향은 단방향으로 흐르도록 작업할 예정이다.

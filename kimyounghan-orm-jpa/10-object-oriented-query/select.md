@@ -1,17 +1,17 @@
 # 프로젝션
 
 - select 절에 조회할 대상을 지정하는 것
-- 엔티티, 임베디드 타입, 스칼라 타입(숫자, 문자 등 기본 데이터 타입)이 대상이다.
+- Entity, 임베디드 타입, 스칼라 타입(숫자, 문자 등 기본 데이터 타입)이 대상이다.
 - `distinct`를 붙여서 중복 제거를 할 수 있다.
 
-### 엔티티 프로젝션
+### Entity 프로젝션
 
 ```jpaql
 select m from Member m
 select m.team from Member m
 ```
 
-`m`이 엔티티의 alias이므로 엔티티 프로젝션이다. `m.team`도 결과가 `team` 엔티티이므로 엔티티 프로젝션에 해당한다.
+`m`이 Entity의 alias이므로 Entity 프로젝션이다. `m.team`도 결과가 `team` Entity이므로 Entity 프로젝션에 해당한다.
 
 ```java
 public class JpaMain {
@@ -35,7 +35,7 @@ public class JpaMain {
 }
 ```
 
-엔티티 프로젝션을 하면 select에 들어가는 모든 데이터가 영속성 컨텍스트에서 관리된다.
+Entity 프로젝션을 하면 select에 들어가는 모든 데이터가 영속성 컨텍스트에서 관리된다.
 
 ```java
 public class JpaMain {
@@ -89,7 +89,7 @@ public class JpaMain {
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/10/screenshot%202021-04-03%20오후%207.11.02.png)
 
-임베디드 타입은 그 엔티티에 속해있으므로 join 없이 조회한다.
+임베디드 타입은 그 Entity에 속해있으므로 join 없이 조회한다.
 
 ```sql
 select address
@@ -222,4 +222,4 @@ public class MemberDto {
 
 {% endtab %} {% endtabs %}
 
-엔티티가 아닌 타입에 생성자로 매핑해서 가져오는 방법이다. 순서와 타입이 일치하는 생성자가 필요하다. `패키지명.클래스명`으로 가져오기 때문에 패키지명이 길어질 수록 사용하기 힘든 단점이 있다.
+Entity가 아닌 타입에 생성자로 매핑해서 가져오는 방법이다. 순서와 타입이 일치하는 생성자가 필요하다. `패키지명.클래스명`으로 가져오기 때문에 패키지명이 길어질 수록 사용하기 힘든 단점이 있다.

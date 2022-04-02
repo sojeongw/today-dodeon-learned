@@ -2,7 +2,7 @@
 
 - SQL 조인 종류는 아니다.
 - JPQL에서 성능 최적화를 위해 제공하는 기능이다.
-- 연관된 엔티티나 컬렉션을 SQL 한 번에 조회할 수 있다.
+- 연관된 Entity나 컬렉션을 SQL 한 번에 조회할 수 있다.
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/11/screenshot%202021-05-23%20오후%202.27.05.png)
 
@@ -69,7 +69,7 @@ public class JpaMain {
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/11/screenshot%202021-05-23%20오후%202.43.33.png)
 
-이 코드는 fetch join으로 회원과 팀을 함께 조회해서 지연 로딩되지 않는다. 즉, for문 안의 team은 프록시가 아니라 실제 엔티티가 담겨있다.
+이 코드는 fetch join으로 회원과 팀을 함께 조회해서 지연 로딩되지 않는다. 즉, for문 안의 team은 프록시가 아니라 실제 Entity가 담겨있다.
 
 지연 로딩으로 설정이 되어있어도 fetch join이 우선 순위를 가진다.
 
@@ -118,26 +118,26 @@ where t.name = '팀A'
 
 - JPQL의 DISTINCT
     - SQL에 DISTINCT를 추가한다.
-    - SQL 결과물이 애플리케이션에 올라오면 엔티티 중복을 제거한다.
+    - SQL 결과물이 애플리케이션에 올라오면 Entity 중복을 제거한다.
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/11/screenshot%202021-05-23%20오후%203.05.25.png)
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/11/screenshot%202021-05-23%20오후%203.06.47.png)
 
-JPQL의 DISTINCT는 애플리케이션에서 추가적으로 중복 제거를 시도한다. 같은 식별자를 가진 Team 엔티티를 제거하는 것이다.
+JPQL의 DISTINCT는 애플리케이션에서 추가적으로 중복 제거를 시도한다. 같은 식별자를 가진 Team Entity를 제거하는 것이다.
 
 ## 일반 join과의 차이
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/11/screenshot%202021-05-23%20오후%203.09.15.png)
 
-JPQL은 결과를 반환할 때 연관 관계를 고려하지 않는다. 단지 select 절에 지정한 엔티티만 조회할 뿐이다. 예제에서는 Team 엔티티만 조회하고 Member 엔티티는
+JPQL은 결과를 반환할 때 연관 관계를 고려하지 않는다. 단지 select 절에 지정한 Entity만 조회할 뿐이다. 예제에서는 Team Entity만 조회하고 Member Entity는
 조회하지 않는다.
 
-fetch join을 사용할 때만 연관된 엔티티를 함께 조회한다. 즉시 로딩의 개념인 것이다. 객체 그래프를 SQL 한 번에 조회할 수 있다.
+fetch join을 사용할 때만 연관된 Entity를 함께 조회한다. 즉시 로딩의 개념인 것이다. 객체 그래프를 SQL 한 번에 조회할 수 있다.
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/11/screenshot%202021-05-23%20오후%203.11.03.png)
 
-일반 join은 실행할 때 연관된 엔티티를 함께 조회하지 않는다. 실제 데이터는 team만 가져온다. 다만 예제의 for문에서 team.getMembers()를 할 때 쿼리가 다시
+일반 join은 실행할 때 연관된 Entity를 함께 조회하지 않는다. 실제 데이터는 team만 가져온다. 다만 예제의 for문에서 team.getMembers()를 할 때 쿼리가 다시
 나가면서 조회되는 것이다.
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/11/screenshot%202021-05-23%20오후%203.13.12.png)
@@ -254,8 +254,8 @@ batchSize 설정은 글로벌로 두고 쓸 수도 있다.
 
 ## 특징
 
-- 연관된 엔티티들을 SQL 한 번으로 조회하므로 성능 최적화가 가능하다.
-- 엔티티에 직접 적용하는 글로벌 로딩 전략보다 우선한다.
+- 연관된 Entity들을 SQL 한 번으로 조회하므로 성능 최적화가 가능하다.
+- Entity에 직접 적용하는 글로벌 로딩 전략보다 우선한다.
     - 글로벌 로딩 전략: `@OneTonMany(fetch = FetchType.LAZY)`
 - 실무에서 글로벌 로딩 전략은 모두 지연로딩이다.
 - 최적화가 필요한 곳은 fetch join을 적용한다.
@@ -264,5 +264,5 @@ batchSize 설정은 글로벌로 두고 쓸 수도 있다.
 
 - 모든 것을 fetch join으로 해결할 수는 없다.
 - 객체 그래프를 유지할 때 사용하면 효과적이다.
-- 여러 테이블을 join해서 엔티티가 가진 모양과 다른 결과를 내야 한다면?
+- 여러 테이블을 join해서 Entity가 가진 모양과 다른 결과를 내야 한다면?
     - 일반 join을 사용하고 필요한 데이터만 조회해서 DTO로 반환한다.

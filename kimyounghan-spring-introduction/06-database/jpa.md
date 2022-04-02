@@ -31,20 +31,20 @@ spring.datasource.username=sa
 spring.jpa.show-sql=true
 # JPA는 테이블을 자동으로 생성하는 기능을 제공한다.
 # none으로 설정하면 해당 기능을 끈다.
-# create를 사용하면 엔티티 정보를 바탕으로 테이블을 직접 생성한다.
+# create를 사용하면 Entity 정보를 바탕으로 테이블을 직접 생성한다.
 spring.jpa.hibernate.ddl-auto=none
 ```
 
 {% endtab %} {% endtabs %}
 
-JPA를 사용하려면 일단 엔티티를 매핑해야 한다. jpa는 인터페이스고 구현체로 hibernate가 있다. 따라서 hibernate 라이브러리가 필요하다.
+JPA를 사용하려면 일단 Entity를 매핑해야 한다. jpa는 인터페이스고 구현체로 hibernate가 있다. 따라서 hibernate 라이브러리가 필요하다.
 
 JPA는 ORM(Object Relational Mapping) 즉, 객체와 데이터베이스 테이블을 매핑해주는 것이다.
 
 {% tabs %} {% tab title="Member.java" %}
 
 ```java
-// 테이블을 매핑해주는 애너테이션 = JPA가 관리하는 엔티티라는 표시 
+// 테이블을 매핑해주는 애너테이션 = JPA가 관리하는 Entity라는 표시 
 @Entity
 public class Member {
 
@@ -80,9 +80,9 @@ public class Member {
 public class JpaMemberRepository implements MemberRepository {
 
   // JPA는 Entity Manager로 동작한다. 
-  // jpa 라이브러리를 추가해놓기만 하면 스프링 부트가 자동으로 엔티티 매니저를 생성해준다.
+  // jpa 라이브러리를 추가해놓기만 하면 스프링 부트가 자동으로 EntityManager를 생성해준다.
   // 우리는 만들어진 것을 주입만 받으면 된다.
-  // 이전에 datasource로 했던 것(DB 연결 등)을 엔티티 매니저가 다 관리한다.
+  // 이전에 datasource로 했던 것(DB 연결 등)을 EntityManager가 다 관리한다.
   private final EntityManager em;
 
   public JpaMemberRepository(EntityManager em) {
@@ -101,7 +101,7 @@ public class JpaMemberRepository implements MemberRepository {
 
   public Optional<Member> findByName(String name) {
     // name으로 찾아야 할 때는 JPQL이라는 객체지향 쿼리를 사용해야 한다.
-    // Member라는 테이블이 아닌 엔티티를 대상으로 쿼리를 날린다.
+    // Member라는 테이블이 아닌 Entity를 대상으로 쿼리를 날린다.
     // m은 객체 자체를 select 하는 것이다.
     List<Member> result = em
         .createQuery("select m from Member m where m.name = :name ", Member.class)
@@ -170,7 +170,7 @@ repository에 구현 클래스 없이 인터페이스만으로 개발을 완료�
 {% tabs %} {% tab title="SpringDataJpaMemberRepository.java" %}
 
 ```java
-// 엔티티와 Id 타입을 맞춰 JpaRepository를 상속한 인터페이스를 만들어야 한다. 
+// Entity와 Id 타입을 맞춰 JpaRepository를 상속한 인터페이스를 만들어야 한다. 
 // 그럼 스프링 데이터 JPA가 SpringDataJpaMemberRepository 빈을 자동으로 만들어준다.
 // 우리가 만들었던 MemberRepository도 상속한다.
 public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Long>,

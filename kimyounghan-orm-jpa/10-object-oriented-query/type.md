@@ -46,7 +46,7 @@ List<Object[]> result = em.createQuery(query).setParameter("userType", MemberTyp
 TypedQuery<Item> query = em.createQuery("select i from Item i where type(i) = 'Book'", Item.class);
 ```
 
-`Book`이 `Item`을 상속할 때 엔티티 타입이 `Book`인 경우를 조회
+`Book`이 `Item`을 상속할 때 Entity 타입이 `Book`인 경우를 조회
 
 ## 기타 식
 

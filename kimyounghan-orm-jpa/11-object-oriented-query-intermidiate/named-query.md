@@ -70,4 +70,4 @@ where m.username = :username
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/11/screenshot%202021-05-23%20오후%204.52.58.png)
 
-Spring Data JPA의 `@Query` 기능이 바로 Named Query다. `@NamedQuery`로 엔티티에 직접 쓰면 지저분하니까 Spring Data JPA를 쓰는 게 좋다.
+Spring Data JPA의 `@Query` 기능이 바로 Named Query다. `@NamedQuery`로 Entity에 직접 쓰면 지저분하니까 Spring Data JPA를 쓰는 게 좋다.

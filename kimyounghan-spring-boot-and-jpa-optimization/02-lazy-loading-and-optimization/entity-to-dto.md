@@ -1,4 +1,4 @@
-# 엔티티를 DTO로 변환 
+# Entity를 DTO로 변환 
 
 ```java
 @RestController
@@ -21,7 +21,7 @@ public class OrderSimpleApiController {
         private OrderStatus orderStatus;
         private Address address;
 
-        // DTO가 엔티티에 의존하는 것은 문제가 되지 않는다.
+        // DTO가 Entity에 의존하는 것은 문제가 되지 않는다.
         public SimpleOrderDto(Order order) {
             orderId = order.getId();
             name = order.getMember().getName(); // lazy
@@ -96,7 +96,7 @@ public class OrderSimpleApiController {
 
 쿼리 한 방으로 불러와졌다. order와 member, order와 delivery를 한 번에 조인해서 가져온다.
 
-- 엔티티를 fetch join을 사용해 쿼리 1번으로 조회한다.
+- Entity를 fetch join을 사용해 쿼리 1번으로 조회한다.
 - 연관 관계에 있는 값을 프록시 대신 실제 값으로 다 채워서 가져온다.
 - fetch join으로 member, delivery는 이미 조회된 상태이므로 지연 로딩 하지 않는다.
 

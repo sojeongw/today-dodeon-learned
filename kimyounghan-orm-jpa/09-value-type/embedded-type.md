@@ -2,7 +2,7 @@
 
 - 새로운 값 타입을 직접 정의할 수 있다.
 - 주로 기본 값 타입을 모아서 만들기 때문에 복합 값 타입이라고 한다.
-- int, String처럼 임베디드 타입도 엔티티가 아닌 그냥 값 타입이다.
+- int, String처럼 임베디드 타입도 Entity가 아닌 그냥 값 타입이다.
     - 변경해도 추적이 되지 않는다.
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/09/screenshot%202021-03-31%20오후%207.52.44.png)
@@ -35,7 +35,7 @@
     - 기간이나 주소는 시스템 전체에서 재사용할 수 있는 데이터다.
 - 응집도가 높다.
     - `Period.isWork()`처럼 해당 값 타입만 사용하는 의미있는 메서드를 만들 수 있다.
-- 임베디드 타입을 포함한 모든 값 타입은 값 타입을 소유한 엔티티에 생명주기를 의존한다.
+- 임베디드 타입을 포함한 모든 값 타입은 값 타입을 소유한 Entity에 생명주기를 의존한다.
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/09/screenshot%202021-03-31%20오후%208.02.23.png)
 
@@ -163,7 +163,7 @@ public class JpaMain {
 
 ## 임베디드 타입과 테이블 매핑
 
-- 임베디드 타입은 엔티티의 값일 뿐이다.
+- 임베디드 타입은 Entity의 값일 뿐이다.
 - 임베디드 타입을 사용하기 전과 후에 매핑하는 테이블은 같다.
 - 대신, 객체와 테이블을 아주 세밀하게 매핑하는 게 가능해진다.
 - 잘 설계한 ORM 애플리케이션은 매핑한 테이블의 수보다 클래스의 수가 더 많다.
@@ -173,7 +173,7 @@ public class JpaMain {
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/09/screenshot%202021-03-31%20오후%208.02.29.png)
 
-`Address`와 `ZipCode`처럼 임베디드 타입도 임베디드 타입을 가질 수 있다. 또한, `PhoneNumber`와 `PhoneEntity`처럼 임베디드 타입이 엔티티를 가질 수도 있다. FK만 가지고 있으면 되기 때문이다.
+`Address`와 `ZipCode`처럼 임베디드 타입도 임베디드 타입을 가질 수 있다. 또한, `PhoneNumber`와 `PhoneEntity`처럼 임베디드 타입이 Entity를 가질 수도 있다. FK만 가지고 있으면 되기 때문이다.
 
 ## @AttributeOverride
 
@@ -205,7 +205,7 @@ public class Member {
 
 {% endtab %} {% endtabs %}
 
-한 엔티티에서 같은 값 타입을 사용하면 어떻게 해야할까? 이때 사용하는 것이 `@AttributeOverride`다.
+한 Entity에서 같은 값 타입을 사용하면 어떻게 해야할까? 이때 사용하는 것이 `@AttributeOverride`다.
 
 {% tabs %} {% tab title="Member.java" %}
 

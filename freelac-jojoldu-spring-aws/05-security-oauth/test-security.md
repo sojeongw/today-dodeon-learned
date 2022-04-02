@@ -162,7 +162,7 @@ public class HelloControllerTest {
 
 ![](../../.gitbook/assets/freelac-jojoldu-spring-aws/05/스크린샷%202020-09-13%20오후%207.30.12.png)
 
-다시 실행하면 이런 에러가 발생한다. `@EnableJpaAuditing`을 사용하기 위해서는 최소 하나의 `@Entity` 클래스가 필요하다. 이 테스트는 `@WebMvcTest`이므로 당연히 엔티티가 존재하지 않는다.
+다시 실행하면 이런 에러가 발생한다. `@EnableJpaAuditing`을 사용하기 위해서는 최소 하나의 `@Entity` 클래스가 필요하다. 이 테스트는 `@WebMvcTest`이므로 당연히 Entity가 존재하지 않는다.
 
 `@EnableJpaAuditing`가 `@SpringBootApplication`과 함께 있다보니, `@WebMvcTest`에서도 스캔할 수밖에 없다. `@EnableJpaAuditing`을 `@SpringBootApplication`에서 분리해보자.
 

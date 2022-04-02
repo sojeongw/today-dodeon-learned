@@ -286,8 +286,8 @@ public class MemberRepositoryTest {
     Assertions.assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
 
     // 같은 트랜잭션에 묶여있기 때문에 같은 영속성 컨텍스트에 존재한다.
-    // 같은 영속성 컨텍스트에서는 아이디 값이 같으면 같은 엔티티로 식별한다.
-    // 이미 같은 영속성 컨텍스트에서 관리되고 있는 엔티티가 있기 때문에 1차 캐시에서 가져온다.
+    // 같은 영속성 컨텍스트에서는 아이디 값이 같으면 같은 Entity로 식별한다.
+    // 이미 같은 영속성 컨텍스트에서 관리되고 있는 Entity가 있기 때문에 1차 캐시에서 가져온다.
     Assertions.assertThat(findMember).isEqualTo(member);
   }
 

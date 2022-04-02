@@ -121,7 +121,7 @@ public abstract class Item {
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/07/screenshot%202021-03-20%20오후%205.58.12.png)
 
-해당 자식 엔티티와 관련이 없는 데이터는 `null`로 들어간다.
+해당 자식 Entity와 관련이 없는 데이터는 `null`로 들어간다.
 
 ![](../../.gitbook/assets/kimyounghan-orm-jpa/07/screenshot%202021-03-20%20오후%206.06.58.png)
 
@@ -134,7 +134,7 @@ public abstract class Item {
 
 ### 단점
 
-- 자식 엔티티가 매핑한 컬럼은 모두 null을 허용해야 한다.
+- 자식 Entity가 매핑한 컬럼은 모두 null을 허용해야 한다.
     - 데이터 무결성 측면에서 애매하다.
 - 단일 테이블에 모든 것을 저장하므로 테이블이 커질 수 있다.
     - 상황에 따라 조회 성능이 오히려 느려질 수 있다.

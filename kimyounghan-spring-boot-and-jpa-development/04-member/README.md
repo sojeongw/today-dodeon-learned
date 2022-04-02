@@ -7,7 +7,7 @@
 @Repository
 public class MemberRepository {
 
-  // 스프링이 엔티티 매니저를 주입해준다.
+  // 스프링이 EntityManager를 주입해준다.
   @PersistenceContext
   private EntityManager em;
 
@@ -41,7 +41,7 @@ public class MemberRepository {
 
 ### @PersistenceContext
 
-- 엔티티 매니저를 주입한다.
+- EntityManager를 주입한다.
 
 ### @PersistenceUnit
 
@@ -50,13 +50,13 @@ public class MemberRepository {
 @Repository
 public class MemberRepository {
 
-  // 엔티티 매니저 팩토리를 직접 주입받고 싶다면 아래를 사용한다.
+  // EntityManagerFactory를 직접 주입받고 싶다면 아래를 사용한다.
   @PersistenceUnit
   private EntityManagerFactory emf;
 }
 ```
 
-- 엔티티 매니저 팩토리를 주입한다.
+- EntityManagerFactory를 주입한다.
 
 ## 회원 서비스 개발
 
@@ -188,8 +188,8 @@ public class MemberRepository {
 }
 ```
 
-원래 엔티티 매니저는 `@PersistenceContext`라는 표준 애너테이션이 꼭 있어야 해서 `@Autowired`만 붙이면 작동하지 않는다. 하지만 스프링 부트에 있는
-스프링 데이터 JPA 덕분에 리포지토리에 있는 엔티티 매니저도 이렇게 생성자 주입으로 수정할 수 있다.
+원래 EntityManager는 `@PersistenceContext`라는 표준 애너테이션이 꼭 있어야 해서 `@Autowired`만 붙이면 작동하지 않는다. 하지만 스프링 부트에 있는
+스프링 데이터 JPA 덕분에 리포지토리에 있는 EntityManager도 이렇게 생성자 주입으로 수정할 수 있다.
 
 ## 회원 기능 테스트
 ### 회원 가입

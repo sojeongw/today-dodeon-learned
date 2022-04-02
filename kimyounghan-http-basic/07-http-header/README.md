@@ -25,26 +25,26 @@
     - 메시지 전체에 적용되는 정보
     - ex) Connection: close
 - Entity Header
-    - 엔티티 바디 정보
+    - Entity 바디 정보
     - ex) Content-Type: text/html, Content-Length: 3423
     
 ### HTTP 바디
 
 ![](../../.gitbook/assets/kimyounghan-http-web-basic/07/screenshot%202021-04-04%20오후%203.40.12.png)
 
-메시지 본문은 엔티티 본문을 전달하는데에 사용한다.
+메시지 본문은 Entity 본문을 전달하는데에 사용한다.
 
-- 엔티티 본문
+- Entity 본문
     - 요청이나 응답에서 전달할 실제 데이터
-- 엔티티 헤더
-    - 엔티티 본문의 데이터를 해석할 수 있는 정보
+- Entity 헤더
+    - Entity 본문의 데이터를 해석할 수 있는 정보
     - 데이터 유형(html, json), 데이터 길이, 압축 정보 등
 
 ---
 
-1999년에 나온 RFC2616가 폐기되고 2014년에 RFC7230~7235가 등장하면서 엔티티 바디 개념이 사라지게 되었다.
+1999년에 나온 RFC2616가 폐기되고 2014년에 RFC7230~7235가 등장하면서 Entity 바디 개념이 사라지게 되었다.
 
-- 엔티티 대신 표현(Representation)이 추가되었다.
+- Entity 대신 표현(Representation)이 추가되었다.
 - 표현은 표현 메타데이터와 표현 데이터를 합친 개념이다.
 
 ## RFC7230(최신)
