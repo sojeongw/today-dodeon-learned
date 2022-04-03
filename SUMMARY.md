@@ -256,6 +256,15 @@
     * [정리](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/summary.md)
 * [OSIV와 성능 최적화](kimyounghan-spring-boot-and-jpa-optimization/04-osiv/README.md)
 
+## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
+
+* [CPU bound 애플리케이션](backend-system-practice/01-cpu-bound-application/README.md)
+  * [CPU를 극단적으로 사용하는 애플리케이션](backend-system-practice/01-cpu-bound-application/cpu-bound-application.md)
+  * [스트레스 테스트 툴로 성능 측정](backend-system-practice/01-cpu-bound-application/performance-benchmark.md)
+  * [Dockerized 애플리케이션 GCP 배포](backend-system-practice/01-cpu-bound-application/dockerized-application-gcp-deployment.md)
+  * [Jenkins를 이용한 배포](backend-system-practice/01-cpu-bound-application/jenkins-deployment.md)
+
+
 ## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
 
 * [예제로 배우는 스프링 입문(개정판)](spring-keesun-baik/spring-framework-introduction/README.md)
