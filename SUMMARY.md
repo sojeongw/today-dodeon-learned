@@ -259,11 +259,11 @@
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
 * [CPU bound 애플리케이션](backend-system-practice/01-cpu-bound-application/README.md)
-  * [CPU를 극단적으로 사용하는 애플리케이션](backend-system-practice/01-cpu-bound-application/cpu-bound-application.md)
-  * [스트레스 테스트 툴로 성능 측정](backend-system-practice/01-cpu-bound-application/performance-benchmark.md)
-  * [Dockerized 애플리케이션 GCP 배포](backend-system-practice/01-cpu-bound-application/dockerized-application-gcp-deployment.md)
-  * [Jenkins를 이용한 배포](backend-system-practice/01-cpu-bound-application/jenkins-deployment.md)
-
+    * [CPU를 극단적으로 사용하는 애플리케이션](backend-system-practice/01-cpu-bound-application/cpu-bound-application.md)
+    * [스트레스 테스트 툴로 성능 측정](backend-system-practice/01-cpu-bound-application/performance-benchmark.md)
+    * [Dockerized 애플리케이션 GCP 배포](backend-system-practice/01-cpu-bound-application/dockerized-application-gcp-deployment.md)
+    * [Jenkins를 이용한 배포](backend-system-practice/01-cpu-bound-application/jenkins-deployment.md)
+* [CPU bound 애플리케이션 무중단 배포](backend-system-practice/02-zero-downtime-deployment/README.md)
 
 ## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
 
