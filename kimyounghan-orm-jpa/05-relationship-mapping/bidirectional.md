@@ -122,7 +122,7 @@ public class Member {
     // 외래키가 있는 곳을 연관 관계의 주인으로 정한다.
     // 연관 관계 주인인 team만 insert, update를 할 수 있다.
     @ManyToOne
-    @Column(name = "TEAM_ID")
+    @JoinColumn(name = "TEAM_ID")
     private Team team;
 }
 
