@@ -49,6 +49,12 @@
 - TABLE_PER_CLASS
     - 구현 클래스마다 테이블 전략
 
+추후 요구 사항이 바뀌어도 @Inheritance의 옵션만 바꿔주면 되기 때문에 편리하다.
+
+![](../../.gitbook/assets/kimyounghan-orm-jpa/07/screenshot%202021-03-20%20오후%205.21.23.png)
+
+JPA 기본 전략은 싱글 테이블이기 때문에 별도로 지정하지 않으면 `item` 테이블에 모든 데이터가 모인다.
+
 {% tabs %} {% tab title="Item.java" %}
 
 ```java
@@ -164,6 +170,7 @@ public class Item {
     - `DTYPE`이 없으면 어떤 게 생성된지 모르기 때문에 웬만하면 넣어주는 게 좋다.
     - `name` 옵션으로 컬럼 이름을 바꿔줄 수도 있다.
         - @DiscriminatorColumn(name = "DIS_TYPE")
+- 단일 테이블 전략에서는 DTYPE이 꼭 필요하기 때문에 @DiscriminatorColumn이 없어도 자동으로 DTYPE을 만든다.
 
 ### @DiscriminatorValue
 
@@ -213,5 +220,3 @@ public class Book extends Item {
 - @DiscriminatorValue("XXX")
     - `DTYPE`에 들어갈 자식의 값을 정해줄 수 있다.
     - ex. 자식인 `movie`가 `M`으로 표시되게 한다.
-
-조인 전략에서는 DTYPE이 없어도 자식 테이블과 조인 쿼리하면 알 수 있지만, 단일 테이블 전략에서는 꼭 필요하다.
