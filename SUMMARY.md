@@ -218,7 +218,7 @@
     * [경로 표현식](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/graph.md)
     * [fetch join](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/fetch-join.md)
     * [다형성 쿼리](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/polymorphism.md)
-    * [Entity 직접 사용](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/direct-use.md)
+    * [Entity 직접 사용](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/using-entity.md)
     * [Named 쿼리](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/named-query.md)
     * [벌크 연산](kimyounghan-orm-jpa/11-object-oriented-query-intermidiate/bulk-calculation.md)
 
