@@ -133,11 +133,11 @@ test {
 @Controller
 public class HelloController {
 
-  @GetMapping("hello")
-  public String hello(Model model) {
-    model.addAttribute("data", "hello!!");
-    return "hello";
-  }
+    @GetMapping("hello")
+    public String hello(Model model) {
+        model.addAttribute("data", "hello!!");
+        return "hello";
+    }
 }
 ```
 
@@ -175,11 +175,10 @@ public class HelloController {
 
 {% endtab %} {% endtabs %}
 
-`resources:template/` + `{ViewName}` + `.html` 경로를 통해 스프링 부트에 thymeleaf viewName이 매핑된다. 기본 정적
-화면은 `/static/index.html`에 정의한다.
+`resources:template/` + `{ViewName}` + `.html` 경로를 통해 스프링 부트에 thymeleaf viewName이 매핑된다. 기본 정적 화면은 `/static/index.html`에
+정의한다.
 
-`spring-boot-devtools` 라이브러리를 추가한 뒤 html 파일을 컴파일만 하면 서버 재시작 없이 변경 사항이 반영된다. `build-recompile` 메뉴에서
-컴파일 할 수 있다.
+`spring-boot-devtools` 라이브러리를 추가한 뒤 html 파일을 컴파일만 하면 서버 재시작 없이 변경 사항이 반영된다. `build-recompile` 메뉴에서 컴파일 할 수 있다.
 
 ## H2 데이터베이스 설치
 
@@ -222,10 +221,10 @@ logging.level:
 @Setter
 public class Member {
 
-  @Id
-  @GeneratedValue
-  private Long id;
-  private String username;
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String username;
 }
 ```
 
@@ -236,21 +235,21 @@ public class Member {
 @Repository
 public class MemberRepository {
 
-  // 스프링 컨테이너가 EntityManager를 주입할 수 있게 해주는 애너테이션
-  @PersistenceContext
-  private EntityManager em;
+    // 스프링 컨테이너가 EntityManager를 주입할 수 있게 해주는 애너테이션
+    @PersistenceContext
+    private EntityManager em;
 
-  public Long save(Member member) {
-    em.persist(member);
+    public Long save(Member member) {
+        em.persist(member);
 
-    // 커맨드와 쿼리를 분리하자.
-    // 저장은 사이드 이펙트를 일으키는 커맨드 성이기 때문에 리턴을 안 하거나 아이디 정도만 반환한다.
-    return member.getId();
-  }
+        // 커맨드와 쿼리를 분리하자.
+        // 저장은 사이드 이펙트를 일으키는 커맨드 성이기 때문에 리턴을 안 하거나 아이디 정도만 반환한다.
+        return member.getId();
+    }
 
-  public Member find(Long id) {
-    return em.find(Member.class, id);
-  }
+    public Member find(Long id) {
+        return em.find(Member.class, id);
+    }
 }
 
 ```
@@ -258,42 +257,47 @@ public class MemberRepository {
 {% endtab %} {% tab title="MemberRepositoryTest.java" %}
 
 ```java
-
-@RunWith(SpringRunner.class)  // 스프링과 관련된 테스트를 할 것이라고 알려준다.
-@SpringBootTest   // 이것도 함께 넣어줘야 한다.
+// 스프링과 관련된 테스트를 할 것이라고 알려준다.
+@RunWith(SpringRunner.class)
+// 스프링 부트 프로젝트이므로 함께 넣어줘야 한다.
+@SpringBootTest   
 public class MemberRepositoryTest {
 
-  @Autowired
-  MemberRepository memberRepository;
+    @Autowired
+    MemberRepository memberRepository;
 
-  @Test
-  // 추가하지 않으면 No EntityManager with actual transaction available for current thread - cannot reliably process 'persist' call 이라고 에러 발생
-  // 테스트가 끝나면 바로 롤백하기 때문에 테이블엔 데이터가 남지 않는다.
-  @Transactional
-  // 날리고 싶지 않으면 이 옵션을 추가한다.
-  @Rollback(value = false)
-  public void save() {
-    // given
-    Member member = new Member();
-    member.setUsername("memberA");
+    @Test
+    // 추가하지 않으면 
+    // No EntityManager with actual transaction available for current thread
+    // - cannot reliably process 'persist' call 에러가 발생한다.
+    // 엔티티의 데이터 변경은 모두 트랜잭션 안에서 이루어져야 하는데 트랜잭션이 없어서 나는 에러다.
+    // @Transactional은 테스트에 있으면 테스트가 끝난 뒤 바로 롤백한다.
+    @Transactional
+    // 테스트 후 데이터를 날리고 싶지 않으면 이 옵션을 추가한다.
+    @Rollback(value = false)
+    public void save() {
+        // given
+        Member member = new Member();
+        member.setUsername("memberA");
 
-    // when
-    Long savedId = memberRepository.save(member);
-    Member findMember = memberRepository.find(savedId);
+        // when
+        Long savedId = memberRepository.save(member);
+        Member findMember = memberRepository.find(savedId);
 
-    // then
-    Assertions.assertThat(findMember.getId()).isEqualTo(member.getId());
-    Assertions.assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
+        // then
+        Assertions.assertThat(findMember.getId()).isEqualTo(member.getId());
+        Assertions.assertThat(findMember.getUsername()).isEqualTo(member.getUsername());
 
-    // 같은 트랜잭션에 묶여있기 때문에 같은 영속성 컨텍스트에 존재한다.
-    // 같은 영속성 컨텍스트에서는 아이디 값이 같으면 같은 Entity로 식별한다.
-    // 이미 같은 영속성 컨텍스트에서 관리되고 있는 Entity가 있기 때문에 1차 캐시에서 가져온다.
-    Assertions.assertThat(findMember).isEqualTo(member);
-  }
+        // 같은 트랜잭션에 묶여있기 때문에 같은 영속성 컨텍스트에 존재한다.
+        // 같은 영속성 컨텍스트에서는 아이디 값이 같으면 같은 Entity로 식별한다.
+        // 이미 같은 영속성 컨텍스트에서 관리되고 있는 Entity가 있기 때문에 1차 캐시에서 가져온다.
+        // 따라서 둘을 비교하면 true가 나온다.
+        Assertions.assertThat(findMember).isEqualTo(member);
+    }
 
-  @Test
-  public void find() {
-  }
+    @Test
+    public void find() {
+    }
 }
 ```
 
@@ -314,7 +318,7 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: create 
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
