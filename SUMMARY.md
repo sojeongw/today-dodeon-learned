@@ -170,9 +170,9 @@
 * [JPA 소개](kimyounghan-orm-jpa/01-jpa-introduction/README.md)
 * [JPA 시작하기](kimyounghan-orm-jpa/02-starting-jpa/README.md)
 * [영속성 관리](kimyounghan-orm-jpa/03-persistence/README.md)
-  * [영속성 컨텍스트](kimyounghan-orm-jpa/03-persistence/persistence-context.md)
-  * [플러시](kimyounghan-orm-jpa/03-persistence/flush.md)
-  * [준영속 상태](kimyounghan-orm-jpa/03-persistence/detach.md)
+    * [영속성 컨텍스트](kimyounghan-orm-jpa/03-persistence/persistence-context.md)
+    * [플러시](kimyounghan-orm-jpa/03-persistence/flush.md)
+    * [준영속 상태](kimyounghan-orm-jpa/03-persistence/detach.md)
 * [Entity 매핑](kimyounghan-orm-jpa/04-entity-mapping/README.md)
     * [객체와 테이블 매핑](kimyounghan-orm-jpa/04-entity-mapping/object-and-table-mapping.md)
     * [데이터베이스 스키마 자동 생성](kimyounghan-orm-jpa/04-entity-mapping/auto-generating-schema.md)
@@ -267,6 +267,8 @@
     * [Dockerized 애플리케이션 GCP 배포](backend-system-practice/01-cpu-bound-application/dockerized-application-gcp-deployment.md)
     * [Jenkins를 이용한 배포](backend-system-practice/01-cpu-bound-application/jenkins-deployment.md)
 * [CPU bound 애플리케이션 무중단 배포](backend-system-practice/02-zero-downtime-deployment/README.md)
+    * [nginx를 통한 로드밸런싱 구성](backend-system-practice/02-zero-downtime-deployment/nginx-deployment.md)
+    * [서버를 늘려서 성능 측정](backend-system-practice/02-zero-downtime-deployment/scale-out-performance.md)
 
 ## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
 
