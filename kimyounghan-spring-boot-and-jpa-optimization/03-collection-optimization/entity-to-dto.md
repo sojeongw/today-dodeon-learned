@@ -5,9 +5,10 @@
 @RestController
 @RequiredArgsConstructor
 public class OrderApiController {
+
     @GetMapping("/api/v2/orders")
     public List<OrderDto> ordersV2() {
-        List<Order> orders = orderRepository.findAll(new OrderSearch());
+        List<Order> orders = orderRepository.findAllByString(new OrderSearch());
 
         return orders.stream().map(OrderDto::new).collect(Collectors.toList());
     }
@@ -27,7 +28,8 @@ public class OrderApiController {
             orderDate = order.getOrderDate();
             orderStatus = order.getStatus();
             address = order.getDelivery().getAddress();
-            orderItems = order.getOrderItems().stream().map(OrderItemDto::new)
+            orderItems = order.getOrderItems().stream()
+                    .map(OrderItemDto::new)
                     .collect(Collectors.toList());
         }
     }
@@ -47,17 +49,16 @@ public class OrderApiController {
 }
 ```
 
-OrderDto에는 OrderItem이 아니라 OrderItemDto 형태로 있어야 한다. 안에 있는 필드도 Entity를 그대로 노출하면 안된다.
-
-이 코드에서도 지연 로딩으로 인해 많은 SQL이 실행된다.
-
-- order 1번
-- member, address, orderItem N번
-    - order 결과 개수만큼
-- item N번
-    - orderItem 결과 개수만큼
-
-다만, 같은 Entity가 영속성 컨텍스트에 있다면 지연 로딩이더라도 SQL을 실행하지 않는다.
+- 안에 있는 필드도 Entity를 그대로 노출하면 안된다.
+    - OrderDto에는 OrderItem이 아니라 OrderItemDto 형태로 있어야 한다.
+- 지연 로딩 쿼리 횟수
+    - order
+        - 1번
+    - member, address, orderItem
+        - order 결과 개수만큼
+    - item
+        - orderItem 결과 개수만큼
+    - 다만, 같은 Entity가 영속성 컨텍스트에 있다면 지연 로딩이더라도 SQL을 실행하지 않는다.
 
 ## 페치 조인 최적화
 
@@ -70,11 +71,11 @@ OrderDto에는 OrderItem이 아니라 OrderItemDto 형태로 있어야 한다. �
 public class OrderRepository {
     public List<Order> findAllWithItem() {
         return em.createQuery(
-                "select o from Order o" +
-                        " join fetch o.member m" +
-                        " join fetch o.delivery d" +
-                        " join fetch o.orderItems oi" +
-                        " join fetch oi.item i", Order.class)
+                        "select o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d" +
+                                " join fetch o.orderItems oi" +
+                                " join fetch oi.item i", Order.class)
                 .getResultList();
     }
 }
@@ -126,11 +127,11 @@ order와 order Item을 조인하면
 public class OrderRepository {
     public List<Order> findAllWithItem() {
         return em.createQuery(
-                "select distinct o from Order o" +
-                        " join fetch o.member m" +
-                        " join fetch o.delivery d" +
-                        " join fetch o.orderItems oi" +
-                        " join fetch oi.item i", Order.class)
+                        "select distinct o from Order o" +
+                                " join fetch o.member m" +
+                                " join fetch o.delivery d" +
+                                " join fetch o.orderItems oi" +
+                                " join fetch oi.item i", Order.class)
                 .getResultList();
     }
 }
@@ -147,7 +148,7 @@ public class OrderRepository {
     - 레퍼런스가 같은 중복 데이터를 날린다.
 - 페이징이 불가능하다는 단점이 있다.
     - 컬렉션 fetch join에서 페이징을 사용하면 모든 데이터를 DB에서 일단 읽어온 뒤 메모리에서 페이징 하기 때문에 OOM이 발생할 수 있다.
-  
+
 ## 컬렉션의 fetch join
 
 - 컬렉션의 fetch join은 2개 이상의 컬렉션에 사용하면 안된다.
