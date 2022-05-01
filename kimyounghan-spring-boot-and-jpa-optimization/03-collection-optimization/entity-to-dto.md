@@ -1,5 +1,4 @@
-# Entity를 DTO로 변환
-
+# Entity를 DTO로 변환: 페치 조인
 ```java
 
 @RestController

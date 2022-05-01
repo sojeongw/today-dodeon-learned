@@ -1,6 +1,8 @@
-# 컬렉션 조회 최적화
+# DTO 직접 조회: 컬렉션 조회 최적화
 
 - 이전에 발생한 N+1 문제를 해결해보자.
+
+## in 절
 
 {% tabs %} {% tab title="OrderApiController.java" %}
 
