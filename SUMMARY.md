@@ -259,6 +259,13 @@
     * [정리](kimyounghan-spring-boot-and-jpa-optimization/03-collection-optimization/summary.md)
 * [OSIV와 성능 최적화](kimyounghan-spring-boot-and-jpa-optimization/04-osiv/README.md)
 
+## 스프링 데이터 JPA <a id="kimyounghan-spring-data-jpa"></a>
+
+* [예제 도메인 모델](kimyounghan-spring-data-jpa/01-domain-model/README.md)
+* [공통 인터페이스 기능](kimyounghan-spring-data-jpa/02-common-interface/README.md)
+    * [순수 JPA 기반 리포지토리](kimyounghan-spring-data-jpa/02-common-interface/01-pure-jpa-repository.md)
+    * [공통 인터페이스 설정](kimyounghan-spring-data-jpa/02-common-interface/02-common-interface.md)
+
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
 * [CPU bound 애플리케이션](backend-system-practice/01-cpu-bound-application/README.md)
