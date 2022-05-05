@@ -265,6 +265,9 @@
 * [공통 인터페이스 기능](kimyounghan-spring-data-jpa/02-common-interface/README.md)
     * [순수 JPA 기반 리포지토리](kimyounghan-spring-data-jpa/02-common-interface/01-pure-jpa-repository.md)
     * [공통 인터페이스 설정](kimyounghan-spring-data-jpa/02-common-interface/02-common-interface.md)
+* [쿼리 메서드](kimyounghan-spring-data-jpa/03-query-method/README.md)
+    * [JPA Named Query](kimyounghan-spring-data-jpa/03-query-method/01-named-query.md)
+    * [@Query](kimyounghan-spring-data-jpa/03-query-method/02-query.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
