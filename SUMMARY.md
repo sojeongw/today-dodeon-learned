@@ -268,6 +268,8 @@
 * [쿼리 메서드](kimyounghan-spring-data-jpa/03-query-method/README.md)
     * [JPA Named Query](kimyounghan-spring-data-jpa/03-query-method/01-named-query.md)
     * [@Query](kimyounghan-spring-data-jpa/03-query-method/02-query.md)
+    * [파라미터 바인딩](kimyounghan-spring-data-jpa/03-query-method/03-parameter-binding.md)
+    * [반환 타입](kimyounghan-spring-data-jpa/03-query-method/04-return-type.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 

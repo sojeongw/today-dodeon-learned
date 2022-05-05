@@ -43,4 +43,6 @@ public class MemberJpaRepository {
     - findTop
     - findTop3
 
+**Reference**
+
 [쿼리 메소드 필터 조건](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation)
