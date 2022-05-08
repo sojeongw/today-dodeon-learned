@@ -265,7 +265,7 @@
 * [공통 인터페이스 기능](kimyounghan-spring-data-jpa/02-common-interface/README.md)
     * [순수 JPA 기반 리포지토리](kimyounghan-spring-data-jpa/02-common-interface/01-pure-jpa-repository.md)
     * [공통 인터페이스 설정](kimyounghan-spring-data-jpa/02-common-interface/02-common-interface.md)
-* [쿼리 메서드](kimyounghan-spring-data-jpa/03-query-method/README.md)
+* [쿼리 메서드 기능](kimyounghan-spring-data-jpa/03-query-method/README.md)
     * [JPA Named Query](kimyounghan-spring-data-jpa/03-query-method/01-named-query.md)
     * [@Query](kimyounghan-spring-data-jpa/03-query-method/02-query.md)
     * [파라미터 바인딩](kimyounghan-spring-data-jpa/03-query-method/03-parameter-binding.md)
@@ -274,6 +274,8 @@
     * [벌크성 수정 쿼리](kimyounghan-spring-data-jpa/03-query-method/06-bulk-update-query.md)
     * [@EntityGraph](kimyounghan-spring-data-jpa/03-query-method/07-entity-graph.md)
     * [JPA Hint & Lock](kimyounghan-spring-data-jpa/03-query-method/08-jpa-hint-and-lock.md)
+* [확장 기능](kimyounghan-spring-data-jpa/04-extension/README.md)
+    * [사용자 정의 리포지토리](kimyounghan-spring-data-jpa/04-extension/01-custom-repository.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
