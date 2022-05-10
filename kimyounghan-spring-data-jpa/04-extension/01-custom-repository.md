@@ -118,3 +118,27 @@ public class MemberQueryRepository {
 - 인터페이스가 아닌 클래스로 만들어 빈으로 등록하고 직접 사용해도 된다.
     - 물론 이때는 스프링 데이터 JPA와는 아무 관계 없이 별도로 동작한다.
     - 핵심은 비즈니스 로직과 그렇지 않은 것을 분리해야 한다는 것!
+
+## 최신 구현 방식
+
+```java
+
+@RequiredArgsConstructor
+public class MemberRepositoryCustomImpl implements MemberRepositoryCustom {
+
+    private final EntityManager em;
+
+    @Override
+    public List<Member> findMemberCustom() {
+        return em.createQuery("select m from Member m")
+                .getResultList();
+    }
+}
+```
+
+- 스프링 데이터 2.x 이상에서 사용자 정의 구현 클래스 이름
+    - MemberRepositoryImpl 등 리포지토리 인터페이스 이름 + Impl 대신
+    - MemberRepositoryCustomImpl 등 사용자 정의 인터페이스 이름 + Impl도 지원한다.
+- 사용자 정의 인터페이스와 구현 클래스 이름이 비슷하므로 기존 방식보다 직관적이다.
+- 여러 인터페이스를 분리해서 구현하는 것도 가능해지므로 이 방식을 권장한다.
+        
