@@ -277,6 +277,7 @@
 * [확장 기능](kimyounghan-spring-data-jpa/04-extension/README.md)
     * [사용자 정의 리포지토리](kimyounghan-spring-data-jpa/04-extension/01-custom-repository.md)
     * [Auditing](kimyounghan-spring-data-jpa/04-extension/02-auditing.md)
+    * [Web 확장](kimyounghan-spring-data-jpa/04-extension/03-web-extension.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 

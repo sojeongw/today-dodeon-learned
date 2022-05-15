@@ -40,9 +40,10 @@ public class JpaBaseEntity {
 {% endtab %} {% tab title="JpaBaseEntity.java" %}
 
 ```java
+
 @Entity
 public class Member extends JpaBaseEntity {
-    
+
 }
 ```
 
@@ -62,10 +63,10 @@ create table member
 ```
 
 - JPA 주요 이벤트 애너테이션
-  - @PrePersist
-  - @PostPersist 
-  - @PreUpdate
-  - @PostUpdate
+    - @PrePersist
+    - @PostPersist
+    - @PreUpdate
+    - @PostUpdate
 
 ```java
 class MemberTest {
@@ -100,21 +101,22 @@ findMember.updatedDate = 2022-05-22T11:13:25.430480
 ## 스프링 데이터 JPA 사용
 
 - 설정
-  - 스프링 부트 설정 클래스
-    - @EnableJpaAuditing
-  - 엔티티
-    - @EntityListeners(AuditingEntityListener.class)
+    - 스프링 부트 설정 클래스
+        - @EnableJpaAuditing
+    - 엔티티
+        - @EntityListeners(AuditingEntityListener.class)
 - 사용 애너테이션
-  - @CreatedDate
-  - @LastModifiedDate
-  - @CreatedBy
-  - @LastModifiedBy
+    - @CreatedDate
+    - @LastModifiedDate
+    - @CreatedBy
+    - @LastModifiedBy
 
 ### 등록일, 수정일
 
 {% tabs %} {% tab title="BaseEntity.java" %}
 
 ```java
+
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
@@ -133,6 +135,7 @@ public class BaseEntity {
 {% endtab %} {% tab title="DataJpaApplication.java" %}
 
 ```java
+
 @EnableJpaAuditing
 @SpringBootApplication
 public class DataJpaApplication {
@@ -144,11 +147,11 @@ public class DataJpaApplication {
 }
 ```
 
-{% endtab %}  {% tab title="BaseEntity.java" %}
+{% endtab %} {% tab title="BaseEntity.java" %}
 
 ```java
 public class Member extends BaseEntity {
-    
+
 }
 ```
 
@@ -164,6 +167,7 @@ findMember.getLastModifiedDate = 2022-05-22T11:27:49.639758
 {% tabs %} {% tab title=BaseEntity.java" %}
 
 ```java
+
 @Getter
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
@@ -184,6 +188,7 @@ public class BaseEntity {
 {% endtab %} {% tab title="DataJpaApplication.java" %}
 
 ```java
+
 @EnableJpaAuditing
 @SpringBootApplication
 public class DataJpaApplication {
@@ -195,8 +200,8 @@ public class DataJpaApplication {
     // 등록자, 수정자를 처리해주는 AuditorAware 스프링 빈을 등록한다.
     @Bean
     public AuditorAware<String> auditorProvider() {
-      // 실제로는 스프링 시큐리티 정보나 HTTP 세션에서 가져온다.
-      return () -> Optional.of(UUID.randomUUID().toString());
+        // 실제로는 스프링 시큐리티 정보나 HTTP 세션에서 가져온다.
+        return () -> Optional.of(UUID.randomUUID().toString());
     }
 }
 ```
@@ -216,16 +221,16 @@ findMember.getLastModifiedBy = 7514ab5c-cdc7-4981-ac9d-4c3bd715dd34
 
 ```xml
 <?xml version=“1.0” encoding="UTF-8”?>
-    <entity-mappings xmlns=“http://xmlns.jcp.org/xml/ns/persistence/orm”
-                     xmlns:xsi=“http://www.w3.org/2001/XMLSchema-instance”
-                     xsi:schemaLocation=“http://xmlns.jcp.org/xml/ns/persistence/
-    orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd”
-                     version=“2.2">
-        <persistence-unit-metadata>
-            <persistence-unit-defaults>
-                <entity-listeners>
-                    <entity-listener
-    class="org.springframework.data.jpa.domain.support.AuditingEntityListener”/>
+<entity-mappings xmlns=“http://xmlns.jcp.org/xml/ns/persistence/orm”
+        xmlns:xsi=“http://www.w3.org/2001/XMLSchema-instance”
+        xsi:schemaLocation=“http://xmlns.jcp.org/xml/ns/persistence/
+        orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd”
+        version=“2.2">
+<persistence-unit-metadata>
+<persistence-unit-defaults>
+    <entity-listeners>
+        <entity-listener
+                class="org.springframework.data.jpa.domain.support.AuditingEntityListener”/>
                 </entity-listeners>
             </persistence-unit-defaults>
         </persistence-unit-metadata>
@@ -240,18 +245,19 @@ findMember.getLastModifiedBy = 7514ab5c-cdc7-4981-ac9d-4c3bd715dd34
 
 ```java
 public class BaseTimeEntity {
-  @CreatedDate
-  @Column(updatable = false)
-  private LocalDateTime createdDate;
-  @LastModifiedDate
-  private LocalDateTime lastModifiedDate;
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDateTime createdDate;
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDate;
 }
+
 public class BaseEntity extends BaseTimeEntity {
-  @CreatedBy
-  @Column(updatable = false)
-  private String createdBy;
-  @LastModifiedBy
-  private String lastModifiedBy;
+    @CreatedBy
+    @Column(updatable = false)
+    private String createdBy;
+    @LastModifiedBy
+    private String lastModifiedBy;
 }
 ```
 
