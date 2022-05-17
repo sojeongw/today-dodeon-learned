@@ -57,6 +57,8 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
     - flush를 생략해서 약간의 성능 향상을 얻을 수 있다.
     - JPA 책 15.4.2를 참고한다.
 
+## 새로운 엔티티를 구별하는 방법
+
 ### save()
 
 ```java
@@ -90,3 +92,146 @@ public class SimpleJpaRepository<T, ID> implements JpaRepositoryImplementation<T
     - DB에서 select를 무조건 한 번 한다는 단점이 있다.
     - 따라서 데이터 변경은 병합보다는 변경 감지를 활용하는 게 좋다.
     - 병합은 영속 상태 엔티티가 잠시 영속 상태를 벗어났다가 다시 영속 상태가 되어야할 때 사용한다.
+
+{% tabs %} {% tab title="Item.java" %}
+
+```java
+
+@Entity
+@Getter
+public class Item {
+
+    @Id
+    @GeneratedValue
+    private Long id;
+}
+```
+
+{% endtab %} {% tab title="ItemRepositoryTest.java" %}
+
+```java
+
+@SpringBootTest
+class ItemRepositoryTest {
+
+    @Autowired
+    ItemRepository itemRepository;
+
+    @Test
+    void save() {
+        Item item = new Item();
+        // id는 JPA에 persist를 할 때 들어간다.
+        itemRepository.save(item);
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+![](../../.gitbook/assets/kimyounghan-spring-data-jpa/05/screenshot%202022-05-22%20오후%203.52.35.png)
+
+- 새로운 객체이므로 id가 null이다.
+
+{% tabs %} {% tab title="Item.java" %}
+
+```java
+
+@Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Item {
+
+    @Id
+    private String id;
+
+    public Item(String id) {
+        this.id = id;
+    }
+}
+```
+
+{% endtab %} {% tab title="ItemRepositoryTest.java" %}
+
+```java
+
+@SpringBootTest
+class ItemRepositoryTest {
+
+    @Autowired
+    ItemRepository itemRepository;
+
+    @Test
+    void save() {
+        Item item = new Item("A");
+        itemRepository.save(item);
+    }
+}
+```
+
+![](../../.gitbook/assets/kimyounghan-spring-data-jpa/05/screenshot%202022-05-22%20오후%203.58.46.png)
+
+```sql
+select item0_.id as id1_0_0_
+from item item0_
+where item0_.id = 'A';
+insert into item (id)
+values ('A');
+```
+
+- 식별자에 값이 있으므로 병합한다.
+- DB에 값이 있다는 걸 가정하는 것이기 때문에 일단 있는지 쿼리한다.
+
+### Persistable
+
+```java
+package org.springframework.data.domain;
+
+public interface Persistable<ID> {
+    ID getId();
+
+    boolean isNew();
+}
+```
+
+- 어떤 이슈로 임의의 ID를 직접 생성해야 한다면 Persistable를 implement 한다.
+
+{% tabs %} {% tab title="Item.java" %}
+
+```java
+
+@Entity
+@EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Item implements Persistable<String> {
+    @Id
+    private String id;
+
+    @CreatedDate
+    private LocalDateTime createdDate;
+
+    public Item(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    // 새 엔티티인지 확인하는 조건을 직접 구현한다.
+    @Override
+    public boolean isNew() {
+        return createdDate == null;
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+```sql
+insert into item (created_date, id)
+values ('2022-05-22T16:23:28.873+0900', 'A');
+```
+
+- 등록 시간인 @CreatedDate를 조합해서 사용하면 새 객체인지 쉽게 구별할 수 있다.
+- 똑같은 테스트를 돌리면 select 없이 insert만 치는 것을 확인할 수 있다.
