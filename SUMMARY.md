@@ -279,6 +279,8 @@
     * [Auditing](kimyounghan-spring-data-jpa/04-extension/02-auditing.md)
     * [Web 확장](kimyounghan-spring-data-jpa/04-extension/03-web-extension.md)
 * [스프링 데이터 JPA 분석](kimyounghan-spring-data-jpa/05-spring-data-jpa/README.md)
+* [나머지 기능](kimyounghan-spring-data-jpa/06-etc/README.md)
+    * [Specifications](kimyounghan-spring-data-jpa/06-etc/01-specifications.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
