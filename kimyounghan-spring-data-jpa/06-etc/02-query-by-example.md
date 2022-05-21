@@ -17,6 +17,7 @@ public class QueryByExampleTest {
     public void basic() throws Exception {
         Team teamA = new Team("teamA");
         em.persist(teamA);
+        
         em.persist(new Member("m1", 0, teamA));
         em.persist(new Member("m2", 0, teamA));
         em.flush();

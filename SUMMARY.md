@@ -282,6 +282,7 @@
 * [나머지 기능](kimyounghan-spring-data-jpa/06-etc/README.md)
     * [Specifications](kimyounghan-spring-data-jpa/06-etc/01-specifications.md)
     * [Query By Example](kimyounghan-spring-data-jpa/06-etc/02-query-by-example.md)
+    * [Projections](kimyounghan-spring-data-jpa/06-etc/03-projections.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
