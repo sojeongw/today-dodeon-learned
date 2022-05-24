@@ -285,6 +285,11 @@
     * [Projections](kimyounghan-spring-data-jpa/06-etc/03-projections.md)
     * [Native Query](kimyounghan-spring-data-jpa/06-etc/04-native-query.md)
 
+## Querydsl <a id="querydsl"></a>
+
+* [프로젝트 환경 설정](querydsl/01-project-settings/README.md)
+
+
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
 * [CPU bound 애플리케이션](backend-system-practice/01-cpu-bound-application/README.md)
