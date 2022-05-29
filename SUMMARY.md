@@ -289,7 +289,8 @@
 
 * [프로젝트 환경 설정](kimyounghan-querydsl/01-project-settings/README.md)
 * [예제 도메인 모델](kimyounghan-querydsl/02-example-domain-model/README.md)
-
+* [기본 문법](kimyounghan-querydsl/03-basic/README.md)
+    * [JPQL vs Querydsl](kimyounghan-querydsl/03-basic/jpql-vs-querydsl.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
