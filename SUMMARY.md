@@ -291,6 +291,8 @@
 * [예제 도메인 모델](kimyounghan-querydsl/02-example-domain-model/README.md)
 * [기본 문법](kimyounghan-querydsl/03-basic/README.md)
     * [JPQL vs Querydsl](kimyounghan-querydsl/03-basic/jpql-vs-querydsl.md)
+    * [Q-Type 활용](kimyounghan-querydsl/03-basic/q-type.md)
+    * [검색 조건](kimyounghan-querydsl/03-basic/search-condition.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
