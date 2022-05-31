@@ -293,6 +293,11 @@
     * [JPQL vs Querydsl](kimyounghan-querydsl/03-basic/jpql-vs-querydsl.md)
     * [Q-Type 활용](kimyounghan-querydsl/03-basic/q-type.md)
     * [검색 조건](kimyounghan-querydsl/03-basic/search-condition.md)
+    * [결과 조회](kimyounghan-querydsl/03-basic/find-result.md)
+    * [정렬](kimyounghan-querydsl/03-basic/sorting.md)
+    * [페이징](kimyounghan-querydsl/03-basic/paging.md)
+    * [집합 함수](kimyounghan-querydsl/03-basic/aggregate.md)
+    * [조인](kimyounghan-querydsl/03-basic/join.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
