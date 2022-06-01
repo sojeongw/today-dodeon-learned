@@ -298,6 +298,9 @@
     * [페이징](kimyounghan-querydsl/03-basic/paging.md)
     * [집합 함수](kimyounghan-querydsl/03-basic/aggregate.md)
     * [조인](kimyounghan-querydsl/03-basic/join.md)
+    * [서브 쿼리](kimyounghan-querydsl/03-basic/subquery.md)
+    * [Case 문](kimyounghan-querydsl/03-basic/case-statement.md)
+    * [상수, 문자 더하기](kimyounghan-querydsl/03-basic/constant-and-string.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
