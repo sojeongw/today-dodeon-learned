@@ -301,6 +301,9 @@
     * [서브 쿼리](kimyounghan-querydsl/03-basic/subquery.md)
     * [Case 문](kimyounghan-querydsl/03-basic/case-statement.md)
     * [상수, 문자 더하기](kimyounghan-querydsl/03-basic/constant-and-string.md)
+* [중급 문법](kimyounghan-querydsl/04-advanced/README.md)
+    * [프로젝션과 결과 반환](kimyounghan-querydsl/04-advanced/projection-and-return-result.md)
+    * [동적 쿼리](kimyounghan-querydsl/04-advanced/dynamic-query.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
