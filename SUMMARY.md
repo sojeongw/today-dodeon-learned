@@ -315,6 +315,8 @@
 * [CPU bound 애플리케이션 무중단 배포](backend-system-practice/02-zero-downtime-deployment/README.md)
     * [nginx를 통한 로드밸런싱 구성](backend-system-practice/02-zero-downtime-deployment/nginx-deployment.md)
     * [서버를 늘려서 성능 측정](backend-system-practice/02-zero-downtime-deployment/scale-out-performance.md)
+* [배포 자동화와 협업을 위한 Git](backend-system-practice/03-deployment-automation/README.md)
+    * [GitHub Webhook과 jenkins로 배포 자동화](backend-system-practice/03-deployment-automation/github-webhook.md)
 
 ## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
 
