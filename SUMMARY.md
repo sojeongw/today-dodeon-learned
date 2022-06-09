@@ -305,6 +305,7 @@
     * [프로젝션과 결과 반환](kimyounghan-querydsl/04-advanced/projection-and-return-result.md)
     * [동적 쿼리](kimyounghan-querydsl/04-advanced/dynamic-query.md)
     * [수정, 삭제 벌크 연산](kimyounghan-querydsl/04-advanced/batch.md)
+    * [SQL Function 호출](kimyounghan-querydsl/04-advanced/sql-function.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
