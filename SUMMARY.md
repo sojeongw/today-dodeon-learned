@@ -306,6 +306,8 @@
     * [동적 쿼리](kimyounghan-querydsl/04-advanced/dynamic-query.md)
     * [수정, 삭제 벌크 연산](kimyounghan-querydsl/04-advanced/batch.md)
     * [SQL Function 호출](kimyounghan-querydsl/04-advanced/sql-function.md)
+* [순수 JPA와 Querydsl](kimyounghan-querydsl/04-jpa-querydsl/README.md)
+    * [순수 JPA 리포지토리와 Querydsl](kimyounghan-querydsl/04-jpa-querydsl/jpa-querydsl.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
