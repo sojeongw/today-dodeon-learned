@@ -170,3 +170,75 @@ from Member member1
 
 - condition에 조건이 아무것도 들어가지 않으면 모든 데이터를 끌고 온다.
 - 운영에서는 데이터가 많기 때문에 기본 조건이 있거나 limit이라도 있어야 한다.
+
+## Where절에 파라미터 사용
+
+```java
+public class MemberJpaRepository {
+
+    private final EntityManager em;
+    private final JPAQueryFactory queryFactory;
+
+    public List<MemberTeamDto> search(MemberSearchCondition condition) {
+        return queryFactory
+                .select(new QMemberTeamDto(
+                        member.id,
+                        member.username,
+                        member.age,
+                        team.id,
+                        team.name))
+                .from(member)
+                .leftJoin(member.team, team)
+                .where(usernameEq(condition.getUsername()),
+                        teamNameEq(condition.getTeamName()),
+                        ageGoe(condition.getAgeGoe()),
+                        ageLoe(condition.getAgeLoe()))
+                .fetch();
+    }
+
+    private BooleanExpression usernameEq(String username) {
+        return hasText(username) ? null : member.username.eq(username);
+    }
+
+    private BooleanExpression teamNameEq(String teamName) {
+        return hasText(teamName) ? null : team.name.eq(teamName);
+    }
+
+    private BooleanExpression ageGoe(Integer ageGoe) {
+        return ageGoe == null ? null : member.age.goe(ageGoe);
+    }
+
+    private BooleanExpression ageLoe(Integer ageLoe) {
+        return ageLoe == null ? null : member.age.loe(ageLoe);
+    }
+}
+```
+
+- Builder에 비해 가독성이 좋다.
+
+### 메서드 재사용
+
+```java
+@Repository
+public class MemberJpaRepository {
+
+    private final EntityManager em;
+    private final JPAQueryFactory queryFactory;
+
+    // 메서드 재사용 가능
+    public List<Member> findMember(MemberSearchCondition condition) {
+        return queryFactory
+                .selectFrom(member)
+                .leftJoin(member.team, team)
+                .where(usernameEq(condition.getUsername()),
+                        teamNameEq(condition.getTeamName()),
+                        ageGoe(condition.getAgeGoe()),
+                        ageLoe(condition.getAgeLoe()))
+                .fetch();
+    }
+    
+    ...
+}
+```
+
+- where 절에서 만들어놨던 메서드를 재사용할 수 있다.
