@@ -309,6 +309,7 @@
 * [순수 JPA와 Querydsl](kimyounghan-querydsl/04-jpa-querydsl/README.md)
     * [순수 JPA 리포지토리와 Querydsl](kimyounghan-querydsl/04-jpa-querydsl/jpa-querydsl.md)
     * [동적 쿼리와 성능 최적화 조회](kimyounghan-querydsl/04-jpa-querydsl/dynamic-query.md)
+    * [조회 API 컨트롤러 개발](kimyounghan-querydsl/04-jpa-querydsl/query-api-controller.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
