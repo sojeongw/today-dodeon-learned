@@ -95,3 +95,77 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     - 전체 카운트 조회 방법을 최적화 할 수 있다면 유리하다.
         - ex. 전체 카운트 조회 시 조인 쿼리를 줄인다.
 - 코드를 리팩터링 해서 내용 쿼리와 전체 카운트 쿼리를 읽기 좋게 분리하면 좋다.
+
+## CountQuery 최적화
+
+- count 쿼리를 생략 할 수 있는 경우
+    - 페이지 시작이면서 컨텐츠 사이즈가 페이지 사이즈보다 작을 때
+        - 첫번째 페이지가 100개를 출력할 수 있는데 데이터가 3개라면 굳이 count 쿼리를 날릴 필요가 없다.
+    - 마지막 페이지 일 때
+        - offset + 컨텐츠 사이즈로 전체 사이즈를 구한다.
+
+```java
+public class MemberRepositoryImpl implements MemberRepositoryCustom {
+
+    @Override
+    public Page<MemberTeamDto> searchPageComplex(MemberSearchCondition condition, Pageable pageable) {
+        List<MemberTeamDto> content = queryFactory
+                .select(new QMemberTeamDto(
+                        member.id.as("memberId"),
+                        member.username,
+                        member.age,
+                        team.id.as("teamId"),
+                        team.name.as("teamName")))
+                .from(member)
+                .leftJoin(member.team, team)
+                .where(
+                        usernameEq(condition.getUsername()),
+                        teamNameEq(condition.getTeamName()),
+                        ageGoe(condition.getAgeGoe()),
+                        ageLoe(condition.getAgeLoe())
+                )
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
+                .fetch();
+
+        JPAQuery<Long> countQuery = queryFactory
+                .select(member.count())
+                .from(member)
+                .leftJoin(member.team, team)
+                .where(usernameEq(condition.getUsername()),
+                        teamNameEq(condition.getTeamName()),
+                        ageGoe(condition.getAgeGoe()),
+                        ageLoe(condition.getAgeLoe()));
+
+        return PageableExecutionUtils.getPage(content, pageable,
+                countQuery::fetchOne);
+    }
+}
+```
+
+## 참고
+
+### Querydsl fetchResults(), fetchCount() Deprecated
+
+- fetchResults()는 select를 단순히 count 처리하는 용도로 바꾸는 정도라 복잡한 쿼리에서는 제대로 동작하지 않는다.
+
+```java
+public class MemberRepositoryImpl implements MemberRepositoryCustom {
+
+    @Override
+    public Page<MemberTeamDto> searchPageSimple(MemberSearchCondition condition, Pageable pageable) {
+        Long totalCount = queryFactory
+                // .select(Wildcard.count) // select count(*)
+                .select(member.count()) // select count(member.id)
+                .from(member)
+                .fetchOne();
+    }
+}
+```
+
+- select(Wildcard.count)
+    - count(*)을 사용하고 싶을 때 사용한다.
+- select(member.count())
+    - select count(member.id)로 처리한다.
+- fetchOne()
+    - 응답 결과는 숫자 하나이므로 fetchOne()을 사용한다.
