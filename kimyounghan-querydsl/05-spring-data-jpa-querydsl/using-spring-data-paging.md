@@ -169,3 +169,35 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
     - select count(member.id)로 처리한다.
 - fetchOne()
     - 응답 결과는 숫자 하나이므로 fetchOne()을 사용한다.
+
+## CountQuery 최적화
+
+- count 쿼리가 생략 가능한 경우 생략해서 처리한다.
+    - 페이지 시작점이면서 컨텐츠 사이즈가 페이지 사이즈보다 작을 때
+    - 마지막 페이지일 때
+        - offset + 컨텐츠 사이즈를 더해 전체 사이즈를 구한다.
+
+```java
+public class MemberRepositoryImpl implements MemberRepositoryCustom {
+
+    @Override
+    public Page<MemberTeamDto> searchPageSimple(MemberSearchCondition condition, Pageable pageable) {
+        
+        ...
+
+        JPAQuery<Member> countQuery = queryFactory
+                .select(member)
+                .from(member)
+                .leftJoin(member.team, team)
+                .where(usernameEq(condition.getUsername()),
+                        teamNameEq(condition.getTeamName()),
+                        ageGoe(condition.getAgeGoe()),
+                        ageLoe(condition.getAgeLoe()));
+
+        return PageableExecutionUtils.getPage(content, pageable, countQuery::fetchCount);
+    }
+}
+```
+
+- count 쿼리는 fetchCount()를 하지 않으면 실제 쿼리가 날아가지 않는다.
+- 인자로 함수를 넘기면 content, pageable의 토탈 사이즈를 보고 실행한다.
