@@ -201,3 +201,92 @@ public class MemberRepositoryImpl implements MemberRepositoryCustom {
 
 - count 쿼리는 fetchCount()를 하지 않으면 실제 쿼리가 날아가지 않는다.
 - 인자로 함수를 넘기면 content, pageable의 토탈 사이즈를 보고 실행한다.
+
+## 컨트롤러 개발
+
+- 지금까지 한 내용이 실제 동작하는지 확인한다.
+
+```java
+
+@RestController
+@RequiredArgsConstructor
+public class MemberController {
+    private final MemberJpaRepository memberJpaRepository;
+    private final MemberRepository memberRepository;
+
+    @GetMapping("/v1/members")
+    public List<MemberTeamDto> searchMemberV1(MemberSearchCondition condition) {
+        return memberJpaRepository.search(condition);
+    }
+
+    @GetMapping("/v2/members")
+    public Page<MemberTeamDto> searchMemberV2(MemberSearchCondition condition,
+                                              Pageable pageable) {
+        return memberRepository.searchPageSimple(condition, pageable);
+    }
+
+    @GetMapping("/v3/members")
+    public Page<MemberTeamDto> searchMemberV3(MemberSearchCondition condition,
+                                              Pageable pageable) {
+        return memberRepository.searchPageComplex(condition, pageable);
+    }
+}
+```
+
+```text
+http://localhost:8080/v2/members?size=5&page=2
+```
+
+```sql
+select count(member1)
+from Member member1
+         left join member1.team as team
+```
+
+- count 쿼리가 나간다.
+
+```text
+http://localhost:8080/v3/members?size=110&page=0
+```
+
+```sql
+select member1.id as memberId, member1.username, member1.age, team.id as teamId, team.name as teamName
+from Member member1
+         left join member1.team as team
+```
+
+- select 쿼리만 나간다.
+- 두 번째 페이지로 넘어갈 컨텐츠 개수가 없기 때문에 count 쿼리를 날리지 않는다.
+
+## 정렬
+
+- 스프링 데이터 JPA가 OrderSpecifier로 정렬 기능을 제공한다.
+
+```java
+public class MemberRepositoryImpl implements MemberRepositoryCustom {
+
+    @Override
+    public Page<MemberTeamDto> searchPageSimple(MemberSearchCondition condition, Pageable pageable) {
+
+        ...
+
+        JPAQuery<Member> query = queryFactory
+                .selectFrom(member);
+        
+        for (Sort.Order o : pageable.getSort()) {
+            PathBuilder pathBuilder = new PathBuilder(member.getType(), member.getMetadata());
+            
+            query.orderBy(new OrderSpecifier(o.isAscending() ? Order.ASC : Order.DESC,
+                    pathBuilder.get(o.getProperty())));
+            
+            List<Member> result = query.fetch();
+        }
+    }
+```
+
+- 스프링 데이터 JPA의 정렬을 Querydsl의 정렬로 직접 변환할 수 있다.
+
+### 참고
+
+- 정렬은 조건이 조금만 복잡해져도 Pageable의 Sort를 쓰기 어렵다.
+- 루트 엔티티 범위를 넘어서는 동적 정렬이 필요하면 Sort보다는 파라미터를 받아서 직접 처리하자.
