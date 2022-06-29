@@ -312,6 +312,7 @@
     * [조회 API 컨트롤러 개발](kimyounghan-querydsl/04-jpa-querydsl/query-api-controller.md)
 * [스프링 데이터 JPA와 Querydsl](kimyounghan-querydsl/05-spring-data-jpa-querydsl/README.md)
     * [스프링 데이터 페이징 활용](kimyounghan-querydsl/05-spring-data-jpa-querydsl/using-spring-data-paging.md)
+    * [스프링 데이터 JPA가 제공하는 Querydsl 기능](kimyounghan-querydsl/05-spring-data-jpa-querydsl/querydsl.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
