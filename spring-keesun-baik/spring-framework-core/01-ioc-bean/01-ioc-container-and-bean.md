@@ -94,13 +94,12 @@ public class BookService {
         book.setCreated(new Date());
         book.setBookStatus(BookStatus.DRAFT);
 
-        // 사용하는 bookRepository는 null을 리턴하므로 여기도 null을 리턴한다.
         return bookRepository.save(book);
     }
 }
 ```
 
-위 코드는 `BookRepository`에 따라 `BookService`의 리턴값이 달라진다.
+`BookRepository`를 뭘 주입받냐에 따라 `BookService`의 리턴값이 달라진다.
 
 ```java
 public class BookServiceTest {
@@ -118,10 +117,11 @@ public class BookServiceTest {
 }
 ```
 
-이렇게 의존성이 있으면 위와 같은 단위 테스트를 하기가 어려워진다. 위는 결국 `null`을 반환할 것이다.
+이렇게 직접 bookService에 의존성이 있으면 단위 테스트를 하기가 어려워진다. 아직 save()를 구현하지 않고 null을 반환하기 때문에 정상적인 테스트가 불가하다.
 
 ```java
 public class BookServiceTest {
+    
     // 가짜 객체를 생성한다.
     @Mock
     BookRepository bookRepository;
@@ -129,12 +129,11 @@ public class BookServiceTest {
     @Test
     public void save() {
         Book book = new Book();
-        // 가짜 객체에 mocking 한다.
-        // bookRepository의 save()를 호출하면 book을 리턴하라고 설정한 것이다.
+        
+        // 가짜 객체에 mocking 한다. = bookRepository의 save()를 호출하면 book을 리턴하라고 설정한다.
         when(bookRepository.save(book)).thenReturn(book);
 
         BookService bookService = new BookService(bookRepository);
-
         Book result = bookService.save(book);
 
         assertThat(book.getCreated()).isNotNull();
@@ -144,4 +143,4 @@ public class BookServiceTest {
 }
 ```
 
-그래서 이렇게 가짜 객체에 mocking 해서 사용한다.
+따라서 이렇게 가짜 객체에 mocking 해서 사용한다.
