@@ -5,6 +5,7 @@
 ### 생성자
 
 ```java
+
 @Service
 public class BookService {
     BookRepository bookRepository;
@@ -21,15 +22,19 @@ public class BookRepository {
 }
 ```
 
-생성자 주입 시 `BookRepository`에 `@Repository`를 붙이지 않으면 에러가 난다. 객체를 생성할 때 해당하는 빈을 찾지 못해 실패하기 때문이다.
+- 생성자 주입 시 `BookRepository`에 `@Repository`를 붙이지 않으면 에러가 난다.
+- 객체를 생성할 때 해당하는 빈을 찾지 못해 실패하기 때문이다.
+- 다른 방법에 비교해 인스턴스를 아예 생성할 수 없다.
 
 **Tip**
 
-보통 `Repository`면 `@Component`보다는 `@Repository`로 빈 설정 해주는 것이 좋다. 그래야 나중에 `Repository`에만 할 수 있는 설정이나 AOP 적용이 수월하다.
+- 보통 `Repository`면 `@Component`보다는 `@Repository`로 빈 설정 해주는 것이 좋다.
+- 그래야 나중에 `Repository`에만 할 수 있는 설정이나 AOP 적용이 수월하다.
 
 ### Setter
 
 ```java
+
 @Service
 public class BookService {
     BookRepository bookRepository;
@@ -46,13 +51,14 @@ public class BookRepository {
 }
 ```
 
-Setter로 주입할 때도 마찬가지로 에러가 난다. 이상하다. Setter라면 적어도 BookService 자체의 빈/인스턴스는 만들 수 있어야 하는 게 아닌가?
-
-맞다. 하지만 `@Autowired`가 있기 때문에 `BookService` 빈을 만들 때 의존성 주입을 시도하게 되므로 실패하는 것이다.
+- Setter로 주입할 때도 `@Repository` 애너테이션이 없을 때 에러가 난다.
+    - Setter라면 적어도 BookService 자체의 빈/인스턴스는 만들 수 있어야 하는 게 아닌가?
+    - 맞다. 하지만 `@Autowired`가 있기 때문에 `BookService` 빈을 만들 때 의존성 주입을 시도하게 되므로 실패하는 것이다.
 
 만약 이 의존성이 필수적인 게 아니라면 아래와 같이 설정할 수 있다.
 
 ```java
+
 @Service
 public class BookService {
     BookRepository bookRepository;
@@ -69,6 +75,7 @@ public class BookService {
 ### 필드
 
 ```java
+
 @Service
 public class BookService {
     @Autowired(required = false)
@@ -80,7 +87,10 @@ public class BookService {
 
 ## 빈이 여러 개인 경우
 
+{% tabs %} {% tab title="BookService.java" %}
+
 ```java
+
 @Service
 public class BookService {
     @Autowired
@@ -88,44 +98,61 @@ public class BookService {
 }
 ```
 
+{% endtab %} {% tab title="BookRepository.java" %}
+
 ```java
 public interface BookRepository {
 }
 ```
 
+{% endtab %} {% tab title="MyBookRepository.java" %}
+
 ```java
+
 @Repository
-public class MyBookRepository implements BookRepository{
+public class MyBookRepository implements BookRepository {
 }
 ```
 
+{% endtab %} {% tab title="KeesunBookRepository.java" %}
+
 ```java
+
 @Repository
 public class KeesunBookRepository implements BookRepository {
 }
 ```
 
-이렇게 같은 `Repository`를 구현하는 클래스가 여러 개라면 `BookService`는 `BookRepository`를 주입할 수 없다.
+{% endtab %} {% endtabs %}
+
+- 같은 `BookRepository`를 구현하는 클래스가 여러 개라면 `BookService`는 `BookRepository`를 주입할 수 없다.
 
 ### @Primary
 
 ```java
-@Repository @Primary
+
+@Repository
+@Primary
 public class KeesunBookRepository implements BookRepository {
 }
 ```
 
-여러 개의 빈 중에 이 빈을 먼저 주입해달라고 할 때 사용한다. `ApplicationRunner`를 활용해 주입된 빈을 출력하면 다음과 같다.
+- 여러 개의 빈 중에 이 빈을 먼저 주입해달라고 할 때 사용한다.
 
 ```text
 class me.whiteship.autowired.KeesunBookRepository
 ```
 
+-
+- `ApplicationRunner`를 활용해 주입된 빈을 출력하면 위와 같이 나오는 걸 확인할 수 있다.
+
 ### @Qualifier
 
-빈이 등록될 때 이름의 기본값은 클래스 이름의 앞 부분을 소문자로 바꾼 것이다. 이 이름을 `@Qualifier`에 추가해준다.
+- 적용할 빈 이름을 `@Qualifier`에 추가해준다.
+- 빈이 등록될 때 이름의 기본값은 클래스 이름의 앞 부분을 소문자로 바꾼 것이다.
 
 ```java
+
 @Service
 public class BookService {
     @Autowired
@@ -139,6 +166,7 @@ public class BookService {
 ```
 
 ```java
+
 @Repository
 public class KeesunBookRepository implements BookRepository {
 }
@@ -149,18 +177,21 @@ public class KeesunBookRepository implements BookRepository {
 ### 해당 타입의 빈 모두 주입
 
 ```java
+
 @Repository
 public class KeesunBookRepository implements BookRepository {
 }
 ```
 
 ```java
+
 @Repository
-public class MyBookRepository implements BookRepository{
+public class MyBookRepository implements BookRepository {
 }
 ```
 
 ```java
+
 @Service
 public class BookService {
     @Autowired
@@ -186,6 +217,7 @@ me.whiteship.autowired.MyBookRepository@5bda80bf
 빈을 주입할 때는 타입을 먼저 본 뒤 이름을 본다.
 
 ```java
+
 @Service
 public class BookService {
     @Autowired
@@ -210,32 +242,31 @@ public class BookService {
 4. EnvironmentAware's setEnvironment
 5. EmbeddedValueResolverAware's setEmbeddedValueResolver
 6. ResourceLoaderAware's setResourceLoader (only applicable when running in an application context)
-7. ApplicationEventPublisherAware's setApplicationEventPublisher (only applicable when running in an application context)
+7. ApplicationEventPublisherAware's setApplicationEventPublisher (only applicable when running in an application
+   context)
 8. MessageSourceAware's setMessageSource (only applicable when running in an application context)
 9. ApplicationContextAware's setApplicationContext (only applicable when running in an application context)
 10. ServletContextAware's setServletContext (only applicable when running in a web application context)
-11. postProcessBeforeInitialization methods of BeanPostProcessors
+11. postProcess**Before**Initialization methods of BeanPostProcessors
 12. InitializingBean's afterPropertiesSet
 13. a custom init-method definition
-14. postProcessAfterInitialization methods of BeanPostProcessors
+14. postProcess**After**Initialization methods of BeanPostProcessors
 
 ### BeanPostProcessor
 
-새로 만든 빈 인스턴스를 수정할 수 있는 라이프 사이클 인터페이스
-
-빈의 인스턴스를 만든 후 초기화할 때 `Initialization` 라이프 사이클이 있는데, 이 라이프 사이클 앞/뒤로 부가적인 작업을 할 수 있는 또 다른 라이프 사이클 콜백이다.
-
-`postProcessBeforeInitialization`, `postProcessAfterInitialization` 메서드 같은 콜백을 제공한다.
+- 새로 만든 빈 인스턴스를 수정할 수 있는 라이프 사이클 인터페이스
+- 빈의 인스턴스를 만든 후 초기화할 때 `Initialization` 라이프 사이클이 있는데, 이 라이프 사이클 앞/뒤로 부가적인 작업을 할 수 있는 또 다른 라이프 사이클 콜백이다.
+- `11. postProcessBeforeInitialization`, `14. postProcessAfterInitialization` 메서드 같은 콜백을 제공한다.
 
 ### AutowiredAnnotationBeanPostProcessor
 
-`BeanPostProcessor`를 상속하며 `@Autowired`, `@Value`, `@Inject` 애너테이션을 처리해준다. 즉, `postProcessBeforeInitialization` 단계에서 `@Autowired`가 붙은 의존성을 주입한다.
+- `BeanPostProcessor`를 상속하며 `@Autowired`, `@Value`, `@Inject` 애너테이션을 처리해준다. 
+- 즉, `11. postProcess**Before**Initialization` 단계에서 `@Autowired`가 붙은 의존성을 주입한다.
 
-### Initialization
-
-`@PostConstruct` 등을 붙인 메서드를 정의할 수 있다.
+### PostConstruct
 
 ```java
+
 @Service
 public class BookService {
     @Autowired
@@ -248,7 +279,10 @@ public class BookService {
     }
 }
 ```
-`@PostConstruct` 단계에서는 이미 빈이 주입된 상태다. 이제 `Runner` 없이도 정보를 출력할 수 있다. 출력되는 위치만 조금 다르다. 
+
+- `@PostConstruct` 단계에서는 이미 빈이 주입된 상태다.
+- `12. InitializingBean's afterPropertiesSet` 단계에서 작업한다.
+- 이제 `Runner` 없이도 정보를 출력할 수 있다. 출력되는 위치만 조금 다르다.
 
 ```text
 2020-03-16 13:33:18.519  WARN 14600 --- [           main] o.s.boot.StartupInfoLogger               : InetAddress.getLocalHost().getHostName() took 5005 milliseconds to respond. Please verify your network configuration (macOS machines may need to add entries to /etc/hosts).
@@ -267,21 +301,23 @@ class me.whiteship.autowired.MyBookRepository
 // Runner가 출력되는 위치
 ```
 
-`Runner`는 구동이 다 되었을 때 일을 한다. 반면, `@PostConstruct`는 라이프 사이클 12번인 `InitializingBean's afterPropertiesSet`에 해당한다.
+- `Runner`는 구동이 다 되었을 때 일을 한다. 
+- 반면, `@PostConstruct`는 `12. InitializingBean's afterPropertiesSet`에 해당한다.
 
 ## 정리
 
-1. 빈 팩토리가 `BeanPostProcessor` 타입의 빈을 찾는다. 
+1. 빈 팩토리가 `BeanPostProcessor` 타입의 빈을 찾는다.
 2. 그 중 하나인 `AutowiredAnnotationBeanPostProcessor`를 찾는다.
-3. `AutowiredAnnotationBeanPostProcessor`가 일반적인 빈들에게 적용한다.
+3. `AutowiredAnnotationBeanPostProcessor`가 일반적인 빈들에게 beanPostProcessor를 적용한다.
 
 ```java
+
 @Component
 public class BookServiceRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        AutowiredAnnotationBeanPostProcessor bean 
-            = applicationContext.getBean(AutowiredAnnotationBeanPostProcessor.class);
+        AutowiredAnnotationBeanPostProcessor bean
+                = applicationContext.getBean(AutowiredAnnotationBeanPostProcessor.class);
         System.out.println(bean);
     }
 }
