@@ -3,6 +3,7 @@
 ## @ComponentScan
 
 ```java
+
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Documented
@@ -20,11 +21,13 @@ public @interface ComponentScan {
 }
 ```
 
-`@ComponentScan` 클래스에 들어가면 `@AliasFor("basePackages")`가 보인다. `basePackages`라는 값이 스트링으로 설정되어 있기 때문에 type-safe 하지 않다.
-
-그래서 그것의 대안으로 `basePackageClasses()`라는 메서드가 선언되어 있다. 이 메서드에 전달된 클래스 기준으로 컴포넌트 스캔을 시작한다.
+- `@ComponentScan` 클래스에 들어가면 `@AliasFor("basePackages")`가 보인다.
+    - `basePackages`라는 값이 스트링으로 설정되어 있기 때문에 type-safe 하지 않다.
+- 그래서 그것의 대안으로 `basePackageClasses()`라는 메서드가 선언되어 있다.
+    - 이 메서드에 전달된 클래스 기준으로 컴포넌트 스캔을 시작한다.
 
 ```java
+
 @SpringBootApplication
 public class DemoApplication {
 
@@ -35,13 +38,15 @@ public class DemoApplication {
 }
 ```
 
-`@ComponentScan`은 `@SpringBootApplication`에 있으므로 `@SpringBootApplication` 애너테이션이 붙은 클래스부터 컴포넌트 스캔을 시작한다. 따라서 여기에 속하지 않는 다른 패키지에 아무리 `@Service` 같은 애너테이션을 붙여도 스캔이 되지 않는다.
+- `@ComponentScan`은 `@SpringBootApplication`에 있기 때문에 `@SpringBootApplication` 애너테이션이 붙은 클래스부터 컴포넌트 스캔을 시작한다.
+- 따라서 여기에 속하지 않는 다른 패키지에 아무리 `@Service` 같은 애너테이션을 붙여도 스캔이 되지 않는다.
 
 ## 필터
 
-어떤 애너테이션을 스캔할지 또는 하지 않을지 설정한다.
+- 어떤 애너테이션을 스캔할지 또는 하지 않을지 설정한다.
 
 ```java
+
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -49,20 +54,21 @@ public class DemoApplication {
 @SpringBootConfiguration
 @EnableAutoConfiguration
 @ComponentScan(
-    excludeFilters = {@Filter(
-    type = FilterType.CUSTOM,
-    classes = {TypeExcludeFilter.class}
-), @Filter(
-    type = FilterType.CUSTOM,
-    classes = {AutoConfigurationExcludeFilter.class}
-)}
+        excludeFilters = {@Filter(
+                type = FilterType.CUSTOM,
+                classes = {TypeExcludeFilter.class}
+        ), @Filter(
+                type = FilterType.CUSTOM,
+                classes = {AutoConfigurationExcludeFilter.class}
+        )}
 )
 public @interface SpringBootApplication {
     ...
 }
 ```
 
-`@ComponentScan`을 쓴다고 해서 모든 것을 다 빈으로 등록하는 것은 아니다. 위 코드는 `excludeFilters`를 사용해 `TypeExcludeFilter`와 `AutoConfigurationExcludeFilter` 클래스를 제외하고 있다.
+- `@ComponentScan`을 쓴다고 해서 모든 것을 다 빈으로 등록하는 것은 아니다.
+- 위 코드는 `excludeFilters`를 사용해 `TypeExcludeFilter`와 `AutoConfigurationExcludeFilter` 클래스를 제외하고 있다.
 
 ## 종류
 
@@ -71,32 +77,39 @@ public @interface SpringBootApplication {
     - @Service
     - @Controller
     - @Configuration
-    
+
 ## 단점
 
-싱글턴 빈은 초기에 다 생성하기 때문에 등록하는 빈이 많은 경우 구동 시간이 오래걸릴 수 있다. 그 대안으로 펑션을 사용한 빈 등록을 할 수 있다.
+- 싱글턴 빈은 초기에 다 생성하기 때문에 등록하는 빈이 많은 경우 구동 시간이 오래걸릴 수 있다.
+    - 하지만 크게 문제되지 않는다고 생각한다.
+    - 대안으로 펑션을 사용한 빈 등록을 할 수 있다.
 
 ## 평션을 이용한 빈 등록
 
-리플렉션, 프록시 등의 기법은 성능에 영향을 주는데 이 방법은 이 두 가지 사용하지 않기 때문에 성능 상의 이점이 있다. 여기서 성능은 애플리케이션 구동 시간을 의미한다.
+- 리플렉션, 프록시 등의 기법은 성능에 영향을 주는데 이 방법은 이 두 가지 사용하지 않기 때문에 성능 상의 이점이 있다.
+    - 여기서 성능은 애플리케이션 구동 시간을 의미한다.
 
 ### SpringApplicationBuilder 사용
 
 ```java
-public static void main(String[] args) {
-    new SpringApplicationBuilder()
-        .sources(Demospring51Application.class)
-        .initializers((ApplicationContextInitializer<GenericApplicationContext>)
-            applicationContext -> {
-            applicationContext.registerBean(MyBean.class);
-            })
-        .run(args);
+public class Example {
+
+    public static void main(String[] args) {
+        new SpringApplicationBuilder()
+                .sources(Demospring51Application.class)
+                .initializers((ApplicationContextInitializer<GenericApplicationContext>)
+                        applicationContext -> {
+                            applicationContext.registerBean(MyBean.class);
+                        })
+                .run(args);
+    }
 }
 ```
 
 ### ApplicationContextInitializer 사용
 
 ```java
+
 @SpringBootApplication
 public class DemoApplication {
 
@@ -142,8 +155,10 @@ Functional Bean Definition!!
 
 ## 동작 원리
 
-실제 스캐닝은 `ConfigurationClassPostProcessor`라는 `BeanFactoryPostProcessor`에 의해 처리된다.
+- 실제 스캐닝은 `ConfigurationClassPostProcessor`라는 `BeanFactoryPostProcessor`에 의해 처리된다.
 
 ### BeanFactoryPostProcessor
 
-다른 모든 빈을 만들기 이전에 적용한다. 즉, 다른 빈을 등록하기 전에 컴포넌트 스캔을 해서 등록하는 것이다. 여기서 다른 빈이란 앞의 예시처럼 직접 등록했거나 `@Bean`을 붙여서 만든 빈을 말한다.
+- 다른 모든 빈을 만들기 이전에 적용한다. 
+- 즉, 다른 빈을 등록하기 전에 컴포넌트 스캔을 해서 등록하는 것이다. 
+- 여기서 다른 빈이란 앞의 예시처럼 직접 등록했거나 `@Bean`을 붙여서 만든 빈을 말한다.
