@@ -5,6 +5,7 @@
 애플리케이션 전반에 걸쳐 빈의 인스턴스가 오직 하나 뿐인 것을 말한다.
 
 ```java
+
 @SpringBootApplication
 public class DemoApplication {
 
@@ -16,6 +17,7 @@ public class DemoApplication {
 ```
 
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
@@ -26,13 +28,16 @@ public class AppRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        // AppRunner가 불러오는 proto
         System.out.println(proto);
+        // Single이 불러오는 proto
         System.out.println(single.getProto());
     }
 }
 ```
 
 ```java
+
 @Component
 public class Single {
     @Autowired
@@ -45,6 +50,7 @@ public class Single {
 ```
 
 ```java
+
 @Component
 public class Proto {
 }
@@ -66,6 +72,7 @@ me.whiteship.beanscope.Proto@3c49fab6
 - WebSocket
 
 ```java
+
 @Component
 @Scope("prototype")
 public class Proto {
@@ -82,6 +89,7 @@ me.whiteship.beanscope.Proto@545f80bf
 이렇게 서로 다른 주소값이 나오게 된다.
 
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
@@ -102,7 +110,7 @@ public class AppRunner implements ApplicationRunner {
 }
 ```
 
-```java
+```text
 proto
 me.whiteship.beanscope.Proto@632aa1a3
 me.whiteship.beanscope.Proto@20765ed5
@@ -119,6 +127,7 @@ me.whiteship.beanscope.Single@2899a8db
 ## 프로토타입 빈이 싱글턴 빈을 참조하는 경우
 
 ```java
+
 @Component
 @Scope("prototype")
 public class Proto {
@@ -127,13 +136,15 @@ public class Proto {
 }
 ```
 
-프로토타입 빈은 항상 새롭지만 안에서 참조하는 싱글턴 빈은 항상 동일하므로 아무 문제가 없다.
+- 프로토타입 빈은 항상 새롭지만 안에서 참조하는 싱글턴 빈은 항상 동일하므로 아무 문제가 없다.
 
 ## 싱글턴 빈이 프로토타입 빈을 참조하는 경우
 
-싱글턴 빈은 한 번만 만들어지므로 이미 프로토타입의 빈이 이미 세팅된 상태다. 따라서 프로토타입 빈이 변경되지 않는다.
+- 싱글턴 빈은 한 번만 만들어지므로 이미 프로토타입의 빈이 이미 세팅된 상태다.
+- 따라서 프로토타입 빈이 변경되지 않는다.
 
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
@@ -160,9 +171,10 @@ me.whiteship.beanscope.Proto@1162410a
 
 ### 해결법
 
-프록시 모드를 설정하면 된다. 기본은 DEFAULT 즉, 사용 안 함으로 되어있다.
+프록시 모드를 설정하면 된다. 기본은 DEFAULT(프록시 모드 사용 안 함)으로 되어있다.
 
 ```java
+
 @Component
 @Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class Proto {
@@ -171,23 +183,24 @@ public class Proto {
 }
 ```
 
-```java
+```text
 proto by single
 me.whiteship.beanscope.Proto@4a951911
 me.whiteship.beanscope.Proto@55b62629
 me.whiteship.beanscope.Proto@a53bb6f
-
 ```
 
-매번 새로운 인스턴스가 만들어짐을 확인할 수 있다. 
+매번 새로운 인스턴스가 만들어짐을 확인할 수 있다.
 
-`TARGET_CLASS`는 클래스 기반의 프록시로 해당 빈 `Proto`를 감싸라고 설정하는 것이다. 다른 인스턴스들이 프로토타입 스코프의 빈을 직접 참조하면 안되기 때문이다. 
-
-프록시를 쓰지 않으면 직접 참조하므로 생성할 때마다 새로 바꿔 줄 여지가 없다. 프록시를 거쳐서 참조하도록 하면 매번 바꿔서 참조할 수 있다.
-
-원래 자바 안에 있는 다이내믹 프록시는 인터페이스의 프록시만 만들 수 있다. 이에 `CG LIB(Code Generator Library`라는 서드 파티 라이브러가 `TARGET_CLASS` 설정을 보고 클래스도 만들 수 있도록 한다. 만약 인터페이스였다면 `INTERFACES`로 설정해서 인터페이스 기반의 프록시를 썼을 것이다.
-
-프록시 빈도 프로토타입의 빈을 상속해서 만들었기 때문에 해당 빈과 타입(여기서는 `Proto` 타입)은 같다. 따라서 의존성 주입이 가능한 것이다.
+- `TARGET_CLASS`
+    - 클래스 기반의 프록시로 빈(`Proto`)를 감싸라고 설정하는 것
+    - 프록시를 쓰지 않으면 직접 참조하므로 프로토타입을 생성할 때마다 새로 바꿔 줄 여지가 없다.
+    - 프록시를 거쳐서 참조하도록 하면 매번 바꿔서 참조할 수 있다.
+- 원래 자바 안에 있는 다이내믹 프록시는 인터페이스의 프록시만 만들 수 있다.
+    - `CG LIB(Code Generator Library`라는 서드 파티 라이브러가 `TARGET_CLASS` 설정을 보고 클래스도 만들 수 있도록 한다.
+    - 만약 인터페이스였다면 `INTERFACES`로 설정해서 인터페이스 기반의 프록시를 썼을 것이다.
+- 프록시 빈도 프로토타입의 빈을 상속해서 만들었기 때문에 해당 빈과 타입(여기서는 `Proto` 타입)은 같다.
+    - 따라서 의존성 주입이 가능한 것이다.
 
 **Reference**
 
@@ -195,9 +208,10 @@ me.whiteship.beanscope.Proto@a53bb6f
 
 ## 싱글턴 객체 사용 시 주의할 점
 
-프로퍼티에 담긴 값이 안정적일 것이라고, thread-safe 할 것이라고 생각해서는 안 된다.
+- 프로퍼티에 담긴 값이 안정적일 것이라고, thread-safe 할 것이라고 생각해서는 안 된다.
 
 ```java
+
 @Component
 public class Single {
     @Autowired
@@ -212,4 +226,5 @@ public class Single {
 }
 ```
 
-또한, 싱글턴 객체는 ApplicationContext를 만들 때 인스턴스를 생성하게 되어 있으므로 애플리케이션 구동에 시간이 걸릴 수 있다.
+- 싱글턴 객체는 ApplicationContext를 만들 때 인스턴스를 생성하게 되어 있다.
+    - 따라서 애플리케이션 구동에 시간이 걸릴 수 있다.
