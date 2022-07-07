@@ -2,12 +2,12 @@
 
 ## EnvironmentCapable
 
-프로파일과 프로퍼티를 다루는 인터페이스
-
-애플리케이션 컨텍스트는 빈 팩토리 기능만 하는 것은 아니다.
+- 프로파일과 프로퍼티를 다루는 인터페이스
+- 애플리케이션 컨텍스트는 빈 팩토리 기능만 하는 것은 아니다.
 
 ```java
-public interface ApplicationContext extends EnvironmentCapable, ListableBeanFactory, HierarchicalBeanFactory, MessageSource, ApplicationEventPublisher, ResourcePatternResolver {
+public interface ApplicationContext extends EnvironmentCapable, ListableBeanFactory,
+        HierarchicalBeanFactory, MessageSource, ApplicationEventPublisher, ResourcePatternResolver {
     @Nullable
     String getId();
 
@@ -24,13 +24,18 @@ public interface ApplicationContext extends EnvironmentCapable, ListableBeanFact
 }
 ```
 
-코드를 보면 여러 인터페이스를 상속받고 있다. 그중 `EnvironmentCapable`는 크게 두 가지를 제공한다. 그 중 하나가 프로파일이다.
+- 코드를 보면 여러 인터페이스를 상속받고 있다.
+- `EnvironmentCapable`는 크게 두 가지를 제공한다.
+    - 그 중 하나가 프로파일이다.
 
 ## 프로파일
 
-빈들의 묶음. 어떤 환경에서는 이러이러한 빈을 쓰겠다. 테스트 환경에서는 a라는 빈을 쓰고 배포 환경에서는 b를 쓰는 등 특정 환경에서 사용할 빈을 바꿔줘야 할 때 사용하는 기능이다.
+- 빈들의 묶음.
+    - 어떤 환경에서는 이러이러한 빈을 쓰겠다.
+- 테스트 환경에서는 a라는 빈을 쓰고 배포 환경에서는 b를 쓰는 등 특정 환경에서 사용할 빈을 바꿔줘야 할 때 사용하는 기능이다.
 
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
@@ -53,9 +58,10 @@ public class AppRunner implements ApplicationRunner {
 [default]
 ```
 
-등록한 프로파일은 없으며 기본으로 `default` 라는 이름의 프로파일이 등록되어 있다.
+- 현재 등록한 프로파일은 없으며 기본으로 `default` 라는 이름의 프로파일이 등록되어 있다.
 
 ```java
+
 @Configuration
 @Profile("test")
 public class TestConfiguration {
@@ -66,9 +72,11 @@ public class TestConfiguration {
 }
 ```
 
-이 빈 설정 파일은 `test` 라는 이름의 프로파일 일 때만 사용된다. 따라서 `test` 프로파일을 쓰기 전까지는 이 빈 설정 파일이 적용되지 않는다.
+- 이 빈 설정 파일은 `test` 라는 이름의 프로파일 일 때만 사용된다. 
+- 따라서 `test` 프로파일을 쓰기 전까지는 이 빈 설정 파일이 적용되지 않는다.
 
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
@@ -90,7 +98,7 @@ public class AppRunner implements ApplicationRunner {
 }
 ```
 
-`BookRepository`가 빈으로 등록되지 않았으므로 당연히 주입도 받을 수 없다.
+- `BookRepository`가 빈으로 등록되지 않았으므로 당연히 주입도 받을 수 없다.
 
 ### 설정 방법
 
@@ -99,6 +107,7 @@ IDE의 `Run/Debug Configuration` 메뉴에서 `Active profiles`에 프로파일 
 #### 클래스에 정의
 
 ```java
+
 @Configuration
 @Profile("test")
 public class TestConfiguration {
@@ -117,6 +126,7 @@ public class TestConfiguration {
 다시 실행하면 `test` 프로파일이 출력된다. 하지만 이 방법은 번거롭다.
 
 ```java
+
 @Repository
 @Profile("test")
 public class TestBookRepository implements BookRepository {
@@ -128,6 +138,7 @@ public class TestBookRepository implements BookRepository {
 #### 메서드에 정의
 
 ```java
+
 @Configuration
 public class TestConfiguration {
     @Bean
@@ -139,8 +150,11 @@ public class TestConfiguration {
 ```
 
 ### 프로파일 표현식
+
 파일 활용
+
 ```java
+
 @Repository
 // prod가 아닌 프로파일 사용
 @Profile("!prod")
@@ -155,11 +169,13 @@ public class TestBookRepository implements BookRepository {
 애플리케이션 등록된 키-값 쌍의 프로퍼티에 접근할 수 있는 기능. 우선 순위가 있는 계층형으로 접근한다. OS 환경 변수나 -D 옵션 프로퍼티 등이 해당한다.
 
 ### 설정 방법
+
 #### IDE 활용
 
 IDE에서 `Run/Debug Configurations`의 `VM options`에 `-Dapp.name=spring5`라고 설정할 수 있다.
 
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
@@ -191,6 +207,7 @@ app.about=spring
 ```
 
 ```java
+
 @SpringBootApplication
 // properties 파일 주소 설정
 @PropertySource("classpath:/app.properties")
@@ -204,6 +221,7 @@ public class DemoApplication {
 ```
 
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
