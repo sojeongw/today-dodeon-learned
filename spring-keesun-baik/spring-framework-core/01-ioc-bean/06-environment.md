@@ -73,7 +73,7 @@ public class TestConfiguration {
 ```
 
 - 이 빈 설정 파일은 `test` 라는 이름의 프로파일 일 때만 사용된다. 
-- 따라서 `test` 프로파일을 쓰기 전까지는 이 빈 설정 파일이 적용되지 않는다.
+- 따라서 `test` 프로파일로 실행하기 전까지는 이 빈 설정 파일이 적용되지 않는다.
 
 ```java
 
@@ -133,7 +133,7 @@ public class TestBookRepository implements BookRepository {
 }
 ```
 
-자바 설정 파일 없이 빈으로 사용하고 싶은 곳에 `@Profile` 애너테이션과 프로파일 이름을 설정하면 된다.
+자바 설정 파일(TestConfiguration) 없이 빈으로 사용하고 싶은 곳에 `@Profile` 애너테이션과 프로파일 이름을 설정하면 된다.
 
 #### 메서드에 정의
 
@@ -151,8 +151,6 @@ public class TestConfiguration {
 
 ### 프로파일 표현식
 
-파일 활용
-
 ```java
 
 @Repository
@@ -162,11 +160,13 @@ public class TestBookRepository implements BookRepository {
 }
 ```
 
-!, &, ||를 이용해 특정 프로파일이 아닌 프로파일의 빈을 설정할 수도 있다.
+- !, &, ||를 이용해 특정 프로파일이 아닌 프로파일의 빈을 설정할 수도 있다.
 
 ## 프로퍼티
 
-애플리케이션 등록된 키-값 쌍의 프로퍼티에 접근할 수 있는 기능. 우선 순위가 있는 계층형으로 접근한다. OS 환경 변수나 -D 옵션 프로퍼티 등이 해당한다.
+- 애플리케이션에 등록된 키-값 쌍의 프로퍼티에 접근할 수 있는 기능. 
+- 우선 순위가 있는 계층형으로 접근한다. 
+- OS 환경 변수나 -D 옵션 프로퍼티 등이 해당한다.
 
 ### 설정 방법
 
@@ -247,4 +247,6 @@ spring5
 spring
 ```
 
-properties의 값이 출력되었다. 만약 `app.name` 이라는 같은 키로 설정되었다면 우선 순위는 `VM option`이 높다.
+properties의 값이 출력되었다. 
+
+만약 `app.name` 이라는 같은 키로 설정되었다면 우선 순위는 properties 파일보다 `VM option`이 높다.
