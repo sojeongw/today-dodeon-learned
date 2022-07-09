@@ -1,10 +1,14 @@
 # MessageSource
 
-애플리케이션 컨텍스트가 상속하고 있는 또 다른 기능. 국제화(i18n) 기능을 제공하는 인터페이스이다.
+- 애플리케이션 컨텍스트가 상속하고 있는 또 다른 기능.
+- 국제화(i18n) 기능을 제공하는 인터페이스이다.
 
 ## properties를 활용한 방법
 
+{% tabs %} {% tab title="AppRunner.java" %}
+
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
@@ -15,11 +19,19 @@ public class AppRunner implements ApplicationRunner {
         // message_ko_KR.properties
         System.out.println(messageSource.getMessage("greeting", new String[]{"keesun"}, Locale.KOREA));
         // messages.properties
-        // OS 기본 언어 설정에 기반하기 때문에 나는 한국어로 출력된다.
         System.out.println(messageSource.getMessage("greeting", new String[]{"keesun"}, Locale.getDefault()));
     }
 }
 ```
+
+{% endtab %} {% tab title="messages_ko_KR.properties" %}
+
+```properties
+# messages_ko_KR.properties
+greeting=안녕, {0}
+```
+
+{% endtab %}{% tab title="messages.properties" %}
 
 ```properties
 # messages.properties
@@ -27,14 +39,11 @@ public class AppRunner implements ApplicationRunner {
 greeting=Hello {0}
 ```
 
-```properties
-# messages_ko_KR.properties
-greeting=안녕, {0}
-```
+{% endtab %} {% endtabs %}
 
 ```text
 안녕, keesun
-안녕, keesun
+Hello keesun
 ```
 
 원래 `ResourceBundleMessageSource` 빈을 등록해야 사용할 수 있지만 스프링 부트는 자동으로 실행해준다.
@@ -44,6 +53,7 @@ greeting=안녕, {0}
 `ReloadableResourceBundleMessageSource`를 이용해 직접 정의하는 방법도 있다.
 
 ```java
+
 @SpringBootApplication
 public class MessageSourceApplication {
 
@@ -51,7 +61,6 @@ public class MessageSourceApplication {
         SpringApplication.run(MessageSourceApplication.class, args);
     }
 
-    // message를 직접 정의하는 방법
     @Bean
     // 빈 이름은 항상 messageSource가 되어야 한다.
     public MessageSource messageSource() {
@@ -66,7 +75,7 @@ public class MessageSourceApplication {
 
 ```text
 안녕, keesun
-안녕, keesun
+hello keesun
 ```
 
 ## 메시지 리로딩
@@ -74,6 +83,7 @@ public class MessageSourceApplication {
 중간에 메시지를 수정하면 수정한 내용이 출력된다.
 
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
@@ -81,7 +91,7 @@ public class AppRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        while(true) {
+        while (true) {
             // message_ko_KR.properties
             System.out.println(messageSource.getMessage("greeting", new String[]{"keesun"}, Locale.KOREA));
             // messages.properties
@@ -98,6 +108,7 @@ public class AppRunner implements ApplicationRunner {
 먼저 메시지가 1초마다 기록되게 만든다.
 
 ```java
+
 @SpringBootApplication
 public class MessageSourceApplication {
 
@@ -105,7 +116,6 @@ public class MessageSourceApplication {
         SpringApplication.run(MessageSourceApplication.class, args);
     }
 
-    // message를 직접 정의하는 방법
     @Bean
     // 빈 이름은 항상 messageSource가 되어야 한다.
     public MessageSource messageSource() {
@@ -129,7 +139,8 @@ public class MessageSourceApplication {
 greeting=안녕, 반갑습니다. {0}
 ```
 
-프로퍼티를 수정하고 `Build Project(F9)` 하면 수정 내용이 반영된다. 빌드 패스에 있는 파일을 끌어오는 것이기 때문에 빌드는 반드시 해준다.
+- 프로퍼티를 수정하고 `Build Project(F9)` 하면 수정 내용이 실시간으로 반영된다. 
+- 빌드 패스에 있는 파일을 끌어오는 것이기 때문에 빌드는 반드시 해준다.
 
 ```text
 안녕, keesun
@@ -138,4 +149,4 @@ greeting=안녕, 반갑습니다. {0}
 안녕, 반갑습니다. keesun
 ```
 
-이렇게 실시간으로 찍힌다.
+이렇게 변경 사항이 바로 찍힌다.
