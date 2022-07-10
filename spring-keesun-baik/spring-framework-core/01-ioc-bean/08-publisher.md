@@ -1,12 +1,14 @@
 # ApplicationEventPublisher
 
-애플리케이션 컨텍스트가 상속받고 있는 인터페이스. 이벤트 프로그래밍에 필요한 인터페이스를 제공하며 옵저버 패턴 구현체다.
+- 애플리케이션 컨텍스트가 상속받고 있는 인터페이스.
+- 이벤트 프로그래밍에 필요한 인터페이스를 제공하며 옵저버 패턴 구현체다.
 
 ## ApplicationEvent를 상속하는 방법
 
 ```java
 // 이벤트는 빈으로 등록되지 않는다. 원하는 데이터를 전달하는 역할이다.
-public class MyEvent extends ApplicationEvent{
+public class MyEvent extends ApplicationEvent {
+
     private int data;
 
     public MyEvent(Object source) {
@@ -24,9 +26,10 @@ public class MyEvent extends ApplicationEvent{
 }
 ```
 
-이렇게 이벤트를 정의해놓으면 publish 즉, 발생시키는 기능을 애플리케이션 컨텍스트가 가지고 있는 것이다.
+- 이벤트를 정의한다.
 
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     // ApplicationContext가 Publisher를 상속하고 있으므로 이것을 써도 되지만 Publisher를 직접 써도 된다.
@@ -41,13 +44,13 @@ public class AppRunner implements ApplicationRunner {
 }
 ```
 
-그리고 이 이벤트를 받아서 처리하는 일은 이벤트 핸들러가 담당한다. 이벤트 핸들러는 빈으로 등록해야 한다.
+- 애플리케이션 컨텍스트는 publish 즉, 이벤트 발생 기능을 가지고 있다.
 
 ```java
+
 @Component
 public class MyEventHandler implements ApplicationListener<MyEvent> {
 
-    //
     @Override
     public void onApplicationEvent(MyEvent myEvent) {
         System.out.println("이벤트 받았다. 데이터는 " + myEvent.getData());
@@ -55,7 +58,8 @@ public class MyEventHandler implements ApplicationListener<MyEvent> {
 }
 ```
 
-아래는 실행 결과다.
+- 이벤트를 받아서 처리하는 일은 이벤트 핸들러가 담당한다.
+    - 이벤트 핸들러는 빈으로 등록해야 한다.
 
 ```text
 이벤트 받았다. 데이터는 100
@@ -67,15 +71,14 @@ public class MyEventHandler implements ApplicationListener<MyEvent> {
 2. 등록되어 있는 빈 중에서 `MyEventHandler`가 이벤트를 받는다.
 3. `MyEventHandler`가 해당 이벤트를 출력한다.
 
-
-## 
+## 개선된 버전
 
 스프링 4.2 이후부터는 `MyEvent`가 `ApplicationEvent`를 상속하거나 `MyEventHandler`가 `ApplicationListener`를 상속하는 방법을 쓰지 않아도 된다.
 
 ```java
 package me.whiteship.eventpublisher;
 
-public class MyEvent{
+public class MyEvent {
     private int data;
 
     // ApplicationEvent는 지웠지만 이벤트를 발생시킨 소스를 갖고 있고 싶다면 이렇게 한다.
@@ -97,8 +100,9 @@ public class MyEvent{
 ```
 
 ```java
+
 @Component
-public class MyEventHandler{
+public class MyEventHandler {
     // 이벤트를 처리하는 메서드 위에 에너테이션을 추가해준다.
     // 이제 메서드 이름을 마음대로 바꿔도 된다.
     @EventListener
@@ -108,19 +112,22 @@ public class MyEventHandler{
 }
 ```
 
-이벤트 핸들러는 상속은 하지 않더라도 꼭 빈으로 등록되어야 한다. 그래야 누가 처리할지 알 수 있기 때문이다.
-
-이 방식이 스프링이 권장하는 `비침투성`이다. 스프링 패키지가 전혀 들어와있지 않은 POJO이기 때문이다. 스프링 소스가 들어가지 않는 프로그래밍이 테스트와 유지보수가 쉽다.
+- 이벤트 핸들러는 상속은 하지 않더라도 꼭 빈으로 등록되어야 한다.
+    - 그래야 누가 처리할지 알 수 있기 때문이다.
 
 ## 두 개 이상의 이벤트 처리
 
-기본적으로는 순차적으로 처리가 된다. 순차적이란 말은 뭐가 먼저 실행될지는 모르지만 동시에 하는 게 아니라 하나씩 실행된다는 말이다.
+- 기본적으로는 순차적으로 처리가 된다.
+- 순차적이란 말은 뭐가 먼저 실행될지는 모르지만 동시에 하는 게 아니라 하나씩 실행된다는 말이다.
 
 ```java
+
 @Component
-public class MyEventHandler{
+public class MyEventHandler {
+
     @EventListener
     public void handle(MyEvent myEvent) {
+
         // 스레드 확인용
         System.out.println(Thread.currentThread().toString());
         System.out.println("이벤트 받았다. 데이터는 " + myEvent.getData());
@@ -129,10 +136,13 @@ public class MyEventHandler{
 ```
 
 ```java
+
 @Component
 public class AnotherHandler {
+
     @EventListener
     public void handle(MyEvent myEvent) {
+
         // 스레드 확인용
         System.out.println(Thread.currentThread().toString());
         System.out.println("Another " + myEvent.getData());
@@ -156,7 +166,7 @@ Thread[main,5,main]
 ```java
 
 @Component
-public class MyEventHandler{
+public class MyEventHandler {
     @EventListener
     // 실행 순서 지정
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -168,6 +178,7 @@ public class MyEventHandler{
 ```
 
 ```java
+
 @Component
 public class AnotherHandler {
     @EventListener
@@ -193,9 +204,12 @@ Another 100
 
 `@Async`로 비동기를 적용할 수 있다. 순서는 스레드 스케줄링에 따라 다르므로 보장되지 않는다.
 
+{% tabs %} {% tab title="EventPublisherApplication.java" %}
+
 ```java
+
 @SpringBootApplication
-// Async로 하려면 아래 애너테이션이 필요하다.
+// Async 설정
 @EnableAsync
 public class EventPublisherApplication {
 
@@ -206,7 +220,10 @@ public class EventPublisherApplication {
 }
 ```
 
+{% endtab %} {% tab title="AnotherHandler.java" %}
+
 ```java
+
 @Component
 public class AnotherHandler {
     @EventListener
@@ -218,9 +235,12 @@ public class AnotherHandler {
 }
 ```
 
+{% endtab %} {% tab title="MyEventHandler.java" %}
+
 ```java
+
 @Component
-public class MyEventHandler{
+public class MyEventHandler {
     @EventListener
     @Async
     public void handle(MyEvent myEvent) {
@@ -229,6 +249,8 @@ public class MyEventHandler{
     }
 }
 ```
+
+{% endtab %} {% endtabs %}
 
 ```text
 Thread[task-2,5,main]
@@ -253,8 +275,9 @@ Another 100
     - HTTP 요청을 처리했을 때 발생
 
 ```java
+
 @Component
-public class MyEventHandler{
+public class MyEventHandler {
     @EventListener
     @Async
     public void handle(MyEvent myEvent) {
