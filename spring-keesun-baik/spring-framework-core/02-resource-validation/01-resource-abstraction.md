@@ -5,14 +5,14 @@
 ## 특징
 
 - `java.net.URL`을 추상화 한 것
-    - `org.springframework.core.io.Resource` 클래스로 감싸서 실제 로우 레벨에 접근하는 기능을 만든 것
+    - `org.springframework.core.io.Resource` 클래스로 감싸서 실제 로우 레벨에 접근하는 기능을 만들었다.
 - 스프링 내부에서 많이 사용하는 인터페이스
 
 ## 추상화 한 이유
 
-- 이전에는 `classpath` 기준으로 리소를 읽어오는 기능이 없었음
-- `ServletContext`를 기준을 상대 경로를 읽어오는 기능이 없었음
-- 새로운 핸들러를 등록해서 특별한 URL 접미사를 만들어 사용할 수는 있었지만 구현이 복잡하고 편의성 메서드가 부족했음
+- 이전에는 `classpath` 기준으로 리소를 읽어오는 기능이 없었다.
+- `ServletContext`를 기준을 상대 경로를 읽어오는 기능이 없었다.
+- 새로운 핸들러를 등록한 뒤 특별한 URL 접미사를 만들어 사용할 수는 있었지만, 구현이 복잡하고 편의성 메서드가 부족했다.
 
 ## Resource 인터페이스
 
@@ -23,7 +23,7 @@
     - isOpen()
     - getDescription()
     - etc...
-    
+
 ### 구현체
 
 - UrlResource
@@ -33,9 +33,8 @@
     - 접두어 `classpath:` 를 지원한다.
 - FileSystemResource
 - ServletContextResource
-    - `리소스 읽어오기` 참고
     - 읽어들이는 리소스 타입이 애플리케이션 컨텍스트와 관련이 있어서 자주 사용한다.
-    - 췝 애플리케이션 루트에서 상대 경로로 리소스를 찾는다.
+    - 웹 애플리케이션 루트에서 상대 경로로 리소스를 찾는다.
 - etc...
 
 **Reference**
@@ -44,13 +43,8 @@
 
 ### ApplicationContext에 따라 리소스 읽어오기
 
-`Resource`의 타입은 location 문자열과 `ApplicationContext` 타입에 따라 결정된다. 만약 `FileSystemXmlApplicationContext`로 불러왔다면, `FileSystemResource`로 리졸빙 한다.
-
-- ClassPathXmlApplicationContext -> ClassPathResource
-- FileSystemXmlApplicationContext -> FileSystemResource
-- WebApplicationContext -> ServletContextResource
-
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
@@ -58,27 +52,36 @@ public class AppRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        // 클래스 패스 기준으로 configLocation에 해당하는 문자열을 가지고 빈 설정 파일을 찾는다.
+        // 클래스 패스 기준으로 문자열에 해당하는 리소스를 찾아서 빈 설정 파일로 활용한다.
         var ctx1 = new ClassPathXmlApplicationContext("config.xml");
-        // 파일 시스템 기준으로 configLocation에 해당하는 문자열을 가지고 빈 설정 파일을 찾는다.
+
+        // 파일 시스템 기준으로 문자열에 해당하는 리소스를 찾아서 빈 설정 파일로 활용한다.
         var ctx2 = new FileSystemXmlApplicationContext("config.xml");
-        // 애플리케이션 루트 기준으로 configLocation에 해당하는 문자열을 가지고 빈 설정 파일을 찾는다.
+
+        // 애플리케이션 루트 기준으로 문자열에 해당하는 리소스를 찾아서 빈 설정 파일로 활용한다.
         var ctx3 = new WebApplicationContext("config.xml");
     }
 }
 ```
 
+- `Resource`의 타입은 location 문자열과 `ApplicationContext` 타입에 따라 결정된다.
+- 만약 `FileSystemXmlApplicationContext`로 불러왔다면, `FileSystemResource`로 리졸빙 한다.
+    - FileSystemXmlApplicationContext -> FileSystemResource
+    - ClassPathXmlApplicationContext -> ClassPathResource
+    - WebApplicationContext -> ServletContextResource
+
 ### ApplicationContext에 상관없이 리소스 읽어오기
 
-`java.net.URL` 접두어 중 하나를 사용할 수 있다. 
+- ApplicationContext의 타입에 상관없이 리소스 타입을 강제하려면 `java.net.URL 접두어(+ classpath:)`중 하나를 사용할 수 있다.
+    - 리소스가 어디서 오는지 명시적으로 나타낼 수 있으므로 이 방식을 더 추천한다.
+    - classpath:me/whiteship/config.xml -> ClassPathResource
+    - file:///some/resource/path/config.xml -> FileSystemResource
+        - 파일을 읽고 싶을 땐 항상 `/`를 세 개로 써줘야 한다.
 
-애플리케이션 컨텍스튼 대부분 웹이기 때문에 `ServletContextResource`를 사용하지만 이걸 알고 쓰는 사람이 별로 없다. 따라서 리소스가 어디서 오는지 코드에서 알기 어렵다. 접두어가 있으면 조금 더 명시적이므로 이 방법을 추천한다.
-
-- classpath:me/whiteship/config.xml -> ClassPathResource
-- file:///some/resource/path/config.xml -> FileSystemResource
-    - 파일을 읽고 싶을 땐 항상 `/`를 세 개로 써줘야 한다.
+## 예제
 
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
@@ -109,9 +112,10 @@ class path resource [test.txt]
 hello spring
 ```
 
-이번에는 `classpath`를 생략하고 실행해보자.
+## classpath를 생략한 예제
 
 ```java
+
 @Component
 public class AppRunner implements ApplicationRunner {
     @Autowired
@@ -145,9 +149,8 @@ ServletContext resource [/test.txt]
 Caused by: java.io.FileNotFoundException: ServletContext resource [/test.txt] cannot be resolved to URL because it does not exist
 ```
 
-예상한대로 리소스의 타입이 `ServletContextResource`가 되었으며 리소스를 찾을 수 없다는 에러가 발생했다.
-
-따라서 스프링 부트 사용 시 `classpath`를 꼭 명시해두자.
+- 예상한대로 리소스의 타입이 `ServletContextResource`가 되었으며 리소스를 찾을 수 없다는 에러가 발생했다.
+- 따라서 스프링 부트 사용 시 `classpath`를 꼭 명시해두자. 
 
 **Reference**
 
