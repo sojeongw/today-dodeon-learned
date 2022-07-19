@@ -348,6 +348,7 @@
         * [ResourceLoader](spring-keesun-baik/spring-framework-core/01-ioc-bean/09-resource-loader.md)
     * [Resource/Validation](spring-keesun-baik/spring-framework-core/02-resource-validation/README.md)
         * [Resource 추상화](spring-keesun-baik/spring-framework-core/02-resource-validation/01-resource-abstraction.md)
+        * [validation 추상화](spring-keesun-baik/spring-framework-core/02-resource-validation/02-validation-abstraction.md)
     * [데이터 바인딩](spring-keesun-baik/spring-framework-core/03-data-binding/README.md)
     * [SpEL](spring-keesun-baik/spring-framework-core/04-spel.md)
     * [스프링 AOP](spring-keesun-baik/spring-framework-core/05-spring-aop.md)
