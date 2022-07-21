@@ -327,6 +327,7 @@
 * [배포 자동화와 협업을 위한 Git](backend-system-practice/03-deployment-automation/README.md)
     * [GitHub Webhook과 jenkins로 배포 자동화](backend-system-practice/03-deployment-automation/github-webhook.md)
     * [머지할 때 발생하는 충돌 해결하기](backend-system-practice/03-deployment-automation/github-conflict.md)
+    * [실무에서 유용한 Git 꿀팁](backend-system-practice/03-deployment-automation/git-tip.md)
 
 ## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
 
