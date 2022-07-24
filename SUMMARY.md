@@ -330,6 +330,7 @@
     * [실무에서 유용한 Git 꿀팁](backend-system-practice/03-deployment-automation/git-tip.md)
 * [I/O bound 애플리케이션](backend-system-practice/04-io-bound-application/README.md)
 * [Message Queue를 도입하여 데이터 유실 방지](backend-system-practice/05-message-queue/README.md)
+    * [스트레스 테스트](backend-system-practice/05-message-queue/stress-test.md)
 
 ## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
 
