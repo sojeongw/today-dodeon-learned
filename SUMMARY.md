@@ -331,6 +331,7 @@
 * [I/O bound 애플리케이션](backend-system-practice/04-io-bound-application/README.md)
 * [Message Queue를 도입하여 데이터 유실 방지](backend-system-practice/05-message-queue/README.md)
     * [스트레스 테스트](backend-system-practice/05-message-queue/stress-test.md)
+* [검색과 분석을 위한 저장소 ElasticSearch](backend-system-practice/06-elastic-search/README.md)
 
 ## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
 
