@@ -334,50 +334,52 @@
 * [검색과 분석을 위한 저장소 ElasticSearch](backend-system-practice/06-elastic-search/README.md)
 * [Kubernetes](backend-system-practice/07-kubernetes/README.md)
 
-## 백기선 스프링 강의 <a id="spring-keesun-baik"></a>
+## 예제로 배우는 스프링 입문 <a id="spring-keesun-baik"></a>
 
-* [예제로 배우는 스프링 입문(개정판)](spring-keesun-baik/spring-framework-introduction/README.md)
-    * [PetClinic 예제](spring-keesun-baik/spring-framework-introduction/01-pet-clinic.md)
-    * [스프링 IoC](spring-keesun-baik/spring-framework-introduction/02-spring-ioc.md)
-    * [스프링 AOP](spring-keesun-baik/spring-framework-introduction/03-spring-aop.md)
-    * [스프링 PSA](spring-keesun-baik/spring-framework-introduction/04-spring-psa.md)
+* [예제로 배우는 스프링 입문(개정판)](keesunbaik-spring-framework-introduction/README.md)
+    * [PetClinic 예제](keesunbaik-spring-framework-introduction/01-pet-clinic.md)
+    * [스프링 IoC](keesunbaik-spring-framework-introduction/02-spring-ioc.md)
+    * [스프링 AOP](keesunbaik-spring-framework-introduction/03-spring-aop.md)
+    * [스프링 PSA](keesunbaik-spring-framework-introduction/04-spring-psa.md)
 
-* [스프링 프레임워크 핵심 기술](spring-keesun-baik/spring-framework-core/README.md)
-    * [IoC 컨테이너와 빈](spring-keesun-baik/spring-framework-core/01-ioc-bean/README.md)
-        * [스프링 IoC 컨테이너와 빈](spring-keesun-baik/spring-framework-core/01-ioc-bean/01-ioc-container-and-bean.md)
-        * [ApplicationContext와 빈 설정](spring-keesun-baik/spring-framework-core/01-ioc-bean/02-application-context.md)
-        * [@Autowired](spring-keesun-baik/spring-framework-core/01-ioc-bean/03-autowired.md)
-        * [@Component와 컴포넌트 스캔](spring-keesun-baik/spring-framework-core/01-ioc-bean/04-component.md)
-        * [빈의 스코프](spring-keesun-baik/spring-framework-core/01-ioc-bean/05-bean-scope.md)
-        * [Environment](spring-keesun-baik/spring-framework-core/01-ioc-bean/06-environment.md)
-        * [MessageSource](spring-keesun-baik/spring-framework-core/01-ioc-bean/07-message-source.md)
-        * [ApplicationEventPublisher](spring-keesun-baik/spring-framework-core/01-ioc-bean/08-publisher.md)
-        * [ResourceLoader](spring-keesun-baik/spring-framework-core/01-ioc-bean/09-resource-loader.md)
-    * [Resource/Validation](spring-keesun-baik/spring-framework-core/02-resource-validation/README.md)
-        * [Resource 추상화](spring-keesun-baik/spring-framework-core/02-resource-validation/01-resource-abstraction.md)
-        * [validation 추상화](spring-keesun-baik/spring-framework-core/02-resource-validation/02-validation-abstraction.md)
-    * [데이터 바인딩](spring-keesun-baik/spring-framework-core/03-data-binding/README.md)
-    * [SpEL](spring-keesun-baik/spring-framework-core/04-spel.md)
-    * [스프링 AOP](spring-keesun-baik/spring-framework-core/05-spring-aop.md)
-    * [Null-Safety](spring-keesun-baik/spring-framework-core/06-null-safety.md)
+## 스프링 프레임워크 핵심 기술 <a id="spring-frameworkd-core-keesun-baik"></a>
 
-## 백기선 테스트 코드 강의 <a id="inflearn-the-java-test"></a>
+* [스프링 프레임워크 핵심 기술](kessunbaik-spring-framework-core/README.md)
+    * [IoC 컨테이너와 빈](kessunbaik-spring-framework-core/01-ioc-bean/README.md)
+        * [스프링 IoC 컨테이너와 빈](kessunbaik-spring-framework-core/01-ioc-bean/01-ioc-container-and-bean.md)
+        * [ApplicationContext와 빈 설정](kessunbaik-spring-framework-core/01-ioc-bean/02-application-context.md)
+        * [@Autowired](kessunbaik-spring-framework-core/01-ioc-bean/03-autowired.md)
+        * [@Component와 컴포넌트 스캔](kessunbaik-spring-framework-core/01-ioc-bean/04-component.md)
+        * [빈의 스코프](kessunbaik-spring-framework-core/01-ioc-bean/05-bean-scope.md)
+        * [Environment](kessunbaik-spring-framework-core/01-ioc-bean/06-environment.md)
+        * [MessageSource](kessunbaik-spring-framework-core/01-ioc-bean/07-message-source.md)
+        * [ApplicationEventPublisher](kessunbaik-spring-framework-core/01-ioc-bean/08-publisher.md)
+        * [ResourceLoader](kessunbaik-spring-framework-core/01-ioc-bean/09-resource-loader.md)
+    * [Resource/Validation](kessunbaik-spring-framework-core/02-resource-validation/README.md)
+        * [Resource 추상화](kessunbaik-spring-framework-core/02-resource-validation/01-resource-abstraction.md)
+        * [validation 추상화](kessunbaik-spring-framework-core/02-resource-validation/02-validation-abstraction.md)
+    * [데이터 바인딩 추상화](kessunbaik-spring-framework-core/03-data-binding/README.md)
+    * [SpEL](kessunbaik-spring-framework-core/04-spel.md)
+    * [스프링 AOP](kessunbaik-spring-framework-core/05-spring-aop.md)
+    * [Null-Safety](kessunbaik-spring-framework-core/06-null-safety.md)
 
-* [JUnit 5](inflearn-the-java-test/01-junit-5)
-    * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/01-introduction.md)
-    * [JUnit 시작하기](inflearn-the-java-test/01-junit-5/02-assertion.md)
-* [Mockito](inflearn-the-java-test/02-mockito.md)
+## THE JAVA <a id="inflearn-the-java"></a>
 
-## 백기선 THE JAVA <a id="inflearn-the-java"></a>
+* [JVM 이해하기](keesunbaik-the-java/01-understanding-of-jvm)
+    * [자바, JVM, JDK, JRE](keesunbaik-the-java/01-understanding-of-jvm/01-java-jvm-jdk-jre.md)
+    * [JVM 구조](keesunbaik-the-java/01-understanding-of-jvm/02-jvm-structure.md)
+    * [클래스 로더](keesunbaik-the-java/01-understanding-of-jvm/03-class-loader.md)
+    * [Heap](keesunbaik-the-java/01-understanding-of-jvm/04-heap.md)
+    * [Garbage Collector](keesunbaik-the-java/01-understanding-of-jvm/05-garbage-collector.md)
+* [리플렉션](keesunbaik-the-java/03-reflection)
+    * [클래스 정보 조회](keesunbaik-the-java/03-reflection/01-class-info.md)
 
-* [JVM 이해하기](inflearn-the-java/01-understanding-of-jvm)
-    * [자바, JVM, JDK, JRE](inflearn-the-java/01-understanding-of-jvm/01-java-jvm-jdk-jre.md)
-    * [JVM 구조](inflearn-the-java/01-understanding-of-jvm/02-jvm-structure.md)
-    * [클래스 로더](inflearn-the-java/01-understanding-of-jvm/03-class-loader.md)
-    * [Heap](inflearn-the-java/01-understanding-of-jvm/04-heap.md)
-    * [Garbage Collector](inflearn-the-java/01-understanding-of-jvm/05-garbage-collector.md)
-* [리플렉션](inflearn-the-java/03-reflection)
-    * [클래스 정보 조회](inflearn-the-java/03-reflection/01-class-info.md)
+## The Java - Test <a id="inflearn-the-java-test"></a>
+
+* [JUnit 5](keesunbaik-the-java-test/01-junit-5)
+    * [JUnit 시작하기](keesunbaik-the-java-test/01-junit-5/01-introduction.md)
+    * [JUnit 시작하기](keesunbaik-the-java-test/01-junit-5/02-assertion.md)
+* [Mockito](keesunbaik-the-java-test/02-mockito.md)
 
 [comment]: <> (## 지식 벌크업 <a id="interview"></a>)
 

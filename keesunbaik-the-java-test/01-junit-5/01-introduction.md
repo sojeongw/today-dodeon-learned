@@ -7,7 +7,7 @@
 - 대체제
     - TestNG, Spock...etc
     
-![](../../.gitbook/assets/inflearn-the-java-test/01/스크린샷%202020-07-16%20오전%2010.29.53.png)
+![](study/today-dodeon-learned/.gitbook/assets/keesunbaik-the-java-test/01/스크린샷%202020-07-16%20오전%2010.29.53.png)
 
 ### Platform
 
@@ -84,7 +84,7 @@ class StudyTest {
 }
 ```
 
-![](../../.gitbook/assets/inflearn-the-java-test/01/스크린샷%202020-07-16%20오전%2011.06.13.png)
+![](study/today-dodeon-learned/.gitbook/assets/keesunbaik-the-java-test/01/스크린샷%202020-07-16%20오전%2011.06.13.png)
 
 ### @Disabled
 
@@ -127,7 +127,7 @@ class StudyTest {
 }
 ```
 
-![](../../.gitbook/assets/inflearn-the-java-test/01/스크린샷%202020-07-16%20오전%2011.13.15.png)
+![](study/today-dodeon-learned/.gitbook/assets/keesunbaik-the-java-test/01/스크린샷%202020-07-16%20오전%2011.13.15.png)
 
 ### @DisplayNameGeneration
 

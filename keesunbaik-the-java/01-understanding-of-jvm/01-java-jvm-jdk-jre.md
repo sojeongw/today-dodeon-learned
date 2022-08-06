@@ -1,6 +1,6 @@
 # 자바, JVM, JDK, JRE
 
-![](../../.gitbook/assets/inflearn-the-java/01/스크린샷%202020-07-05%20오후%207.38.04.png)
+![](study/today-dodeon-learned/.gitbook/assets/keesunbaik-the-java/01/스크린샷%202020-07-05%20오후%207.38.04.png)
 
 ## JVM(Java Virtual Machine)
 
@@ -13,7 +13,7 @@
 
 ### 자바 바이트 코드
 
-![](../../.gitbook/assets/inflearn-the-java/01/스크린샷%202020-07-05%20오후%208.06.16.png)
+![](study/today-dodeon-learned/.gitbook/assets/keesunbaik-the-java/01/스크린샷%202020-07-05%20오후%208.06.16.png)
 
 **Reference**
 

@@ -31,9 +31,9 @@ public class MoimTest {
 
 코드 커버리지란 테스트 코드가 내 소스 코드의 얼마큼을 커버하는지 즉, 테스트하는지를 의미한다.
 
-![](../../.gitbook/assets/inflearn-the-java/02/스크린샷%202020-07-05%20오후%2011.42.38.png)
+![](study/today-dodeon-learned/.gitbook/assets/keesunbaik-the-java/02/스크린샷%202020-07-05%20오후%2011.42.38.png)
 
-![](../../.gitbook/assets/inflearn-the-java/02/스크린샷%202020-07-05%20오후%2011.44.22.png)
+![](study/today-dodeon-learned/.gitbook/assets/keesunbaik-the-java/02/스크린샷%202020-07-05%20오후%2011.44.22.png)
 
 위의 코드를 `Jacoco`로 검사하면 내 코드가 얼마나 테스트되었는지 보여준다. 이 정보는 바이트코드를 이용한 것이다.
 
@@ -91,4 +91,4 @@ public class Magician {
 }
 ```
 
-![](../../.gitbook/assets/inflearn-the-java/02/스크린샷%202020-07-06%20오전%2012.00.06.png)
+![](study/today-dodeon-learned/.gitbook/assets/keesunbaik-the-java/02/스크린샷%202020-07-06%20오전%2012.00.06.png)
