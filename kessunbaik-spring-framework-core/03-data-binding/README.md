@@ -82,12 +82,11 @@ public class EventFormatter implements Formatter<Event> {
 ![](../../.gitbook/assets/keesunbaik-spring-framework-core/03/스크린샷%202022-08-14%20오후%205.30.35.png)
 
 - DefaultFormattingConversionService
-    - FormatterRegistry
-    - ConversionService
+    - ConversionService 역할을 하면서도 FormatterRegistry 역할도 한다.
     - 여러 기본 컨버터와 포매터를 등록해준다.
 
 ### 스프링 부트
 
-- 웹 애플리케이션인 경우 WebConversionService를 빈으로 등록해준다.
-    - DefaultFormattingConversionSerivce를 상속하고 있다.
+- 웹 애플리케이션인 경우 스프링 부트가 WebConversionService를 빈으로 등록해준다.
+    - DefaultFormattingConversionSerivce를 상속하고 있어 더 많은 기능을 가진다.
 - Formatter와 Converter 빈을 찾아 자동으로 등록해 준다.
