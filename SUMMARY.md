@@ -285,7 +285,7 @@
     * [Projections](kimyounghan-spring-data-jpa/06-etc/03-projections.md)
     * [Native Query](kimyounghan-spring-data-jpa/06-etc/04-native-query.md)
 
-## Querydsl <a id="querydsl"></a>
+## Querydsl <a id="kimyounghan-querydsl"></a>
 
 * [프로젝트 환경 설정](kimyounghan-querydsl/01-project-settings/README.md)
 * [예제 도메인 모델](kimyounghan-querydsl/02-example-domain-model/README.md)
@@ -334,7 +334,7 @@
 * [검색과 분석을 위한 저장소 ElasticSearch](backend-system-practice/06-elastic-search/README.md)
 * [Kubernetes](backend-system-practice/07-kubernetes/README.md)
 
-## 예제로 배우는 스프링 입문 <a id="spring-keesun-baik"></a>
+## 예제로 배우는 스프링 입문 <a id="keesunbaik-introduction-of-spring"></a>
 
 * [예제로 배우는 스프링 입문(개정판)](keesunbaik-spring-framework-introduction/README.md)
     * [PetClinic 예제](keesunbaik-spring-framework-introduction/01-pet-clinic.md)
@@ -342,7 +342,7 @@
     * [스프링 AOP](keesunbaik-spring-framework-introduction/03-spring-aop.md)
     * [스프링 PSA](keesunbaik-spring-framework-introduction/04-spring-psa.md)
 
-## 스프링 프레임워크 핵심 기술 <a id="spring-frameworkd-core-keesun-baik"></a>
+## 스프링 프레임워크 핵심 기술 <a id="keesunbaik-spring-framework-core"></a>
 
 * [스프링 프레임워크 핵심 기술](kessunbaik-spring-framework-core/README.md)
     * [IoC 컨테이너와 빈](kessunbaik-spring-framework-core/01-ioc-bean/README.md)
@@ -363,7 +363,12 @@
     * [스프링 AOP](kessunbaik-spring-framework-core/05-spring-aop.md)
     * [Null-Safety](kessunbaik-spring-framework-core/06-null-safety.md)
 
-## THE JAVA <a id="inflearn-the-java"></a>
+## 스프링 부트 개념과 활용 <a id="keesunbaik-concepts-of-spring-boot"></a>
+
+* [스프링 부트 원리](study/today-dodeon-learned/keesunbaik-concepts-of-spring-boot/03-principle/README.md)
+    * [자동 설정](study/today-dodeon-learned/keesunbaik-concepts-of-spring-boot/03-principle/auto-configuration.md)
+
+## THE JAVA <a id="keesunbaik-the-java"></a>
 
 * [JVM 이해하기](keesunbaik-the-java/01-understanding-of-jvm)
     * [자바, JVM, JDK, JRE](keesunbaik-the-java/01-understanding-of-jvm/01-java-jvm-jdk-jre.md)
@@ -374,7 +379,7 @@
 * [리플렉션](keesunbaik-the-java/03-reflection)
     * [클래스 정보 조회](keesunbaik-the-java/03-reflection/01-class-info.md)
 
-## The Java - Test <a id="inflearn-the-java-test"></a>
+## The Java - Test <a id="keesunbaik-the-java-test"></a>
 
 * [JUnit 5](keesunbaik-the-java-test/01-junit-5)
     * [JUnit 시작하기](keesunbaik-the-java-test/01-junit-5/01-introduction.md)
