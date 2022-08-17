@@ -365,8 +365,9 @@
 
 ## 스프링 부트 개념과 활용 <a id="keesunbaik-concepts-of-spring-boot"></a>
 
-* [스프링 부트 원리](study/today-dodeon-learned/keesunbaik-concepts-of-spring-boot/03-principle/README.md)
-    * [자동 설정](study/today-dodeon-learned/keesunbaik-concepts-of-spring-boot/03-principle/auto-configuration.md)
+* [스프링 부트 원리](keesunbaik-concepts-of-spring-boot/03-principle/README.md)
+    * [자동 설정](keesunbaik-concepts-of-spring-boot/03-principle/auto-configuration.md)
+    * [내장 서버](keesunbaik-concepts-of-spring-boot/03-principle/embeded-server.md)
 
 ## THE JAVA <a id="keesunbaik-the-java"></a>
 
