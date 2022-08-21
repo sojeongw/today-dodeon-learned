@@ -371,6 +371,8 @@
         * [컨테이너와 서버 포트](keesunbaik-concepts-of-spring-boot/03-principle/container.md)
         * [HTTPS와 HTTP2](keesunbaik-concepts-of-spring-boot/03-principle/https.md)
     * [독립적으로 실행 가능한 JAR](keesunbaik-concepts-of-spring-boot/03-principle/jar.md)
+* [스프링 부트 활용](keesunbaik-concepts-of-spring-boot/04-practical-use/README.md)
+    * [Spring Application](keesunbaik-concepts-of-spring-boot/04-practical-use/spring-application.md)
 
 ## THE JAVA <a id="keesunbaik-the-java"></a>
 
