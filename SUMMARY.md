@@ -374,6 +374,8 @@
 * [스프링 부트 활용](keesunbaik-concepts-of-spring-boot/04-practical-use/README.md)
     * [Spring Application](keesunbaik-concepts-of-spring-boot/04-practical-use/spring-application.md)
     * [외부 설정](keesunbaik-concepts-of-spring-boot/04-practical-use/settings.md)
+    * [프로파일](keesunbaik-concepts-of-spring-boot/04-practical-use/profile.md)
+    * [로깅](keesunbaik-concepts-of-spring-boot/04-practical-use/logging.md)
 
 ## THE JAVA <a id="keesunbaik-the-java"></a>
 
