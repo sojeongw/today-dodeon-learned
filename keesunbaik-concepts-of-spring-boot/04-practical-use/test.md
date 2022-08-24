@@ -164,3 +164,57 @@ class SampleControllerTest {
 ### @WebFluxTest
 
 ### @DataJpaTest
+
+## 테스트 유틸
+
+- 특정 로그 메시지가 출력되는지 테스트 코드로 확인하고 싶을 때 사용한다.
+
+### OutputCapture
+
+{% tabs %} {% tab title="SampleController.java" %}
+
+```java
+@RestController
+public class SampleController {
+
+    Logger logger = LoggerFactory.getLogger(SampleController.class);
+
+    ...
+
+    @GetMapping("/hello")
+    public String hello() {
+        logger.info("holoman");
+        return "hello " + sampleService.getName();
+    }
+}
+```
+
+{% endtab %} {% tab title="SampleControllerTest.java" %}
+
+```java
+@WebMvcTest
+@ExtendWith(OutputCaptureExtension.class)
+class SampleControllerTest {
+    
+    @MockBean
+    SampleService sampleService;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @Test
+    void hello(CapturedOutput capturedOutput) throws Exception {
+        when(sampleService.getName()).thenReturn("whiteship");
+        mockMvc.perform(get("/hello")).andExpect(content().string("hello whiteship"));
+        assertThat(capturedOutput.toString()).contains("holoman");
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+### TestPropertyValues
+
+### TestRestTemplate
+
+### ConfigFileApplicationContextInitializer
