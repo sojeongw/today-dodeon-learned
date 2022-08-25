@@ -377,6 +377,7 @@
     * [프로파일](keesunbaik-concepts-of-spring-boot/04-practical-use/profile.md)
     * [로깅](keesunbaik-concepts-of-spring-boot/04-practical-use/logging.md)
     * [테스트](keesunbaik-concepts-of-spring-boot/04-practical-use/test.md)
+    * [Spring Boot Devtools](keesunbaik-concepts-of-spring-boot/04-practical-use/spring-boot-dev-tools.md)
 
 ## THE JAVA <a id="keesunbaik-the-java"></a>
 
