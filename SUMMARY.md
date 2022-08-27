@@ -382,6 +382,7 @@
     * [소개](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/README.md)
     * [HttpMessageConverters](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/http-message-converters.md)
     * [ViewResolver](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/view-resolver.md)
+    * [정적 리소스](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/static-resource.md)
 
 ## THE JAVA <a id="keesunbaik-the-java"></a>
 
