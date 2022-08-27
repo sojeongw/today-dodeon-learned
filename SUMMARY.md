@@ -379,7 +379,9 @@
     * [테스트](keesunbaik-concepts-of-spring-boot/04-practical-use/test.md)
     * [Spring Boot Devtools](keesunbaik-concepts-of-spring-boot/04-practical-use/spring-boot-dev-tools.md)
 * [스프링 웹 MVC](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/README.md)
-    * [스프링 웹 MVC](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/README.md)
+    * [소개](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/README.md)
+    * [HttpMessageConverters](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/http-message-converters.md)
+    * [ViewResolver](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/view-resolver.md)
 
 ## THE JAVA <a id="keesunbaik-the-java"></a>
 
