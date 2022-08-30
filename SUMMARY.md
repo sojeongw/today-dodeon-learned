@@ -385,6 +385,7 @@
     * [정적 리소스](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/static-resource.md)
     * [웹 JAR](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/web-jar.md)
     * [index 페이지와 파비콘](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/index-favicon.md)
+    * [ExceptionHandler](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/exception-handler.md)
 
 ## THE JAVA <a id="keesunbaik-the-java"></a>
 
