@@ -42,3 +42,19 @@ public class Application {
     
 }
 ```
+
+- 애너테이션을 사용해 개별적으로 적용할 수 있다.
+
+```java
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:18080");
+    }
+}
+```
+
+- WebMvcConfigurer로 전역 설정도 가능하다.
