@@ -314,6 +314,10 @@
     * [스프링 데이터 페이징 활용](kimyounghan-querydsl/05-spring-data-jpa-querydsl/using-spring-data-paging.md)
     * [스프링 데이터 JPA가 제공하는 Querydsl 기능](kimyounghan-querydsl/05-spring-data-jpa-querydsl/querydsl.md)
 
+## 데이터 접근 핵심 원리 <a id="kimyounghan-jdbc"></a>
+
+* [JDBC 이해](kimyounghan-jdbc/01-jdbc/README.md)
+
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
 * [CPU bound 애플리케이션](backend-system-practice/01-cpu-bound-application/README.md)
