@@ -387,6 +387,7 @@
     * [index 페이지와 파비콘](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/index-favicon.md)
     * [ExceptionHandler](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/exception-handler.md)
     * [Spring HATEOAS](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/spring-hateoas.md)
+    * [CORS](keesunbaik-concepts-of-spring-boot/05-spring-web-mvc/cors.md)
 
 ## THE JAVA <a id="keesunbaik-the-java"></a>
 
