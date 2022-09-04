@@ -317,6 +317,7 @@
 ## 데이터 접근 핵심 원리 <a id="kimyounghan-jdbc"></a>
 
 * [JDBC 이해](kimyounghan-jdbc/01-jdbc/README.md)
+    * [JDBC와 최신 데이터 접근 기술](kimyounghan-jdbc/01-jdbc/jdbc-trend.md)
 
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
