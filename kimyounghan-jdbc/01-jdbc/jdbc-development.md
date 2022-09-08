@@ -197,6 +197,7 @@ ResultSet executeQuery() throws SQLException;
 {% tabs %} {% tab title="MemberRepositoryV0Test.java" %}
 
 ```java
+
 @Slf4j
 class MemberRepositoryV0Test {
     MemberRepositoryV0 repository = new MemberRepositoryV0();
@@ -221,3 +222,138 @@ class MemberRepositoryV0Test {
 ```text
 MemberRepositoryV0Test - findMember=Member(memberId=memberV0, money=10000)
 ```
+
+## 수정
+
+{% tabs %} {% tab title="MemberRepositoryV0.java" %}
+
+```java
+
+@Slf4j
+public class MemberRepositoryV0 {
+
+    public void update(String memberId, int money) throws SQLException {
+        String sql = "update member set money=? where member_id=?";
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = getConnection();
+            pstmt = con.prepareStatement(sql);
+
+            pstmt.setInt(1, money);
+            pstmt.setString(2, memberId);
+
+            int resultSize = pstmt.executeUpdate();
+            log.info("resultSize={}", resultSize);
+        } catch (SQLException e) {
+            log.error("db error", e);
+            throw e;
+        } finally {
+            close(con, pstmt, null);
+        }
+    }
+}
+```
+
+{% endtab %} {% tab title="MemberRepositoryV0Test.java" %}
+
+```java
+
+@Slf4j
+class MemberRepositoryV0Test {
+    MemberRepositoryV0 repository = new MemberRepositoryV0();
+
+    @Test
+    void crud() throws SQLException {
+        // save
+        Member member = new Member("memberV0", 10000);
+        repository.save(member);
+
+        // findById
+        Member findMember = repository.findById(member.getMemberId());
+        log.info("findMember={}", findMember);
+
+        assertThat(findMember).isEqualTo(member);
+
+        // update
+        // money: 10000 -> 20000
+        repository.update(member.getMemberId(), 20000);
+        Member updatedMember = repository.findById(member.getMemberId());
+
+        assertThat(updatedMember.getMoney()).isEqualTo(20000);
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
+
+- executeUpdate()
+    - 영향 받은 row 수를 반환한다.
+
+## 삭제
+
+{% tabs %} {% tab title="MemberRepositoryV0.java" %}
+
+```java
+@Slf4j
+public class MemberRepositoryV0 {
+
+    public void delete(String memberId) throws SQLException {
+        String sql = "delete from member where member_id=?";
+
+        Connection con = null;
+        PreparedStatement pstmt = null;
+
+        try {
+            con = getConnection();
+            pstmt = con.prepareStatement(sql);
+
+            pstmt.setString(1, memberId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            log.error("db error", e);
+            throw e;
+        } finally {
+            close(con, pstmt, null);
+        }
+    }
+}
+```
+
+{% endtab %} {% tab title="MemberRepositoryV0Test.java" %}
+
+```java
+@Slf4j
+class MemberRepositoryV0Test {
+    MemberRepositoryV0 repository = new MemberRepositoryV0();
+
+    @Test
+    void crud() throws SQLException {
+        // save
+        Member member = new Member("memberV1", 10000);
+        repository.save(member);
+
+        // findById
+        Member findMember = repository.findById(member.getMemberId());
+        log.info("findMember={}", findMember);
+
+        assertThat(findMember).isEqualTo(member);
+
+        // update
+        // money: 10000 -> 20000
+        repository.update(member.getMemberId(), 20000);
+        Member updatedMember = repository.findById(member.getMemberId());
+
+        assertThat(updatedMember.getMoney()).isEqualTo(20000);
+
+        // delete
+        repository.delete(member.getMemberId());
+        assertThatThrownBy(() -> repository.findById(member.getMemberId()))
+                .isInstanceOf(NoSuchElementException.class);
+    }
+}
+```
+
+{% endtab %} {% endtabs %}
