@@ -86,7 +86,7 @@
     * [프록시 캐시](kimyounghan-http-basic/08-http-header-cache/proxy-cache.md)
     * [캐시 무효화](kimyounghan-http-basic/08-http-header-cache/cache-revalidation.md)
 
-## 김영한의 실전 자바 중급 2편 <a id-"kimyounghan-java-intermediate-2"></a>
+## 김영한의 실전 자바 <a id="kimyounghan-java"></a>
 
 * [제네릭](kimyounghan-java-intermediate-2/01-generic/generic.md)
 
