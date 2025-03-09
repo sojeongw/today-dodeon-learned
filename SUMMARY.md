@@ -2,6 +2,11 @@
 
 * [개발왕, 도던](README.md)
 
+## 스프링 시큐리티 인 액션 <a id="spring-security-in-action"></a>
+
+* [오늘날의 보안](spring-security-in-action/01.md)
+* [안녕! 스프링 시큐리티](spring-security-in-action/02.md)
+
 ## 스프링 입문 <a id="kimyounghan-spring-introduction"></a>
 
 * [프로젝트 환경설정](kimyounghan-spring-introduction/01-project-settings/README.md)
