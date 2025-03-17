@@ -330,6 +330,12 @@
     * [데이터베이스 연결](kimyounghan-jdbc/01-jdbc/db-connection.md)
     * [JDBC 개발](kimyounghan-jdbc/01-jdbc/jdbc-development.md)
 
+## 스프링 고급편 <a id ="kimyounghan-spring-advanced'></a>
+
+* [스레드 로컬](kimyounghan-spring-advanced/01-threadlocal.md)
+* [템플릿 메서드 패턴과 콜백 패턴](kimyounghan-spring-advanced/02-template-method-callback.md)
+* [프록시 패턴과 데코레이터 패턴](kimyounghan-spring-advanced/03-proxy-and-decorator-pattern.md)
+
 ## 백엔드 시스템 실무 <a id="backend-system-practice"></a>
 
 * [CPU bound 애플리케이션](backend-system-practice/01-cpu-bound-application/README.md)
