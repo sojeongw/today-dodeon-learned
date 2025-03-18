@@ -6,6 +6,8 @@
 
 * [오늘날의 보안](spring-security-in-action/01.md)
 * [안녕! 스프링 시큐리티](spring-security-in-action/02.md)
+* [사용자 관리](spring-security-in-action/03.md)
+* [암호 처리](spring-security-in-action/04.md)
 
 ## 스프링 입문 <a id="kimyounghan-spring-introduction"></a>
 
