@@ -9,6 +9,7 @@
 * [사용자 관리](spring-security-in-action/03.md)
 * [암호 처리](spring-security-in-action/04.md)
 * [인증 구현](spring-security-in-action/05.md)
+* [실전: 작고 안전한 웹 애플리케이션](spring-security-in-action/06.md)
 
 ## 스프링 고급편 <a id="kimyounghan-spring-advanced"></a>
 
