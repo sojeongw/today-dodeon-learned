@@ -12,6 +12,8 @@
 * [실전: 작고 안전한 웹 애플리케이션](spring-security-in-action/06.md)
 * [권한 부여 구성: 액세스 제한](spring-security-in-action/07.md)
 * [권한 부여 구성: 제한 적용](spring-security-in-action/08.md)
+* [필터 구현](spring-security-in-action/09.md)
+* [CSRF 보호와 CORS 적용](spring-security-in-action/10.md)
 
 ## 스프링 고급편 <a id="kimyounghan-spring-advanced"></a>
 
