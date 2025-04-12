@@ -14,6 +14,7 @@
 * [권한 부여 구성: 제한 적용](spring-security-in-action/08.md)
 * [필터 구현](spring-security-in-action/09.md)
 * [CSRF 보호와 CORS 적용](spring-security-in-action/10.md)
+* [실전: 책임의 분리](spring-security-in-action/11.md)
 
 ## 스프링 고급편 <a id="kimyounghan-spring-advanced"></a>
 
