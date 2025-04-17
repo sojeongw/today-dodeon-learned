@@ -15,6 +15,8 @@
 * [필터 구현](spring-security-in-action/09.md)
 * [CSRF 보호와 CORS 적용](spring-security-in-action/10.md)
 * [실전: 책임의 분리](spring-security-in-action/11.md)
+* [OAuth 2가 동작하는 방법](spring-security-in-action/12.md)
+* [OAuth 2: 권한 부여 서버 구현](spring-security-in-action/13.md)
 
 ## 스프링 고급편 <a id="kimyounghan-spring-advanced"></a>
 
